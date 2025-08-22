@@ -82,7 +82,6 @@ export default function MenuSelect({
             setIsOpen(false);
             setIsOpenAnimation(null);
         }, 200);
-        buttonRef.current?.focus();
     };
 
     function handleKeyDown(e: React.KeyboardEvent) {
@@ -120,7 +119,6 @@ export default function MenuSelect({
                 setIsOpen(false);
                 setIsOpenAnimation(null);
             }, 200);
-            buttonRef.current?.focus();
             e.preventDefault();
         } else if (e.key === "Enter" || e.key === " ") {
             if (focusedIndex !== null) {

@@ -1,4 +1,5 @@
 import React, { JSX, useState, useRef, useEffect } from "react";
+import BodyAccess from "../utils/bodyAccess";
 import Checkbox from "../checkbox/checkbox";
 import Overlay from "../overlay/overlay";
 import Box from "../box/box";
@@ -34,11 +35,22 @@ export default function MultipleMenuSelect({
 }: MenuSelectProps): JSX.Element {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const listRef = useRef<HTMLUListElement>(null);
-    const hasOpened = useRef<boolean>(false);
+    const maxHeight = 200;
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isOpenAnimation, setIsOpenAnimation] = useState<boolean|null>(null);
     const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
     const [showBg, setShowBg] = useState<boolean>(true);
+    const [menuSelectPosition, setMenuSelectPosition] = useState<{top:number, left:number}>({top:0, left:0});
+
+    useEffect(() => {
+        if (!isOpen || !buttonRef.current) return;
+
+        const rect = buttonRef.current.getBoundingClientRect();
+        const exactHeight = Math.min(maxHeight, 6 + options.length * (checkbox?35:32));
+        const elementHeight = Math.min(rect.bottom + window.scrollY, window.innerHeight - exactHeight + window.scrollY)
+        setMenuSelectPosition({ top: elementHeight, left: rect.left + window.scrollX });
+    }, [checkbox, isOpen, options.length]);
 
     useEffect(() => {
         if (isOpen && selectedOptions.length === 0) {
@@ -66,6 +78,9 @@ export default function MultipleMenuSelect({
         if (!isOpen) {
             if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
                 setIsOpen(true);
+                setTimeout(() => {
+                    setIsOpenAnimation(true);
+                }, 20);
                 setFocusedIndex(0);
                 e.preventDefault();
             }
@@ -89,8 +104,11 @@ export default function MultipleMenuSelect({
             setFocusedIndex((i) => (i === null ? 0 : Math.max(i - 1, 0)));
             e.preventDefault();
         } else if (e.key === "Escape") {
-            setIsOpen(false);
-            buttonRef.current?.focus();
+            setIsOpenAnimation(false);
+            setTimeout(() => {
+                setIsOpen(false);
+                setIsOpenAnimation(null);
+            }, 200);
             e.preventDefault();
         } else if (e.key === "Enter" || e.key === " ") {
             if (focusedIndex !== null) {
@@ -102,7 +120,17 @@ export default function MultipleMenuSelect({
 
     function handleOpen() {
         setIsOpen(true);
-        hasOpened.current = true;
+        setTimeout(() => {
+            setIsOpenAnimation(true);
+        }, 20);
+    }
+
+    function handleOverlayClose() {
+        setIsOpenAnimation(false);
+        setTimeout(() => {
+            setIsOpen(false);
+            setIsOpenAnimation(null);
+        }, 200);
     }
 
     function renderIcon() {
@@ -128,7 +156,7 @@ export default function MultipleMenuSelect({
                 <Overlay
                     id={`${id}-overlay`}
                     color="rgba(0, 0, 0, 0)"
-                    onClose={()=>setIsOpen(false)}
+                    onClose={handleOverlayClose}
                 />
             )}
             <button
@@ -174,51 +202,61 @@ export default function MultipleMenuSelect({
                     {required && <span aria-hidden="true" style={{ color: "red", margin:"0 5px" }}>&nbsp;*</span>}
                 </label>
             )}
-            <ul
-                ref={listRef}
-                role="listbox"
-                className={`menu-select-list ${isOpen ? "open" : ""} ${!isOpen&&hasOpened.current ? "closing" : ""}`}
-                aria-labelledby={id + '-label'}
-                tabIndex={-1}
-                aria-activedescendant={focusedIndex !== null ? `${id}-option-${focusedIndex}` : undefined}
-            >
-                {options.length>0 && options.map((option, idx) => (
-                    <li
-                        key={option}
-                        id={`${id}-option-${idx}`}
-                        role="option"
-                        className={`menu-select-option ${focusedIndex === idx ? "focused" : ""} ${selectedOptions.includes(option) ? "selected" : ""}`}
-                        aria-selected={focusedIndex === idx}
-                        tabIndex={focusedIndex === idx ? 0 : -1}
-                        onClick={() => handleOptionClick(option)}
-                        onMouseEnter={() => setFocusedIndex(idx)}
-                        >
-                        {checkbox!==false?
-                        <Checkbox
-                            id={`${id}-checkbox-${idx}`}
-                            label={option}
-                            checked={selectedOptions.includes(option)}
-                            side={checkbox===true?"right":checkbox}
-                            onChange={()=>handleOptionClick(option)}
-                            disabled={disabled}
-                            style={{width: "calc(100% - 40px)"}}
-                            />:
-                            option
-                        }
-                    </li>
-                ))}
-                {options.length === 0 && (
-                    <li
-                        className="menu-select-option empty"
-                        role="option"
-                        aria-selected="false"
-                        aria-disabled="true"
+            {isOpen&&(
+                <BodyAccess>
+                    <ul
+                        ref={listRef}
+                        role="listbox"
+                        className={`menu-select-list ${isOpenAnimation ? "open" : ""} ${isOpenAnimation===false? "closing" : ""}`}
+                        aria-labelledby={id + '-label'}
                         tabIndex={-1}
-                        style={{ cursor: "not-allowed" }}>
-                        No options available    
-                    </li>
-                )}
-            </ul>
+                        aria-activedescendant={focusedIndex !== null ? `${id}-option-${focusedIndex}` : undefined}
+                        style={{
+                            top: menuSelectPosition.top,
+                            left: menuSelectPosition.left,
+                            minWidth: buttonRef.current?.offsetWidth,
+                            maxHeight: `min(${maxHeight}px, calc(100svh - 20px))`
+                        }}
+                    >
+                        {options.length>0 && options.map((option, idx) => (
+                            <li
+                                key={option}
+                                id={`${id}-option-${idx}`}
+                                role="option"
+                                className={`menu-select-option ${focusedIndex === idx ? "focused" : ""} ${selectedOptions.includes(option) ? "selected" : ""}`}
+                                aria-selected={focusedIndex === idx}
+                                tabIndex={focusedIndex === idx ? 0 : -1}
+                                onClick={() => handleOptionClick(option)}
+                                onMouseEnter={() => setFocusedIndex(idx)}
+                                >
+                                {checkbox!==false?
+                                <Checkbox
+                                    id={`${id}-checkbox-${idx}`}
+                                    label={option}
+                                    checked={selectedOptions.includes(option)}
+                                    side={checkbox===true?"right":checkbox}
+                                    onChange={()=>handleOptionClick(option)}
+                                    disabled={disabled}
+                                    style={{width: "calc(100% - 40px)"}}
+                                    />:
+                                    option
+                                }
+                            </li>
+                        ))}
+                        {options.length === 0 && (
+                            <li
+                                className="menu-select-option empty"
+                                role="option"
+                                aria-selected="false"
+                                aria-disabled="true"
+                                tabIndex={-1}
+                                style={{ cursor: "not-allowed" }}>
+                                No options available    
+                            </li>
+                        )}
+                    </ul>
+                </BodyAccess>
+            )}
         </div>
     );
 }
