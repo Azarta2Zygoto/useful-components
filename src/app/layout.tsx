@@ -1,11 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Component Library",
-  description: "A collection of reusable components for building user interfaces in react.",
+    title: "Component Library",
+    description: "A collection of reusable components for building user interfaces in react.",
 };
+
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
+    viewportFit: "cover",
+}
 
 export default function RootLayout({
   children,
