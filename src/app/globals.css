@@ -1,0 +1,68 @@
+@import url("../component/component.css");
+
+:root {
+    --bg: #ffffff;
+    --fg: #1e1f20;
+    --add-nothing-color: #00aaff10;
+    --add-minor-color: #00aaff40;
+    --add-light-color: #00aaff80;
+    --add-mid-color: #00aaffb0;
+    --add-hard-color: #00aaffd0;
+    --add-total-color: #00aaff;
+
+    --element-color: #666c74;
+    --border-color-special: var(--add-total-color);
+    --border-color-shadow-special: var(--add-minor-color);
+    --outline-color: #fefefe;
+    --outline-color-shadow: #fefefe30;
+    --disabled-bg-color: #838080;
+    --disabled-border-color: #838080;
+    --disabled-text-color: #b0b8c1;
+    --disabled-bg-checked-color: #4b4646;
+    --input-border-color: var(--add-light-color);
+    --input-bg-color: #2f3236;
+    --input-placeholder-color: #a8a8a8;
+    --input-focus-border-color: var(--add-total-color);
+    --input-focus-bg-color: #494d53;
+    --hover-bg-color: var(--add-minor-color);
+    --focus-bg-color: var(--add-light-color);
+    --selected-bg-color: var(--add-mid-color);
+    --selected-hover-bg-color: var(--add-hard-color);
+    --invalid-bg-color: #ff000010;
+    --invalid-border-color: #ff0000;
+    --warning-bg-color: #ffcc0010;
+    --warning-border-color: #ffcc00;
+    --success-bg-color: #00ff0010;
+    --success-border-color: #00ff00;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #1e1f20;
+        --fg: #ededed;
+    }
+}
+
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    margin:0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: Arial, Helvetica, sans-serif;
+}
+main{
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

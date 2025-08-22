@@ -1,0 +1,8 @@
+.date-tooltip {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    cursor:help;
+    text-decoration: underline dotted;
+    position:relative;
+}

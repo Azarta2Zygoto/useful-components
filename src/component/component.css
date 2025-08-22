@@ -1,0 +1,208 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    /* Override the default yellow background in Chrome */
+    -webkit-box-shadow: 0 0 0 30px var(--input-focus-bg-color) inset !important;
+    /* Change text color if needed */
+    -webkit-text-fill-color: var(--fg) !important;
+    /* Maintain your transition effects */
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+textarea {
+    padding: 10px 14px;
+    border: 2px solid var(--input-border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg-color);
+    color: var(--fg);
+    font-size: 16px;
+    outline: none;
+    box-shadow: 0 2px 10px #1167b10f;
+    margin: 8px 10px;
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+    outline: 1px solid transparent;
+    outline-offset: -3px;
+}
+input[type="text"]:hover:not(:disabled),
+input[type="email"]:hover:not(:disabled),
+input[type="password"]:hover:not(:disabled),
+input[type="number"]:hover:not(:disabled),
+input[type="date"]:hover:not(:disabled),
+textarea:hover {
+    outline: 1px solid var(--input-focus-border-color);
+    box-shadow: 0 0 0 3px #1167b136;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+    border-color: var(--border-color-special);
+    box-shadow: 0 0 0 3px var(--border-color-shadow-special);
+    background: var(--input-focus-bg-color);
+    outline: 1px solid var(--input-focus-border-color);
+    box-shadow: 0 0 0 3px #1167b136;
+}
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder {
+    color: var(--disabled-text-color);
+    opacity: 1;
+    font-style: italic;
+}
+input:autofill {
+    background-color: var(--input-border-color) !important;
+    color: var(--fg) !important;
+    box-shadow: 0 0 0 30px var(--input-bg-color) inset !important;
+}
+
+input:autofill:hover,
+input:autofill:focus {
+    background-color: var(--input-border-color) !important;
+    color: var(--fg) !important;
+    box-shadow: 0 0 0 30px var(--input-focus-bg-color) inset !important;
+}
+input[type="text"]:invalid,
+input[type="number"]:invalid,
+input[type="email"]:invalid,
+input[type="password"]:invalid,
+input[type="text"].invalid,
+input[type="number"].invalid,
+input[type="email"].invalid,
+input[type="password"].invalid {
+    background-color: var(--invalid-bg-color)!important;
+    border-color: var(--invalid-border-color)!important;
+}
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+input[type="password"]:disabled,
+input[type="number"]:disabled,
+input[type="date"]:disabled {
+    background-color: var(--disabled-bg-color);
+    border-color: var(--disabled-border-color);
+    cursor: not-allowed;
+}
+
+
+.background-click {
+    position:relative;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    min-width:fit-content;
+    height:fit-content;
+    border-radius: 2px;
+    padding: 0;
+    margin: 0 5px;
+    outline: none;
+    & i {
+        color:var(--element-color);
+        transition: color 0.3s ease;
+    }
+    & svg path {
+        fill: var(--element-color);
+        transition: fill 0.3s ease;
+    }
+}
+.background-click:hover {
+    border: none;
+    background-color: transparent;
+    & i {
+        color: var(--hover-bg-color);
+    }
+    & svg path {
+        fill: var(--hover-bg-color);
+    }
+}
+.background-click:active {
+    border: none;
+    background-color: transparent;
+    & i  {
+        color: var(--focus-bg-color);
+    }
+    & svg path {
+        fill: var(--focus-bg-color);
+    }
+}
+.background-click:focus-visible {
+    border: none;
+    background-color: transparent;
+    outline: solid 1px var(--foreground);
+    & i  {
+        color: var(--focus-bg-color);
+    }
+    & svg path {
+        fill: var(--focus-bg-color);
+    }
+}
+.background-click.selected {
+    border: none;
+    background-color: transparent;
+    & i {
+        color: var(--selected-bg-color);
+    }
+    & svg path {
+        fill: var(--selected-bg-color);
+    }
+}
+
+
+
+.tooltip:before {
+    z-index: 100;
+    content: attr(data-tooltip);
+
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    padding: 4px 8px;
+    margin: 0;
+    background-color: var(--input-bg-color);
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 1px 1px 2px 3px rgba(0, 0, 0, 0.1);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.tooltip:hover:before {
+    opacity: 1;
+    visibility: visible;
+}
+/* All animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        visibility: visible;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    99% {
+        opacity: 0.01;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
