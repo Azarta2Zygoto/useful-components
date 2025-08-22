@@ -9,7 +9,7 @@ interface SwitchProps {
     label?: string;
     required?: boolean;
     style?: React.CSSProperties;
-    colors?: string[]|"default"|"opposite";
+    colors?: [string, string]|"default"|"opposite";
     onChange: (checked: boolean) => void;
 }
 
@@ -24,6 +24,28 @@ export default function Switch({
     colors = "default",
     onChange,
 }: SwitchProps): JSX.Element {
+    const tooltipText = label
+        ? label
+        : checked
+            ? typeof tooltip === "object"
+                ? tooltip.on
+                : "On"
+            : typeof tooltip === "object"
+                ? tooltip.off
+                : "Off";
+    
+    let sliderBg: string | undefined;
+        if (!disabled) {
+            if (colors === "default" && !required) {
+                sliderBg = "var(--border-color-special)";
+            } else if (colors === "opposite" || required) {
+                sliderBg = checked
+                    ? "var(--success-border-color)"
+                    : "var(--invalid-border-color)";
+            } else if (Array.isArray(colors)) {
+                sliderBg = checked ? colors[0] : colors[1];
+            }
+        }
     return (
         <label
             htmlFor={id}
@@ -33,9 +55,8 @@ export default function Switch({
         >
             <div
                 className={`switch-wrapper ${tooltip ? "tooltip" : ""}`}
-                {...(tooltip ? { "data-tooltip": label ? label :
-                    (checked ? typeof tooltip !== "boolean" ? tooltip.on:"On" :
-                        typeof tooltip !== "boolean" ? tooltip.off:"Off") } : {})}>
+                {...(tooltip ? { "data-tooltip": tooltipText } : {})}
+            >
                 <input
                     id={id}
                     type="checkbox"
@@ -54,21 +75,8 @@ export default function Switch({
                 <span
                     aria-hidden="true"
                     className="switch-slider"
-                    style={{
-                        backgroundColor:
-                        !disabled?
-                            colors === "default"&&!required
-                                ? checked
-                                    ? "var(--border-color-special)"
-                                    : "var(--border-color-special)"
-                                : colors === "opposite"||required
-                                    ? checked
-                                        ? "var(--success-border-color)"
-                                        : "var(--invalid-border-color)"
-                                    : checked
-                                        ? colors[0]
-                                        : colors[1]:undefined
-                    }}/>
+                    style={{ backgroundColor: sliderBg }}
+                    />
             </div>
             {label && (
                 <span className="switch-label">
