@@ -2,7 +2,6 @@ import React, { JSX, useState, useRef, useEffect } from "react";
 import Checkbox from "../checkbox/checkbox";
 import Overlay from "../overlay/overlay";
 import Box from "../box/box";
-import "../menuSelect/menuSelect.css";
 
 interface MenuSelectProps {
     id: string;
@@ -153,6 +152,9 @@ export default function MultipleMenuSelect({
                     {selectedOptions.map((opt, idx) => (
                         <Box
                             key={idx+opt}
+                            style={{
+                                maxWidth: style?.width?`calc(${style.width} - 90px)`:undefined,
+                            }}
                         >
                             {opt}
                         </Box>

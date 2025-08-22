@@ -30,6 +30,7 @@ export default function RootLayout({
                 <li><Link href="/radioButton">Radio Button</Link></li>
                 <li><Link href="/input">Input</Link></li>
                 <li><Link href="/multipleMenuSelect">Multiple Menu Select</Link></li>
+                <li><Link href="/switch">Switch</Link></li>
             </ul>
         </nav>
         {children}

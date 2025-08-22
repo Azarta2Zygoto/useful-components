@@ -1,7 +1,7 @@
 .menu-select-container {
+    position: relative;
     display: flex;
     flex-direction: column-reverse;
-    position: relative;
     width: fit-content;
     margin:5px 10px;
 }
@@ -10,11 +10,11 @@
     display: inline-flex;
     flex-direction: row;
     align-items: center;
-    min-width:100px;
+    min-width: 100px;
     min-height: 56px;
     height: fit-content;
     width: fit-content;
-    max-width: calc(100% - 25px);
+    max-width: 100%;
     font-size: 16px;
     padding: 14px 25px 14px 10px;
     box-sizing: border-box;
@@ -101,7 +101,6 @@
 
     opacity: 1;
     visibility: visible;
-    animation: fadeIn 0.3s forwards;
 }
 .menu-select-list.closing {
     transform: scaleX(0.8) translateX(-10%) scaleY(0.1) translateY(-500%);
@@ -109,7 +108,11 @@
 }
 
 .menu-select-option {
-    padding: 10px 15px;
+    display: flex;
+    align-items: center;    
+    height: 32px;
+    width: calc(100% - 30px);
+    padding: 0 15px;
     cursor: pointer;
     color: var(--fg);
     user-select: none;
