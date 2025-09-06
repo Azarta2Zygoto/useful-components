@@ -2,6 +2,7 @@ import React, { JSX, useState, useRef, useEffect } from "react";
 import BodyAccess from "../utils/bodyAccess";
 import Overlay from "../overlay/overlay";
 import "./menuSelect.css";
+import Tooltip from "../tooltip/tooltip";
 
 interface MenuSelectProps {
     id: string;
@@ -169,27 +170,28 @@ export default function MenuSelect({
                     onClose={handleOverlayClose}
                 />
             )}
-            <button
-                ref={buttonRef}
-                type="button"
-                role="button"
-                className={`menu-select-button ${required&&selectedOption===""?"invalid":""} ${tooltip ? "tooltip" : ""}`}
-                style={{...style,
-                    ...(hideIcon ? { paddingRight: "10px" } : {}),
-                }}
-                id={id}
-                disabled={disabled}
-                aria-disabled={disabled}
-                aria-haspopup="listbox"
-                aria-expanded={isOpen}
-                data-tooltip={label}
-                aria-labelledby={id+'-label'}
-                onClick={handleOpen}
-                onKeyDown={handleKeyDown}
-            >
+            <Tooltip title={label||""} active={tooltip??false}>
+                <button
+                    ref={buttonRef}
+                    type="button"
+                    role="button"
+                    className={`menu-select-button ${required&&selectedOption===""?"invalid":""}`}
+                    style={{...style,
+                        ...(hideIcon ? { paddingRight: "10px" } : {}),
+                    }}
+                    id={id}
+                    disabled={disabled}
+                    aria-disabled={disabled}
+                    aria-haspopup="listbox"
+                    aria-expanded={isOpen}
+                    aria-labelledby={id+'-label'}
+                    onClick={handleOpen}
+                    onKeyDown={handleKeyDown}
+                >
                     {selectedOption}
                     {renderIcon()}
-            </button>
+                </button>
+            </Tooltip>
             {label&&(
                 <label
                     id={id+'-label'}

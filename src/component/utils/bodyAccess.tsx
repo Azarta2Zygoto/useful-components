@@ -4,17 +4,16 @@ import { createPortal } from 'react-dom';
 export default function BodyAccess({
     children
 }: { children: React.ReactNode }):JSX.Element|null {
-    const elRef = useRef<HTMLDivElement | null>(null);
+    const elRef = useRef<HTMLDivElement>(document.createElement('div'));
 
     useEffect(() => {
-        elRef.current = document.createElement('div');
-
-        document.body.appendChild(elRef.current!);
+        const el = elRef.current;
+        
+        document.body.appendChild(el);
         return () => {
-            document.body.removeChild(elRef.current!);
+            document.body.removeChild(el);
         };
     }, []);
-
-    if (!elRef.current) return null;
+    
     return createPortal(children, elRef.current);
 }

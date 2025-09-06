@@ -3,7 +3,7 @@
 :root {
     --bg: #ffffff;
     --fg: #1e1f20;
-    --add-nothing-color: #00aaff10;
+    --add-nothing-color: #00aaff20;
     --add-minor-color: #00aaff40;
     --add-light-color: #00aaff80;
     --add-mid-color: #00aaffb0;
@@ -13,6 +13,7 @@
     --element-color: #666c74;
     --border-color-special: var(--add-total-color);
     --border-color-shadow-special: var(--add-minor-color);
+    --border-color:var(--fg);
     --outline-color: #fefefe;
     --outline-color-shadow: #fefefe30;
     --disabled-bg-color: #838080;
@@ -24,10 +25,12 @@
     --input-placeholder-color: #a8a8a8;
     --input-focus-border-color: var(--add-total-color);
     --input-focus-bg-color: #494d53;
-    --hover-bg-color: var(--add-minor-color);
-    --focus-bg-color: var(--add-light-color);
-    --selected-bg-color: var(--add-mid-color);
-    --selected-hover-bg-color: var(--add-hard-color);
+    --hover-bg-color: var(--add-nothing-color);
+    --focus-bg-color: var(--add-minor-color);
+    --selected-bg-color: var(--add-light-color);
+    --selected-hover-bg-color: var(--add-mid-color);
+    --selected-tabuled-bg-color: var(--add-hard-color);
+    --selected-tabuled-hover-bg-color: var(--add-total-color);
     --invalid-bg-color: #ff000010;
     --invalid-border-color: #ff0000;
     --warning-bg-color: #ffcc0010;
@@ -40,7 +43,21 @@
     :root {
         --bg: #1e1f20;
         --fg: #ededed;
+        --border-color:var(--bg);
     }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 4px;
+    background: #0d1011;
+}
+::-webkit-scrollbar:horizontal {
+    height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color-special);
+    border-radius: 4px;
 }
 
 html {

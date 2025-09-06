@@ -1,5 +1,6 @@
 import { JSX } from "react";
 import "./switch.css";
+import Tooltip from "../tooltip/tooltip";
 
 interface SwitchProps {
     id: string;
@@ -53,31 +54,32 @@ export default function Switch({
             className={`switch-container ${disabled ? "disabled" : ""}`}
             style={style}
         >
-            <div
-                className={`switch-wrapper ${tooltip ? "tooltip" : ""}`}
-                {...(tooltip ? { "data-tooltip": tooltipText } : {})}
-            >
-                <input
-                    id={id}
-                    type="checkbox"
-                    className="switch-checkbox"
-                    checked={checked}
-                    disabled={disabled}
-                    aria-checked={checked}
-                    aria-labelledby={id+"-label"}
-                    aria-required={required}
-                    {...(label ? { "aria-label": label } : {})}
-                    onChange={(e) => onChange(e.target.checked)}
-                />
-                <span
-                    aria-hidden="true"
-                    className="switch-bg"/>
-                <span
-                    aria-hidden="true"
-                    className="switch-slider"
-                    style={{ backgroundColor: sliderBg }}
+            <Tooltip title={tooltipText} active={tooltip?true:false}>
+                <div
+                    className={`switch-wrapper`}
+                >
+                    <input
+                        id={id}
+                        type="checkbox"
+                        className="switch-checkbox"
+                        checked={checked}
+                        disabled={disabled}
+                        aria-checked={checked}
+                        aria-labelledby={id+"-label"}
+                        aria-required={required}
+                        {...(label ? { "aria-label": label } : {})}
+                        onChange={(e) => onChange(e.target.checked)}
                     />
-            </div>
+                    <span
+                        aria-hidden="true"
+                        className="switch-bg"/>
+                    <span
+                        aria-hidden="true"
+                        className="switch-slider"
+                        style={{ backgroundColor: sliderBg }}
+                        />
+                </div>
+            </Tooltip>
             {label && (
                 <span className="switch-label">
                     {label}

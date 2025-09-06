@@ -1,0 +1,23 @@
+.tooltip-wrapper {
+    width: fit-content;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+}
+
+.tooltip-component {
+    position: fixed;
+    z-index: 9000;
+    transform: translate(-50%);
+    padding: 4px 8px;
+    margin: 0;
+    background-color: var(--input-bg-color);
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 1px 1px 2px 3px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    animation: fadeOut 0.3s reverse;
+}

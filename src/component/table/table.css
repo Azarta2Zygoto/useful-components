@@ -1,0 +1,29 @@
+.table-row-hover tr:hover,
+.table-cell-hover tr td:hover{
+    background-color: var(--hover-bg-color);
+}
+.table .table-row-tabuled,
+.table .table-cell-tabuled {
+    background-color: var(--focus-bg-color);
+}
+.table .table-row-selected,
+.table .table-cell-selected {
+    background-color: var(--selected-bg-color);
+}
+.table .table-row-selected:hover,
+.table .table-cell-selected:hover {
+    background-color:var(--selected-hover-bg-color);
+}
+.table .table-row-tabuled.table-row-selected,
+.table .table-cell-tabuled.table-cell-selected {
+    background-color: var(--selected-tabuled-bg-color);
+}
+.table .table-row-tabuled.table-row-selected:hover,
+.table .table-cell-tabuled.table-cell-selected:hover {
+    background-color: var(--selected-tabuled-hover-bg-color);
+}
+.table-sort-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+}

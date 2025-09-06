@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import FloatingLabelInput from "@/component/input/input";
+import NumberInput from "@/component/input/numberInput";
 
 const inputValues = [
     "",
@@ -9,8 +10,14 @@ const inputValues = [
     "",
     "Disabled Input"
 ]
+
+const numberValues = [
+    1, 0, 0, 0
+]
+
 export default function InputPage() {
     const [inputValue, setInputValue] = useState<string[]>(inputValues);
+    const [numberValue, setNumberValue] = useState<number[]>(numberValues)
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index:number) => {
         setInputValue(prevValues => {
@@ -19,6 +26,14 @@ export default function InputPage() {
             return newValues;
         });
     };
+
+    function handleNumberValuesChanges(value:number, index:number) {
+        setNumberValue(prevValues => {
+            const newValues = [...prevValues];
+            newValues[index] = value;
+            return newValues;
+        });
+    }   
 
     return (
         <main>
@@ -54,6 +69,12 @@ export default function InputPage() {
                 disabled
                 getChange={(e)=>handleInputChange(e, 3)}
             />
+            <NumberInput
+                id="Number"
+                value={numberValue[0]}
+                placeholder="change the number"
+                getChange={(v)=>handleNumberValuesChanges(v, 0)}
+                />
         </main>
     );
 }

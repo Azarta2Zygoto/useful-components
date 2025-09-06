@@ -1,9 +1,10 @@
 import { JSX } from 'react';
+import Tooltip from '../tooltip/tooltip';
 import './dateTooltip.css';
 
 interface DateTooltipProps {
     date: Date;
-    showTooltip?: boolean;
+    tooltip?: boolean;
     language?: string;
     displayFormat?: Intl.DateTimeFormatOptions;
     tooltipFormat?: Intl.DateTimeFormatOptions;
@@ -13,7 +14,7 @@ interface DateTooltipProps {
 
 export default function DateTooltip({
     date,
-    showTooltip = true,
+    tooltip = true,
     language = 'fr-FR',
     displayFormat,
     tooltipFormat,
@@ -45,14 +46,15 @@ export default function DateTooltip({
 
 
     return (
-        <time
-            dateTime={date.toISOString()}
-            className={`date-tooltip ${showTooltip ? 'tooltip' : ''} ${className || ''}`}
-            aria-label={fullDate}
-            {...(showTooltip !== false ? { 'data-tooltip': fullDate } : {})}
-            style={style}
-        >
-            {shortDate}
-        </time>
+        <Tooltip title={fullDate} active={tooltip??false}>
+            <time
+                dateTime={date.toISOString()}
+                className={`date-tooltip ${className || ''}`}
+                aria-label={fullDate}
+                style={style}
+            >
+                {shortDate}
+            </time>
+        </Tooltip>
     );
 }

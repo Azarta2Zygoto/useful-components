@@ -1,5 +1,6 @@
 import { JSX } from "react";
 import "./radioButton.css";
+import Tooltip from "../tooltip/tooltip";
 
 interface RadioButtonProps {
     name: string;
@@ -46,28 +47,29 @@ export default function RadioButton({
         }
     }
     return (
-        <div className="radio-button-container">
-            <input
-                type="radio"
-                id={name+ "-" +value}
-                className={`radio-input ${className ? className + "-input" : ""}`}
-                name={name}
-                value={value}
-                onChange={onChange}
-                onClick={handleDeselect}
-                checked={checked}
-                aria-checked={checked}
-                aria-disabled={disabled}
-                disabled={disabled}/>
-            <label
-                htmlFor={name+ "-" +value}
-                className={`radio-label ${className ? className + "-label" : ""} ${tooltip ? "tooltip" : ""}`}
-                style={style}
-                aria-label={label ? label.toString() : undefined}
-                data-tooltip={tooltip?value:undefined}
-            >
-                {label||value}
-            </label>
-        </div>
+        <Tooltip title={label?label.toString():value} active={tooltip??false}>
+            <div className="radio-button-container">
+                <input
+                    type="radio"
+                    id={name+ "-" +value}
+                    className={`radio-input ${className ? className + "-input" : ""}`}
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    onClick={handleDeselect}
+                    checked={checked}
+                    aria-checked={checked}
+                    aria-disabled={disabled}
+                    disabled={disabled}/>
+                <label
+                    htmlFor={name+ "-" +value}
+                    className={`radio-label ${className ? className + "-label" : ""}`}
+                    style={style}
+                    aria-label={label ? label.toString() : undefined}
+                >
+                    {label||value}
+                </label>
+            </div>
+        </Tooltip>
     );
 }

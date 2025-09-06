@@ -1,4 +1,5 @@
 import React, { JSX } from "react";
+import Tooltip from "../tooltip/tooltip";
 import "./checkbox.css";
 
 interface CheckboxProps {
@@ -31,37 +32,39 @@ export default function Checkbox({
     onChange
 }: CheckboxProps): JSX.Element {
     return (
-        <label
-            className={`checkbox-container ${disabled ? "disabled" : ""} ${tooltip ? "tooltip" : ""} ${side === "left" ? "reverse" : ""}`}
-            id={id+"-label"}
-            style={style}
-            htmlFor={id}
-            data-tooltip={label}
+        <Tooltip title={label} active={tooltip??false}>
+            <label
+                className={`checkbox-container ${disabled ? "disabled" : ""} ${side === "left" ? "reverse" : ""}`}
+                id={id+"-label"}
+                style={style}
+                htmlFor={id}
             >
-            {hideLabel?"":label}
-            {required && <span aria-hidden="true" style={{ color: "red", margin:"0 5px" }}>&nbsp;*</span>}
-            <input
-                id={id}
-                type="checkbox"
-                checked={checked}
-                disabled={disabled}
-                name={name??id}
+                {hideLabel?"":label}
+                {required && <span aria-hidden="true" style={{ color: "red", margin:"0 5px" }}>&nbsp;*</span>}
+                <input
+                    id={id}
+                    type="checkbox"
+                    checked={checked}
+                    disabled={disabled}
+                    name={name??id}
 
-                required={required}
-                aria-checked={checked}
-                aria-labelledby={id+"-label"}
-                aria-describedby={id+"-checkmark"}
-                aria-required={required}
-                onChange={onChange}
-                {...(hideLabel ? { "aria-label": label } : {})}/>
-            <span
-                id={id+"-checkmark"}
-                className="checkbox-checkmark"
-                style= {{
-                    right: hideLabel?'50%':rightOffset+"px",
-                    transform: hideLabel?'translateX(50%) translateY(-50%)':undefined
-                }}>
-            </span>
-        </label>
+                    required={required}
+                    aria-checked={checked}
+                    aria-labelledby={id+"-label"}
+                    aria-describedby={id+"-checkmark"}
+                    aria-required={required}
+                    onChange={onChange}
+                    {...(hideLabel ? { "aria-label": label } : {})}
+                />
+                <span
+                    id={id+"-checkmark"}
+                    className="checkbox-checkmark"
+                    style= {{
+                        right: hideLabel?'50%':rightOffset+"px",
+                        transform: hideLabel?'translateX(50%) translateY(-50%)':undefined
+                    }}>
+                </span>
+            </label>
+            </Tooltip>
     );
 }

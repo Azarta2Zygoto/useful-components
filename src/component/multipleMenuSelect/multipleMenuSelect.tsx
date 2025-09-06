@@ -1,10 +1,12 @@
-import React, { JSX, useState, useRef, useEffect } from "react";
+import React, { JSX, useState, useRef, useEffect, Fragment } from "react";
 import BodyAccess from "../utils/bodyAccess";
 import Checkbox from "../checkbox/checkbox";
 import Overlay from "../overlay/overlay";
 import Box from "../box/box";
+import "../menuSelect/menuSelect.css";
+import Tooltip from "../tooltip/tooltip";
 
-interface MenuSelectProps {
+interface MultipleMenuSelectProps {
     id: string;
     options: string[];
     selectedOptions: string[];
@@ -13,9 +15,10 @@ interface MenuSelectProps {
     disabled?: boolean;
     hideIcon?: boolean;
     required?: boolean;
-    tooltip?: boolean;
+    tooltip?: boolean|string;
     checkbox?: boolean|"left"|"right";
     style?: React.CSSProperties;
+    children?: React.ReactNode;
     onSelect: (value: string[]) => void;
 }
 
@@ -31,8 +34,9 @@ export default function MultipleMenuSelect({
     checkbox = false,
     tooltip,
     hideIcon,
+    children,
     onSelect,
-}: MenuSelectProps): JSX.Element {
+}: MultipleMenuSelectProps): JSX.Element {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const listRef = useRef<HTMLUListElement>(null);
     const maxHeight = 200;
@@ -66,6 +70,7 @@ export default function MultipleMenuSelect({
     }, [isOpen, selectedOptions]);
 
     function handleOptionClick(option: string) {
+        console.log(option);
         if (selectedOptions.includes(option)) {
             onSelect(selectedOptions.filter(opt => opt !== option));
         }
@@ -159,37 +164,41 @@ export default function MultipleMenuSelect({
                     onClose={handleOverlayClose}
                 />
             )}
-            <button
-                ref={buttonRef}
-                type="button"
-                role="button"
-                className={`menu-select-button ${required&&selectedOptions.length===0?"invalid":""} ${tooltip ? "tooltip" : ""}`}
-                style={{...style,
-                    ...(hideIcon ? { paddingRight: "10px" } : {}),
-                }}
-                id={id}
-                disabled={disabled}
-                aria-disabled={disabled}
-                aria-haspopup="listbox"
-                aria-expanded={isOpen}
-                aria-labelledby={id+'-label'}
-                data-tooltip={label}
-                onClick={handleOpen}
-                onKeyDown={handleKeyDown}
-            >
-                    {selectedOptions.map((opt, idx) => (
-                        <Box
-                            key={idx+opt}
-                            style={{
-                                maxWidth: style?.width?`calc(${style.width} - 90px)`:undefined,
-                            }}
-                        >
-                            {opt}
-                        </Box>
-                    ))
-                            }
-                    {renderIcon()}
-            </button>
+            <Tooltip title={label || tooltip?.toString() || "multiple select menu"} active={tooltip?true:false}>
+                <button
+                    ref={buttonRef}
+                    type="button"
+                    role="button"
+                    className={`menu-select-button ${required&&selectedOptions.length===0?"invalid":""}`}
+                    style={{...style,
+                        ...(hideIcon ? { paddingRight: "10px" } : {}),
+                    }}
+                    id={id}
+                    disabled={disabled}
+                    aria-disabled={disabled}
+                    aria-haspopup="listbox"
+                    aria-expanded={isOpen}
+                    aria-labelledby={id+'-label'}
+                    onClick={handleOpen}
+                    onKeyDown={handleKeyDown}
+                >
+                    {children ?? (
+                        <Fragment>
+                            {selectedOptions.map((opt, idx) => (
+                                <Box
+                                    key={idx+opt}
+                                    style={{
+                                        maxWidth: style?.width?`calc(${style.width} - 90px)`:undefined,
+                                    }}
+                                >
+                                    {opt}
+                                </Box>
+                            ))}
+                            {renderIcon()}
+                        </Fragment>
+                    )}
+                </button>
+            </Tooltip>
             {label&&(
                 <label
                     id={id+'-label'}
@@ -226,7 +235,7 @@ export default function MultipleMenuSelect({
                                 className={`menu-select-option ${focusedIndex === idx ? "focused" : ""} ${selectedOptions.includes(option) ? "selected" : ""}`}
                                 aria-selected={focusedIndex === idx}
                                 tabIndex={focusedIndex === idx ? 0 : -1}
-                                onClick={() => handleOptionClick(option)}
+                                onClick={() => {handleOptionClick(option);console.log("li")}}
                                 onMouseEnter={() => setFocusedIndex(idx)}
                                 >
                                 {checkbox!==false?
@@ -235,7 +244,7 @@ export default function MultipleMenuSelect({
                                     label={option}
                                     checked={selectedOptions.includes(option)}
                                     side={checkbox===true?"right":checkbox}
-                                    onChange={()=>handleOptionClick(option)}
+                                    onChange={()=>{handleOptionClick(option);console.log("change")}}
                                     disabled={disabled}
                                     style={{width: "calc(100% - 40px)"}}
                                     />:
