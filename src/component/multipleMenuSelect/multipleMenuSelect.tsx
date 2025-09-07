@@ -17,6 +17,7 @@ interface MultipleMenuSelectProps {
     required?: boolean;
     tooltip?: boolean|string;
     checkbox?: boolean|"left"|"right";
+    className?: string;
     style?: React.CSSProperties;
     children?: React.ReactNode;
     onSelect: (value: string[]) => void;
@@ -34,6 +35,7 @@ export default function MultipleMenuSelect({
     checkbox = false,
     tooltip,
     hideIcon,
+    className,
     children,
     onSelect,
 }: MultipleMenuSelectProps): JSX.Element {
@@ -155,6 +157,10 @@ export default function MultipleMenuSelect({
         );
     }
 
+    useEffect(() => {
+        console.log(className)
+    }, [className]);
+
     return (
         <div className="menu-select-container">
             {isOpen&&(
@@ -165,11 +171,12 @@ export default function MultipleMenuSelect({
                 />
             )}
             <Tooltip title={label || tooltip?.toString() || "multiple select menu"} active={tooltip?true:false}>
+                {className}
                 <button
                     ref={buttonRef}
                     type="button"
                     role="button"
-                    className={`menu-select-button ${required&&selectedOptions.length===0?"invalid":""}`}
+                    className={`menu-select-button ${required&&selectedOptions.length===0?"invalid":""} ${className?className:""}`}
                     style={{...style,
                         ...(hideIcon ? { paddingRight: "10px" } : {}),
                     }}

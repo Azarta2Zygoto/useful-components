@@ -224,6 +224,15 @@ input[type="date"]:disabled {
     box-shadow: 0 0 10px #00000066;
     overflow-x: auto;
 }
+.void,
+.void:hover,
+.void:active,
+.void:focus-visible {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
 /* All animations */
 @keyframes fadeOut {
     0% {

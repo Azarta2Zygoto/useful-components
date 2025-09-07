@@ -445,6 +445,7 @@ export default function Table({
                     {filterable==="outside" && (
                         <MultipleMenuSelect
                                 id={name + "-table-filterable"}
+                                className='void'
                                 selectedOptions={viewableItems.filter(item => item !== null)}
                                 options={correctHeaderTitles}
                                 onSelect={handleShowing}

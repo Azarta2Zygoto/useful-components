@@ -14,6 +14,7 @@ interface MenuSelectProps {
     hideIcon?: boolean;
     required?: boolean;
     tooltip?: boolean;
+    className?: string;
     style?: React.CSSProperties;
     onSelect: (value: string) => void;
 }
@@ -29,6 +30,7 @@ export default function MenuSelect({
     required,
     tooltip,
     hideIcon,
+    className,
     onSelect,
 }: MenuSelectProps): JSX.Element {
     const buttonRef = useRef<HTMLButtonElement>(null);
@@ -175,7 +177,7 @@ export default function MenuSelect({
                     ref={buttonRef}
                     type="button"
                     role="button"
-                    className={`menu-select-button ${required&&selectedOption===""?"invalid":""}`}
+                    className={`menu-select-button ${required&&selectedOption===""?"invalid":""} ${className||""}`}
                     style={{...style,
                         ...(hideIcon ? { paddingRight: "10px" } : {}),
                     }}
