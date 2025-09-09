@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, JSX, useLayoutEffect } from "react";
+import { useState, useEffect, useRef, JSX } from "react";
 import DisplayInfos from "./displayInfo";
 import MenuSelect from "../menuSelect/menuSelect";
 import Tooltip from "../tooltip/tooltip";
@@ -116,7 +116,7 @@ export default function InputInfo({
     }, [tooltipContentRef, formInfoRef]);
 
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         function updateTooltipPosition() {
             const input = document.getElementById(id + "-element");
             if (!input) return;
