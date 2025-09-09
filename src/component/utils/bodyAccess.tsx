@@ -3,17 +3,24 @@ import { createPortal } from 'react-dom';
 
 export default function BodyAccess({
     children
-}: { children: React.ReactNode }):JSX.Element|null {
-    const elRef = useRef<HTMLDivElement>(document?.createElement('div'));
+}: { children: React.ReactNode }): JSX.Element | null {
+    // Ne pas accéder à `document` directement sur le serveur
+    const elRef = useRef<HTMLDivElement | null>(
+        typeof document !== "undefined" ? document.createElement('div') : null
+    );
 
     useEffect(() => {
-        const el = elRef.current;
-        
+        // Si on est côté client et que l'élément n'existe pas encore, le créer
+        if (!elRef.current) {
+            elRef.current = document.createElement('div');
+        }
+        const el = elRef.current!;
         document.body.appendChild(el);
         return () => {
             document.body.removeChild(el);
         };
     }, []);
-    
+
+    if (!elRef.current) return null; // sécurité pour SSR
     return createPortal(children, elRef.current);
 }

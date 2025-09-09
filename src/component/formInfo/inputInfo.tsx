@@ -95,7 +95,74 @@ export default function InputInfo({
     const [positionTooltip, setPositionTooltip] = useState<{ top: string; left: string; translateY:string }>({ top: "0", left: "0", translateY: "-50%" });
     const [position, setPosition] = useState<{ top: string; left: string; translateY:string }>({ top: "0", left: "0", translateY: "-50%" });
 
+    useEffect(() => {
+        if (typeof document === "undefined") return;
+        if (!tooltipContentRef.current || !formInfoRef.current) return;
+        
+        const currentTooltip = tooltipContentRef.current;
+        const currentFormInfo = formInfoRef.current;
 
+        const handleClick = (e: MouseEvent) => {
+            if ((currentTooltip && !currentTooltip.contains(e.target as Node)) &&
+                (currentFormInfo && !currentFormInfo.contains(e.target as Node))) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener("click", handleClick);
+
+        return () => {
+            document.removeEventListener("click", handleClick);
+        };
+    }, [tooltipContentRef, formInfoRef]);
+
+
+    useEffect(() => {
+        if (typeof document === "undefined") return;
+
+        function updateTooltipPosition() {
+            const input = document.getElementById(id + "-element");
+            if (!input) return;
+            const rect = input.getBoundingClientRect();
+            let top = rect.top + rect.height / 2 + window.scrollY;
+            const left = rect.right + 10 + window.scrollX;
+            
+            // Check for top overflow
+            if (top + 40 > window.innerHeight) {
+                top = window.innerHeight - 40;
+            }
+            setPositionTooltip({
+                top: `${top}px`,
+                left: `${left}px`,
+                translateY: "-50%",
+            });
+
+            const tooltipWidth = 250;
+            const dif = window.innerWidth - (rect.right + tooltipWidth + 90);
+            if (dif > 0) {
+                setPosition({
+                    top: "14px",
+                    left: `55px`,
+                    translateY: "-50%"
+                });
+            } else {
+                setPosition({
+                    top: `28px`,
+                    left: `${window.innerWidth-270-rect.right}px`,
+                    translateY: "0"
+                });
+            }
+        }
+
+        updateTooltipPosition();
+        window.addEventListener("resize", updateTooltipPosition);
+        window.addEventListener("scroll", updateTooltipPosition, true);
+
+        return () => {
+            window.removeEventListener("resize", updateTooltipPosition);
+            window.removeEventListener("scroll", updateTooltipPosition, true);
+        };
+    }, [id, show, width]);
 
     useEffect(() => {
         const newProblems = []
