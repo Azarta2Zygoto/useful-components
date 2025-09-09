@@ -117,6 +117,8 @@ export default function InputInfo({
 
 
     useEffect(() => {
+        if (typeof document === "undefined") return;
+
         function updateTooltipPosition() {
             const input = document.getElementById(id + "-element");
             if (!input) return;
