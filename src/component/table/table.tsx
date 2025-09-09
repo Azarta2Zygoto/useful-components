@@ -104,7 +104,6 @@ export default function Table({
     }, [headerTitles, data]);
 
     function reinitTabuled() {
-        console.log("Reinit tabuled");
         setTabuledRow(-1);
         setTabuledCell({ x: -1, y: -1 });
     }
@@ -130,7 +129,6 @@ export default function Table({
 
     function handleShowing(valideValue: string[]) {
         if (valideValue.length === 0) return;
-        console.log(valideValue);
 
         const newWiewableItems:(string|null)[] = [];
         

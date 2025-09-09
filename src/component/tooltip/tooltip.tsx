@@ -8,6 +8,7 @@ interface TooltipProps {
     placement?: "top" | "bottom" | "left" | "right";
     active?: boolean;
     offset?: number;
+    targetRef?: React.RefObject<HTMLElement|null>;
     style?: React.CSSProperties;
 }
 
@@ -17,6 +18,7 @@ export default function Tooltip({
     active = true,
     placement = "bottom",
     offset = 4,
+    targetRef,
     style
 }: TooltipProps) : JSX.Element {
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -24,9 +26,12 @@ export default function Tooltip({
     const [showTooltip, setShowTooltip] = useState(false);
 
     const mouseEnter = () => {
-        if (!active || !wrapperRef.current) return;
+        if (!active) return;
 
-        const rect = wrapperRef.current.getBoundingClientRect();
+        const ref = targetRef?.current || wrapperRef.current;
+        if (!ref) return;
+
+        const rect = ref.getBoundingClientRect();
         let left = rect.left + rect.width / 2;
         let top = rect.top + rect.height;
         if (placement === "top") {

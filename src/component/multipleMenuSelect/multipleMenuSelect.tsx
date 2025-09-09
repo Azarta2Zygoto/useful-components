@@ -72,7 +72,6 @@ export default function MultipleMenuSelect({
     }, [isOpen, selectedOptions]);
 
     function handleOptionClick(option: string) {
-        console.log(option);
         if (selectedOptions.includes(option)) {
             onSelect(selectedOptions.filter(opt => opt !== option));
         }
@@ -156,11 +155,6 @@ export default function MultipleMenuSelect({
             </svg>
         );
     }
-
-    useEffect(() => {
-        console.log(className)
-    }, [className]);
-
     return (
         <div className="menu-select-container">
             {isOpen&&(
@@ -242,7 +236,7 @@ export default function MultipleMenuSelect({
                                 className={`menu-select-option ${focusedIndex === idx ? "focused" : ""} ${selectedOptions.includes(option) ? "selected" : ""}`}
                                 aria-selected={focusedIndex === idx}
                                 tabIndex={focusedIndex === idx ? 0 : -1}
-                                onClick={() => {handleOptionClick(option);console.log("li")}}
+                                onClick={() => handleOptionClick(option)}
                                 onMouseEnter={() => setFocusedIndex(idx)}
                                 >
                                 {checkbox!==false?
@@ -251,7 +245,7 @@ export default function MultipleMenuSelect({
                                     label={option}
                                     checked={selectedOptions.includes(option)}
                                     side={checkbox===true?"right":checkbox}
-                                    onChange={()=>{handleOptionClick(option);console.log("change")}}
+                                    onChange={()=>handleOptionClick(option)}
                                     disabled={disabled}
                                     style={{width: "calc(100% - 40px)"}}
                                     />:

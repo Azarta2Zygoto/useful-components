@@ -32,6 +32,7 @@ export default function RootLayout({
                 <li><Link href="/multipleMenuSelect">Multiple Menu Select</Link></li>
                 <li><Link href="/switch">Switch</Link></li>
                 <li><Link href="/table">Table</Link></li>
+                <li><Link href="/form">Form Info</Link></li>
             </ul>
         </nav>
         {children}

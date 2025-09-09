@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { JSX, useRef } from "react";
 import Tooltip from "../tooltip/tooltip";
 
 interface FormInfoProps {
@@ -7,32 +7,50 @@ interface FormInfoProps {
     form?: boolean;
     action?: string;
     method?: "get"|"post";
+    encType?: string;
     style?: React.CSSProperties;
     text?:{
         see?: string
     }
     children: React.ReactNode;
+    isInfo?: boolean;
+    buttonClassName?: string;
+    ref?: React.Ref<HTMLFormElement>|React.Ref<HTMLDivElement>;
     getInfo:()=>void;
+    onSubmit?:(e: React.FormEvent<HTMLFormElement>)=>void;
 }
 
 
 export default function FormInfo({
     className,
+    isInfo,
     tooltip,
     style,
     action,
     method,
     form = true,
     text,
+    encType="application/x-www-form-urlencoded",
     children,
-    getInfo
+    buttonClassName,
+    ref,
+    getInfo,
+    onSubmit
 }: FormInfoProps): JSX.Element {
+    const infoRef = useRef<HTMLButtonElement>(null);
+
     const innerJSX = (
-        <Tooltip title={text?.see||"See more information"} active={tooltip}>
+        <Tooltip
+            title={text?.see||"See more information"}
+            active={tooltip}
+            targetRef={infoRef}
+        >
             <button
-                className="background-click"
+                className={`background-click ${isInfo&&"selected"} ${buttonClassName||""}`}
                 aria-label={text?.see||"See more information"}
+                aria-describedby="forminfo-tooltip"
                 onClick={getInfo}
+                ref={infoRef}
                 type="button"
                 style={{
                     position: "absolute",
@@ -54,8 +72,11 @@ export default function FormInfo({
             <form
                 action={action||"#"}
                 method={method||"get"}
+                ref={ref as React.Ref<HTMLFormElement>}
                 className={`component-box ${className||""}`}
+                encType={encType}
                 style={style}
+                onSubmit={onSubmit}
             >
                 {innerJSX}
                 {children}
@@ -64,6 +85,7 @@ export default function FormInfo({
     }
     return (
         <div
+            ref={ref as React.Ref<HTMLDivElement>}
             className={`component-box ${className||""}`}
             style={style}
         >

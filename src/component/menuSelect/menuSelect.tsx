@@ -16,6 +16,7 @@ interface MenuSelectProps {
     tooltip?: boolean;
     className?: string;
     style?: React.CSSProperties;
+    ref?: React.Ref<unknown>;
     onSelect: (value: string) => void;
 }
 
@@ -81,7 +82,6 @@ export default function MenuSelect({
         onSelect(option);
         setIsOpenAnimation(false);
         setTimeout(() => {
-            console.log("Closing menu");
             setIsOpen(false);
             setIsOpenAnimation(null);
         }, 200);
