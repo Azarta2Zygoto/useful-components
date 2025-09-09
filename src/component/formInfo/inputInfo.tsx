@@ -96,6 +96,7 @@ export default function InputInfo({
     const [position, setPosition] = useState<{ top: string; left: string; translateY:string }>({ top: "0", left: "0", translateY: "-50%" });
 
     useEffect(() => {
+        if (typeof document === "undefined") return;
         if (!tooltipContentRef.current || !formInfoRef.current) return;
         
         const currentTooltip = tooltipContentRef.current;

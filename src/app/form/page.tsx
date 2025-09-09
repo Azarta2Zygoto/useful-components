@@ -7,7 +7,7 @@ import InputInfo from "@/component/formInfo/inputInfo";
 export default function Page() {
     const [infoVisible, setInfoVisible] = useState(false);
     return (
-        <div style={{padding: "20px"}}>
+        <main>
             <h1>Form Info Component</h1>
             <FormInfo
                 isInfo={infoVisible}
@@ -45,6 +45,6 @@ export default function Page() {
                     show={infoVisible}
                 />
             </FormInfo>
-        </div>
+        </main>
     );
 }
