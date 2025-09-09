@@ -4,7 +4,7 @@ import { useState } from "react";
 import FormInfo from "@/component/formInfo/formInfo";
 import InputInfo from "@/component/formInfo/inputInfo";
 
-export default function Page() {
+export default function FormPage() {
     const [infoVisible, setInfoVisible] = useState(false);
     return (
         <main>
@@ -26,6 +26,7 @@ export default function Page() {
                     placeholder="Type something as password..."
                     maxLength={20}
                     show={infoVisible}
+                    getChange={(val) => console.log(val)}
                 />
                 <InputInfo
                     label="Input with Info"
@@ -34,6 +35,7 @@ export default function Page() {
                     value="email"
                     placeholder="Type something as email..."
                     show={infoVisible}
+                    getChange={(val) => console.log(val)}
                 />
                 <InputInfo
                     label="Input with Info"
@@ -43,6 +45,7 @@ export default function Page() {
                     floatingLabel
                     placeholder="Type something as email..."
                     show={infoVisible}
+                    getChange={(val) => console.log(val)}
                 />
             </FormInfo>
         </main>
