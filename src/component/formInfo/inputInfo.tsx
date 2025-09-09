@@ -95,26 +95,6 @@ export default function InputInfo({
     const [positionTooltip, setPositionTooltip] = useState<{ top: string; left: string; translateY:string }>({ top: "0", left: "0", translateY: "-50%" });
     const [position, setPosition] = useState<{ top: string; left: string; translateY:string }>({ top: "0", left: "0", translateY: "-50%" });
 
-    useEffect(() => {
-        if (typeof document === "undefined") return;
-        if (!tooltipContentRef.current || !formInfoRef.current) return;
-        
-        const currentTooltip = tooltipContentRef.current;
-        const currentFormInfo = formInfoRef.current;
-
-        const handleClick = (e: MouseEvent) => {
-            if ((currentTooltip && !currentTooltip.contains(e.target as Node)) &&
-                (currentFormInfo && !currentFormInfo.contains(e.target as Node))) {
-                setIsOpen(false);
-            }
-        };
-
-        document.addEventListener("click", handleClick);
-
-        return () => {
-            document.removeEventListener("click", handleClick);
-        };
-    }, [tooltipContentRef, formInfoRef]);
 
 
     useEffect(() => {
