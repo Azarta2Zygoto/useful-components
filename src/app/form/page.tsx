@@ -28,6 +28,25 @@ export default function FormPage() {
                     show={infoVisible}
                     getChange={(val) => console.log(val)}
                 />
+                <InputInfo
+                    label="Input with Info"
+                    type="email"
+                    id="input-with-info-email"
+                    value="email"
+                    placeholder="Type something as email..."
+                    show={infoVisible}
+                    getChange={(val) => console.log(val)}
+                />
+                <InputInfo
+                    label="Input with Info"
+                    type="email"
+                    id="input-with-info-email-2"
+                    value="email"
+                    floatingLabel
+                    placeholder="Type something as email..."
+                    show={infoVisible}
+                    getChange={(val) => console.log(val)}
+                />
             </FormInfo>
         </main>
     );

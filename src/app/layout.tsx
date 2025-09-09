@@ -23,7 +23,7 @@ export default function RootLayout({
       <body>
         <nav>
             <ul>
-                <li><Link href="/">Home</Link></li>
+                <li><Link href="/" className="button">Home</Link></li>
                 <li><Link href="/checkbox">Checkbox</Link></li>
                 <li><Link href="/menuselect">Menu Select</Link></li>
                 <li><Link href="/alertBox">Alert Box</Link></li>

@@ -91,6 +91,55 @@ input[type="date"]:disabled {
     cursor: not-allowed;
 }
 
+.button {
+    background-color: var(--focus-bg-color);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width:100px;
+    width: fit-content;
+    height: 30px;
+    font-size: 18px;
+    color: var(--fg);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    margin: 10px 20px;
+    padding: 0 5px;
+    border: solid 2px transparent;
+    text-decoration: none;
+}
+
+.button.disabled,
+.button.disabled:hover,
+.button.disabled:active,
+.button.disabled:focus-visible,
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active,
+.button:disabled:focus-visible{
+    pointer-events: none;
+    background-color: var(--disabled-bg-color);
+    border-color: var(--disabled-border-color);
+}
+
+.button:hover {
+    background-color: var(--selected-bg-color);
+}
+
+.button:active {
+    background-color: var(--selected-tabuled-bg-color);
+}
+.button:focus-visible {
+    outline: solid 1px var(--fg);
+    outline-offset: 1px;
+    background-color: var(--selected-tabuled-bg-color);
+    border:2px solid var(--selected-tabuled-bg-color);
+}
+.button.selected {
+    background-color: var(--selected-tabuled-hover-bg-color);
+    border:2px solid var(--selected-tabuled-hover-bg-color);
+}
 .background-click {
     background-color: transparent;
     display: flex;
