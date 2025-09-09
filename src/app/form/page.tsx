@@ -17,6 +17,17 @@ export default function FormPage() {
             >
                 <h2>Form Title</h2>
                 <p>This is a sample form content.</p>
+                <InputInfo
+                    label="Input with Info"
+                    type="password"
+                    tooltip
+                    id="input-with-info"
+                    value="password"
+                    placeholder="Type something as password..."
+                    maxLength={20}
+                    show={infoVisible}
+                    getChange={(val) => console.log(val)}
+                />
             </FormInfo>
         </main>
     );
