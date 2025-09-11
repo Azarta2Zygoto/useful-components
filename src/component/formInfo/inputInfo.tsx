@@ -8,8 +8,16 @@ import BodyAccess from "../utils/bodyAccess";
 import NumberInput from "../input/numberInput";
 import Icon from "../utils/icon";
 import "./inputInfo.css";
+import ArrayInput from "../input/arrayInput";
 
-type listType = "text" | "password" | "email" | "tel" | "url" | "number" | "select_menu" | "multiple_select_menu" | "fake_input";
+type listType = "text" | "password" |
+    "email" | "tel" |
+    "url" | "number" |
+    "select_menu" | "multiple_select_menu" |
+    "fake_input" | "text_array" |
+    "number_array" | "email_array" |
+    "tel_array" | "url_array"
+;
 
 interface InputInfoProps {
     id: string;
@@ -33,6 +41,8 @@ interface InputInfoProps {
     style?: React.CSSProperties;
     boxStyle?: React.CSSProperties;
     show?: boolean;
+    icon?: boolean;
+    maxElements?: number;
     otherTests?: {text:string, correct:boolean}[];
     floatingLabel?: boolean;
     width?: number;
@@ -44,6 +54,7 @@ interface InputInfoProps {
         pattern?: string,
         min_number?: string,
         max_number?: string,
+        max_elements?: string,
     }
     regexText?:{
         minuscule?: string,
@@ -84,6 +95,8 @@ export default function InputInfo({
     show,
     otherTests,
     floatingLabel,
+    icon,
+    maxElements,
     width = 1025,
     regexText,
     tooltip,
@@ -198,9 +211,12 @@ export default function InputInfo({
         if (max && typeof value === "number" && value > max) {
             newProblems.push("max")
         }
+        if (maxElements && values && values.length > maxElements) {
+            newProblems.push("max_elements")
+        }
 
         setProblems(newProblems)
-    }, [max, maxLength, min, minLength, pattern, required, value, otherTests]);
+    }, [max, maxLength, min, minLength, pattern, required, value, otherTests, values, maxElements]);
 
     return (
         <div className="tooltip" style={boxStyle}>
@@ -218,6 +234,8 @@ export default function InputInfo({
                 min={min}
                 max={max}
                 step={step}
+                icon={icon}
+                maxElements={maxElements}
                 required={required}
                 disabled={disabled}
                 autoComplete={autoComplete}
@@ -341,6 +359,15 @@ export default function InputInfo({
                             regexText={regexText}
                         />
                     }
+                    {maxElements &&
+                        <DisplayInfos
+                            type="max_elements"
+                            valid={!problems.includes("max_elements")}
+                            value={maxElements}
+                            text={displayText}
+                            regexText={regexText}
+                        />
+                    }
                     {otherTests && otherTests.length > 0 &&(
                         otherTests.map((value, index) => (
                             <DisplayInfos
@@ -374,6 +401,8 @@ interface DisplayerProps {
     maxLength?: number;
     max?: number;
     step?: number;
+    icon?: boolean;
+    maxElements?: number;
     required?: boolean;
     disabled?: boolean;
     autoComplete?: string;
@@ -405,6 +434,8 @@ function Displayer({
     step,
     required,
     disabled,
+    icon,
+    maxElements,
     autoComplete = "on",
     options,
     className,
@@ -416,7 +447,33 @@ function Displayer({
     getValues,
     getNumber
 }: DisplayerProps): JSX.Element {
-    if (type === "text" || type === "password" || type === "email" || type === "tel" || type === "url") {
+    if (type === "text_array" || type === "number_array" || type === "email_array" || type === "tel_array" || type === "url_array") {
+        return (
+            <ArrayInput
+                id={id+"-element" || ""}
+                type={type === "number_array" ? "number" : type === "email_array" ? "email" : type === "tel_array" ? "tel" : type === "url_array" ? "url" : "text"}
+                values={values || []}
+                placeholder={placeholder || ""}
+                className={className}
+                required={required}
+                disabled={disabled}
+                autoComplete={autoComplete}
+                pattern={pattern}
+                size={size}
+                minLength={minLength}
+                maxLength={maxLength}
+                min={min}
+                max={max}
+                icon={icon}
+                maxElements={maxElements}
+                step={step}
+                floatingLabel={floatingLabel}
+                style={style}
+                getValues={getValues || (() => {})}
+            />
+        );
+    }
+    else if (type === "text" || type === "password" || type === "email" || type === "tel" || type === "url") {
         if (floatingLabel) {
             return (
                 <FloatingLabelInput
@@ -509,10 +566,10 @@ function Displayer({
                 min={min}
                 max={max}
                 step={step}
+                icon={icon}
                 floatingLabel={floatingLabel}
                 style={style}
                 getChange={getNumber || (() => {})}
-                icon={true}
             />
         );
     }

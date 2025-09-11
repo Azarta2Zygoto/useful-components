@@ -1,15 +1,16 @@
 import { ChangeEvent, JSX, useState, useEffect, Fragment } from "react";
-import FloatingLabelInput from "./input";
 import Box from "../box/box";
-import "./input.css"
-import NumberInput from "./numberInput";
 import Icon from "../utils/icon";
+import FloatingLabelInput from "./input";
+import NumberInput from "./numberInput";
+import "./input.css"
 
 interface ArrayInputProps {
     id: string;
     values: string[];
     placeholder: string;
     type?: "text" | "email" | "tel" | "url" | "number";
+    maxElements?: number;
     className?: string;
     required?: boolean;
     disabled?: boolean;
@@ -17,6 +18,7 @@ interface ArrayInputProps {
     floatingLabel?: boolean;
     icon?: boolean;
     pattern?: string;
+    size?: number;
     minLength?: number;
     maxLength?: number;
     min?: number;
@@ -41,11 +43,13 @@ export default function ArrayInput({
     pattern,
     minLength,
     maxLength,
+    size,
     min,
     max,
     step,
     int,
     style,
+    maxElements,
     getValues,
 }:ArrayInputProps): JSX.Element {
     const [currentValue, setCurrentValue] = useState<string>("");
@@ -64,6 +68,7 @@ export default function ArrayInput({
     const handleAddInput = () => {
         if (currentValue.trim() === "") return;
         if (currentValues.includes(currentValue.trim())) return;
+        if (maxElements && currentValues.length >= maxElements) return;
         const newValues = [...currentValues, currentValue.trim()];
         setCurrentValues(newValues);
         setCurrentValue("");
@@ -118,10 +123,10 @@ export default function ArrayInput({
                         type={type}
                         value={currentValue}
                         placeholder={placeholder}
-                        className={"array-input " + (className || '')}
-                        required={required}
+                        className={"array-input " + (required&&currentValues.length===0?"invalid ":"")+ (className || '')}
                         disabled={disabled}
                         autoComplete={autoComplete}
+                        size={size}
                         pattern={pattern}
                         minLength={minLength}
                         maxLength={maxLength}
@@ -135,10 +140,10 @@ export default function ArrayInput({
                         type={type}
                         value={currentValue}
                         placeholder={placeholder}
-                        className={"array-input " + (className || '')}
-                        required={required}
+                        className={"array-input " + (required&&currentValues.length===0?"invalid ":"") + (className || '')}
                         disabled={disabled}
                         autoComplete={autoComplete}
+                        size={size}
                         pattern={pattern}
                         minLength={minLength}
                         maxLength={maxLength}
@@ -151,8 +156,7 @@ export default function ArrayInput({
                         id={id}
                         value={currentValue===""?0:parseFloat(currentValue)}
                         placeholder={placeholder}
-                        className={"array-input " + (className || '')}
-                        required={required}
+                        className={"array-input " + (required&&currentValues.length===0?"invalid ":"") + (className || '')}
                         disabled={disabled}
                         autoComplete={autoComplete}
                         icon={icon}
@@ -165,7 +169,9 @@ export default function ArrayInput({
                         int={int}
                     />
                 )}
-                {valueChange===""&&currentValue.trim()!==""&&!currentValues.includes(currentValue.trim())&&(
+                {valueChange===""&&currentValue.trim()!==""&&
+                    !currentValues.includes(currentValue.trim())&&
+                    (maxElements?maxElements>currentValues.length:true)&&(
                     <button
                         type="button"
                         className="background-click validate-array-button-add"
@@ -175,14 +181,24 @@ export default function ArrayInput({
                         <Icon name="plus-circle-fill" />
                     </button>
                 )}
-                
-                {valueChange===""&&currentValues.includes(currentValue.trim())&&(
+                {valueChange===""&&currentValues.includes(currentValue.trim())&&
+                    (maxElements?maxElements>currentValues.length:true)&&(
                     <Icon
                         name="plus-circle-fill"
                         color="var(--invalid-border-color)"
                         className="array-input-duplicate-icon"
                         title={"Already in the list"}
                         desc={"This value is already in the list"}
+                    />
+                )}
+                {valueChange===""&&maxElements&&maxElements<=currentValues.length&&(
+                    <Icon
+                        name="full"
+                        color={maxElements===currentValues.length?
+                            "var(--warning-border-color)":"var(--invalid-border-color)"}
+                        className="array-input-maximum-icon"
+                        title={"Maximum reached"}
+                        desc={"Maximum number of elements reached"}
                     />
                 )}
                 {valueChange!==""&&currentValue.trim()!==""&&(
@@ -206,7 +222,7 @@ export default function ArrayInput({
                     </Fragment>
                 )}
             </div>
-            <div className="array-input-boxes-container">
+            <div className={`array-input-boxes-container ${currentValues.length===maxElements?"full":""} ${maxElements&&currentValues.length>maxElements?"too-full":""}`}>
                 {values.map((value, index) => (
                     <Box
                         key={index}

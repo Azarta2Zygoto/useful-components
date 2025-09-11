@@ -162,7 +162,8 @@ input[type="date"]:disabled {
         transition: fill 0.3s ease;
     }
 }
-.background-click:hover {
+.background-click:hover:not(.disabled),
+.background-click:hover:not(:disabled) {
     border: none;
     background-color: transparent;
     & i {
@@ -172,7 +173,8 @@ input[type="date"]:disabled {
         fill: var(--selected-bg-color);
     }
 }
-.background-click:active {
+.background-click:active:not(.disabled),
+.background-click:active:not(:disabled) {
     border: none;
     background-color: transparent;
     & i  {
@@ -182,7 +184,8 @@ input[type="date"]:disabled {
         fill: var(--selected-hover-bg-color);
     }
 }
-.background-click:focus-visible {
+.background-click:focus-visible:not(.disabled),
+.background-click:focus-visible:not(:disabled) {
     border: none;
     background-color: transparent;
     outline: solid 1px var(--fg);

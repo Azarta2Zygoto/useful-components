@@ -110,6 +110,34 @@ export default function InputPage() {
                 style={{maxWidth:450}}
                 getValues={(v)=>setArrayTextChange(v)}
                 />
+            <ArrayInput
+                id="Array-input-max-3"
+                type="text"
+                values={ArrayTextChange}
+                maxElements={3}
+                placeholder="Add values to the array"
+                style={{maxWidth:450}}
+                getValues={(v)=>setArrayTextChange(v)}
+                />
+            <ArrayInput
+                id="Array-input-required"
+                type="text"
+                values={ArrayTextChange}
+                required
+                placeholder="Add values to the array"
+                style={{maxWidth:450}}
+                getValues={(v)=>setArrayTextChange(v)}
+                />
+            <ArrayInput
+                id="Array-input-required-floating"
+                type="text"
+                values={ArrayTextChange}
+                required
+                floatingLabel
+                placeholder="Add values to the array"
+                style={{maxWidth:450}}
+                getValues={(v)=>setArrayTextChange(v)}
+                />
         </main>
     );
 }

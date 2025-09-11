@@ -9,6 +9,7 @@ const defaultTexts = {
     pattern: "The value does not match the required format",
     min_number: "Minimum value is {value}",
     max_number: "Maximum value is {value}",
+    max_elements: "Maximum {value} elements",
 };
 
 type InfoType =
@@ -18,6 +19,7 @@ type InfoType =
     | "pattern"
     | "min_number"
     | "max_number"
+    | "max_elements"
     | "else";
 
 interface displayInfoProps {
@@ -31,6 +33,7 @@ interface displayInfoProps {
         pattern?: string,
         min_number?: string,
         max_number?: string,
+        max_elements?: string,
     }
     regexText?:{
         minuscule?: string,
@@ -65,6 +68,8 @@ export default function DisplayInfos({
                 return (text?.min_number || defaultTexts.min_number).replace("{value}", String(value));
             case "max_number":
                 return (text?.max_number || defaultTexts.max_number).replace("{value}", String(value));
+            case "max_elements":
+                return (text?.max_elements || defaultTexts.max_elements).replace("{value}", String(value));
             default:
                 return String(value ?? "");
         }
