@@ -19,6 +19,7 @@ interface FloatingLabelInputProps {
     maxLength?: number;
     style?: React.CSSProperties;
     getChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export default function FloatingLabelInput({
@@ -38,9 +39,9 @@ export default function FloatingLabelInput({
     minLength,
     maxLength,
     style,
-    getChange
+    getChange,
+    onKeyDown
 }: FloatingLabelInputProps): JSX.Element {
-
     return (
         <div 
         className="floating-label-container" 
@@ -50,6 +51,7 @@ export default function FloatingLabelInput({
             type={type}
             value={value}
             placeholder=" " // Empty placeholder to enable CSS selector
+            className={"floating-label-input "+ (className || '')}
             required={required}
             disabled={disabled}
             pattern={pattern}
@@ -61,7 +63,7 @@ export default function FloatingLabelInput({
             minLength={minLength}
             maxLength={maxLength}
             onChange={(e)=>getChange(e)}
-            className={"floating-label-input "+ (className || '')}
+            onKeyDown={onKeyDown}
             style={style}
         />
         <label 

@@ -11,6 +11,7 @@
     --add-total-color: #00aaff;
 
     --element-color: #666c74;
+    --box-color: #6c10aa;
     --border-color-special: var(--add-total-color);
     --border-color-shadow-special: var(--add-minor-color);
     --border-color:var(--fg);

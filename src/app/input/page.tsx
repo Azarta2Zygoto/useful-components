@@ -3,6 +3,7 @@
 import { useState } from "react";
 import FloatingLabelInput from "@/component/input/input";
 import NumberInput from "@/component/input/numberInput";
+import ArrayInput from "@/component/input/arrayInput";
 
 const inputValues = [
     "",
@@ -17,7 +18,8 @@ const numberValues = [
 
 export default function InputPage() {
     const [inputValue, setInputValue] = useState<string[]>(inputValues);
-    const [numberValue, setNumberValue] = useState<number[]>(numberValues)
+    const [numberValue, setNumberValue] = useState<number[]>(numberValues);
+    const [ArrayTextChange, setArrayTextChange] = useState<string[]>([]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index:number) => {
         setInputValue(prevValues => {
@@ -74,6 +76,38 @@ export default function InputPage() {
                 value={numberValue[0]}
                 placeholder="change the number"
                 getChange={(v)=>handleNumberValuesChanges(v, 0)}
+                />
+                
+            <NumberInput
+                id="Number-floating"
+                value={numberValue[1]}
+                placeholder="change the number"
+                floatingLabel
+                getChange={(v)=>handleNumberValuesChanges(v, 1)}
+                />
+            <NumberInput
+                id="Number-floating-icon"
+                value={numberValue[2]}
+                placeholder="change the number"
+                icon
+                floatingLabel
+                getChange={(v)=>handleNumberValuesChanges(v, 2)}
+                />
+            <NumberInput
+                id="Number-floating-icon-max"
+                value={numberValue[2]}
+                placeholder="change the number - max 10"
+                icon
+                max={10}
+                floatingLabel
+                getChange={(v)=>handleNumberValuesChanges(v, 2)}
+                />
+            <ArrayInput
+                id="Array-input"
+                type="text"
+                values={ArrayTextChange}
+                placeholder="Add values to the array"
+                getValues={(v)=>setArrayTextChange(v)}
                 />
         </main>
     );

@@ -6,10 +6,13 @@ import MultipleMenuSelect from "../multipleMenuSelect/multipleMenuSelect";
 import FloatingLabelInput from "../input/input";
 import "./inputInfo.css";
 import BodyAccess from "../utils/bodyAccess";
+import NumberInput from "../input/numberInput";
+
+type listType = "text" | "password" | "email" | "tel" | "url" | "number" | "select_menu" | "multiple_select_menu" | "fake_input";
 
 interface InputInfoProps {
     id: string;
-    type:string;
+    type:listType;
     value: string|number;
     values?: string[];
     label?: string;
@@ -53,6 +56,7 @@ interface InputInfoProps {
     getChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     getValue?: (value: string) => void;
     getValues?: (values: string[]) => void;
+    getNumber?: (value: number) => void;
 }
 
 export default function InputInfo({
@@ -85,7 +89,8 @@ export default function InputInfo({
     displayText,
     getChange,
     getValue,
-    getValues
+    getValues,
+    getNumber
 }: InputInfoProps) {
     const tooltipContentRef = useRef<HTMLDivElement>(null);
     const formInfoRef = useRef<HTMLDivElement>(null);
@@ -148,7 +153,7 @@ export default function InputInfo({
             } else {
                 setPosition({
                     top: `28px`,
-                    left: `${window.innerWidth-270-rect.right}px`,
+                    left: `${window.innerWidth-285-rect.right}px`,
                     translateY: "0"
                 });
             }
@@ -223,6 +228,7 @@ export default function InputInfo({
                 getChange={getChange}
                 getValue={getValue}
                 getValues={getValues}
+                getNumber={getNumber}
             />
 
             <BodyAccess>
@@ -231,6 +237,7 @@ export default function InputInfo({
                         opacity: show ? 1 : 0,
                         pointerEvents: show ? "auto" : "none",
                         display: show ? "flex" : "none",
+                        zIndex: isOpen&&show ? 4 : 3,
                         top: positionTooltip.top,
                         left: positionTooltip.left,
                         transform: `translateY(${positionTooltip.translateY})`,
@@ -351,7 +358,7 @@ export default function InputInfo({
 
 interface DisplayerProps {
     id?: string;
-    type:string;
+    type:listType;
     value: string|number;
     values?: string[];
     label?: string;
@@ -375,6 +382,7 @@ interface DisplayerProps {
     getChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     getValue?: (value: string) => void;
     getValues?: (values: string[]) => void;
+    getNumber?: (value: number) => void;
 }
 
 function Displayer({
@@ -391,17 +399,18 @@ function Displayer({
     maxLength,
     max,
     step,
-    required = false,
-    disabled = false,
+    required,
+    disabled,
     autoComplete = "on",
     options,
     className,
     style,
     tooltip,
-    floatingLabel = false,
+    floatingLabel,
     getChange,
     getValue,
-    getValues
+    getValues,
+    getNumber
 }: DisplayerProps): JSX.Element {
     if (type === "text" || type === "password" || type === "email" || type === "tel" || type === "url") {
         if (floatingLabel) {
@@ -460,7 +469,7 @@ function Displayer({
                     step={step}
                     minLength={minLength}
                     maxLength={maxLength}
-                    getChange={getChange || (() => {})}
+                    getChange={(e)=>getNumber && getNumber(Number(e.target.value))}
                     style={style}
                 />
             );
@@ -479,7 +488,27 @@ function Displayer({
                 disabled={disabled}
                 autoComplete={autoComplete}
                 style={style}
-                onChange={getChange}
+                onChange={(e)=>getNumber && getNumber(Number(e.target.value))}
+            />
+        );
+    }
+    else if (type === "fake_input") {
+        return (
+            <NumberInput
+                id={id+"-element" || ""}
+                value={value as number}
+                placeholder={placeholder || ""}
+                className={className}
+                required={required}
+                disabled={disabled}
+                autoComplete={autoComplete}
+                min={min}
+                max={max}
+                step={step}
+                floatingLabel={floatingLabel}
+                style={style}
+                getChange={getNumber || (() => {})}
+                icon={true}
             />
         );
     }

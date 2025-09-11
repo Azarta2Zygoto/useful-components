@@ -1,5 +1,6 @@
 import { ChangeEvent, JSX, useState } from "react";
 import FloatingLabelInput from "./input";
+import "./input.css"
 
 interface NumberInputProps {
     id: string;
@@ -9,10 +10,13 @@ interface NumberInputProps {
     required?: boolean;
     disabled?: boolean;
     autoComplete?: string;
+    floatingLabel?: boolean;
+    icon?: boolean;
     min?: number;
     max?: number;
     step?: number;
     style?: React.CSSProperties;
+    int?: boolean;
     getChange: (value:number) => void;
 }
 
@@ -24,60 +28,168 @@ export default function NumberInput({
     required,
     disabled,
     autoComplete,
+    floatingLabel,
+    icon,
     min,
     max,
-    step,
+    step=1,
     style,
+    int,
     getChange
 }:NumberInputProps): JSX.Element {
-    const [numberSize, setNumberSize] = useState<number>(-1)
+    const [numberSize, setNumberSize] = useState<boolean>(false)
+    const [oldValue, setOldValue] = useState<number>(value)
 
     function handleValueChange(e:ChangeEvent<HTMLInputElement>) {
-        let newValue = e.target.value
-        newValue.replace(',', '.')
-        if (newValue[newValue.length-1]==="." && numberOccurence(newValue, '.')===1){
-            setNumberSize(0);
+        const newValue = e.target.value
+        let correctedValue = int?newValue.replace(',', '').replace('.', ''):newValue.replace(',', '.')
+        if(isNaN(Number(correctedValue)) && correctedValue !== "" && correctedValue !== "-" && correctedValue !== "."){
+            getChange(oldValue)
+            return
+        }
+        
+        if (correctedValue[correctedValue.length-1]==="." && numberOccurence(correctedValue, '.')===1 && oldValue.toString().indexOf('.')===-1){
+            setNumberSize(true);
         }
         else {
-            setNumberSize(-1)
+            setNumberSize(false)
         }
-        if (numberSize!=-1){
-            const [start, end] = newValue.slice(newValue.length-1);
+        console.log(correctedValue, numberSize)
+        if (numberSize){
+            const start = correctedValue.slice(0, correctedValue.length-1);
+            const end = correctedValue.slice(correctedValue.length-1);
             console.log(start, end)
-            newValue = start + '.' + end;
+            correctedValue = start + '.' + end;
         }
-        console.log(newValue)
-        const numbered = numberAfterComa(newValue);
-        console.log(numbered)
-        const toNumber = parseFloat(newValue)
-        console.log(toNumber)
+        
+        const toNumber = parseFloat(correctedValue);
+        if (isNaN(toNumber)) {
+            getChange(0)
+            return
+        }
+        if (min !== undefined && toNumber < min) {
+            getChange(min)
+            setOldValue(min)
+            return
+        }
+        if (max !== undefined && toNumber > max) {
+            getChange(max)
+            setOldValue(max)
+            return
+        }
         getChange(toNumber)
+        setOldValue(toNumber)
     }
 
-    return (
-        <FloatingLabelInput
-            type="text"
-            id={id}
-            value={value}
-            placeholder={placeholder}
-            className={className}
-            required={required}
-            disabled={disabled}
-            autoComplete={autoComplete}
-            style={style}
-            getChange={handleValueChange}
-        />
+    function handleArrowClick(isIncrement:boolean) {
+        let newValue = value;
+        if (isIncrement) {
+            newValue += Math.abs(step);
+            if (max !== undefined && newValue > max) {
+                newValue = max;
+            }
+        } else {
+            newValue -= Math.abs(step);
+            if (min !== undefined && newValue < min) {
+                newValue = min;
+            }
+        }
+        getChange(newValue);
+    }
+
+    function handleKeyDown(e:React.KeyboardEvent<HTMLInputElement>) {
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            handleArrowClick(true);
+        }
+        else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            handleArrowClick(false);
+        }
+    }
+
+    if (floatingLabel) return (
+        <div className={`fake-number-input ${icon ? "activate" : ''}`}>
+            <FloatingLabelInput
+                type="text"
+                id={id}
+                value={value}
+                placeholder={placeholder}
+                className={"aaaa "+((max&&value>max)||(min&&value<min)?"invalid ":"")+(className||"")}
+                required={required}
+                disabled={disabled}
+                autoComplete={autoComplete}
+                style={style}
+                getChange={handleValueChange}
+                onKeyDown={handleKeyDown}
+            />
+            {icon && (
+                <div className="fake-arrow">
+                    <button 
+                        type="button"
+                        className="background-click"
+                        aria-label="Increment"
+                        onClick={() => handleArrowClick(true)}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                            <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                        </svg>
+                    </button>
+                    <button 
+                        type="button"
+                        className="background-click"
+                        aria-label="Decrement"
+                        onClick={() => handleArrowClick(false)}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            )}
+        </div>
     )
-}
-
-function numberAfterComa(value:string):number{
-    if (value.includes('.')){
-        const index=value.indexOf('.')
-        return value.length-index
-    }
-    else {
-        return 0
-    }
+    else return (
+        <div className={`fake-number-input ${icon ? "activate" : ''}`}>
+            <input
+                type="text"
+                id={id}
+                value={value}
+                placeholder={placeholder}
+                className={className}
+                required={required}
+                disabled={disabled}
+                autoComplete={autoComplete}
+                style={style}
+                onChange={handleValueChange}
+                onKeyDown={handleKeyDown}
+            />
+                {icon && (
+                    <div className="fake-arrow">
+                        <button 
+                            type="button"
+                            className="background-click"
+                            aria-label="Increment"
+                            onClick={() => handleArrowClick(true)}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                            </svg>
+                        </button>
+                        <button 
+                            type="button"
+                            className="background-click"
+                            aria-label="Decrement"
+                            onClick={() => handleArrowClick(false)}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                )}
+            </div>
+    )
 }
 
 function numberOccurence(value:string, char:string):number {

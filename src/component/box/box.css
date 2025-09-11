@@ -6,10 +6,12 @@
     margin: 3px;
     padding: 0 10px;
     font-size: 14px;
+    text-align: left;
     height: 24px;
     color: var(--fg);
-    background-color: var(--add-total-color);
+    background-color: var(--box-color);
     border-radius: 12px;
     text-overflow: ellipsis;
     overflow: hidden;
 }
+.box.clickable { cursor: pointer; }
