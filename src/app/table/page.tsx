@@ -85,9 +85,19 @@ export default function TablePage() {
             }}
         />
         <Table
-            name="userTable-sotable"
+            name="userTable-sortable"
             data={tableData}
             sortable
+            title="User Information"
+            headerTitles={["ID", "Name", "GGGA", "Email"]}
+            onClickCell={(e, rowIndex, columnIndex) => {
+                alert(`Clicked cell at row ${rowIndex + 1}, column ${columnIndex + 1}`);
+            }}
+        />
+        <Table
+            name="userTable-download"
+            data={tableData}
+            onDownload={()=>console.log("Download")}
             title="User Information"
             headerTitles={["ID", "Name", "GGGA", "Email"]}
             onClickCell={(e, rowIndex, columnIndex) => {

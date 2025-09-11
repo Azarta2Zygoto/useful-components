@@ -53,10 +53,15 @@ input:is(:-webkit-autofill, :autofill) + .floating-label,
     align-items: center;
     color: #777;
 }
+.array-input-container {
+    display: inline-flex;
+    width: fit-content;
+}
 .array-input-label {
     position: relative;
     display: inline-block;
     width: fit-content;
+    height: fit-content;
 }
 .validate-array-button-add,
 .validate-array-button-cancel {
@@ -80,4 +85,21 @@ input:is(:-webkit-autofill, :autofill) + .floating-label,
     right: 25px;
     top: 50%;
     transform: translateY(-50%);
+}
+.array-input-boxes-container {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width:fit-content;
+    margin: 5px;
+    padding: 5px;
+    border: solid 1px var(--fg);
+    box-shadow: 1px 1px 3px var(--fg);
+    border-radius: 10px;
+}
+.array-input-boxes-container:empty {
+    border: none;
+    box-shadow: none;
 }

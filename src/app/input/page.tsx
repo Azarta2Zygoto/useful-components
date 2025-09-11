@@ -107,6 +107,7 @@ export default function InputPage() {
                 type="text"
                 values={ArrayTextChange}
                 placeholder="Add values to the array"
+                style={{maxWidth:450}}
                 getValues={(v)=>setArrayTextChange(v)}
                 />
         </main>

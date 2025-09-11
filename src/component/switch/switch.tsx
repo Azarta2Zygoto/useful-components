@@ -41,7 +41,7 @@ export default function Switch({
                 sliderBg = "var(--border-color-special)";
             } else if (colors === "opposite" || required) {
                 sliderBg = checked
-                    ? "var(--success-border-color)"
+                    ? "var(--valid-border-color)"
                     : "var(--invalid-border-color)";
             } else if (Array.isArray(colors)) {
                 sliderBg = checked ? colors[0] : colors[1];

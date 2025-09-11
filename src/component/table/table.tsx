@@ -3,6 +3,7 @@ import MultipleMenuSelect from '../multipleMenuSelect/multipleMenuSelect';
 import { TableVirtuoso, VirtuosoHandle } from 'react-virtuoso';
 import Tooltip from '../tooltip/tooltip';
 import './table.css'
+import Icon from '../utils/icon';
 
 const defaultRowsPerPageOptions = [5, 10, 25, 50, 100];
 const defaultRowsPerPage = 10;
@@ -69,6 +70,7 @@ export default function Table({
 }: TableProps):JSX.Element {
     const tableRef = useRef<HTMLTableElement>(null);
     const virtuosoRef = useRef<VirtuosoHandle>(null);
+    const buttonDownloadRef = useRef<HTMLButtonElement>(null);
 
     const [dataDisplayed, setDataDisplayed] = useState(data);
     const [viewableItems, setViewableItems] = useState<(string|null)[]>(headerTitles??data.length>0?Object.keys(data[0]):[]);
@@ -325,11 +327,11 @@ export default function Table({
                                     maxWidth: "30px",
                                     maxHeight: "25px",
                                 }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className="background-click">
-                                        <desc>Icon showing an eye, representing view options</desc>
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
+                                    <Icon
+                                        name="eye-fill"
+                                        title='Show/Hide Columns'
+                                        desc='Allow to open a menu to show or hide columns'
+                                    />
                             </MultipleMenuSelect>
                         )}
                         {filterable && firstNonNull(viewableItems) !== i && (
@@ -344,12 +346,13 @@ export default function Table({
                                 <button
                                     className={`background-click`}
                                     aria-label={text?.filterable || "Hide Column"}
-                                    onClick={() => { handleFilterable(title) }}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                            <desc>Icon showing an eye with a slash through it, representing hidden state</desc>
-                                            <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
-                                            <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
-                                        </svg>
+                                    onClick={() => { handleFilterable(title) }}
+                                    type="button">
+                                        <Icon
+                                            name="eye-slash-fill"
+                                            title='Hide Column'
+                                            desc='Allow to hide this column'
+                                        />
                                 </button>
                             </Tooltip>
                         )}
@@ -359,22 +362,18 @@ export default function Table({
                                     <button
                                         className={`background-click ${(sort.column === i&&sort.direction==="asc") ? "selected" : ""}`}
                                         aria-label={text?.sortAscending || "Sort Ascending"}
-                                        onClick={() => { handleSorting(Object.keys(data[0])[i], "asc") }}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                <desc>Icon showing an arrow pointing up, representing ascending sort</desc>
-                                                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
-                                            </svg>
+                                        onClick={() => { handleSorting(Object.keys(data[0])[i], "asc") }}
+                                        type="button">
+                                            <Icon name='caret-up-fill' />
                                     </button>
                                 </Tooltip>
                                 <Tooltip title={text?.sortDescending || "Sort Descending"} active={tooltip}>
                                     <button
                                         className={`background-click ${(sort.column === i&&sort.direction==="desc") ? "selected" : ""}`}
                                         aria-label={text?.sortDescending || "Sort Descending"}
-                                        onClick={() => { handleSorting(Object.keys(data[0])[i], "desc") }}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                <desc>Icon showing an arrow pointing down, representing descending sort</desc>
-                                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                                            </svg>
+                                        onClick={() => { handleSorting(Object.keys(data[0])[i], "desc") }}
+                                        type="button">
+                                            <Icon name='caret-down-fill' />
                                     </button>
                                 </Tooltip>
                             </div>
@@ -422,38 +421,42 @@ export default function Table({
                 onBlur={()=>reinitTabuled()}
                 style={boxStyle}>
                     {onDownload && (
-                        <Tooltip title={text?.download || "Download"} active={tooltip}>
+                        <Tooltip
+                            title={text?.download || "Download"}
+                            active={tooltip}
+                            targetRef={buttonDownloadRef}
+                        >
                             <button
-                            className='background-click'
-                            aria-label={text?.download || "Download"}
-                            onClick={()=>onDownload?.(viewableItems.filter(item => item !== null))}
-                            style={{
-                                position: "absolute",
-                                top: "10px",
-                                right: "10px",
-                            }}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                    <desc>Icon showing a box with an arrow pointing down into it, representing download</desc>
-                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
-                                </svg>
+                                ref={buttonDownloadRef}
+                                className='background-click'
+                                aria-label={text?.download || "Download"}
+                                onClick={()=>onDownload?.(viewableItems.filter(item => item !== null))}
+                                style={{
+                                    position: "absolute",
+                                    top: "10px",
+                                    right: "10px",
+                                }}
+                                type="button"
+                            >
+                                <Icon name="download" />
                             </button>
                         </Tooltip>
                     )}
                     {filterable==="outside" && (
                         <MultipleMenuSelect
-                                id={name + "-table-filterable"}
-                                className='void'
-                                selectedOptions={viewableItems.filter(item => item !== null)}
-                                options={correctHeaderTitles}
-                                onSelect={handleShowing}
-                                checkbox={"left"}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className="background-click">
-                                        <desc>Icon showing an eye, representing view options</desc>
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
-                            </MultipleMenuSelect>
+                            id={name + "-table-filterable"}
+                            className='void'
+                            selectedOptions={viewableItems.filter(item => item !== null)}
+                            options={correctHeaderTitles}
+                            onSelect={handleShowing}
+                            checkbox={"left"}
+                        >
+                            <Icon
+                                name="eye-fill"
+                                title='Show/Hide Columns'
+                                desc='Allow to open a menu to show or hide columns'
+                            />
+                        </MultipleMenuSelect>
                     )}
                 <h1 className="table-title">{title}</h1>
                 {virtual ? (

@@ -36,8 +36,8 @@
     --invalid-border-color: #ff0000;
     --warning-bg-color: #ffcc0010;
     --warning-border-color: #ffcc00;
-    --success-bg-color: #00ff0010;
-    --success-border-color: #00ff00;
+    --valid-bg-color: #00ff0010;
+    --valid-border-color: #00ff00;
 }
 
 @media (prefers-color-scheme: dark) {

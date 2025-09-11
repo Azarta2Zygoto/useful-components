@@ -3,6 +3,7 @@ import BodyAccess from "../utils/bodyAccess";
 import Overlay from "../overlay/overlay";
 import "./menuSelect.css";
 import Tooltip from "../tooltip/tooltip";
+import Icon from "../utils/icon";
 
 interface MenuSelectProps {
     id: string;
@@ -146,23 +147,6 @@ export default function MenuSelect({
         }, 200);
     }
 
-    function renderIcon() {
-        if (hideIcon) return null;
-        
-        return (
-            <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            className={`menu-select-icon ${isOpen ? "open" : ""}`}
-            >
-            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-            </svg>
-        );
-    }
-
     return (
         <div className={`menu-select-container`}>
             {isOpen&&(
@@ -191,7 +175,7 @@ export default function MenuSelect({
                     onKeyDown={handleKeyDown}
                 >
                     {selectedOption}
-                    {renderIcon()}
+                    {!hideIcon&&<Icon name="caret-down-fill" className={`menu-select-icon ${isOpenAnimation ? "open" : ""}`} />}
                 </button>
             </Tooltip>
             {label&&(

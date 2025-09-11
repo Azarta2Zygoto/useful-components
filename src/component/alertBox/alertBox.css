@@ -18,8 +18,8 @@
     }
 }
 .info-box.success{
-    border: solid 1px var(--success-border-color);
-    box-shadow: 0 0 0 4px var(--success-bg-color);
+    border: solid 1px var(--valid-border-color);
+    box-shadow: 0 0 0 4px var(--valid-bg-color);
 }
 .info-box.error{
     border: solid 1px var(--invalid-border-color);

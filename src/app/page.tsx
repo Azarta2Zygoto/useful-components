@@ -5,6 +5,7 @@ import Checkbox from "@/component/checkbox/checkbox";
 import MenuSelect from "@/component/menuSelect/menuSelect";
 import DateTooltip from "@/component/date/dateTooltip";
 import Box from "@/component/box/box";
+import Icon from "@/component/utils/icon";
 
 export default function Home() {
     const [checked, setChecked] = useState(false);
@@ -62,7 +63,27 @@ export default function Home() {
             <Box>
                 <span>This is a box component.</span>
             </Box>
-
+            <Icon
+                name="envelope-fill"
+                title="Contact"
+                desc="Contact us"
+                color="blue"
+                style={{marginRight: "0.5rem"}}
+            />
+            <Icon
+                name="info-circle-fill"
+                title="Information"
+                desc="More information"
+                color="green"
+                style={{marginRight: "0.5rem"}}
+            />
+            <Icon
+                name="x-circle-fill"
+                title="Error"
+                desc="An error has occurred"
+                color="red"
+                style={{marginRight: "0.5rem"}}
+            />
         </main>
     );
 }
