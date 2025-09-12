@@ -1,6 +1,6 @@
 import React, { JSX, useId, Fragment } from "react";
 
-type iconTypes =
+export type iconTypes =
     "envelope-fill"|
     "info-circle-fill"|
     "x-circle-fill"|

@@ -29,3 +29,35 @@
     border: solid 1px var(--warning-border-color);
     box-shadow: 0 0 0 4px var(--warning-bg-color);
 }
+
+.info-box-compact {
+    position:fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    width:fit-content;
+    background-color: var(--bg);
+    padding: 3px;
+    border-radius: 20px;
+    margin: 5px;
+
+    & p {
+        margin: 0;
+        padding: 0 3px;
+        font-size: clamp(10px, 3vw, 18px);
+        color: var(--fg);
+    }
+}
+.info-box-compact.success{
+    background-color: var(--valid-border-color);
+    box-shadow: 0 0 0 4px var(--valid-bg-color);
+}
+.info-box-compact.error{
+    background-color: var(--invalid-border-color);
+    box-shadow: 0 0 0 4px var(--invalid-bg-color);
+}
+.info-box-compact.warning{
+    background-color: var(--warning-border-color);
+    box-shadow: 0 0 0 4px var(--warning-bg-color);
+}

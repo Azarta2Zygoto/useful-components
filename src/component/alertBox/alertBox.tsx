@@ -13,6 +13,7 @@ interface ValidateBoxProps {
     zIndex?: number;
     tooltip?: boolean;
     children?: JSX.Element | JSX.Element[];
+    view?:"default" | "compact";
     text?: {
         devError?: string;
         descDevError?: string;
@@ -49,6 +50,7 @@ export default function AlertBox({
     visible = true,
     zIndex = 3,
     tooltip = true,
+    view = "default",
     text = {
         devError: "Dev Error",
         descDevError: "An error occurred, please contact support.",
@@ -64,6 +66,8 @@ export default function AlertBox({
 }: ValidateBoxProps):JSX.Element {
     const classNameValue = error === 2 ? "warning" :
         error === 1 ? "success" : "error";
+
+    const classNameView = view === "compact" ? "info-box-compact" : "info-box";
 
     const [icon, setIcon] = useState<JSX.Element | string>("");
     const [positioning, setPositioning] = useState<{
@@ -103,8 +107,8 @@ export default function AlertBox({
             }}
             role="alert"
             aria-live="assertive"
-            className={`info-box ${classNameValue}`}>
-            {icon}
+            className={`${classNameView} ${classNameValue}`}>
+            {view!=="compact"&&icon}
             <p>{message}</p>
             {children && (
                 <div className="info-box-children">

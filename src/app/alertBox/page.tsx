@@ -22,6 +22,7 @@ export default function AlertBoxPage() {
     const [error, setError] = useState<-1|0|1|2>(1);
     const [message, setMessage] = useState("This is an alert box message.");
     const [position, setPosition] = useState<typeof positionsList[number]>("bottom left");
+    const [alertType, setAlertType] = useState<"default"|"compact">("default");
 
     useEffect(() => {
         // Simulate an error after 2 seconds
@@ -46,11 +47,19 @@ export default function AlertBoxPage() {
                 onSelect={(value) => setPosition(value as unknown as typeof positionsList[number])}
                 options={positionsList as unknown as string[]}
             />
+            <MenuSelect
+                id={"alert-type-select"}
+                label="Select Alert Type"
+                selectedOption={alertType}
+                onSelect={(value) => setAlertType(value as "default"|"compact")}
+                options={["default", "compact"]}
+            />
             <AlertBox
                 error={error}
                 position={position}
                 message={message}
                 visible={visible}
+                view={alertType}
                 onClose={() => setVisible(false)}
             />
         </div>
