@@ -147,6 +147,7 @@ export default function ArrayInput({
                         disabled={disabled}
                         autoComplete={autoComplete}
                         size={size}
+                        required={required}
                         pattern={pattern}
                         minLength={minLength}
                         maxLength={maxLength}

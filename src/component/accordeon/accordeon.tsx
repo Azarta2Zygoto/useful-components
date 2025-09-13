@@ -5,7 +5,7 @@ import "./accordeon.css";
 interface AccordeonProps {
     title: string|JSX.Element;
     children: JSX.Element;
-    open?: boolean;
+    isOpen?: boolean;
     style?: React.CSSProperties;
     className?: string;
     height?:number;
@@ -18,7 +18,7 @@ interface AccordeonProps {
 export default function Accordeon({
     title,
     children,
-    open,
+    isOpen,
     style,
     className,
     height,
@@ -30,14 +30,14 @@ export default function Accordeon({
     const contentId = useId();
     const headerId = useId();
 
-    const [openState, setOpenState] = useState(!!open);
+    const [openState, setOpenState] = useState(!!isOpen);
     const contentRef = useRef<HTMLDivElement | null>(null);
     const [maxHeight, setMaxHeight] = useState<string>("0px");
 
     
     useEffect(() => {
-        setOpenState(Boolean(open));
-    }, [open]);
+        setOpenState(Boolean(isOpen));
+    }, [isOpen]);
 
     useEffect(() => {
         const el = contentRef.current;

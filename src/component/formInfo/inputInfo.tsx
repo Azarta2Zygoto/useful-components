@@ -16,7 +16,8 @@ type listType = "text" | "password" |
     "select_menu" | "multiple_select_menu" |
     "fake_input" | "text_array" |
     "number_array" | "email_array" |
-    "tel_array" | "url_array"
+    "tel_array" | "url_array" |
+    "date" | "textarea"
 ;
 
 interface InputInfoProps {
@@ -476,7 +477,7 @@ export function Displayer({
             />
         );
     }
-    else if (type === "text" || type === "password" || type === "email" || type === "tel" || type === "url") {
+    else if (type === "text" || type === "password" || type === "email" || type === "tel" || type === "url" || type === "date") {
         if (floatingLabel) {
             return (
                 <FloatingLabelInput
@@ -612,6 +613,44 @@ export function Displayer({
                 required={required}
                 tooltip={tooltip}
                 onSelect={getValues || (() => {})}
+            />
+        );
+    }
+    else if (type === "textarea") {
+        return (
+            <textarea
+                id={id+"-element" || ""}
+                className={className}
+                value={value}
+                placeholder={placeholder}
+                minLength={minLength}
+                maxLength={maxLength}
+                required={required}
+                disabled={disabled}
+                autoComplete={autoComplete}
+                style={style}
+                onChange={
+                    getChange
+                        ? (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                            // Adapt the event to match the expected signature
+                            getChange({
+                                ...e,
+                                target: {
+                                    ...e.target,
+                                    value: e.target.value
+                                }
+                            } as unknown as React.ChangeEvent<HTMLInputElement>);
+                        }
+                        : undefined
+                }
+                onKeyDown={
+                    onKeyDown
+                        ? (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+                            // Adapt the event to match the expected signature for input
+                            onKeyDown(e as unknown as React.KeyboardEvent<HTMLInputElement>);
+                        }
+                        : undefined
+                }
             />
         );
     }

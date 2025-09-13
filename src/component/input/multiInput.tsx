@@ -38,7 +38,7 @@ export default function MultiInput({
     minElements,
     maxElements,
     validationDisabling,
-    focusChange,
+    focusChange = true,
     getNumberOfElements,
 }: MultiInputProps):JSX.Element {
     const [numberOfElements, setNumberOfElements] = useState<number>(minElements ? minElements : 1);
