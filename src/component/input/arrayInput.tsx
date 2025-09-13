@@ -125,7 +125,7 @@ export default function ArrayInput({
                         id={id}
                         type={type}
                         value={currentValue}
-                        placeholder={placeholder}
+                        placeholder={placeholder + (required?" *":"")}
                         className={"array-input " + (required&&currentValues.length===0?"invalid ":"")+ (className || '')}
                         disabled={disabled}
                         autoComplete={autoComplete}
@@ -142,7 +142,7 @@ export default function ArrayInput({
                         id={id}
                         type={type}
                         value={currentValue}
-                        placeholder={placeholder}
+                        placeholder={placeholder + (required?" *":"")}
                         className={"array-input " + (required&&currentValues.length===0?"invalid ":"") + (className || '')}
                         disabled={disabled}
                         autoComplete={autoComplete}
@@ -158,7 +158,7 @@ export default function ArrayInput({
                     <NumberInput
                         id={id}
                         value={currentValue===""?0:parseFloat(currentValue)}
-                        placeholder={placeholder}
+                        placeholder={placeholder + (required?" *":"")}
                         className={"array-input " + (required&&currentValues.length===0?"invalid ":"") + (className || '')}
                         disabled={disabled}
                         autoComplete={autoComplete}

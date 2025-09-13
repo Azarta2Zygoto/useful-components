@@ -1,4 +1,4 @@
-import { JSX, useState, useEffect, useRef, Fragment } from 'react';
+import { JSX, useState, Fragment } from 'react';
 import Tooltip from '../tooltip/tooltip';
 import Icon from '../utils/icon';
 import { Displayer } from '../formInfo/inputInfo';
