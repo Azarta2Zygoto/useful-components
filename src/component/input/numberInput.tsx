@@ -57,11 +57,9 @@ export default function NumberInput({
         else {
             setNumberSize(false)
         }
-        console.log(correctedValue, numberSize)
         if (numberSize){
             const start = correctedValue.slice(0, correctedValue.length-1);
             const end = correctedValue.slice(correctedValue.length-1);
-            console.log(start, end)
             correctedValue = start + '.' + end;
         }
         

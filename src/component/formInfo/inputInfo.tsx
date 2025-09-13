@@ -387,7 +387,7 @@ export default function InputInfo({
     );
 }
 
-interface DisplayerProps {
+export interface DisplayerProps {
     id?: string;
     type:listType;
     value: string|number;
@@ -416,9 +416,10 @@ interface DisplayerProps {
     getValue?: (value: string) => void;
     getValues?: (values: string[]) => void;
     getNumber?: (value: number) => void;
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-function Displayer({
+export function Displayer({
     id,
     type,
     value,
@@ -445,7 +446,8 @@ function Displayer({
     getChange,
     getValue,
     getValues,
-    getNumber
+    getNumber,
+    onKeyDown
 }: DisplayerProps): JSX.Element {
     if (type === "text_array" || type === "number_array" || type === "email_array" || type === "tel_array" || type === "url_array") {
         return (
@@ -470,6 +472,7 @@ function Displayer({
                 floatingLabel={floatingLabel}
                 style={style}
                 getValues={getValues || (() => {})}
+                onKeyDown={onKeyDown}
             />
         );
     }
@@ -491,6 +494,7 @@ function Displayer({
                     maxLength={maxLength}
                     getChange={getChange || (() => {})}
                     style={style}
+                    onKeyDown={onKeyDown}
                 />
             );
         }
@@ -510,6 +514,7 @@ function Displayer({
                 autoComplete={autoComplete}
                 style={style}
                 onChange={getChange}
+                onKeyDown={onKeyDown}
             />
         );
     }
@@ -532,6 +537,7 @@ function Displayer({
                     maxLength={maxLength}
                     getChange={(e)=>getNumber && getNumber(Number(e.target.value))}
                     style={style}
+                    onKeyDown={onKeyDown}
                 />
             );
         }
@@ -550,6 +556,7 @@ function Displayer({
                 autoComplete={autoComplete}
                 style={style}
                 onChange={(e)=>getNumber && getNumber(Number(e.target.value))}
+                onKeyDown={onKeyDown}
             />
         );
     }
@@ -570,6 +577,7 @@ function Displayer({
                 floatingLabel={floatingLabel}
                 style={style}
                 getChange={getNumber || (() => {})}
+                onKeyDown={onKeyDown}
             />
         );
     }

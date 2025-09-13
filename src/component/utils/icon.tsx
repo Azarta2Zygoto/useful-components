@@ -54,7 +54,7 @@ export default function Icon({
             fill={color}
             className={className}
             style={{pointerEvents:autoTooltip?undefined:"none", ...style}}
-            viewBox={viewbox || `0 0 ${size} ${size}`}
+            viewBox={viewbox || `0 0 16 16`}
             role={labelledBy ? "img" : undefined}
             aria-labelledby={labelledBy}
             aria-hidden={labelledBy ? undefined : true}

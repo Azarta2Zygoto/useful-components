@@ -27,6 +27,7 @@ interface ArrayInputProps {
     int?: boolean;
     style?: React.CSSProperties;
     getValues: (values:string[]) => void;
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export default function ArrayInput({
@@ -51,6 +52,7 @@ export default function ArrayInput({
     style,
     maxElements,
     getValues,
+    onKeyDown
 }:ArrayInputProps): JSX.Element {
     const [currentValue, setCurrentValue] = useState<string>("");
     const [currentValues, setCurrentValues] = useState<string[]>(values);
@@ -99,6 +101,7 @@ export default function ArrayInput({
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        onKeyDown?.(e);
         if (e.key === 'Enter') {
             e.preventDefault();
             if (valueChange === "") {

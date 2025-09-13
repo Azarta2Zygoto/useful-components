@@ -34,6 +34,8 @@ export default function RootLayout({
                 <li><Link href="/table">Table</Link></li>
                 <li><Link href="/form">Form Info</Link></li>
                 <li><Link href="/accordeon">Accordeon</Link></li>
+                <li><Link href="/multiInput">Multi Input</Link></li>
+                
             </ul>
         </nav>
         {children}

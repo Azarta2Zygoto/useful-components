@@ -116,3 +116,35 @@ input:is(:-webkit-autofill, :autofill) + .floating-label,
     border: none;
     box-shadow: none;
 }
+.multi-input-fieldset {
+    border: 2px solid var(--fg);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+}
+.multi-input-fieldset legend {
+    padding: 0 10px;
+    font-weight: bold;
+}
+.multi-input-fieldset.valid {
+    border-color: var(--valid-border-color);
+}
+.multi-input-fieldset.invalid {
+    border-color: var(--invalid-border-color);
+}
+.multi-input-table {
+    border-collapse: collapse;
+}
+.valid-row{
+    border-left: 1px solid var(--valid-border-color);
+}
+.invalid-row{
+    border-left: 1px solid var(--invalid-border-color);
+}
+.inline-actions {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
