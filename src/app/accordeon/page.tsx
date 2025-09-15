@@ -23,7 +23,7 @@ export default function AccordeonPage() {
             </button>
             <Accordeon
                 title="Sample Accordeon"
-                open={openSimple}
+                isOpen={openSimple}
                 onToggle={() => setOpenSimple(!open)}
                 height={110}
                 view="simple">
@@ -34,7 +34,7 @@ export default function AccordeonPage() {
             </Accordeon>
             <Accordeon
                 title="Card View Accordeon"
-                open={openCard}
+                isOpen={openCard}
                 view="card">
                 <div>
                     <p>This is another accordeon with card view.</p>

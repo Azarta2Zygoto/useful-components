@@ -47,25 +47,22 @@ export default function Accordeon({
         }
 
         if (openState) {
-            // expand: set measured height then remove limit to allow auto-height
+            
             const measured = height ? height : el.scrollHeight;
-            // set to measured px to animate from 0 -> measured
+            
             setMaxHeight(`${measured}px`);
             const tidy = window.setTimeout(() => {
-                // remove maxHeight so content can grow/shrink naturally
                 setMaxHeight("none");
             }, transitionMs);
             return () => clearTimeout(tidy);
         } else {
-            // collapse: if we had 'none', force current height then animate to 0
+            
             const current = el.scrollHeight;
-            // ensure browser sees current height before changing to 0
             setMaxHeight(`${current}px`);
-            // next frame -> 0
+            
             const raf = window.setTimeout(() => {
                 setMaxHeight("0px");
-            }
-            , 10);
+            }, 10);
             return () => clearTimeout(raf);
         }
     }, [openState, height, transitionMs, children]);

@@ -5,6 +5,7 @@ interface FloatingLabelInputProps {
     id: string;
     type: string;
     value: string | number;
+    role?: string;
     placeholder: string;
     className?: string;
     required?: boolean;
@@ -18,14 +19,19 @@ interface FloatingLabelInputProps {
     minLength?: number;
     maxLength?: number;
     style?: React.CSSProperties;
+    ref?: React.Ref<HTMLInputElement>;
+    aria?: { [key: string]: string|undefined };
     getChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+    onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export default function FloatingLabelInput({
     id,
     type,
     value,
+    role,
     placeholder,
     className,
     required,
@@ -39,15 +45,21 @@ export default function FloatingLabelInput({
     minLength,
     maxLength,
     style,
+    ref,
+    aria,
     getChange,
-    onKeyDown
+    onKeyDown,
+    onBlur,
+    onFocus
 }: FloatingLabelInputProps): JSX.Element {
     return (
         <div 
-        className="floating-label-container" 
+            className="floating-label-container" 
         >
         <input
+            ref={ref}
             id={id}
+            role={role}
             type={type}
             value={value}
             placeholder=" " // Empty placeholder to enable CSS selector
@@ -64,7 +76,10 @@ export default function FloatingLabelInput({
             maxLength={maxLength}
             onChange={(e)=>getChange(e)}
             onKeyDown={onKeyDown}
+            onBlur={onBlur}
+            onFocus={onFocus}
             style={style}
+            {...(aria || {})}
         />
         <label 
             htmlFor={id} 

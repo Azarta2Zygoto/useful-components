@@ -1,4 +1,4 @@
-import React, { JSX, useState, useRef, useEffect, Fragment } from "react";
+import React, { JSX, useState, useRef, useEffect, Fragment, useLayoutEffect } from "react";
 import BodyAccess from "../utils/bodyAccess";
 import Checkbox from "../checkbox/checkbox";
 import Overlay from "../overlay/overlay";
@@ -50,14 +50,22 @@ export default function MultipleMenuSelect({
     const [showBg, setShowBg] = useState<boolean>(true);
     const [menuSelectPosition, setMenuSelectPosition] = useState<{top:number, left:number}>({top:0, left:0});
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!isOpen || !buttonRef.current) return;
-
-        const rect = buttonRef.current.getBoundingClientRect();
-        const exactHeight = Math.min(maxHeight, 6 + options.length * (checkbox?35:32));
-        const elementHeight = Math.min(rect.bottom + window.scrollY, window.innerHeight - exactHeight + window.scrollY)
-        setMenuSelectPosition({ top: elementHeight, left: rect.left + window.scrollX });
-    }, [checkbox, isOpen, options.length]);
+        const update = () => {
+            const rect = buttonRef.current!.getBoundingClientRect();
+            const exactHeight = Math.min(maxHeight, 6 + options.length * 32);
+            const elementTop = Math.min(rect.bottom + window.scrollY, window.innerHeight - exactHeight + window.scrollY);
+            setMenuSelectPosition({ top: elementTop, left: rect.left + window.scrollX });
+        };
+        update();
+        window.addEventListener("resize", update);
+        window.addEventListener("scroll", update, true);
+        return () => {
+            window.removeEventListener("resize", update);
+            window.removeEventListener("scroll", update, true);
+        };
+    }, [isOpen, options.length]);
 
     useEffect(() => {
         if (isOpen && selectedOptions.length === 0) {

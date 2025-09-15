@@ -1,4 +1,4 @@
-import React, { JSX, useState, useRef, useEffect } from "react";
+import React, { JSX, useState, useRef, useEffect, useLayoutEffect } from "react";
 import BodyAccess from "../utils/bodyAccess";
 import Overlay from "../overlay/overlay";
 import "./menuSelect.css";
@@ -19,6 +19,7 @@ interface MenuSelectProps {
     style?: React.CSSProperties;
     ref?: React.Ref<unknown>;
     onSelect: (value: string) => void;
+    onKeyDown?: (event: React.KeyboardEvent) => void;
 }
 
 export default function MenuSelect({
@@ -34,9 +35,9 @@ export default function MenuSelect({
     hideIcon,
     className,
     onSelect,
+    onKeyDown
 }: MenuSelectProps): JSX.Element {
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const listRef = useRef<HTMLUListElement>(null);
     const maxHeight = 200;
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -45,13 +46,21 @@ export default function MenuSelect({
     const [showBg, setShowBg] = useState<boolean>(true);
     const [menuSelectPosition, setMenuSelectPosition] = useState<{top:number, left:number}>({top:0, left:0});
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!isOpen || !buttonRef.current) return;
-
-        const rect = buttonRef.current.getBoundingClientRect();
-        const exactHeight = Math.min(maxHeight, 6 + options.length * 32);
-        const elementHeight = Math.min(rect.bottom + window.scrollY, window.innerHeight - exactHeight + window.scrollY)
-        setMenuSelectPosition({ top: elementHeight, left: rect.left + window.scrollX });
+        const update = () => {
+            const rect = buttonRef.current!.getBoundingClientRect();
+            const exactHeight = Math.min(maxHeight, 6 + options.length * 32);
+            const elementTop = Math.min(rect.bottom + window.scrollY, window.innerHeight - exactHeight + window.scrollY);
+            setMenuSelectPosition({ top: elementTop, left: rect.left + window.scrollX });
+        };
+        update();
+        window.addEventListener("resize", update);
+        window.addEventListener("scroll", update, true);
+        return () => {
+            window.removeEventListener("resize", update);
+            window.removeEventListener("scroll", update, true);
+        };
     }, [isOpen, options.length]);
 
     useEffect(() => {
@@ -89,6 +98,7 @@ export default function MenuSelect({
     };
 
     function handleKeyDown(e: React.KeyboardEvent) {
+        onKeyDown?.(e);
         if (!isOpen) {
             if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
                 setIsOpen(true);
@@ -193,7 +203,6 @@ export default function MenuSelect({
             {isOpen&&(
                 <BodyAccess>
                     <ul
-                        ref={listRef}
                         role="listbox"
                         className={`menu-select-list ${isOpenAnimation ? "open" : ""} ${isOpenAnimation===false? "closing" : ""}`}
                         aria-labelledby={id + '-label'}
