@@ -54,6 +54,7 @@ export default function Tooltip({
         setShowTooltip(false);
     };
 
+    if (!active) return <>{children}</>;
     return (
         <div
             className="tooltip-wrapper"
