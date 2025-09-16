@@ -1,14 +1,16 @@
 import React, { JSX, useState, useRef, useEffect, useLayoutEffect } from "react";
 import BodyAccess from "../utils/bodyAccess";
 import Overlay from "../overlay/overlay";
-import "./menuSelect.css";
 import Tooltip from "../tooltip/tooltip";
 import Icon from "../utils/icon";
+import type { InputVariant } from "../utils/types";
+import "./menuSelect.css";
 
 interface MenuSelectProps {
     id: string;
     options: string[];
     selectedOption: string;
+    variant?: InputVariant;
     label?: string;
     floatingLabel?: boolean;
     disabled?: boolean;
@@ -26,6 +28,7 @@ export default function MenuSelect({
     id,
     options,
     selectedOption,
+    variant = "outlined",
     style,
     label,
     floatingLabel,
@@ -171,7 +174,7 @@ export default function MenuSelect({
                     ref={buttonRef}
                     type="button"
                     role="button"
-                    className={`menu-select-button ${required&&selectedOption===""?"invalid":""} ${className||""}`}
+                    className={`menu-select-button-${variant}${required&&selectedOption===""?" invalid ":""}${className||""}`}
                     style={{...style,
                         ...(hideIcon ? { paddingRight: "10px" } : {}),
                     }}

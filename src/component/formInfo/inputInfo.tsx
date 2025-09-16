@@ -6,9 +6,10 @@ import MultipleMenuSelect from "../multipleMenuSelect/multipleMenuSelect";
 import FloatingLabelInput from "../input/input";
 import BodyAccess from "../utils/bodyAccess";
 import NumberInput from "../input/numberInput";
-import Icon from "../utils/icon";
-import "./inputInfo.css";
 import ArrayInput from "../input/arrayInput";
+import Icon from "../utils/icon";
+import type { InputVariant } from "../utils/types";
+import "./inputInfo.css";
 
 type listType = "text" | "password" |
     "email" | "tel" |
@@ -24,6 +25,7 @@ interface InputInfoProps {
     id: string;
     type:listType;
     value: string|number;
+    variant?: InputVariant;
     values?: string[];
     label?: string;
     placeholder?: string;
@@ -79,6 +81,7 @@ export default function InputInfo({
     values,
     label,
     placeholder,
+    variant = "outlined",
     pattern,
     size,
     minLength,
@@ -225,6 +228,7 @@ export default function InputInfo({
                 id={id}
                 type={type}
                 value={value}
+                variant={variant}
                 values={values}
                 label={label}
                 placeholder={placeholder}
@@ -392,6 +396,7 @@ export interface DisplayerProps {
     id?: string;
     type:listType;
     value: string|number;
+    variant?: InputVariant;
     values?: string[];
     label?: string;
     placeholder?: string;
@@ -425,6 +430,7 @@ export function Displayer({
     type,
     value,
     values,
+    variant,
     label,
     placeholder,
     pattern,
@@ -456,6 +462,7 @@ export function Displayer({
                 id={id+"-element" || ""}
                 type={type === "number_array" ? "number" : type === "email_array" ? "email" : type === "tel_array" ? "tel" : type === "url_array" ? "url" : "text"}
                 values={values || []}
+                variant={variant}
                 placeholder={placeholder || ""}
                 className={className}
                 required={required}
@@ -484,6 +491,7 @@ export function Displayer({
                     id={id+"-element" || ""}
                     type={type}
                     value={value as string}
+                    variant={variant}
                     placeholder={placeholder || ""}
                     className={className}
                     required={required}
@@ -503,7 +511,7 @@ export function Displayer({
             <input
                 type={type}
                 id={id+"-element" || ""}
-                className={className}
+                className={`input-${variant} ${className}`}
                 value={value}
                 placeholder={placeholder}
                 pattern={pattern}
@@ -525,6 +533,7 @@ export function Displayer({
                 <FloatingLabelInput
                     id={id+"-element" || ""}
                     type={type}
+                    variant={variant}
                     value={value as string}
                     placeholder={placeholder || ""}
                     className={className}
@@ -546,7 +555,7 @@ export function Displayer({
             <input
                 type={type}
                 id={id+"-element" || ""}
-                className={className}
+                className={`input-${variant} ${className}`}
                 value={value}
                 placeholder={placeholder}
                 min={min}
@@ -568,6 +577,7 @@ export function Displayer({
                 value={value as number}
                 placeholder={placeholder || ""}
                 className={className}
+                variant={variant}
                 required={required}
                 disabled={disabled}
                 autoComplete={autoComplete}
@@ -587,6 +597,7 @@ export function Displayer({
             <MenuSelect
                 id={id+"-element" || ""}
                 label={label || ""}
+                variant={variant}
                 selectedOption={value as string}
                 options={options || []}
                 disabled={disabled}
@@ -604,6 +615,7 @@ export function Displayer({
             <MultipleMenuSelect
                 id={id+"-element" || ""}
                 label={label || ""}
+                variant={variant}
                 selectedOptions={values as string[]}
                 options={options || []}
                 disabled={disabled}
@@ -620,7 +632,7 @@ export function Displayer({
         return (
             <textarea
                 id={id+"-element" || ""}
-                className={className}
+                className={`input-${variant} ${className}`}
                 value={value}
                 placeholder={placeholder}
                 minLength={minLength}

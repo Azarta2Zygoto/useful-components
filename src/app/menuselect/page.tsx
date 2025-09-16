@@ -38,6 +38,39 @@ export default function MenuSelectPage(){
                 style={{ width: "200px" }}
             />
             <MenuSelect
+                id="example-select-compact"
+                label="Example Select"
+                variant="compact"
+                options={["Option 1", "Option 2", "Option 3", "Option 4"]}
+                selectedOption={selectedOption[0]}
+                onSelect={(value) => setSelectedOption(prev=>
+                    prev.map((_, index) => index === 0 ? value : _)
+                )}
+                style={{ width: "200px" }}
+            />
+            <MenuSelect
+                id="example-select-filled"
+                variant="filled"
+                label="Example Select"
+                options={["Option 1", "Option 2", "Option 3", "Option 4"]}
+                selectedOption={selectedOption[0]}
+                onSelect={(value) => setSelectedOption(prev=>
+                    prev.map((_, index) => index === 0 ? value : _)
+                )}
+                style={{ width: "200px" }}
+            />
+            <MenuSelect
+                id="example-select-standard"
+                variant="standard"
+                label="Example Select"
+                options={["Option 1", "Option 2", "Option 3", "Option 4"]}
+                selectedOption={selectedOption[0]}
+                onSelect={(value) => setSelectedOption(prev=>
+                    prev.map((_, index) => index === 0 ? value : _)
+                )}
+                style={{ width: "200px" }}
+            />
+            <MenuSelect
                 id="example-select-floating"
                 label="Example Select floating Label"
                 options={["Option 1", "Option 2", "Option 3", "Option 4"]}

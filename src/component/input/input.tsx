@@ -1,12 +1,14 @@
 import { JSX } from 'react';
+import { InputVariant } from '../utils/types';
 import "./input.css";
 
 interface FloatingLabelInputProps {
     id: string;
     type: string;
     value: string | number;
-    role?: string;
     placeholder: string;
+    role?: string;
+    variant?: InputVariant;
     className?: string;
     required?: boolean;
     disabled?: boolean;
@@ -32,6 +34,7 @@ export default function FloatingLabelInput({
     type,
     value,
     role,
+    variant = "outlined",
     placeholder,
     className,
     required,
@@ -63,7 +66,7 @@ export default function FloatingLabelInput({
             type={type}
             value={value}
             placeholder=" " // Empty placeholder to enable CSS selector
-            className={"floating-label-input "+ (className || '')}
+            className={`floating-label-input input-${variant} ${className || ""}`}
             required={required}
             disabled={disabled}
             pattern={pattern}

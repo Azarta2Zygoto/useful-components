@@ -3,12 +3,14 @@ import Box from "../box/box";
 import Icon from "../utils/icon";
 import FloatingLabelInput from "./input";
 import NumberInput from "./numberInput";
+import type { InputVariant } from "../utils/types";
 import "./input.css"
 
 interface ArrayInputProps {
     id: string;
     values: string[];
     placeholder: string;
+    variant?: InputVariant;
     type?: "text" | "email" | "tel" | "url" | "number";
     maxElements?: number;
     className?: string;
@@ -35,6 +37,7 @@ export default function ArrayInput({
     values,
     placeholder,
     type="text",
+    variant = "outlined",
     className,
     required,
     disabled,
@@ -125,8 +128,9 @@ export default function ArrayInput({
                         id={id}
                         type={type}
                         value={currentValue}
+                        variant={variant}
                         placeholder={placeholder + (required?" *":"")}
-                        className={"array-input " + (required&&currentValues.length===0?"invalid ":"")+ (className || '')}
+                        className={`${required&&currentValues.length===0?" invalid ":""} ${className || ''}`}
                         disabled={disabled}
                         autoComplete={autoComplete}
                         size={size}
@@ -143,7 +147,7 @@ export default function ArrayInput({
                         type={type}
                         value={currentValue}
                         placeholder={placeholder + (required?" *":"")}
-                        className={"array-input " + (required&&currentValues.length===0?"invalid ":"") + (className || '')}
+                        className={`input-${variant}${required&&currentValues.length===0?" invalid ":""} ${className || ''}`}
                         disabled={disabled}
                         autoComplete={autoComplete}
                         size={size}
@@ -160,6 +164,7 @@ export default function ArrayInput({
                         id={id}
                         value={currentValue===""?0:parseFloat(currentValue)}
                         placeholder={placeholder + (required?" *":"")}
+                        variant={variant}
                         className={"array-input " + (required&&currentValues.length===0?"invalid ":"") + (className || '')}
                         disabled={disabled}
                         autoComplete={autoComplete}

@@ -48,6 +48,30 @@ export default function InputPage() {
                 getChange={(e)=>handleInputChange(e, 0)}
             />
             <FloatingLabelInput
+                id="example-input-standard"
+                type="text"
+                variant='standard'
+                value={inputValue[0]}
+                placeholder="Enter text"
+                getChange={(e)=>handleInputChange(e, 0)}
+            />
+            <FloatingLabelInput
+                id="example-input-filled"
+                type="text"
+                variant='filled'
+                value={inputValue[0]}
+                placeholder="Enter text"
+                getChange={(e)=>handleInputChange(e, 0)}
+            />
+            <FloatingLabelInput
+                id="example-input-compact"
+                type="text"
+                variant='compact'
+                value={inputValue[0]}
+                placeholder="Enter text"
+                getChange={(e)=>handleInputChange(e, 0)}
+            />
+            <FloatingLabelInput
                 id="example-input required"
                 type="text"
                 value={inputValue[1]}

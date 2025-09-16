@@ -5,12 +5,14 @@ import Overlay from "../overlay/overlay";
 import Box from "../box/box";
 import Tooltip from "../tooltip/tooltip";
 import Icon from "../utils/icon";
+import type { InputVariant } from "../utils/types";
 import "../menuSelect/menuSelect.css";
 
 interface MultipleMenuSelectProps {
     id: string;
     options: string[];
     selectedOptions: string[];
+    variant?: InputVariant;
     label?: string;
     floatingLabel?: boolean;
     disabled?: boolean;
@@ -28,6 +30,7 @@ export default function MultipleMenuSelect({
     id,
     options,
     selectedOptions,
+    variant = "outlined",
     style,
     label,
     floatingLabel,
@@ -163,7 +166,7 @@ export default function MultipleMenuSelect({
                     ref={buttonRef}
                     type="button"
                     role="button"
-                    className={`menu-select-button ${required&&selectedOptions.length===0?"invalid":""} ${className?className:""}`}
+                    className={`menu-select-button-${variant}${required&&selectedOptions.length===0?" invalid ":""}${className?className:""}`}
                     style={{...style,
                         ...(hideIcon ? { paddingRight: "10px" } : {}),
                     }}

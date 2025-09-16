@@ -3,12 +3,14 @@ import FloatingLabelInput from "../input/input";
 import Overlay from "../overlay/overlay";
 import BodyAccess from "../utils/bodyAccess";
 import { bestMatches } from "./levenshtein";
+import type { InputVariant } from "../utils/types";
 import "./combobox.css";
 
 interface ComboboxProps {
     id: string;
     value: string;
     options: string[];
+    variant?: InputVariant;
     className?: string;
     style?: React.CSSProperties;
     pattern?: string;
@@ -27,6 +29,7 @@ export default function Combobox({
     id,
     value,
     options,
+    variant = "outlined",
     className,
     style,
     pattern,
@@ -54,7 +57,6 @@ export default function Combobox({
     useEffect(() => setValueVisible(value), [value]);
 
     useEffect(() => {
-        console.log("options changed", options);
         setViewableOptions(options);
         setCaseInsensitive(options.map(opt => opt.toLowerCase()));
     }, [options]);
@@ -181,6 +183,7 @@ export default function Combobox({
                     ref={inputRef}
                     type="text"
                     role='combobox'
+                    variant={variant}
                     className={className}
                     style={style}
                     value={valueVisible}
@@ -205,7 +208,7 @@ export default function Combobox({
                     id={id}
                     type="text"
                     role='combobox'
-                    className={className}
+                    className={`input-${variant} ${className}`}
                     style={style}
                     value={valueVisible}
                     pattern={pattern}
