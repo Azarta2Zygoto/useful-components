@@ -5,19 +5,21 @@
 .accordeon-content.component {
     width: calc(100% - 14px);
     height: fit-content;
-    overflow: hidden;
     padding:5px;
     border: 2px solid var(--border-color-special);
     border-radius: 0 0 10px 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    overflow: hidden;
     transition: all 0.3s ease;
 }
 .accordeon-content.inner {
     width: calc(100% - 14px);
     height: fit-content;
-    overflow: hidden;
     padding:5px;
     border-left: 2px solid var(--border-color-special);
+
+    overflow: hidden;
     transition: all 0.3s ease;
 }
 .accordeon-content.accordeon-simple {

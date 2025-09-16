@@ -6,6 +6,27 @@ import { bestMatches } from "./levenshtein";
 import type { InputVariant } from "../utils/types";
 import "./combobox.css";
 
+/**
+ * @param param - The properties for the Combobox component.
+ * @param param.id - The unique identifier for the combobox.
+ * @param param.value - The current value of the combobox.
+ * @param param.options - The list of options available in the combobox.
+ * @param param.variant - Optional variant of the input ("standard", "outlined", or "filled", default is "outlined").
+ * @param param.className - Optional additional class name for custom styling.
+ * @param param.style - Optional inline styles for the combobox.
+ * @param param.pattern - Optional regex pattern for input validation.
+ * @param param.required - Optional required state of the input (default is false).
+ * @param param.disabled - Optional disabled state of the input (default is false).
+ * @param param.placeholder - Optional placeholder text for the input.
+ * @param param.floatingLabel - Optional boolean to enable floating label (default is false).
+ * @param param.perfectMatch - Optional boolean to enable perfect match filtering (default is false).
+ * @param param.validOnly - Optional boolean to allow only valid options (default is false).
+ * @param param.maximumOptions - Optional maximum number of options to display (default is 100).
+ * @param param.onChange - The change event handler for the combobox.
+ * @param param.onKeyDown - Optional key down event handler for the input.
+ * @returns A JSX element representing the Combobox component.
+ */
+
 interface ComboboxProps {
     id: string;
     value: string;
@@ -63,6 +84,7 @@ export default function Combobox({
 
     useLayoutEffect(() => {
         if (!isOpen || !inputRef.current) return;
+
         const update = () => {
             const rect = inputRef.current!.getBoundingClientRect();
             const exactHeight = Math.min(maxHeight, 6 + options.length * 32);
@@ -70,6 +92,7 @@ export default function Combobox({
             setMenuSelectPosition({ top: elementTop, left: rect.left + window.scrollX });
         };
         update();
+
         window.addEventListener("resize", update);
         window.addEventListener("scroll", update, true);
         return () => {

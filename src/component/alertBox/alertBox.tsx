@@ -1,7 +1,7 @@
-import { JSX, useEffect, useState } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import Tooltip from "../tooltip/tooltip";
-import "./alertBox.css";
 import Icon from "../utils/icon";
+import "./alertBox.css";
 
 interface ValidateBoxProps {
     error:-1|0|1|2; // -1 Dev Error, 0: error, 1: success, 2: warning
@@ -9,19 +9,18 @@ interface ValidateBoxProps {
     position?: "top" | "bottom" | "left" | "right" | "center" |
                 "top left" | "top right" |
                 "bottom left" | "bottom right";
+    className?: string;
     visible?: boolean;
-    zIndex?: number;
     tooltip?: boolean;
-    children?: JSX.Element | JSX.Element[];
+    zIndex?: number;
     view?:"default" | "compact";
     text?: {
         devError?: string;
-        descDevError?: string;
         info?: string;
-        descInfo?: string;
         close?: string;
-        descClose?: string;
-    }
+    };
+    style?: React.CSSProperties;
+    children?: React.ReactNode;
     onInfo?: () => void;
     onClose?: () => void;
     onContact?: () => void;
@@ -35,9 +34,12 @@ interface ValidateBoxProps {
  * @param param.position - Optional position of the box (default is "bottom left").
  * @param param.visible - Optional visibility state of the box (default is true).
  * @param param.zIndex - Optional z-index for the box (default is 3).
- * @param param.children - Optional children elements to display inside the box.
  * @param param.text - Optional text for dev error, info, and close buttons.
  * @param param.tooltip - Optional tooltip for the box (default is true).
+ * @param param.view - Optional view type ("default" or "compact", default is "default").
+ * @param param.className - Optional additional class name for custom styling.
+ * @param param.style - Optional inline styles for the box.
+ * @param param.children - Optional children elements to display inside the box.
  * @param param.onInfo - Optional callback for additional information.
  * @param param.onClose - Optional callback to close the box.
  * @param param.onContact - Optional callback to contact support.
@@ -47,23 +49,18 @@ export default function AlertBox({
     error,
     message,
     position = "bottom left",
+    className,
     visible = true,
-    zIndex = 3,
     tooltip = true,
+    zIndex = 3,
     view = "default",
-    text = {
-        devError: "Dev Error",
-        descDevError: "An error occurred, please contact support.",
-        info: "Information",
-        descInfo: "Click for more information.",
-        close: "Close",
-        descClose: "Close this alert box."
-    },
+    text,
+    style,
+    children,
     onInfo,
     onClose,
     onContact,
-    children
-}: ValidateBoxProps):JSX.Element {
+}: ValidateBoxProps):JSX.Element|null {
     const classNameValue = error === 2 ? "warning" :
         error === 1 ? "success" : "error";
 
@@ -96,33 +93,42 @@ export default function AlertBox({
         setPositioning({ top, left, transform });
     }, [position]);
     
+    if (!visible) return null;
     return (
         <div
+            className={`${classNameView} ${classNameValue}`}
+            role="alert"
+            aria-live="assertive"
             style={{
                 zIndex: zIndex,
-                display: visible ? "flex" : "none",
                 top: positioning.top,
                 left: positioning.left,
                 transform: positioning.transform,
             }}
-            role="alert"
-            aria-live="assertive"
-            className={`${classNameView} ${classNameValue}`}>
+        >
             {view!=="compact"&&icon}
             <p>{message}</p>
             {children && (
-                <div className="info-box-children">
+                <div
+                    className={className||""}
+                    style={style}
+                >
                     {children}
                 </div>
             )}
-            <div style={{display: "flex", alignItems: "center"}}>
+            <span className="info-box-icons">
                 {onContact && error === -1 && (
-                    <Tooltip title={text.devError || "Dev Error"} active={tooltip} style={{margin: "0 5px"}}>
+                    <Tooltip
+                        title={text?.devError || "Dev Error"}
+                        active={tooltip}
+                        style={{margin: "0 5px"}}
+                    >
                         <button
+                            type="button"
                             className={`background-click`}
-                            aria-label={text.devError || "Dev Error"}
                             onClick={onContact}
-                            type="button">
+                            aria-label={text?.devError || "Dev Error"}
+                        >
                             <Icon
                                 name="envelope-fill"
                             />
@@ -130,12 +136,17 @@ export default function AlertBox({
                     </Tooltip>
                 )}
                 {onInfo && (
-                    <Tooltip title={text.info || "Information"} active={tooltip} style={{margin: "0 5px"}}>
+                    <Tooltip
+                        title={text?.info || "Information"}
+                        active={tooltip}
+                        style={{margin: "0 5px"}}
+                    >
                         <button
+                            type="button"
                             className={`background-click`}
-                            aria-label={text.info || "Information"}
                             onClick={onInfo}
-                            type="button">
+                            aria-label={text?.info || "Information"}
+                        >
                             <Icon
                                 name="info-circle-fill"
                             />
@@ -143,19 +154,24 @@ export default function AlertBox({
                     </Tooltip>
                 )}
                 {onClose && (
-                    <Tooltip title={text.close || "Close"} active={tooltip} style={{margin: "0 5px"}}>
+                    <Tooltip
+                        title={text?.close || "Close"}
+                        active={tooltip}
+                        style={{margin: "0 5px"}}
+                    >
                         <button
+                            type="button"
                             className={`background-click`}
-                            aria-label={text.close || "Close"}
                             onClick={onClose}
-                            type="button">
+                            aria-label={text?.close || "Close"}
+                        >
                             <Icon
                                 name="x-circle-fill"
                             />
                         </button>
                     </Tooltip>
                 )}
-            </div>
+            </span>
         </div>
     );
 }

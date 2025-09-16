@@ -61,6 +61,8 @@ export default function AlertBoxPage() {
                 visible={visible}
                 view={alertType}
                 onClose={() => setVisible(false)}
+                onInfo={() => alert("More information")}
+                onContact={() => alert("Contacting support...")}
             />
         </div>
     );
