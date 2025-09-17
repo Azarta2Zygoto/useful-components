@@ -66,7 +66,7 @@ export default function FloatingLabelInput({
                 role={role}
                 value={value}
                 placeholder=" " // Empty placeholder to enable CSS selector
-                className={`floating-label input-${variant} ${className??""}`}
+                className={`floating-label input-${variant} ${className ?? ""}`}
                 required={required}
                 disabled={disabled}
                 autoComplete={autoComplete}
@@ -87,7 +87,7 @@ export default function FloatingLabelInput({
                 type={type}
                 value={value}
                 placeholder=" " // Empty placeholder to enable CSS selector
-                className={`floating-label-input input-${variant} ${className??""}`}
+                className={`floating-label-input input-${variant} ${className ?? ""}`}
                 required={required}
                 disabled={disabled}
                 pattern={pattern}

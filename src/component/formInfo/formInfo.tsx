@@ -47,7 +47,7 @@ export default function FormInfo({
             targetRef={infoRef}
         >
             <button
-                className={`background-click ${isInfo&&"selected"} ${buttonclassName??""}`}
+                className={`background-click ${isInfo&&"selected"} ${buttonClassName ?? ""}`}
                 aria-label={text?.see||"See more information"}
                 onClick={getInfo}
                 ref={infoRef}
@@ -70,7 +70,7 @@ export default function FormInfo({
                 action={action||"#"}
                 method={method||"get"}
                 ref={ref as React.Ref<HTMLFormElement>}
-                className={`component-box ${className??""}`}
+                className={`component-box ${className ?? ""}`}
                 encType={encType}
                 style={style}
                 onSubmit={onSubmit}
@@ -83,7 +83,7 @@ export default function FormInfo({
     return (
         <div
             ref={ref as React.Ref<HTMLDivElement>}
-            className={`component-box ${className??""}`}
+            className={`component-box ${className ?? ""}`}
             style={style}
         >
             {innerJSX}

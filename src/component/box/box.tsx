@@ -39,7 +39,7 @@ export default function Box({
 
     return (
         <div
-            className={`box${isClickable ? " clickable" : ""}${disabled ? " disabled":""} ${className??""}`}
+            className={`box${isClickable ? " clickable" : ""}${disabled ? " disabled":""} ${className ?? ""}`}
             role={isClickable ? "button" : undefined}
             onClick={disabled ? undefined : onClick}
             onKeyDown={handleKeyDown}

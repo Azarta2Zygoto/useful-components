@@ -110,7 +110,7 @@ export default function AlertBox({
             <p>{message}</p>
             {children && (
                 <div
-                    className={className??""}
+                    className={className ?? ""}
                     style={style}
                 >
                     {children}

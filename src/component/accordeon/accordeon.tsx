@@ -119,7 +119,7 @@ export default function Accordeon({
     }
 
     return (
-        <div className={`accordeon-wrapper${openState ? " open" : " closed"} ${className??""}`}>
+        <div className={`accordeon-wrapper${openState ? " open" : " closed"} ${className ?? ""}`}>
             {view==="card"&&(
                 <div
                     id={headerId}

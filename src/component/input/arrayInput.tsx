@@ -121,7 +121,7 @@ export default function ArrayInput({
     }
 
     return (
-        <div className={`array-input-container ${className??""}`} style={style}>
+        <div className={`array-input-container ${className ?? ""}`} style={style}>
             <div className="array-input-label">
                 {type!=="number"&&floatingLabel&&(
                     <FloatingLabelInput

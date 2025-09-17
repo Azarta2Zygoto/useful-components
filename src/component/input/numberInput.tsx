@@ -123,7 +123,7 @@ export default function NumberInput({
                 value={value}
                 variant={variant}
                 placeholder={placeholder}
-                className={"aaaa "+((max&&value>max)||(min&&value<min)?"invalid ":"")+(className??"")}
+                className={"aaaa "+((max&&value>max)||(min&&value<min)?"invalid ":"")+(className ?? "")}
                 required={required}
                 disabled={disabled}
                 autoComplete={autoComplete}
