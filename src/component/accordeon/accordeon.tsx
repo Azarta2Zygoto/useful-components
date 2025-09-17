@@ -105,7 +105,7 @@ export default function Accordeon({
             if (typeof raf2 !== "undefined") window.cancelAnimationFrame(raf2);
         };
         
-    }, [openState, height, transitionMs, children]);
+    }, [openState, height, transitionMs]);
 
     function handleToggle() {
         setOpenState(!openState);
@@ -119,7 +119,7 @@ export default function Accordeon({
     }
 
     return (
-        <div className={`accordeon-wrapper${openState ? " open" : " closed"} ${className || ""}`}>
+        <div className={`accordeon-wrapper${openState ? " open" : " closed"} ${className??""}`}>
             {view==="card"&&(
                 <div
                     id={headerId}

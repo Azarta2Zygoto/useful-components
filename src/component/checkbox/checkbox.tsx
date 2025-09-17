@@ -84,7 +84,7 @@ export default function Checkbox({
                 />
                 <span
                     id={`${id}-checkmark`}
-                    className={!renderedCheckmark ? "checkbox-checkmark" : ""+(className ? ` ${className}` : "")}
+                    className={!renderedCheckmark ? "checkbox-checkmark " : "checkbox-placement"+(className ? ` ${className}` : "")}
                     aria-hidden="true"
                     style= {{
                         ...style,

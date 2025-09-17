@@ -37,6 +37,14 @@
     outline: 2px solid transparent;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, outline 0.3s ease;
 }
+.checkbox-placement {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin:0;
+    padding:0;
+    transform: translateY(-50%);
+}
 .checkbox-checkmark:after {
     content: "";
     position: absolute;

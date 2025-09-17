@@ -1,8 +1,8 @@
 import { ChangeEvent, JSX, useState } from "react";
 import FloatingLabelInput from "./input";
-import "./input.css"
-import Icon from "../utils/icon";
 import { InputVariant } from "../utils/types";
+import Icon from "../utils/icon";
+import "./input.css"
 
 interface NumberInputProps {
     id: string;
@@ -123,11 +123,12 @@ export default function NumberInput({
                 value={value}
                 variant={variant}
                 placeholder={placeholder}
-                className={"aaaa "+((max&&value>max)||(min&&value<min)?"invalid ":"")+(className||"")}
+                className={"aaaa "+((max&&value>max)||(min&&value<min)?"invalid ":"")+(className??"")}
                 required={required}
                 disabled={disabled}
                 autoComplete={autoComplete}
                 style={style}
+                pattern="[0-9]*"
                 getChange={handleValueChange}
                 onKeyDown={handleKeyDown}
             />
@@ -165,6 +166,7 @@ export default function NumberInput({
                 disabled={disabled}
                 autoComplete={autoComplete}
                 style={style}
+                pattern="[0-9]*"
                 onChange={handleValueChange}
                 onKeyDown={handleKeyDown}
             />

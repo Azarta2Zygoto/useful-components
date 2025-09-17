@@ -174,7 +174,7 @@ export default function MenuSelect({
                     ref={buttonRef}
                     type="button"
                     role="button"
-                    className={`menu-select-button-${variant}${required&&selectedOption===""?" invalid ":""}${className||""}`}
+                    className={`menu-select-button-${variant}${required&&selectedOption===""?" invalid ":""}${className?" "+className:""}`}
                     style={{...style,
                         ...(hideIcon ? { paddingRight: "10px" } : {}),
                     }}

@@ -59,31 +59,53 @@ export default function FloatingLabelInput({
         <div 
             className="floating-label-container" 
         >
-        <input
-            ref={ref}
-            id={id}
-            role={role}
-            type={type}
-            value={value}
-            placeholder=" " // Empty placeholder to enable CSS selector
-            className={`floating-label-input input-${variant} ${className || ""}`}
-            required={required}
-            disabled={disabled}
-            pattern={pattern}
-            autoComplete={autoComplete}
-            min={min}
-            max={max}
-            step={step}
-            size={size}
-            minLength={minLength}
-            maxLength={maxLength}
-            onChange={(e)=>getChange(e)}
-            onKeyDown={onKeyDown}
-            onBlur={onBlur}
-            onFocus={onFocus}
-            style={style}
-            {...(aria || {})}
-        />
+        {type==="textarea"?(
+            <textarea
+                ref={ref as React.Ref<HTMLTextAreaElement>}
+                id={id}
+                role={role}
+                value={value}
+                placeholder=" " // Empty placeholder to enable CSS selector
+                className={`floating-label input-${variant} ${className??""}`}
+                required={required}
+                disabled={disabled}
+                autoComplete={autoComplete}
+                minLength={minLength}
+                maxLength={maxLength}
+                onChange={(e)=>getChange(e as unknown as React.ChangeEvent<HTMLInputElement>)}
+                onKeyDown={(e)=>onKeyDown&&(onKeyDown(e as unknown as React.KeyboardEvent<HTMLInputElement>))}
+                onBlur={(e)=>onBlur&&(onBlur(e as unknown as React.FocusEvent<HTMLInputElement>))}
+                onFocus={(e)=>onFocus&&(onFocus(e as unknown as React.FocusEvent<HTMLInputElement>))}
+                style={style}
+                {...(aria || {})}
+            />
+        ):(
+            <input
+                ref={ref}
+                id={id}
+                role={role}
+                type={type}
+                value={value}
+                placeholder=" " // Empty placeholder to enable CSS selector
+                className={`floating-label-input input-${variant} ${className??""}`}
+                required={required}
+                disabled={disabled}
+                pattern={pattern}
+                autoComplete={autoComplete}
+                min={min}
+                max={max}
+                step={step}
+                size={size}
+                minLength={minLength}
+                maxLength={maxLength}
+                onChange={getChange}
+                onKeyDown={onKeyDown}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                style={style}
+                {...(aria || {})}
+            />
+        )}
         <label 
             htmlFor={id} 
             className="floating-label"

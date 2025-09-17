@@ -8,6 +8,7 @@ import BodyAccess from "../utils/bodyAccess";
 import NumberInput from "../input/numberInput";
 import ArrayInput from "../input/arrayInput";
 import Icon from "../utils/icon";
+import Combobox from "../combobox/combobox";
 import type { InputVariant } from "../utils/types";
 import "./inputInfo.css";
 
@@ -18,7 +19,7 @@ type listType = "text" | "password" |
     "fake_input" | "text_array" |
     "number_array" | "email_array" |
     "tel_array" | "url_array" |
-    "date" | "textarea"
+    "date" | "textarea" | "combobox"
 ;
 
 interface InputInfoProps {
@@ -47,6 +48,8 @@ interface InputInfoProps {
     icon?: boolean;
     maxElements?: number;
     otherTests?: {text:string, correct:boolean}[];
+    perfectMatch?: boolean;
+    validOnly?: boolean;
     floatingLabel?: boolean;
     width?: number;
     tooltip?: boolean;
@@ -100,6 +103,8 @@ export default function InputInfo({
     otherTests,
     floatingLabel,
     icon,
+    perfectMatch,
+    validOnly,
     maxElements,
     width = 1025,
     regexText,
@@ -247,6 +252,8 @@ export default function InputInfo({
                 options={options}
                 className={className+(problems.length > 0 ? " invalid" : "")}
                 style={style}
+                perfectMatch={perfectMatch}
+                validOnly={validOnly}
                 floatingLabel={floatingLabel}
                 tooltip={tooltip}
                 getChange={getChange}
@@ -416,6 +423,8 @@ export interface DisplayerProps {
     className?: string;
     style?: React.CSSProperties;
     show?: boolean;
+    perfectMatch?: boolean;
+    validOnly?: boolean;
     floatingLabel?: boolean;
     tooltip?: boolean;
     getChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -449,6 +458,8 @@ export function Displayer({
     className,
     style,
     tooltip,
+    perfectMatch,
+    validOnly,
     floatingLabel,
     getChange,
     getValue,
@@ -555,7 +566,7 @@ export function Displayer({
             <input
                 type={type}
                 id={id+"-element" || ""}
-                className={`input-${variant} ${className}`}
+                className={`input-${variant} ${className?className:""}`}
                 value={value}
                 placeholder={placeholder}
                 min={min}
@@ -625,6 +636,27 @@ export function Displayer({
                 required={required}
                 tooltip={tooltip}
                 onSelect={getValues || (() => {})}
+            />
+        );
+    }
+    else if (type === "combobox") {
+        return (
+            <Combobox
+                id={id+"-element" || ""}
+                value={value as string}
+                options={options || []}
+                variant={variant}
+                disabled={disabled}
+                pattern={pattern}
+                placeholder={placeholder}
+                floatingLabel={floatingLabel}
+                className={className}
+                style={style}
+                required={required}
+                autoComplete={autoComplete}
+                perfectMatch={perfectMatch}
+                validOnly={validOnly}
+                onChange={getValue || (() => {})}
             />
         );
     }
