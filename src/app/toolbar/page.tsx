@@ -14,7 +14,7 @@ export default function ToolbarPage():JSX.Element {
                 tooltip={true}
                 type="expand"
                 text={{fermer: "Fermer le menu", ouvrir: "Ouvrir le menu"}}
-                displayName={(name) => {
+                displayDifferentName={(name) => {
                     if (name === "accueil") return "Accueil";
                     if (name === "a-propos") return "À propos";
                     if (name === "contact") return "Contact";
