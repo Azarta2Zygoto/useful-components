@@ -73,6 +73,14 @@ main{
 
 
 
+@media (max-width: 600px) {
+    main {
+        padding: 2% 5% 0 5%;
+        width: 90%;
+    }
+}
+
+
 :root{
     --bg2: #161a1f;
 }
