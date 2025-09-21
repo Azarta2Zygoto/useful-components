@@ -26,7 +26,7 @@ export default function RootLayout({
             toolbarData={toolbarJSON.toolbar}/>
         <div className="sub-body">
             <header>
-                <h1>Component Library</h1>
+                <h1 style={{color:'white'}}>Component Library</h1>
             </header>
             {children}
         </div>

@@ -2,8 +2,8 @@
 @import "bootstrap-icons/font/bootstrap-icons";
 
 :root {
-    --bg: #ffffff;
-    --fg: #1e1f20;
+    --bg: #1e1f20;
+    --fg: #ededed;
     --add-nothing-color: #00aaff20;
     --add-minor-color: #00aaff40;
     --add-light-color: #00aaff80;
@@ -15,7 +15,7 @@
     --box-color: #6c10aa;
     --border-color-special: var(--add-total-color);
     --border-color-shadow-special: var(--add-minor-color);
-    --border-color:var(--fg);
+    --border-color:var(--bg);
     --outline-color: #fefefe;
     --outline-color-shadow: #fefefe30;
     --disabled-bg-color: #838080;
@@ -39,14 +39,6 @@
     --warning-border-color: #ffcc00;
     --valid-bg-color: #00ff0010;
     --valid-border-color: #00ff00;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #1e1f20;
-        --fg: #ededed;
-        --border-color:var(--bg);
-    }
 }
 
 html {
