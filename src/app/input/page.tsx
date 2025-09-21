@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import FloatingLabelInput from "@/component/input/input";
 import MenuSelect from "@/component/menuSelect/menuSelect";
 import ComponentSelect from "@/self/componentSelect";
+import { InfoComponent } from "@/self/moreInfo";
 
 const inputValues = [
     "",
@@ -49,7 +50,7 @@ export default function InputPage() {
     return (
         <main>
             <h1>Input</h1>
-            <p>Input allows user to enter specific information</p>
+            <p>Input allows user to enter specific information.</p>
 
             <h2>Basic input</h2>
 
@@ -70,7 +71,7 @@ export default function InputPage() {
 
             
             <h2>Different variant</h2>
-            <p>Input can have different variants : standard, filled, compact and outlined</p>
+            <p>Input can have different variants : standard, filled, compact and outlined.</p>
             <div className="inner-component">
                 <div className="colonne">
                     <label htmlFor="filled">Filled</label>
@@ -108,7 +109,7 @@ export default function InputPage() {
                 </div>
             </div>
             <h2>Other input type</h2>
-            <p>Obviously, variants work with other type of input</p>
+            <p>Obviously, variants work with other type of input.</p>
             <div className="inner-component" style={{minHeight: "100px"}}>
                 <MenuSelect
                     id={"select-change-number"}
@@ -157,6 +158,10 @@ export default function InputPage() {
             </div>
             <h2>Floating label</h2>
             <p>Input can also have floating label</p>
+            <InfoComponent>
+                <p>The floating label input can be used with all variants and most features of the basic input.<br/>
+                To provide the label to the component, you only need to provide the placeholder ! It will be use for both aspect.</p>
+            </InfoComponent>
             <ComponentSelect
                 options={options}
                 value={selectedOption[2]}
