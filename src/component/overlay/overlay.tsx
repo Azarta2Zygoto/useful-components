@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, JSX } from 'react';
+import BodyAccess from '@/component/utils/bodyAccess';
 import './overlay.css';
 
 interface OverlayProps {
     open?: boolean;
     id?: string;
     color?: string;
+    tobody?: boolean;
     style?: React.CSSProperties;
     children?: React.ReactNode;
     onClose: () => void;
@@ -15,6 +17,7 @@ export default function Overlay({
     style,
     color = "rgba(0, 0, 0, 0.5)",
     open=true,
+    tobody,
     children,
     onClose
 }: OverlayProps): JSX.Element {
@@ -35,7 +38,7 @@ export default function Overlay({
         };
     }, [onClose]);
 
-    return (
+    const overlay = (
         <div
             id={id}
             className={`overlay ${open ? 'open' : 'closed'}`}
@@ -57,4 +60,5 @@ export default function Overlay({
                 {children}
         </div>
     );
+    return tobody ? <BodyAccess>{overlay}</BodyAccess> : overlay;
 }

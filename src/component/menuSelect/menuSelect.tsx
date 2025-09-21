@@ -22,6 +22,8 @@ interface MenuSelectProps {
     ref?: React.Ref<unknown>;
     onSelect: (value: string) => void;
     onKeyDown?: (event: React.KeyboardEvent) => void;
+    setCustomOption?:(name:string) => React.ReactNode;
+    setCustomList?: (index:number, name?:string) => React.ReactNode;
 }
 
 export default function MenuSelect({
@@ -38,7 +40,9 @@ export default function MenuSelect({
     hideIcon,
     className,
     onSelect,
-    onKeyDown
+    onKeyDown,
+    setCustomOption,
+    setCustomList
 }: MenuSelectProps): JSX.Element {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const maxHeight = 200;
@@ -67,7 +71,7 @@ export default function MenuSelect({
     }, [isOpen, options.length]);
 
     useEffect(() => {
-        if (options.length === 0) return;
+        if (options.length === 0||typeof selectedOption!=="string") return;
 
         const initialIndex = options.indexOf(selectedOption);
         if (initialIndex !== -1) {
@@ -175,8 +179,9 @@ export default function MenuSelect({
                     type="button"
                     role="button"
                     className={`menu-select-button-${variant}${required&&selectedOption===""?" invalid ":""}${className?" "+className:""}`}
-                    style={{...style,
+                    style={{
                         ...(hideIcon ? { paddingRight: "10px" } : {}),
+                        ...style,
                     }}
                     id={id}
                     disabled={disabled}
@@ -187,7 +192,7 @@ export default function MenuSelect({
                     onClick={handleOpen}
                     onKeyDown={handleKeyDown}
                 >
-                    {selectedOption}
+                    {setCustomOption ? setCustomOption(selectedOption) : selectedOption}
                     {!hideIcon&&<Icon name="caret-down-fill" className={`menu-select-icon ${isOpenAnimation ? "open" : ""}`} />}
                 </button>
             </Tooltip>
@@ -229,7 +234,7 @@ export default function MenuSelect({
                                 onClick={() => handleOptionClick(option)}
                                 onMouseEnter={() => setFocusedIndex(idx)}
                                 >
-                                {option}
+                                {setCustomList ? setCustomList(idx) : option}
                             </li>
                         ))}
                         {options.length === 0 && (

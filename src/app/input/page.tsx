@@ -71,6 +71,13 @@ export default function InputPage() {
                 placeholder="Enter text"
                 getChange={(e)=>handleInputChange(e, 0)}
             />
+            <input
+                type="text"
+                value={inputValue[0]}
+                placeholder="Enter text"
+                className="input-compact"
+                onChange={(e)=>handleInputChange(e, 0)}
+            />
             <FloatingLabelInput
                 id="example-input required"
                 type="text"
@@ -94,6 +101,13 @@ export default function InputPage() {
                 placeholder="Enter text"
                 disabled
                 getChange={(e)=>handleInputChange(e, 3)}
+            />
+            <FloatingLabelInput
+                id="example-input-date"
+                type="date"
+                value={inputValue[0]}
+                placeholder="Enter date"
+                getChange={(e)=>handleInputChange(e, 0)}
             />
             <NumberInput
                 id="Number"

@@ -18,17 +18,20 @@ input:is(:-webkit-autofill, :autofill) + .floating-label,
     top: 15%;
     left: 20px;
     padding: 0 4px;
-    color:  var(--add-total-color);
+    color:  var(--fg);
     font-size: 12px;
     font-style: normal;
     background-image: linear-gradient(to bottom, var(--bg) 0% 75%, transparent 65%);
 }
-.floating-label-input:invalid,
-.floating-label-input.invalid {
-    border-color: var(--invalid-bg-color);
+.floating-label-input:focus + .floating-label {
+    color: var(--add-total-color);
 }
 .floating-label-input:disabled + .floating-label {
     color: white;
+}
+.floating-label-input:invalid,
+.floating-label-input.invalid {
+    border-color: var(--invalid-bg-color);
 }
 .floating-label-input:invalid + .floating-label,
 .floating-label-input.invalid + .floating-label {

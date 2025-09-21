@@ -1,0 +1,14 @@
+.flag-icon {
+    width: 20px;
+    height: 15px;
+    flex-shrink: 0; /* Prevent shrinking */
+    object-fit: cover; /* Ensure the flag covers the area */
+    border: 1px solid var(--input-border-color); /* Optional: Add a border for better visibility */
+    box-shadow: 0 0 2px rgba(0,0,0,0.2); /* Optional: Add a slight shadow */
+}
+.flag-name {
+    margin-left: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

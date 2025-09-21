@@ -1,0 +1,172 @@
+:root {
+    --toolbar-bg-color: #130808;
+    --toolbar-button-color: #150c35;
+    --toolbar-button-hover-color: #28187a;
+    --toolbar-button-active-color: #2609bb;
+    --light-background-color: #2f3236;
+}
+
+.toolbar{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 50px;
+    height: 100%;
+    background-color: var(--toolbar-bg-color);
+    overflow-y: auto; /* Allow scrolling */
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
+}
+.toolbar a {
+    text-decoration: none;
+}
+
+.toolbar .active-button {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 35px;
+    max-width: 35px;
+    height: 35px;
+    padding: 0;
+    background-color: var(--toolbar-button-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+    overflow: hidden;
+    transition: background-color 0.3s ease, min-width 0.3s ease;
+}
+.toolbar .active-button:hover {
+    background-color: var(--toolbar-button-hover-color);
+}
+.toolbar .active-button:active {
+    background-color: var(--toolbar-button-active-color);
+    outline: 2px solid var(--toolbar-button-active-color);
+}
+.toolbar .active-button:focus-visible {
+    outline: 2px solid var(--toolbar-button-active-color);
+}
+.toolbar .active-button i {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.toolbar .link {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 30px;
+    max-width: 30px;
+    height: 30px;
+    margin: 5px;
+    padding: 0;
+    background-color: var(--toolbar-button-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+    overflow: hidden;
+    transition: background-color 0.3s ease, min-width 0.3s ease;
+}
+.toolbar .link:hover {
+    background-color: var(--toolbar-button-hover-color);
+}
+.toolbar .link:active {
+    background-color: var(--toolbar-button-active-color);
+    outline: 2px solid var(--toolbar-button-active-color);
+}
+.toolbar .link.selected {
+    outline: 2px solid var(--toolbar-button-active-color);
+}
+.toolbar .link:focus-visible {
+    outline: 2px solid var(--toolbar-button-active-color);
+}
+
+.toolbar .link span {
+    max-width: 0;
+    width: calc(100% - 25px);
+    margin-left: 25px;
+    font-size: 16px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transition: max-width 0.3s;
+}
+.toolbar .link i {
+    position: absolute;
+    font-size: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    transition: left 0.3s ease;
+}
+
+.toolbar .link.mini {
+    min-width: 25px;
+    max-width: 25px;
+    height: 25px;
+}
+.toolbar .link.mini span {
+    font-size: 16px;
+    max-width: 0;
+}
+
+.toolbar.active {
+    min-width: 150px;
+}
+.toolbar.active .link {
+    min-width: 130px;
+}
+.toolbar.active .link .i {
+    left: 10%;
+}
+.toolbar.active .link span {
+    max-width: 120px;
+    transition: max-width 0.3s;
+}
+
+
+.toolbar .subpath {
+    background-color: transparent;
+    visibility: hidden;
+    opacity: 0;
+    height: 0px;
+    width: 0px;
+    margin: 0 0 0 10px;
+    padding: 0;
+    border-left: 2px solid var(--toolbar-button-active-color);
+    overflow: visible;
+    list-style: none;
+
+    transition: height 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+}
+.toolbar .subpath.active {
+    visibility: visible;
+    opacity: 1;
+    width: 80%;
+}
+.toolbar.active .subpath .link {
+    min-width: 118px;
+}
+@media (max-width: 600px) {
+    .toolbar {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-100%); /* Move off-screen */
+    }
+}

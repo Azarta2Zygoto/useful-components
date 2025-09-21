@@ -186,6 +186,39 @@ input:autofill:focus {
 .input-filled.invalid:not(:disabled) {
     background-color: var(--invalid-bg-color);
 }
+.input-invisible {
+    padding: 0;
+    margin:0;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--fg);
+    font-size: 16px;
+    box-shadow: 0 0 0 #1167b10f;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+.input-filled:hover:not(:disabled):not(:focus-visible) {
+    box-shadow: 0 0 0 3px #1167b136;
+}
+.input-filled:focus-visible {
+    outline: 1px solid var(--input-focus-border-color);
+    box-shadow: 0 0 0 3px #1167b136;
+}
+.input-filled:disabled {
+    background-color: var(--disabled-bg-color);
+    color: var(--disabled-text-color);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+.input-filled::placeholder {
+    color: var(--disabled-text-color);
+    opacity: 1;
+    font-style: italic;
+}
+.input-filled:invalid:not(:disabled),
+.input-filled.invalid:not(:disabled) {
+    background-color: var(--invalid-bg-color);
+}
 textarea {
     resize: vertical;
     min-height: 60px;
@@ -381,14 +414,10 @@ textarea {
     box-shadow: 0 0 10px #00000066;
     overflow-x: auto;
 }
-.void,
-.void:hover,
-.void:active,
-.void:focus-visible {
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    outline: none;
+.bi {
+    font-size: 1.2em;
+    vertical-align: -0.15em;
+    fill: currentColor;
 }
 /* All animations */
 @keyframes fadeOut {

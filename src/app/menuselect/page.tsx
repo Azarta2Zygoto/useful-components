@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import MenuSelect from "@/component/menuSelect/menuSelect";
+import FlagSelect from "@/component/menuSelect/flagSelect";
 
 const selectOptionsList = [
     "",
@@ -24,6 +25,7 @@ const options = [
 
 export default function MenuSelectPage(){
     const [selectedOption, setSelectedOption] = useState<string[]>(selectOptionsList);
+    const [selectedContries, setSelectedCountries] = useState<string[]>(["France", "United States"]);
 
     return (
         <main>
@@ -145,6 +147,34 @@ export default function MenuSelectPage(){
                 tooltip
                 onSelect={(value) => setSelectedOption(prev=>
                     prev.map((_, index) => index === 7 ? value : _)
+                )}
+            />
+            <FlagSelect
+                id="example-flag-select"
+                countries={[
+                    {name: "France", code: "FR"},
+                    {name: "United States", code: "US"},
+                    {name: "Germany", code: "DE"},
+                    {name: "Spain", code: "ES"},
+                ]}
+                selectCountry={selectedContries[0]}
+                onSelect={(value) => setSelectedCountries(prev=>
+                    prev.map((_, index) => index === 0 ? value : _)
+                )}
+                style={{ width: "200px"}}
+            />
+            <FlagSelect
+                id="example-flag-select-flag-only"
+                countries={[
+                    {name: "France", code: "FR"},
+                    {name: "United States", code: "US"},
+                    {name: "Germany", code: "DE"},
+                    {name: "Spain", code: "ES"},
+                ]}
+                flagOnly
+                selectCountry={selectedContries[1]}
+                onSelect={(value) => setSelectedCountries(prev=>
+                    prev.map((_, index) => index === 1 ? value : _)
                 )}
             />
         </main>

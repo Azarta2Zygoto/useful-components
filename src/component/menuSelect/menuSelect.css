@@ -217,6 +217,55 @@
     color: var(--invalid-border-color);
 }
 
+.menu-select-button-invisible {
+    position: relative;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+    font-size: 16px;
+    padding: 0 25px 0 0;
+    margin:0;
+    box-sizing: border-box;
+    border: none;
+    background-color: transparent;
+    color:var(--fg);
+    cursor: pointer;
+    user-select:text;
+    overflow: hidden;
+    flex-wrap: wrap; /* Allow content to wrap */
+    gap: 2px;
+    
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+.menu-select-button-filled:hover:not(:disabled) {
+    background-color: transparent;
+    box-shadow: 0 0 0 0 #1167b136;
+}
+.menu-select-button-filled:focus {
+    outline: 1px solid var(--input-focus-border-color);
+    box-shadow: 0 0 0 3px #1167b136;
+}
+.menu-select-button-filled:focus ~ .menu-select-label.floating {
+    color: var(--add-total-color);
+}
+.menu-select-button-filled:disabled {
+    background-color: var(--disabled-bg-color);
+    border-color: var(--disabled-border-color);
+    cursor: not-allowed;
+    & .menu-select-icon {
+        transform: translateY(-50%) rotate(-90deg);
+    }
+}
+.menu-select-button-filled.invalid:not(:disabled) {
+    background-color: var(--invalid-bg-color)!important;
+    border-color: var(--invalid-border-color)!important;
+}
+.menu-select-button-filled.invalid:not(:disabled) ~ .menu-select-label.floating {
+    color: var(--invalid-border-color);
+}
+
 .menu-select-icon{
     position: absolute;
     right: 5px;

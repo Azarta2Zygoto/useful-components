@@ -1,0 +1,76 @@
+{
+    "toolbar": [
+        {
+            "name": "Accueil",
+            "icon": "bi bi-house-fill"
+        },
+        {
+            "name": "Input",
+            "icon": "bi bi-piggy-bank-fill",
+            "subpath":[
+                {
+                    "name": "number",
+                    "icon": "bi bi-buildings"
+                },
+                {
+                    "name": "multiarray",
+                    "icon": "bi bi-person"
+                }
+            ]
+        },
+        {
+            "name": "Select Menu",
+            "icon": "bi bi-menu-button-wide-fill",
+            "subpath":[
+                {
+                    "name": "selectMenu",
+                    "icon": "bi bi-apple"
+                },
+                {
+                    "name": "MultipleSelectMenu",
+                    "icon": "bi bi-basket"
+                },
+                {
+                    "name": "special",
+                    "icon": "bi bi-bell"
+                }
+            ]
+        },
+        {
+            "name": "Alert Box",
+            "icon": "bi bi-exclamation-triangle-fill"
+        },
+        {
+            "name": "Swicth",
+            "icon": "bi bi-toggle-on"
+        },
+        {
+            "name": "Radio Button",
+            "icon": "bi bi-ui-radios"
+        },
+        {
+            "name": "Checkbox",
+            "icon": "bi bi-check2-square"
+        },
+        {
+            "name": "Table",
+            "icon": "bi bi-table"
+        },
+        {
+            "name": "Accordeon",
+            "icon": "bi bi-arrows-collapse"
+        },
+        {
+            "name": "Combobox",
+            "icon": "bi bi-list"
+        },
+        {
+            "name": "Toolbar",
+            "icon": "bi bi-layout-text-sidebar-reverse"
+        },
+        {
+            "name": "Little Components",
+            "icon": "bi bi-puzzle"
+        }
+    ]
+}

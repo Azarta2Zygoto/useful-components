@@ -8,6 +8,7 @@ interface TooltipProps {
     placement?: "top" | "bottom" | "left" | "right";
     active?: boolean;
     offset?: number;
+    keepWrapper?: boolean;
     targetRef?: React.RefObject<HTMLElement|null>;
     style?: React.CSSProperties;
 }
@@ -18,6 +19,7 @@ export default function Tooltip({
     active = true,
     placement = "bottom",
     offset = 4,
+    keepWrapper,
     targetRef,
     style
 }: TooltipProps) : JSX.Element {
@@ -54,7 +56,7 @@ export default function Tooltip({
         setShowTooltip(false);
     };
 
-    if (!active) return <>{children}</>;
+    if (!active&&!keepWrapper) return <>{children}</>;
     return (
         <div
             className="tooltip-wrapper"
