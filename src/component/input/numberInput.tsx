@@ -46,11 +46,22 @@ export default function NumberInput({
     onKeyDown
 }:NumberInputProps): JSX.Element {
     const [numberSize, setNumberSize] = useState<boolean>(false)
+    const [isMinus, setIsMinus] = useState<boolean>(false)
     const [oldValue, setOldValue] = useState<number>(value)
 
     function handleValueChange(e:ChangeEvent<HTMLInputElement>) {
         const newValue = e.target.value
+        if ((newValue === "0-" || newValue === "-0") && !isMinus && (min===undefined || min<0)) {
+            console.log("minus")
+            getChange(0)
+            setIsMinus(true)
+            return
+        }
+
+        setIsMinus(false)
         let correctedValue = int?newValue.replace(',', '').replace('.', ''):newValue.replace(',', '.')
+        correctedValue = correctedValue.replace(/[^0-9\.\-\+]/g, '');
+        correctedValue = isMinus?"-"+correctedValue:correctedValue;
         if(isNaN(Number(correctedValue)) && correctedValue !== "" && correctedValue !== "-" && correctedValue !== "."){
             getChange(oldValue)
             return
@@ -125,12 +136,11 @@ export default function NumberInput({
                 value={value}
                 variant={variant}
                 placeholder={placeholder}
-                className={"aaaa "+((max&&value>max)||(min&&value<min)?"invalid ":"")+(className ?? "")}
+                className={((max&&value>max)||(min&&value<min)?"invalid ":"")+(className ?? "")}
                 required={required}
                 disabled={disabled}
                 autoComplete={autoComplete}
                 style={style}
-                pattern="[0-9]*"
                 getChange={handleValueChange}
                 onKeyDown={handleKeyDown}
             />
@@ -168,7 +178,7 @@ export default function NumberInput({
                 disabled={disabled}
                 autoComplete={autoComplete}
                 style={style}
-                pattern="[0-9]*"
+                inputMode={int ? "numeric" : "decimal"}
                 onChange={handleValueChange}
                 onKeyDown={handleKeyDown}
             />

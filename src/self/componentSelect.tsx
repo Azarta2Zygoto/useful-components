@@ -1,4 +1,5 @@
 import MenuSelect from "@/component/menuSelect/menuSelect";
+import { useGlobal } from "./globalProvider";
 import React, { JSX } from "react";
 
 export interface ComponentSelectProps {
@@ -8,6 +9,8 @@ export interface ComponentSelectProps {
     label: string;
     id: string;
     children?: React.ReactNode;
+    style?: React.CSSProperties;
+    show?: boolean;
 }
 
 export default function ComponentSelect({
@@ -16,24 +19,33 @@ export default function ComponentSelect({
     onChange,
     label,
     id,
-    children
+    children,
+    style,
+    show = true
 }: ComponentSelectProps) : JSX.Element {
+    const { width } = useGlobal();
     return (
-        <div className="inner-component">
-            <span></span>
+        <div className="inner-component"
+            style={style}>
+            {show&&(
+                <span></span>
+            )}
             <div className="inner-component-description">
                 {children}
             </div>
-            <MenuSelect
-                id={id}
-                boxClassName="inner-component-select"
-                options={options}
-                selectedOption={value}
-                onSelect={onChange}
-                backgroundColor="var(--bg2)"
-                floatingLabel
-                label={label}
-            />
+            {show&&(
+                <MenuSelect
+                    id={id}
+                    boxClassName="inner-component-select"
+                    options={options}
+                    selectedOption={value}
+                    onSelect={onChange}
+                    backgroundColor="var(--bg2)"
+                    floatingLabel
+                    label={label}
+                    boxStyle={{margin:width<600?"0 auto":undefined}}
+                />
+            )}
         </div>
     );
 }

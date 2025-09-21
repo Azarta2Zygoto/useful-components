@@ -414,7 +414,6 @@ export default function Table({
 
     if (box||title||onDownload||filterable==="outside"||paginated) {
         return (
-            <div style={{overflow:"auto", overflowY:"hidden"}}>
             <div className="limit-table component-box"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
@@ -518,13 +517,11 @@ export default function Table({
                     </table>
                 )}
             </div>
-            </div>
         );
     }
     else {
         return (
             virtual ? (
-            <div style={{overflow:"auto"}}>
                 <div className="limit-table"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
@@ -558,9 +555,7 @@ export default function Table({
                         itemContent={(index, item) => makeContent(item, index)}
                     />
                 </div>
-            </div>
             ) : (
-            <div style={{overflow:"auto"}}>
                 <div className="limit-table"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
@@ -596,7 +591,6 @@ export default function Table({
                             </tfoot>
                         )}
                     </table>
-                </div>
             </div>
         )
     )}

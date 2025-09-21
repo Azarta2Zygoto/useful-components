@@ -172,6 +172,7 @@ export default function InputPage() {
                 onChange={(val)=>handleSelectChange(val, 2)}
                 label={"Input style"}
                 id={"select-change-floating-label-style"}
+                style={{justifyContent:"space-between"}}
             >
                 <FloatingLabelInput
                     id="floating-label-input"

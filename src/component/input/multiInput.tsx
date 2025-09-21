@@ -117,6 +117,7 @@ export default function MultiInput({
                                 <Tooltip
                                     title={rowsValid.includes(false) ? "" : "New row"}
                                     active={!rowsValid.includes(false)}
+                                    keepWrapper={true}
                                 >
                                     <button
                                         type="button"

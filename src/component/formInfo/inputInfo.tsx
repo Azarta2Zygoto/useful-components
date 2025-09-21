@@ -441,7 +441,7 @@ export function Displayer({
     type,
     value,
     values,
-    variant,
+    variant = "outlined",
     label,
     placeholder,
     pattern,
