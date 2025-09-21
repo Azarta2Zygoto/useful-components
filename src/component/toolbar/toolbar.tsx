@@ -87,11 +87,9 @@ export default function Toolbar({
     }
 
     function handleToolbarActivation() {
-        setInternaIsActive(prev => {
-            const newState = !prev;
-            if (getActive) getActive(newState);
-            return newState;
-        });
+        const newState = !internIsActive;
+        if (getActive) getActive(newState);
+        setInternaIsActive(newState);
     }
 
     return (

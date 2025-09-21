@@ -20,6 +20,10 @@ export default function ComponentSelect({
 }: ComponentSelectProps) : JSX.Element {
     return (
         <div className="inner-component">
+            <span></span>
+            <div className="inner-component-description">
+                {children}
+            </div>
             <MenuSelect
                 id={id}
                 boxClassName="inner-component-select"
@@ -30,7 +34,6 @@ export default function ComponentSelect({
                 floatingLabel
                 label={label}
             />
-            {children}
         </div>
     );
 }

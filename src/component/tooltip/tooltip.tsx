@@ -51,10 +51,16 @@ export default function Tooltip({
         }
         
         setCoords({ left, top });
+        console.log("touch open");
         setShowTooltip(true);
     };
 
     const mouseLeave = () => {
+        setShowTooltip(false);
+    };
+
+    const onTouchCancelEvent = () => {
+        console.log("touch cancel");
         setShowTooltip(false);
     };
 
@@ -63,8 +69,10 @@ export default function Tooltip({
         <div
             className="tooltip-wrapper"
             ref={wrapperRef}
-            onMouseEnter={mouseEnter}
-            onMouseLeave={mouseLeave}
+            onPointerEnter={mouseEnter}
+            onPointerLeave={mouseLeave}
+            onTouchStart={mouseEnter}
+            onTouchEnd={onTouchCancelEvent}
             aria-describedby={active && showTooltip ? "tooltip" : undefined}
             style={style}
         >

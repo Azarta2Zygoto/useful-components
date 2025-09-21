@@ -65,6 +65,7 @@ export default function InputPage() {
                         value={inputValue[0]}
                         placeholder="Enter text"
                         onChange={(e)=>handleInputChange(e, 0)}
+                        style={{maxWidth:"100%"}}
                     />
                 </div>
             </div>
@@ -110,29 +111,7 @@ export default function InputPage() {
             </div>
             <h2>Other input type</h2>
             <p>Obviously, variants work with other type of input.</p>
-            <div className="inner-component" style={{minHeight: "100px"}}>
-                <MenuSelect
-                    id={"select-change-number"}
-                    boxClassName="inner-component-select"
-                    options={options}
-                    selectedOption={selectedOption[0]}
-                    onSelect={(val)=>handleSelectChange(val, 0)}
-                    floatingLabel
-                    backgroundColor="var(--bg2)"
-                    style={{width:140}}
-                    label={"Number input style"}
-                />
-                <MenuSelect
-                    id={"select-change-number"}
-                    boxClassName="inner-component-select-sub"
-                    options={options}
-                    selectedOption={selectedOption[1]}
-                    onSelect={(val)=>handleSelectChange(val, 1)}
-                    floatingLabel
-                    backgroundColor="var(--bg2)"
-                    style={{width:140}}
-                    label={"Date input style"}
-                />
+            <div className="inner-component">
                 <div className="colonne">
                     <label htmlFor="number">Number</label>
                     <input
@@ -155,6 +134,31 @@ export default function InputPage() {
                         onChange={(e)=>setDateValue(e.target.value)}
                     />
                 </div>
+            </div>
+            <p> You can change the variant of these two inputs with the select below :</p>
+            <div className="ligne">
+                <MenuSelect
+                    id={"select-change-number"}
+                    boxClassName="inner-component-select"
+                    options={options}
+                    selectedOption={selectedOption[0]}
+                    onSelect={(val)=>handleSelectChange(val, 0)}
+                    floatingLabel
+                    backgroundColor="var(--bg2)"
+                    style={{width:140}}
+                    label={"Number input style"}
+                />
+                <MenuSelect
+                    id={"select-change-number"}
+                    boxClassName="inner-component-select"
+                    options={options}
+                    selectedOption={selectedOption[1]}
+                    onSelect={(val)=>handleSelectChange(val, 1)}
+                    floatingLabel
+                    backgroundColor="var(--bg2)"
+                    style={{width:140}}
+                    label={"Date input style"}
+                />
             </div>
             <h2>Floating label</h2>
             <p>Input can also have floating label</p>

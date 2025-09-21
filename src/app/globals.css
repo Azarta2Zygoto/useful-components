@@ -95,33 +95,36 @@ main{
     overflow: auto;
 }
 header {
+    position: relative;
     width: 100%;
     box-sizing: border-box;
     border-bottom: 1px solid var(--border-color);
     background: #1d146d;
 }
 h1 {
+    font-size: clamp(24px, 4vw, 32px);
     text-align: center;
     margin: 20px 0;
 }
 h2 {
+    font-size: clamp(16px, 3vw, 24px);
     margin: 10px 0;
 }
 p {
+    font-size: clamp(12px, 2vw, 16px);
     margin: 3px 0;
     line-height: 1.5em;
 }
 
 .inner-component {
-    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;           /* allow children to wrap to next line */
     gap: 16px;
-    width: calc(100% - 125px);
-    padding: 30px 60px;
+    width: calc(100% - 62px);
+    padding: 30px 30px;
     margin: 5px 0 20px 0;
     border: 1px solid var(--fg);
     border-radius: 20px;
@@ -130,24 +133,31 @@ p {
     box-shadow: 1px 1px 3px var(--fg);
     transition: border-color 0.3s, box-shadow 0.3s;
 }
+.inner-component-description{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 .inner-component-select {
-    position: absolute!important;
-    top: 10px;
-    right: 10px;
-    z-index: 10;
+    width: fit-content;
+    height: fit-content;
 }
 
-.inner-component-select-sub {
-    position: absolute!important;
-    bottom: 10px;
-    right: 10px;
-    z-index: 10;
-}
 .colonne {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.ligne {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 .info-component {
     position: relative;
@@ -165,4 +175,23 @@ p {
     top: 50%;
     left: 5px;
     transform: translateY(-50%);
+}
+
+.button-header {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.button-header-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    color: white;
+    cursor: pointer;
 }

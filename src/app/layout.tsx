@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import Toolbar from "@/component/toolbar/toolbar";
-import toolbarJSON from "@/data/toolbar.json";
+import { GlobalProvider } from "@/self/globalProvider";
+import ToolbarWrapper from "@/self/subToolbar";
+import Header from "@/self/header";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,16 +22,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body>
-        <Toolbar
-            toolbarData={toolbarJSON.toolbar}/>
-        <div className="sub-body">
-            <header>
-                <h1 style={{color:'white'}}>Component Library</h1>
-            </header>
-            {children}
-        </div>
-      </body>
+        <body>
+            <GlobalProvider>
+                <ToolbarWrapper/>
+                <div className="sub-body">
+                    <Header/>
+                    {children}
+                </div>
+            </GlobalProvider>
+        </body>
     </html>
   );
 }
