@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef, JSX } from "react";
 import BodyAccess from "@/component/utils/bodyAccess";
 import "./tooltip.css";

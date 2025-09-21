@@ -1,3 +1,5 @@
+"use client";
+
 import { JSX, useState, Fragment } from 'react';
 import Tooltip from '../tooltip/tooltip';
 import Icon from '../utils/icon';

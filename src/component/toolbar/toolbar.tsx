@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect, JSX, Fragment } from "react";
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';

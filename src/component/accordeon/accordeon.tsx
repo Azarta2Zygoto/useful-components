@@ -1,3 +1,5 @@
+"use client";
+
 import React, { JSX, useState, useEffect, useId, useRef, useLayoutEffect } from "react";
 import Tooltip from "../tooltip/tooltip";
 import Icon from "../utils/icon";

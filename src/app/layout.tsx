@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import Link from "next/link";
+import Toolbar from "@/component/toolbar/toolbar";
+import toolbarJSON from "@/data/toolbar.json";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,26 +22,8 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body>
-        <nav>
-            <ul>
-                <li><Link href="/" className="button">Home</Link></li>
-                <li><Link href="/checkbox">Checkbox</Link></li>
-                <li><Link href="/menuselect">Menu Select</Link></li>
-                <li><Link href="/alertBox">Alert Box</Link></li>
-                <li><Link href="/radioButton">Radio Button</Link></li>
-                <li><Link href="/input">Input</Link></li>
-                <li><Link href="/multipleMenuSelect">Multiple Menu Select</Link></li>
-                <li><Link href="/switch">Switch</Link></li>
-                <li><Link href="/table">Table</Link></li>
-                <li><Link href="/form">Form Info</Link></li>
-                <li><Link href="/accordeon">Accordeon</Link></li>
-                <li><Link href="/multiInput">Multi Input</Link></li>
-                <li><Link href="/combobox">Combobox</Link></li>
-                <li><Link href="/box">Box</Link></li>
-                <li><Link href="/toolbar">Toolbar</Link></li>
-                <li><Link href="/menu">Menu</Link></li>
-            </ul>
-        </nav>
+        <Toolbar
+            toolbarData={toolbarJSON.toolbar}/>
         {children}
       </body>
     </html>

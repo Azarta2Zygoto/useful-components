@@ -1,3 +1,5 @@
+"use client";
+
 import React, { JSX, useState, useRef, useEffect, useLayoutEffect } from "react";
 import BodyAccess from "../utils/bodyAccess";
 import Overlay from "../overlay/overlay";

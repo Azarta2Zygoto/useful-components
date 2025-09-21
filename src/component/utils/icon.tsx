@@ -1,3 +1,5 @@
+"use client";
+
 import React, { JSX, useId, Fragment } from "react";
 
 export type iconTypes =

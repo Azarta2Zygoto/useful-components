@@ -1,3 +1,5 @@
+"use client";
+
 import { ChangeEvent, JSX, useState } from "react";
 import FloatingLabelInput from "./input";
 import { InputVariant } from "../utils/types";

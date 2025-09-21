@@ -1,3 +1,5 @@
+"use client";
+
 import React, { JSX, Fragment } from "react";
 import MenuSelect from "./menuSelect";
 import { InputVariant } from "../utils/types";

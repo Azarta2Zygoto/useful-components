@@ -1,6 +1,6 @@
 import { JSX } from "react";
-import "./radioButton.css";
 import Tooltip from "../tooltip/tooltip";
+import "./radioButton.css";
 
 interface RadioButtonProps {
     name: string;

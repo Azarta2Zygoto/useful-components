@@ -1,3 +1,5 @@
+"use client";
+
 import React, { JSX, useState, useRef, useEffect, Fragment, useLayoutEffect } from "react";
 import BodyAccess from "../utils/bodyAccess";
 import Checkbox from "../checkbox/checkbox";

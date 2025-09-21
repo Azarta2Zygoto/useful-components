@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useRef, JSX } from "react";
 import DisplayInfos from "./displayInfo";
 import MenuSelect from "../menuSelect/menuSelect";

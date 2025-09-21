@@ -1,6 +1,6 @@
 import { JSX } from "react";
-import "./switch.css";
 import Tooltip from "../tooltip/tooltip";
+import "./switch.css";
 
 interface SwitchProps {
     id: string;

@@ -1,3 +1,5 @@
+"use client";
+
 import { ChangeEvent, JSX, useState, useEffect, Fragment } from "react";
 import Box from "../box/box";
 import Icon from "../utils/icon";

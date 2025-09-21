@@ -1,3 +1,5 @@
+"use client";
+
 import React, { JSX, useState, useEffect, useRef, useLayoutEffect, useCallback } from "react";
 import Icon from "../utils/icon";
 import Overlay from "../overlay/overlay";

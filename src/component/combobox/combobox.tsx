@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, JSX, useEffect, useRef, useLayoutEffect } from "react";
 import FloatingLabelInput from "../input/input";
 import Overlay from "../overlay/overlay";

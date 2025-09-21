@@ -1,9 +1,11 @@
+"use client";
+
 import { useState, useEffect, JSX, Fragment, useRef } from 'react';
 import MultipleMenuSelect from '../multipleMenuSelect/multipleMenuSelect';
 import { TableVirtuoso, VirtuosoHandle } from 'react-virtuoso';
 import Tooltip from '../tooltip/tooltip';
-import './table.css'
 import Icon from '../utils/icon';
+import './table.css'
 
 const defaultRowsPerPageOptions = [5, 10, 25, 50, 100];
 const defaultRowsPerPage = 10;

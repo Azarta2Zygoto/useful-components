@@ -1,3 +1,5 @@
+"use client";
+
 import { JSX,useMemo } from "react"
 import { regexEnTexte } from "../utils/function"
 import Icon from "../utils/icon";
