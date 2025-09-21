@@ -23,6 +23,7 @@ interface FloatingLabelInputProps {
     style?: React.CSSProperties;
     ref?: React.Ref<HTMLInputElement>;
     aria?: { [key: string]: string|undefined };
+    backgroundColor?: string;
     getChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -50,6 +51,7 @@ export default function FloatingLabelInput({
     style,
     ref,
     aria,
+    backgroundColor = "var(--bg)",
     getChange,
     onKeyDown,
     onBlur,
@@ -76,7 +78,10 @@ export default function FloatingLabelInput({
                 onKeyDown={(e)=>onKeyDown&&(onKeyDown(e as unknown as React.KeyboardEvent<HTMLInputElement>))}
                 onBlur={(e)=>onBlur&&(onBlur(e as unknown as React.FocusEvent<HTMLInputElement>))}
                 onFocus={(e)=>onFocus&&(onFocus(e as unknown as React.FocusEvent<HTMLInputElement>))}
-                style={style}
+                style={{
+                    backgroundImage: `linear-gradient(to bottom, ${backgroundColor} 0% 80%, transparent 80%)`,
+                    ...style
+                }}
                 {...(aria || {})}
             />
         ):(
@@ -109,6 +114,9 @@ export default function FloatingLabelInput({
         <label 
             htmlFor={id} 
             className="floating-label"
+            style={{
+                backgroundImage: value!=""?`linear-gradient(to bottom, ${backgroundColor} 0% 80%, transparent 80%)`:undefined,
+            }}
         >
             {placeholder}
             {required && <span aria-hidden="true" style={{ color: "red", margin:"0 5px" }}>&nbsp;*</span>}

@@ -24,6 +24,7 @@ interface MultipleMenuSelectProps {
     checkbox?: boolean|"left"|"right";
     className?: string;
     style?: React.CSSProperties;
+    backgroundColor?: string;
     children?: React.ReactNode;
     onSelect: (value: string[]) => void;
 }
@@ -42,6 +43,7 @@ export default function MultipleMenuSelect({
     tooltip,
     hideIcon,
     className,
+    backgroundColor = "var(--bg)",
     children,
     onSelect,
 }: MultipleMenuSelectProps): JSX.Element {
@@ -204,7 +206,7 @@ export default function MultipleMenuSelect({
                     className={`menu-select-label ${floatingLabel ? "floating" : ""} ${selectedOptions.length===0&&!isOpen ? "void" : ""}`}
                     htmlFor={id}
                     style={{
-                        backgroundImage: showBg ? "linear-gradient(to bottom, var(--bg) 0% 55%, transparent 55%)" : "none",
+                        backgroundImage: showBg ? `linear-gradient(to bottom, ${backgroundColor} 0% 80%, transparent 80%)` : "none",
                     }}>
                     {label}
                     {required && <span aria-hidden="true" style={{ color: "red", margin:"0 5px" }}>&nbsp;*</span>}

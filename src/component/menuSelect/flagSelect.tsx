@@ -16,6 +16,7 @@ interface FlagSelectProps {
     variant?: InputVariant;
     tooltip?: boolean;
     style?: React.CSSProperties;
+    backgroundColor?: string;
     onSelect: (country: string) => void;
     onKeyDown?: (event: React.KeyboardEvent<Element>) => void;
 }
@@ -29,6 +30,7 @@ export default function FlagSelect({
     tooltip,
     variant="outlined",
     className,
+    backgroundColor = "var(--bg)",
     onSelect,
     onKeyDown
 }: FlagSelectProps): JSX.Element {
@@ -95,6 +97,7 @@ export default function FlagSelect({
             onKeyDown={onKeyDown}
             setCustomList={setCountryFlag}
             setCustomOption={setCountryFlagOption}
+            backgroundColor={backgroundColor}
             style={{
                 ...style,
                 paddingRight: flagOnly ? 0 : undefined,}}

@@ -1,25 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import FloatingLabelInput from "@/component/input/input";
-import NumberInput from "@/component/input/numberInput";
-import ArrayInput from "@/component/input/arrayInput";
+import MenuSelect from "@/component/menuSelect/menuSelect";
+import ComponentSelect from "@/self/componentSelect";
 
 const inputValues = [
     "",
     "",
     "",
-    "Disabled Input"
+    "",
+    "",
+    "",
+    "",
+    "",
 ]
 
-const numberValues = [
-    1, 0, 0, 0
+const selectedOptionDefault = [
+    'standard',
+    'filled',
+    'outlined',
+    'outlined'
 ]
 
+const options = ['standard', 'filled', 'compact', 'outlined'];
 export default function InputPage() {
     const [inputValue, setInputValue] = useState<string[]>(inputValues);
-    const [numberValue, setNumberValue] = useState<number[]>(numberValues);
-    const [ArrayTextChange, setArrayTextChange] = useState<string[]>([]);
+    const [numberValue, setNumberValue] = useState<number>(0);
+    const [dateValue, setDateValue] = useState<string>("");
+    const [selectedOption, setSelectedOption] = useState<string[]>(selectedOptionDefault);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index:number) => {
         setInputValue(prevValues => {
@@ -29,153 +38,178 @@ export default function InputPage() {
         });
     };
 
-    function handleNumberValuesChanges(value:number, index:number) {
-        setNumberValue(prevValues => {
+    const handleSelectChange = (value: string, index:number) => {
+        setSelectedOption(prevValues => {
             const newValues = [...prevValues];
             newValues[index] = value;
             return newValues;
         });
-    }   
+    };
 
     return (
         <main>
-            <h1>Floating Label Input Example</h1>
-            <FloatingLabelInput
-                id="example-input"
-                type="text"
-                value={inputValue[0]}
-                placeholder="Enter text"
-                getChange={(e)=>handleInputChange(e, 0)}
-            />
-            <FloatingLabelInput
-                id="example-input-standard"
-                type="text"
-                variant='standard'
-                value={inputValue[0]}
-                placeholder="Enter text"
-                getChange={(e)=>handleInputChange(e, 0)}
-            />
-            <FloatingLabelInput
-                id="example-input-filled"
-                type="text"
-                variant='filled'
-                value={inputValue[0]}
-                placeholder="Enter text"
-                getChange={(e)=>handleInputChange(e, 0)}
-            />
-            <FloatingLabelInput
-                id="example-input-compact"
-                type="text"
-                variant='compact'
-                value={inputValue[0]}
-                placeholder="Enter text"
-                getChange={(e)=>handleInputChange(e, 0)}
-            />
-            <input
-                type="text"
-                value={inputValue[0]}
-                placeholder="Enter text"
-                className="input-compact"
-                onChange={(e)=>handleInputChange(e, 0)}
-            />
-            <FloatingLabelInput
-                id="example-input required"
-                type="text"
-                value={inputValue[1]}
-                placeholder="Enter text"
-                required
-                getChange={(e)=>handleInputChange(e, 1)}
-            />
-            <FloatingLabelInput
-                id="example-input-disabled"
-                type="text"
-                value={inputValue[2]}
-                placeholder="Enter text"
-                disabled
-                getChange={(e)=>handleInputChange(e, 2)}
-            />
-            <FloatingLabelInput
-                id="example-input-disabled-2"
-                type="text"
-                value={inputValue[3]}
-                placeholder="Enter text"
-                disabled
-                getChange={(e)=>handleInputChange(e, 3)}
-            />
-            <FloatingLabelInput
-                id="example-input-date"
-                type="date"
-                value={inputValue[0]}
-                placeholder="Enter date"
-                getChange={(e)=>handleInputChange(e, 0)}
-            />
-            <NumberInput
-                id="Number"
-                value={numberValue[0]}
-                placeholder="change the number"
-                getChange={(v)=>handleNumberValuesChanges(v, 0)}
+            <h1>Input</h1>
+            <p>Input allows user to enter specific information</p>
+
+            <h2>Basic input</h2>
+
+
+            <div className="inner-component">
+                <div className="colonne">
+                    <label htmlFor="text">A text input</label>
+                    <input
+                        id="text"
+                        type="text"
+                        className="input-standard"
+                        value={inputValue[0]}
+                        placeholder="Enter text"
+                        onChange={(e)=>handleInputChange(e, 0)}
+                    />
+                </div>
+            </div>
+
+            
+            <h2>Different variant</h2>
+            <p>Input can have different variants : standard, filled, compact and outlined</p>
+            <div className="inner-component">
+                <div className="colonne">
+                    <label htmlFor="filled">Filled</label>
+                    <input
+                        id="filled"
+                        type="text"
+                        className="input-filled"
+                        value={inputValue[1]}
+                        placeholder="Enter text"
+                        onChange={(e)=>handleInputChange(e, 1)}
+                    />
+                </div>
+                <div className="colonne">
+                    <label htmlFor="compact">Compact</label>
+                    <input
+                        id="compact"
+                        type="text"
+                        className="input-compact"
+                        value={inputValue[2]}
+                        placeholder="Enter text"
+                        onChange={(e)=>handleInputChange(e, 2)}
+                    />
+                </div>
+                <div className="colonne">
+                    <label htmlFor="outlined">Outlined</label>
+                    <input
+                        id="outlined"
+                        type="text"
+                        className="input-outlined"
+                        value={inputValue[3]}
+                        disabled    
+                        placeholder="Enter text"
+                        onChange={(e)=>handleInputChange(e, 3)}
+                    />
+                </div>
+            </div>
+            <h2>Other input type</h2>
+            <p>Obviously, variants work with other type of input</p>
+            <div className="inner-component" style={{minHeight: "100px"}}>
+                <MenuSelect
+                    id={"select-change-number"}
+                    boxClassName="inner-component-select"
+                    options={options}
+                    selectedOption={selectedOption[0]}
+                    onSelect={(val)=>handleSelectChange(val, 0)}
+                    floatingLabel
+                    backgroundColor="var(--bg2)"
+                    style={{width:140}}
+                    label={"Number input style"}
                 />
-                
-            <NumberInput
-                id="Number-floating"
-                value={numberValue[1]}
-                placeholder="change the number"
-                floatingLabel
-                getChange={(v)=>handleNumberValuesChanges(v, 1)}
+                <MenuSelect
+                    id={"select-change-number"}
+                    boxClassName="inner-component-select-sub"
+                    options={options}
+                    selectedOption={selectedOption[1]}
+                    onSelect={(val)=>handleSelectChange(val, 1)}
+                    floatingLabel
+                    backgroundColor="var(--bg2)"
+                    style={{width:140}}
+                    label={"Date input style"}
                 />
-            <NumberInput
-                id="Number-floating-icon"
-                value={numberValue[2]}
-                placeholder="change the number"
-                icon
-                floatingLabel
-                getChange={(v)=>handleNumberValuesChanges(v, 2)}
+                <div className="colonne">
+                    <label htmlFor="number">Number</label>
+                    <input
+                        id="number"
+                        type="number"
+                        className={`input-${selectedOption[0]}`}
+                        value={numberValue}
+                        placeholder="Enter text"
+                        onChange={(e)=>setNumberValue(Number(e.target.value))}
+                    />
+                </div>
+                <div className="colonne">
+                    <label htmlFor="date">Date</label>
+                    <input
+                        id="date"
+                        type="date"
+                        className={`input-${selectedOption[1]}`}
+                        value={dateValue}
+                        placeholder="Enter text"
+                        onChange={(e)=>setDateValue(e.target.value)}
+                    />
+                </div>
+            </div>
+            <h2>Floating label</h2>
+            <p>Input can also have floating label</p>
+            <ComponentSelect
+                options={options}
+                value={selectedOption[2]}
+                onChange={(val)=>handleSelectChange(val, 2)}
+                label={"Input style"}
+                id={"select-change-floating-label-style"}
+            >
+                <FloatingLabelInput
+                    id="floating-label-input"
+                    type="text"
+                    value={inputValue[4]}
+                    variant={selectedOption[2] as "standard" | "filled" | "compact" | "outlined"}
+                    placeholder="Enter text"
+                    getChange={(e)=>handleInputChange(e, 4)}
                 />
-            <NumberInput
-                id="Number-floating-icon-max"
-                value={numberValue[2]}
-                placeholder="change the number - max 10"
-                icon
-                max={10}
-                floatingLabel
-                getChange={(v)=>handleNumberValuesChanges(v, 2)}
+            </ComponentSelect>
+            <h2>Floating label with other features</h2>
+            <p>Floating label also works with other features like required, disabled, invalid...</p>
+            <ComponentSelect
+                options={options}
+                value={selectedOption[3]}
+                onChange={(val)=>handleSelectChange(val, 3)}
+                label={"Input style"}
+                id={"select-change-floating-label-style-fields"}
+            >
+                <FloatingLabelInput
+                    id="floating-label-input-required"
+                    type="text"
+                    required
+                    value={inputValue[5]}
+                    variant={selectedOption[3] as "standard" | "filled" | "compact" | "outlined"}
+                    placeholder="Enter text"
+                    getChange={(e)=>handleInputChange(e, 5)}
                 />
-            <ArrayInput
-                id="Array-input"
-                type="text"
-                values={ArrayTextChange}
-                placeholder="Add values to the array"
-                style={{maxWidth:450}}
-                getValues={(v)=>setArrayTextChange(v)}
+                <FloatingLabelInput
+                    id="floating-label-input-disabled"
+                    type="text"
+                    disabled
+                    value={inputValue[6]}
+                    variant={selectedOption[3] as "standard" | "filled" | "compact" | "outlined"}
+                    placeholder="Enter text"
+                    getChange={(e)=>handleInputChange(e, 6)}
                 />
-            <ArrayInput
-                id="Array-input-max-3"
-                type="text"
-                values={ArrayTextChange}
-                maxElements={3}
-                placeholder="Add values to the array"
-                style={{maxWidth:450}}
-                getValues={(v)=>setArrayTextChange(v)}
+                <FloatingLabelInput
+                    id="floating-label-input-invalid"
+                    type="text"
+                    pattern={"^[A-Za-z]+$"}
+                    value={inputValue[7]}
+                    variant={selectedOption[3] as "standard" | "filled" | "compact" | "outlined"}
+                    placeholder="Enter only letters"
+                    getChange={(e)=>handleInputChange(e, 7)}
                 />
-            <ArrayInput
-                id="Array-input-required"
-                type="text"
-                values={ArrayTextChange}
-                required
-                placeholder="Add values to the array"
-                style={{maxWidth:450}}
-                getValues={(v)=>setArrayTextChange(v)}
-                />
-            <ArrayInput
-                id="Array-input-required-floating"
-                type="text"
-                values={ArrayTextChange}
-                required
-                floatingLabel
-                placeholder="Add values to the array"
-                style={{maxWidth:450}}
-                getValues={(v)=>setArrayTextChange(v)}
-                />
+            </ComponentSelect>
         </main>
     );
 }

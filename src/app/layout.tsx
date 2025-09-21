@@ -24,7 +24,12 @@ export default function RootLayout({
       <body>
         <Toolbar
             toolbarData={toolbarJSON.toolbar}/>
-        {children}
+        <div className="sub-body">
+            <header>
+                <h1>Component Library</h1>
+            </header>
+            {children}
+        </div>
       </body>
     </html>
   );

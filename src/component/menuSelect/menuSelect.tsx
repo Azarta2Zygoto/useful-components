@@ -20,8 +20,11 @@ interface MenuSelectProps {
     required?: boolean;
     tooltip?: boolean;
     className?: string;
+    boxClassName?: string;
+    boxStyle?: React.CSSProperties;
     style?: React.CSSProperties;
     ref?: React.Ref<unknown>;
+    backgroundColor?: string;
     onSelect: (value: string) => void;
     onKeyDown?: (event: React.KeyboardEvent) => void;
     setCustomOption?:(name:string) => React.ReactNode;
@@ -41,6 +44,9 @@ export default function MenuSelect({
     tooltip,
     hideIcon,
     className,
+    boxClassName,
+    boxStyle,
+    backgroundColor = "var(--bg)",
     onSelect,
     onKeyDown,
     setCustomOption,
@@ -167,7 +173,10 @@ export default function MenuSelect({
     }
 
     return (
-        <div className={`menu-select-container`}>
+        <div
+            className={`menu-select-container ${boxClassName?? ""}`}
+            style={boxStyle}
+        >
             {isOpen&&(
                 <Overlay
                     id={`${id}-overlay`}
@@ -204,7 +213,7 @@ export default function MenuSelect({
                     className={`menu-select-label ${floatingLabel ? "floating" : ""} ${selectedOption===""&&!isOpen ? "void" : ""}`}
                     htmlFor={id}
                     style={{
-                        backgroundImage: showBg ? "linear-gradient(to bottom, var(--bg) 0% 55%, transparent 55%)" : "none",
+                        backgroundImage: showBg ? `linear-gradient(to bottom, ${backgroundColor} 0% 80%, transparent 80%)` : "none",
                     }}>
                     {label}
                     {required && <span aria-hidden="true" style={{ color: "red", margin:"0 5px" }}>&nbsp;*</span>}

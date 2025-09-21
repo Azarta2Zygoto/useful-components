@@ -61,9 +61,8 @@ input:autofill:focus {
 .input-outlined:focus-visible {
     border-color: var(--border-color-special);
     box-shadow: 0 0 0 3px var(--border-color-shadow-special);
-    background: var(--input-focus-bg-color);
+    background-color: var(--input-focus-bg-color);
     outline: 1px solid var(--input-focus-border-color);
-    box-shadow: 0 0 0 3px #1167b136;
 }
 .input-outlined::placeholder {
     color: var(--disabled-text-color);

@@ -26,7 +26,7 @@ interface ToolbarProps {
     }
     children?: React.ReactNode;
     underChildren?: React.ReactNode;
-    displayName?: (name:string) => string;
+    displayDifferentName?: (name:string) => string;
     getPath?: (path:string, subPath:string) => void;
     getActive?: (active:boolean) => void;
 }
@@ -41,7 +41,7 @@ export default function Toolbar({
     text,
     children,
     underChildren,
-    displayName,
+    displayDifferentName,
     getPath,
     getActive
 }:ToolbarProps):JSX.Element {
@@ -121,7 +121,7 @@ export default function Toolbar({
                     return (
                         <Fragment key={index}>
                             <Tooltip
-                                title={displayName?displayName(name):name}
+                                title={displayDifferentName?displayDifferentName(name):name}
                                 active={tooltip&&!internIsActive}
                                 keepWrapper={true}
                             >
@@ -137,7 +137,7 @@ export default function Toolbar({
                                             width: type==="expand" && item.subpath && item.subpath.length !== 0 && path!== key ? 'calc(100% - 50px)' : undefined,
                                             marginRight: type==="expand" && item.subpath && item.subpath.length !== 0 && path!== key ? '25px' : undefined,
                                         }}>
-                                        {displayName?displayName(name):name}
+                                        {displayDifferentName?displayDifferentName(name):name}
                                         {type==="expand" && item.subpath && item.subpath.length !== 0 && path!== key && (
                                             <button
                                                 type="button"
@@ -175,7 +175,7 @@ export default function Toolbar({
                                                     height: path===key||subPathOpen[index] ? `35px` : '0px',
                                                 }}>
                                                 <Tooltip
-                                                    title={displayName?displayName(subItem.name):subItem.name}
+                                                    title={displayDifferentName?displayDifferentName(subItem.name):subItem.name}
                                                     active={tooltip&&!internIsActive}
                                                     keepWrapper={true}
                                                 >
@@ -185,7 +185,7 @@ export default function Toolbar({
                                                         className={"link mini"+((key===path&&subPath===subKey)?' selected':'')}
                                                         href={`/${key}/${subKey}`}>
                                                         <i className={subItem.icon+" i"}/>
-                                                        <span>{displayName?displayName(subItem.name):subItem.name}</span>
+                                                        <span>{displayDifferentName?displayDifferentName(subItem.name):subItem.name}</span>
                                                     </Link>
                                                 </Tooltip>
                                             </li>
