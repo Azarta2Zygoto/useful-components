@@ -4,8 +4,9 @@ import React, { useEffect, useRef, JSX } from 'react';
 import { createPortal } from 'react-dom';
 
 export default function BodyAccess({
-    children
-}: { children: React.ReactNode }): JSX.Element | null {
+    children,
+    parent,
+}: { children: React.ReactNode, parent?: HTMLElement | null }): JSX.Element | null {
     // Ne pas accéder à `document` directement sur le serveur
     const elRef = useRef<HTMLDivElement | null>(
         typeof document !== "undefined" ? document.createElement('div') : null
@@ -24,5 +25,5 @@ export default function BodyAccess({
     }, []);
 
     if (!elRef.current) return null; // sécurité pour SSR
-    return createPortal(children, elRef.current);
+    return createPortal(children, parent??elRef.current);
 }
