@@ -138,7 +138,7 @@ export default function InputPage() {
             <p> You can change the variant of these two inputs with the select below :</p>
             <div className="ligne">
                 <MenuSelect
-                    id={"select-change-number"}
+                    id={"select-change-number-1"}
                     boxClassName="inner-component-select"
                     options={options}
                     selectedOption={selectedOption[0]}
@@ -149,7 +149,7 @@ export default function InputPage() {
                     label={"Number input style"}
                 />
                 <MenuSelect
-                    id={"select-change-number"}
+                    id={"select-change-number-2"}
                     boxClassName="inner-component-select"
                     options={options}
                     selectedOption={selectedOption[1]}

@@ -39,6 +39,9 @@ interface ComboboxProps {
     pattern?: string;
     required?: boolean;
     disabled?: boolean;
+    size?: number;
+    minLength?: number;
+    maxLength?: number;
     placeholder?: string;
     floatingLabel?: boolean;
     perfectMatch?: boolean;
@@ -59,6 +62,9 @@ export default function Combobox({
     pattern,
     required,
     disabled,
+    size,
+    minLength,
+    maxLength,
     placeholder,
     floatingLabel,
     autoComplete = "off",
@@ -218,6 +224,9 @@ export default function Combobox({
                     required={required}
                     disabled={disabled}
                     autoComplete={autoComplete}
+                    size={size}
+                    minLength={minLength}
+                    maxLength={maxLength}
                     placeholder={placeholder||""}
                     getChange={handleInputChange}
                     onKeyDown={handleKeyDown}
@@ -242,6 +251,9 @@ export default function Combobox({
                     pattern={pattern}
                     required={required}
                     disabled={disabled}
+                    size={size}
+                    minLength={minLength}
+                    maxLength={maxLength}
                     autoComplete={autoComplete}
                     placeholder={placeholder||""}
                     onChange={handleInputChange}

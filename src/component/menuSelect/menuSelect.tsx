@@ -207,7 +207,7 @@ export default function MenuSelect({
                     {!hideIcon&&<Icon name="caret-down-fill" className={`menu-select-icon ${isOpenAnimation ? "open" : ""}`} />}
                 </button>
             </Tooltip>
-            {label&&(
+            {label&&!tooltip&&(
                 <label
                     id={id+'-label'}
                     className={`menu-select-label ${floatingLabel ? "floating" : ""} ${selectedOption===""&&!isOpen ? "void" : ""}`}

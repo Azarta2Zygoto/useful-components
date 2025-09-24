@@ -17,6 +17,7 @@ import "./checkbox.css";
  * @param param.required - Optional required state of the checkbox (default is false).
  * @param param.tooltip - Optional boolean to enable tooltip on hover (default is false).
  * @param param.style - Optional inline styles for the checkbox.
+ * @param param.boxStyle - Optional inline styles for the checkbox container.
  * @param param.checkmark - Optional custom checkmark (React node or function returning a React node).
  * @param param.onChange - The change event handler for the checkbox.
  * @return A JSX element representing the Checkbox component.
@@ -35,6 +36,7 @@ interface CheckboxProps {
     required?: boolean;
     tooltip?: boolean;
     style?: React.CSSProperties;
+    boxStyle?: React.CSSProperties;
     checkmark?: React.ReactNode | ((checked: boolean) => React.ReactNode);
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -53,6 +55,7 @@ export default function Checkbox({
     tooltip,
     checkmark,
     style,
+    boxStyle,
     onChange
 }: CheckboxProps): JSX.Element {
     const renderedCheckmark = typeof checkmark === "function"
@@ -64,6 +67,7 @@ export default function Checkbox({
             <label
                 className={`checkbox-container${disabled ? " disabled" : ""}${side === "left" ? " reverse" : ""}`}
                 id={id+"-label"}
+                style={boxStyle}
                 htmlFor={id}
             >
                 {!hideLabel ? label : null}

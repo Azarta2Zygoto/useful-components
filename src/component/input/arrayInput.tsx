@@ -1,8 +1,9 @@
 "use client";
 
-import { ChangeEvent, JSX, useState, useEffect, Fragment } from "react";
+import { JSX, useState, useEffect, Fragment } from "react";
 import Box from "../box/box";
 import Icon from "../utils/icon";
+import Combobox from "../combobox/combobox";
 import FloatingLabelInput from "./input";
 import NumberInput from "./numberInput";
 import type { InputVariant } from "../utils/types";
@@ -13,22 +14,26 @@ interface ArrayInputProps {
     values: string[];
     placeholder: string;
     variant?: InputVariant;
-    type?: "text" | "email" | "tel" | "url" | "number";
+    type?: "text" | "email" | "tel" | "url" | "number" | "combobox";
     maxElements?: number;
     className?: string;
     required?: boolean;
     disabled?: boolean;
     autoComplete?: string;
     floatingLabel?: boolean;
+    options?: string[];
     icon?: boolean;
     pattern?: string;
     size?: number;
     minLength?: number;
     maxLength?: number;
+    reset?: boolean;
     min?: number;
     max?: number;
     step?: number;
     int?: boolean;
+    boxStyle?: React.CSSProperties;
+    boxClassName?: string;
     style?: React.CSSProperties;
     getValues: (values:string[]) => void;
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
@@ -49,11 +54,15 @@ export default function ArrayInput({
     pattern,
     minLength,
     maxLength,
+    options,
     size,
     min,
     max,
     step,
     int,
+    reset = true,
+    boxStyle,
+    boxClassName,
     style,
     maxElements,
     getValues,
@@ -68,8 +77,7 @@ export default function ArrayInput({
         setCurrentValues(values);
     }, [values]);
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
+    const handleInputChange = (newValue:string) => {
         setCurrentValue(newValue);
     };
     const handleAddInput = () => {
@@ -105,6 +113,12 @@ export default function ArrayInput({
         setValueChange("");
     }
 
+    const handleReset = () => {
+        setCurrentValue("");
+        setValueChange("");
+        getValues([]);
+    }
+
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         onKeyDown?.(e);
         if (e.key === 'Enter') {
@@ -125,7 +139,7 @@ export default function ArrayInput({
     return (
         <div className={`array-input-container ${className ?? ""}`} style={style}>
             <div className="array-input-label">
-                {type!=="number"&&floatingLabel&&(
+                {(type==="tel"||type==="text"||type==="email"||type==="url")&&floatingLabel&&(
                     <FloatingLabelInput
                         id={id}
                         type={type}
@@ -139,7 +153,7 @@ export default function ArrayInput({
                         pattern={pattern}
                         minLength={minLength}
                         maxLength={maxLength}
-                        getChange={handleInputChange}
+                        getChange={(e)=>handleInputChange(e.target.value)}
                         onKeyDown={handleKeyDown}
                     />
                 )}
@@ -157,7 +171,7 @@ export default function ArrayInput({
                         pattern={pattern}
                         minLength={minLength}
                         maxLength={maxLength}
-                        onChange={handleInputChange}
+                        onChange={(e)=>handleInputChange(e.target.value)}
                         onKeyDown={handleKeyDown}
                     />
                 )}
@@ -180,17 +194,48 @@ export default function ArrayInput({
                         int={int}
                     />
                 )}
+                {type==="combobox"&&options&&(
+                    <Combobox
+                        id={id}
+                        value={currentValue}
+                        placeholder={placeholder}
+                        variant={variant}
+                        options={options}
+                        className={`array-input ${required&&currentValues.length===0?" invalid ":""} ${className || ''}`}
+                        disabled={disabled}
+                        autoComplete={autoComplete}
+                        pattern={pattern}
+                        size={size}
+                        minLength={minLength}
+                        maxLength={maxLength}
+                        style={{position:"relative"}}
+                        onChange={handleInputChange}
+                        onKeyDown={handleKeyDown}
+                    />
+                )}
                 {valueChange===""&&currentValue.trim()!==""&&
                     !currentValues.includes(currentValue.trim())&&
                     (maxElements?maxElements>currentValues.length:true)&&(
-                    <button
-                        type="button"
-                        className="background-click validate-array-button-add"
-                        onClick={handleAddInput}
-                        aria-label="Add input"
-                    >
-                        <Icon name="plus-circle-fill" />
-                    </button>
+                        <Fragment>
+                            <button
+                                type="button"
+                                className="background-click validate-array-button-add"
+                                onClick={handleAddInput}
+                                aria-label="Add input"
+                            >
+                                <Icon name="plus-circle-fill" />
+                            </button>
+                            {reset && (
+                                <button
+                                    type="button"
+                                    className="background-click validate-array-button-reset"
+                                    onClick={handleReset}
+                                    aria-label="Reset input"
+                                >
+                                    <Icon name="arrow-anti-clockwise" />
+                                </button>
+                            )}
+                        </Fragment>
                 )}
                 {valueChange===""&&currentValues.includes(currentValue.trim())&&
                     (maxElements?maxElements>currentValues.length:true)&&(
@@ -237,9 +282,16 @@ export default function ArrayInput({
                 {values.map((value, index) => (
                     <Box
                         key={index}
-                        className={`array-input-box ${valueChange===value?"selected":""}`}
+                        className={`${boxClassName??""} array-input-box${valueChange===value?" selected":""}`}
                         onClick={() => handleModifyInput(value)}
-                        style={{width: 'fit-content', cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.6 : 1, flexDirection: 'row', alignItems: 'center'}}
+                        style={{
+                            width: 'fit-content',
+                            cursor: disabled ? 'not-allowed' : 'pointer',
+                            opacity: disabled ? 0.6 : 1,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            ...boxStyle
+                        }}
                         disabled={disabled}>
                         {value}
                         {!disabled&&valueChange!==value&&(

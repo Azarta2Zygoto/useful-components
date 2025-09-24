@@ -245,10 +245,10 @@ export default function MultipleMenuSelect({
                                     label={option}
                                     checked={selectedOptions.includes(option)}
                                     side={checkbox===true?"right":checkbox}
-                                    onChange={()=>handleOptionClick(option)}
+                                    onChange={()=>{}}
                                     disabled={disabled}
-                                    style={{width: "calc(100% - 40px)"}}
-                                    />:
+                                    boxStyle={{pointerEvents:"none"}}
+                                />:
                                     option
                                 }
                             </li>

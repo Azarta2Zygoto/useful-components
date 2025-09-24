@@ -10,11 +10,15 @@
             "subpath":[
                 {
                     "name": "number",
-                    "icon": "bi bi-buildings"
+                    "icon": "bi bi-123"
                 },
                 {
-                    "name": "multiarray",
-                    "icon": "bi bi-person"
+                    "name": "Multi Input",
+                    "icon": "bi bi-collection"
+                },
+                {
+                    "name": "Array Input",
+                    "icon": "bi bi-list-ol"
                 }
             ]
         },
@@ -23,12 +27,8 @@
             "icon": "bi bi-menu-button-wide-fill",
             "subpath":[
                 {
-                    "name": "selectMenu",
-                    "icon": "bi bi-apple"
-                },
-                {
-                    "name": "MultipleSelectMenu",
-                    "icon": "bi bi-basket"
+                    "name": "Multiple Select Menu",
+                    "icon": "bi bi-collection"
                 },
                 {
                     "name": "special",

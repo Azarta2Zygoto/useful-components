@@ -3,19 +3,27 @@
 import React, { JSX, Fragment } from "react";
 import MenuSelect from "./menuSelect";
 import { InputVariant } from "../utils/types";
+import Icon from "../utils/icon";
 import * as FlagIcons from "country-flag-icons/react/3x2";
 import "./flagSelect.css";
-import Icon from "../utils/icon";
 
 interface FlagSelectProps {
     id: string;
     countries: {name:string, code:string}[];
     selectCountry: string;
-    className?: string;
     flagOnly?: boolean;
     variant?: InputVariant;
+    label?: string;
+    floatingLabel?: boolean;
+    disabled?: boolean;
+    hideIcon?: boolean;
+    required?: boolean;
     tooltip?: boolean;
+    className?: string;
+    boxClassName?: string;
+    boxStyle?: React.CSSProperties;
     style?: React.CSSProperties;
+    ref?: React.Ref<unknown>;
     backgroundColor?: string;
     onSelect: (country: string) => void;
     onKeyDown?: (event: React.KeyboardEvent<Element>) => void;
@@ -26,6 +34,13 @@ export default function FlagSelect({
     countries,
     selectCountry,
     flagOnly,
+    label,
+    floatingLabel,
+    disabled,
+    hideIcon,
+    required,
+    boxClassName,
+    boxStyle,
     style,
     tooltip,
     variant="outlined",
@@ -36,7 +51,7 @@ export default function FlagSelect({
 }: FlagSelectProps): JSX.Element {
 
     function setCountryFlag(index:number):React.ReactNode {
-        const countryCode = countries[index].code;
+        const countryCode = countries[index].code.toUpperCase();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const FlagComponent = (FlagIcons as Record<string, React.ComponentType<any>>)[countryCode];
 
@@ -92,12 +107,18 @@ export default function FlagSelect({
             selectedOption={selectCountry}
             variant={flagOnly ? "invisible" : variant}
             tooltip={flagOnly ? undefined : tooltip}
-            hideIcon={flagOnly ? true : false}
+            hideIcon={flagOnly ? true : hideIcon}
             onSelect={onSelect}
             onKeyDown={onKeyDown}
             setCustomList={setCountryFlag}
             setCustomOption={setCountryFlagOption}
             backgroundColor={backgroundColor}
+            label={label}
+            floatingLabel={floatingLabel}
+            disabled={disabled}
+            required={required}
+            boxClassName={boxClassName}
+            boxStyle={boxStyle}
             style={{
                 ...style,
                 paddingRight: flagOnly ? 0 : undefined,}}

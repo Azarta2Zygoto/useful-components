@@ -85,6 +85,13 @@ input:is(:-webkit-autofill, :autofill) + .floating-label,
     top: 50%;
     transform: translateY(-50%);
 }
+.validate-array-button-reset {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
 .array-input-duplicate-icon,
 .array-input-maximum-icon {
     user-select: none;
