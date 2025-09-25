@@ -87,3 +87,11 @@ main{
     flex-wrap: wrap;
     gap: 20px;
 }
+
+
+@media (max-width: 600px) {
+    main {
+        padding: 2% 5% 5% 5%;
+        width: 90%;
+    }
+}

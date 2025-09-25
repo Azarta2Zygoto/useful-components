@@ -47,8 +47,8 @@ export default function RadioButton({
         }
     }
     return (
-        <Tooltip title={label?label.toString():value} active={tooltip??false}>
-            <div className="radio-button-container">
+        <Tooltip title={value} active={tooltip??false}>
+            <div className={`radio-button-container ${className ? className + "-container" : ""}`}>
                 <input
                     type="radio"
                     id={name+ "-" +value}

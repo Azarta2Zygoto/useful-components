@@ -27,25 +27,25 @@ input[type="radio"]:disabled:not(:checked) + label {
 }
 .radio-button-container {
     position: relative;
-    display: block;
-    background-color: transparent;
     margin: 5px;
+    background-color: transparent;
     cursor: pointer;
 }
 .radio-button-container label {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 10px;
-    border-radius: 5px;
     width: 150px;
-    background-color: var(--input-bg-color);
+    padding: 10px 10px;
     border: 2px solid transparent;
+    border-radius: 5px;
+    background-color: var(--input-bg-color);
     color: var(--fg);
     font-size: 12px;
-    cursor: pointer;
+    
     outline: 2px solid transparent;
     outline-offset: 1px;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 .radio-button-container label:hover {

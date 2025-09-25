@@ -20,3 +20,20 @@ export function InfoComponent({
         </div>
     );
 }
+
+
+export function WarningComponent({
+    children
+}: MoreInfoProps): JSX.Element {
+    return (
+        <div className="warning-component">
+            <Icon
+                name="exclamation-circle-fill"
+                size={20}
+                color="var(--warning-border-color)"
+                className="info-icon"
+            />
+            {children}
+        </div>
+    );
+}
