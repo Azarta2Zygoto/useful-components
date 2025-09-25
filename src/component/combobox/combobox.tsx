@@ -88,9 +88,9 @@ export default function Combobox({
     useEffect(() => setValueVisible(value), [value]);
 
     useEffect(() => {
-        setViewableOptions(options);
-        setCaseInsensitive(options.map(opt => opt.toLowerCase()));
-    }, [options]);
+        setViewableOptions(options.filter((_, idx) => idx < maximumOptions));
+        setCaseInsensitive(options.map(opt => opt.toLowerCase()).filter((_, idx) => idx < maximumOptions));
+    }, [options, maximumOptions]);
 
     useLayoutEffect(() => {
         if (!isOpen || !inputRef.current) return;

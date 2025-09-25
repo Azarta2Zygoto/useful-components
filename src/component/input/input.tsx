@@ -115,7 +115,7 @@ export default function FloatingLabelInput({
             htmlFor={id} 
             className="floating-label"
             style={{
-                backgroundImage: value!=""?`linear-gradient(to bottom, ${backgroundColor} 0% 80%, transparent 80%)`:undefined,
+                backgroundImage: value!==""&&value!==undefined&&value!==null?`linear-gradient(to bottom, ${backgroundColor} 0% 80%, transparent 80%)`:undefined,
             }}
         >
             {placeholder}

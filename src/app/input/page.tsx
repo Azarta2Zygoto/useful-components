@@ -103,7 +103,6 @@ export default function InputPage() {
                         type="text"
                         className="input-outlined"
                         value={inputValue[3]}
-                        disabled    
                         placeholder="Enter text"
                         onChange={(e)=>handleInputChange(e, 3)}
                     />

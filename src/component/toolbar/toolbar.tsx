@@ -53,8 +53,12 @@ export default function Toolbar({
     const [subPathOpen, setSubPathOpen] = useState<(boolean|null)[]>([]);
 
     useEffect(() => {
+        if (isActiveDefault!==undefined) {
+            setInternaIsActive(isActiveDefault);
+            return;
+        }
         setInternaIsActive(isActive);
-    }, [isActive]);
+    }, [isActive, isActiveDefault]);
 
     useEffect(() => {
         const newToolbarOpen: (boolean|null)[] = [];

@@ -103,8 +103,11 @@ export default function Table({
     }, [selected]);
 
     useEffect(() => {
-        setViewableItems(headerTitles??data.length>0?Object.keys(data[0]):[]);
-        setCorrectHeaderTitles(headerTitles??data.length>0?Object.keys(data[0]):[]);
+        const titles = headerTitles&&headerTitles.length>0?
+            headerTitles:
+            data.length>0?Object.keys(data[0]):[];
+        setViewableItems(titles);
+        setCorrectHeaderTitles(titles);
     }, [headerTitles, data]);
 
     function reinitTabuled() {
@@ -319,6 +322,7 @@ export default function Table({
                                 onSelect={handleShowing}
                                 checkbox={"left"}
                                 tooltip={tooltip?text?.filterable:false}
+                                variant="invisible"
                                 style={{
                                     opacity: filterable === "in-hover" ? (isHovered ? 1 : 0) : 1,
                                     transition: "opacity 0.3s ease-in-out",
