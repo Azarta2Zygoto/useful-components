@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Accordeon from "@/component/accordeon/accordeon";
+import Accordeon from "@/components/accordeon/accordeon";
 
 
 export default function AccordeonPage() {

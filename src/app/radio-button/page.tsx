@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, Fragment} from "react";
-import RadioGroup from "@/component/radioButton/radioGroup";
+import RadioGroup from "@/components/radioButton/radioGroup";
 import { WarningComponent } from "@/self/moreInfo";
 
 const radioList = [

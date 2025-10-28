@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import ArrayInput from "@/component/input/arrayInput";
+import ArrayInput from "@/components/input/arrayInput";
 import { InfoComponent } from "@/self/moreInfo";
 
 const arrayValues = [

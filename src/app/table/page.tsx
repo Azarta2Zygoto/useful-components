@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Table from "@/component/table/table";
-import AlertBox from "@/component/alertBox/alertBox";
+import Table from "@/components/table/table";
+import AlertBox from "@/components/alertBox/alertBox";
 import { InfoComponent, WarningComponent } from "@/self/moreInfo";
 
 const data = [

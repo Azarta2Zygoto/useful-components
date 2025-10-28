@@ -1,7 +1,7 @@
 "use client";
 
 import React, { JSX, useRef } from 'react';
-import Tooltip from '@/component/tooltip/tooltip';
+import Tooltip from '@/components/tooltip/tooltip';
 import { useGlobal } from './globalProvider';
 
 export default function Header():JSX.Element {

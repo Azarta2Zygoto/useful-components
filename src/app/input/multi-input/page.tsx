@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import MultiInput from "@/component/input/multiInput";
+import MultiInput from "@/components/input/multiInput";
 import ComponentSelect from "@/self/componentSelect";
 import { InfoComponent } from "@/self/moreInfo";
 

@@ -1,4 +1,4 @@
-import MenuSelect from "@/component/menuSelect/menuSelect";
+import MenuSelect from "@/components/menuSelect/menuSelect";
 import { useGlobal } from "./globalProvider";
 import React, { JSX } from "react";
 

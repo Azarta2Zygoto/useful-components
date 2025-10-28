@@ -1,7 +1,7 @@
 "use client";
 
 import React, { JSX } from "react";
-import Toolbar from "@/component/toolbar/toolbar";
+import Toolbar from "@/components/toolbar/toolbar";
 import toolbarJSON from "@/data/toolbar.json";
 
 export default function ToolbarPage():JSX.Element {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Combobox from "@/component/combobox/combobox";
+import Combobox from "@/components/combobox/combobox";
 
 const selectOptionsList = [
     "",

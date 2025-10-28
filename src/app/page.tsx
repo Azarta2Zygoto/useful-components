@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import Combobox from "@/component/combobox/combobox";
-import MultipleMenuSelect from "@/component/multipleMenuSelect/multipleMenuSelect";
-import Table from "@/component/table/table";
+import Combobox from "@/components/combobox/combobox";
+import MultipleMenuSelect from "@/components/multipleMenuSelect/multipleMenuSelect";
+import Table from "@/components/table/table";
 
 export default function HomePage() {
     const [selectedOption, setSelectedOption] = useState<string>("");

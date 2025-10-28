@@ -1,7 +1,7 @@
 "use client";
 
 import {useState} from "react";
-import Switch from "@/component/switch/switch";
+import Switch from "@/components/switch/switch";
 import { InfoComponent } from "@/self/moreInfo";
 
 const radioList = [

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import FlagSelect from "@/component/menuSelect/flagSelect";
+import FlagSelect from "@/components/menuSelect/flagSelect";
 import { InfoComponent } from "@/self/moreInfo";
 
 const selectOptions = [

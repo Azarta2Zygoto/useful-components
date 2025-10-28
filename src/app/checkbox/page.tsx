@@ -1,7 +1,7 @@
 "use client";
 
 import {useState} from "react";
-import Checkbox from "@/component/checkbox/checkbox";
+import Checkbox from "@/components/checkbox/checkbox";
 import { WarningComponent } from "@/self/moreInfo";
 
 const defaultChecked= [

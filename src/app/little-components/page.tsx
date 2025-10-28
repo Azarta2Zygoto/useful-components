@@ -1,7 +1,7 @@
 "use client";
 
-import Box from "@/component/box/box";
-import Tooltip from "@/component/tooltip/tooltip";
+import Box from "@/components/box/box";
+import Tooltip from "@/components/tooltip/tooltip";
 
 const selectOptions = [
     "banana",

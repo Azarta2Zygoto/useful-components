@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, JSX } from 'react';
-import BodyAccess from '@/component/utils/bodyAccess';
+import BodyAccess from '@/components/utils/bodyAccess';
 import './overlay.css';
 
 interface OverlayProps {

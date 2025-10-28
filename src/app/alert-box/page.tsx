@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import AlertBox from "@/component/alertBox/alertBox";
-import MenuSelect from "@/component/menuSelect/menuSelect";
+import AlertBox from "@/components/alertBox/alertBox";
+import MenuSelect from "@/components/menuSelect/menuSelect";
 import { InfoComponent } from "@/self/moreInfo";
 
 const positionsList = [

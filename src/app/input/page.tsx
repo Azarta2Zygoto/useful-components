@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import FloatingLabelInput from "@/component/input/input";
-import MenuSelect from "@/component/menuSelect/menuSelect";
+import FloatingLabelInput from "@/components/input/input";
+import MenuSelect from "@/components/menuSelect/menuSelect";
 import ComponentSelect from "@/self/componentSelect";
 import { InfoComponent } from "@/self/moreInfo";
 

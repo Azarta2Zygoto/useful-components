@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useState } from "react";
-import MenuSelect from "@/component/menuSelect/menuSelect";
+import MenuSelect from "@/components/menuSelect/menuSelect";
 
 const selectOptionsList = [
     "apple",

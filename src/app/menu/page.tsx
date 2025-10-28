@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import Menu from "@/component/menu/menu";
+import Menu from "@/components/menu/menu";
 
 export default function MenuPage() {
     const parentRef = useRef<HTMLButtonElement>(null);

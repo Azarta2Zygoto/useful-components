@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import MultipleMenuSelect from "@/component/multipleMenuSelect/multipleMenuSelect";
+import MultipleMenuSelect from "@/components/multipleMenuSelect/multipleMenuSelect";
 import { InfoComponent } from "@/self/moreInfo";
 
 const voidOptions = [

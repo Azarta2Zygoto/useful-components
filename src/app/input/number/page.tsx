@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import NumberInput from "@/component/input/numberInput";
+import NumberInput from "@/components/input/numberInput";
 import ComponentSelect from "@/self/componentSelect";
 
 const numberValues = [

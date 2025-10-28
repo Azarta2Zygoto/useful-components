@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, JSX } from "react";
-import BodyAccess from "@/component/utils/bodyAccess";
+import BodyAccess from "@/components/utils/bodyAccess";
 import "./tooltip.css";
 
 interface TooltipProps {

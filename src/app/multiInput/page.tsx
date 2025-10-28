@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import MultiInput from "@/component/input/multiInput";
+import MultiInput from "@/components/input/multiInput";
 
 export default function Page() {
     const [inputValues, setInputValues] = useState<{

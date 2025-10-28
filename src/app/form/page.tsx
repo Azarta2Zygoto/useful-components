@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import FormInfo from "@/component/formInfo/formInfo";
-import InputInfo from "@/component/formInfo/inputInfo";
+import FormInfo from "@/components/formInfo/formInfo";
+import InputInfo from "@/components/formInfo/inputInfo";
 
 export default function FormPage() {
     const [infoVisible, setInfoVisible] = useState(false);

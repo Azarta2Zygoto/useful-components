@@ -1,4 +1,4 @@
-import Icon from "@/component/utils/icon";
+import Icon from "@/components/utils/icon";
 import React, { JSX } from "react";
 
 interface MoreInfoProps {
