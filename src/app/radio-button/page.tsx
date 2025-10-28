@@ -156,7 +156,7 @@ export default function RadioButtonPage() {
                     label={options5.map((value)=>
                         <Fragment key={value}>
                             {/* eslint-disable-next-line @next/next/no-img-element*/}
-                            <img src={`/useful-components/${value}-icon.svg`} alt={value} style={{width:"20px", height:"20px", verticalAlign:"middle"}}/>
+                            <img src={`/useful-components/icons/${value}-icon.svg`} alt={value} style={{width:"20px", height:"20px", verticalAlign:"middle"}}/>
                             &nbsp;<span style={{textTransform:"capitalize"}}>{value}</span>
                         </Fragment>
                     )}
@@ -178,7 +178,7 @@ export default function RadioButtonPage() {
                     label={options5.map((value)=>
                         <Fragment key={value}>
                             {/* eslint-disable-next-line @next/next/no-img-element*/}
-                            <img src={`/useful-components/${value}-icon.svg`} alt={value} style={{width:"20px", height:"20px", verticalAlign:"middle"}}/>
+                            <img src={`/useful-components/icons/${value}-icon.svg`} alt={value} style={{width:"20px", height:"20px", verticalAlign:"middle"}}/>
                         </Fragment>
                     )}
                     onChange={(e)=>handleChange(e, 7)}

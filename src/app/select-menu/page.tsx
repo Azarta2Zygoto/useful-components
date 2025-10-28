@@ -57,7 +57,7 @@ export default function MenuSelectPage(){
         return (
             <Fragment>
                 {/* eslint-disable-next-line @next/next/no-img-element*/}
-                <img src={`/useful-components/${value}-icon.svg`} alt={value} style={{width:"20px", height:"20px", verticalAlign:"middle"}}/>
+                <img src={`/useful-components/icons/${value}-icon.svg`} alt={value} style={{width:"20px", height:"20px", verticalAlign:"middle"}}/>
                 &nbsp;<span style={{textTransform:"capitalize"}}>{value}</span>
             </Fragment>
         )

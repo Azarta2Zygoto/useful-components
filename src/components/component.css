@@ -403,13 +403,14 @@ textarea {
     display: flex;
     flex-direction: column;
     max-width: calc(100vw - 20px);
+    min-height: fit-content;
     padding: 10px clamp(2px, 2vw, 20px);
     margin: 10px;
     background-color: var(--bg);
     border: solid 2px var(--border-color);
     border-radius: 10px;
     box-shadow: 0 0 10px #00000066;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 .bi {
     font-size: 1.2em;
