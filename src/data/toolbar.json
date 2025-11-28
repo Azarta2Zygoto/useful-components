@@ -7,7 +7,7 @@
         {
             "name": "Input",
             "icon": "bi bi-piggy-bank-fill",
-            "subpath":[
+            "subpath": [
                 {
                     "name": "number",
                     "icon": "bi bi-123"
@@ -25,7 +25,7 @@
         {
             "name": "Select Menu",
             "icon": "bi bi-menu-button-wide-fill",
-            "subpath":[
+            "subpath": [
                 {
                     "name": "Multiple Select Menu",
                     "icon": "bi bi-collection"

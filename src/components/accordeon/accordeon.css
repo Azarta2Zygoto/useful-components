@@ -5,7 +5,7 @@
 .accordeon-content.component {
     width: calc(100% - 14px);
     height: fit-content;
-    padding:5px;
+    padding: 5px;
     border: 2px solid var(--border-color-special);
     border-radius: 0 0 10px 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -16,7 +16,7 @@
 .accordeon-content.inner {
     width: calc(100% - 14px);
     height: fit-content;
-    padding:5px;
+    padding: 5px;
     border-left: 2px solid var(--border-color-special);
 
     overflow: hidden;
@@ -47,7 +47,7 @@
 }
 .accordeon-wrapper.closed .accordeon-content {
     padding: 0 5px;
-    border-color: transparent;  
+    border-color: transparent;
 }
 .accordeon-wrapper.open .accordeon-content {
     padding: 5px;

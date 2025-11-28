@@ -1,18 +1,10 @@
 "use client";
 
 import { useState } from "react";
+
 import Combobox from "@/components/combobox/combobox";
 
-const selectOptionsList = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    ""
-]
+const selectOptionsList = ["", "", "", "", "", "", "", ""];
 
 const selectOptions = [
     "banana",
@@ -24,14 +16,15 @@ const selectOptions = [
     "strawberry",
     "blueberry",
     "watermelon",
-    "kiwi"
-]
+    "kiwi",
+];
 
 export default function ComboboxPage() {
-    const [selectedValue, setSelectedValue] = useState<string[]>(selectOptionsList);
+    const [selectedValue, setSelectedValue] =
+        useState<string[]>(selectOptionsList);
 
-    function handleValidation(val: string, index:number) {
-        setSelectedValue(prev => {
+    function handleValidation(val: string, index: number) {
+        setSelectedValue((prev) => {
             const newValues = [...prev];
             newValues[index] = val;
             return newValues;
@@ -41,8 +34,12 @@ export default function ComboboxPage() {
     return (
         <main>
             <h1>Combobox</h1>
-            <p>A combobox is a combination of a dropdown list and a single-line textbox, allowing the user to either type a value directly or select a value from the list.</p>
-            
+            <p>
+                A combobox is a combination of a dropdown list and a single-line
+                textbox, allowing the user to either type a value directly or
+                select a value from the list.
+            </p>
+
             <h2>Basic combobox</h2>
             <div className="inner-component">
                 <Combobox
@@ -56,7 +53,10 @@ export default function ComboboxPage() {
             </div>
 
             <h2>Perfect match</h2>
-            <p>You can show on the dropdown list only the value that start exactly as the same as the user is entering.</p>
+            <p>
+                You can show on the dropdown list only the value that start
+                exactly as the same as the user is entering.
+            </p>
             <div className="inner-component">
                 <Combobox
                     id="fruit-combobox-perfect"
@@ -69,7 +69,10 @@ export default function ComboboxPage() {
                 />
             </div>
             <h2>Valid only</h2>
-            <p>You can restrict the user to select only a value from the list with the validOnly property.</p>
+            <p>
+                You can restrict the user to select only a value from the list
+                with the validOnly property.
+            </p>
             <div className="inner-component">
                 <Combobox
                     id="fruit-combobox-valid"
@@ -82,7 +85,9 @@ export default function ComboboxPage() {
                 />
             </div>
             <h2>Maximum option</h2>
-            <p>You can limit the number of option shown in the dropdown list.</p>
+            <p>
+                You can limit the number of option shown in the dropdown list.
+            </p>
             <div className="inner-component">
                 <Combobox
                     id="fruit-combobox-max-option"

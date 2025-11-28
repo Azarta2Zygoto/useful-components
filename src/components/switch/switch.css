@@ -43,7 +43,9 @@
     top: 2px;
     background-color: var(--border-color-special);
     border-radius: 50%;
-    transition: transform 0.3s, background-color 0.3s;
+    transition:
+        transform 0.3s,
+        background-color 0.3s;
 }
 
 .switch-checkbox:checked ~ .switch-slider {
@@ -53,7 +55,7 @@
 .switch-container:focus-within ~ .switch-wrapper {
     border-color: var(--input-focus-border-color);
 }
-.switch-container.disabled .switch-wrapper{
+.switch-container.disabled .switch-wrapper {
     cursor: not-allowed;
 }
 .switch-container.disabled .switch-slider {

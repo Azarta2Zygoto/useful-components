@@ -43,7 +43,10 @@ input:autofill:focus {
     font-size: 16px;
     box-shadow: 0 2px 10px #1167b10f;
     margin: 8px 10px;
-    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s,
+        background-color 0.3s;
     outline: 1px solid transparent;
     outline-offset: -3px;
 }
@@ -78,13 +81,16 @@ input:autofill:focus {
 .input-standard {
     padding: 8px 10px;
     margin: 8px 10px;
-    border:none;
+    border: none;
     border-bottom: 2px solid var(--selected-bg-color);
     background-color: transparent;
     color: var(--fg);
     font-size: 16px;
     box-shadow: 0 2px 10px #1167b10f;
-    transition: border 0.3s, box-shadow 0.3s, background-color 0.3s;
+    transition:
+        border 0.3s,
+        box-shadow 0.3s,
+        background-color 0.3s;
 }
 
 .input-standard:hover:not(:disabled) {
@@ -100,7 +106,7 @@ input:autofill:focus {
 .input-standard:focus-visible {
     border-bottom-color: var(--selected-tabuled-hover-bg-color);
     box-shadow: 0 0 0 3px var(--border-color-shadow-special);
-    outline:none;
+    outline: none;
 }
 .input-standard::placeholder {
     color: var(--disabled-text-color);
@@ -122,7 +128,10 @@ input:autofill:focus {
     font-size: 16px;
 
     box-shadow: 0 2px 10px #1167b10f;
-    transition: border 0.3s, box-shadow 0.3s, background-color 0.3s;
+    transition:
+        border 0.3s,
+        box-shadow 0.3s,
+        background-color 0.3s;
 }
 .input-compact:hover:not(:disabled) {
     border-color: var(--selected-tabuled-hover-bg-color);
@@ -157,7 +166,9 @@ input:autofill:focus {
     font-size: 16px;
     box-shadow: 0 2px 10px #1167b10f;
     margin: 8px 10px;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition:
+        background-color 0.3s,
+        box-shadow 0.3s;
 }
 .input-filled:hover:not(:disabled):not(:focus-visible) {
     background-color: var(--hover-bg-color);
@@ -187,14 +198,16 @@ input:autofill:focus {
 }
 .input-invisible {
     padding: 0;
-    margin:0;
+    margin: 0;
     border: none;
     border-radius: 8px;
     background-color: transparent;
     color: var(--fg);
     font-size: 16px;
     box-shadow: 0 0 0 #1167b10f;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition:
+        background-color 0.3s,
+        box-shadow 0.3s;
 }
 .input-filled:hover:not(:disabled):not(:focus-visible) {
     box-shadow: 0 0 0 3px #1167b136;
@@ -232,14 +245,17 @@ textarea {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    min-width:100px;
+    min-width: 100px;
     width: fit-content;
     height: 30px;
     font-size: 18px;
     color: var(--fg);
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease;
     margin: 10px 20px;
     padding: 0 5px;
     border: solid 2px transparent;
@@ -253,7 +269,7 @@ textarea {
 .button:disabled,
 .button:disabled:hover,
 .button:disabled:active,
-.button:disabled:focus-visible{
+.button:disabled:focus-visible {
     pointer-events: none;
     background-color: var(--disabled-bg-color);
     border-color: var(--disabled-border-color);
@@ -271,11 +287,11 @@ textarea {
     outline: solid 1px var(--fg);
     outline-offset: 1px;
     background-color: var(--selected-tabuled-bg-color);
-    border:2px solid var(--selected-tabuled-bg-color);
+    border: 2px solid var(--selected-tabuled-bg-color);
 }
 .button.selected {
     background-color: var(--selected-tabuled-hover-bg-color);
-    border:2px solid var(--selected-tabuled-hover-bg-color);
+    border: 2px solid var(--selected-tabuled-hover-bg-color);
 }
 .background-click {
     background-color: transparent;
@@ -284,14 +300,14 @@ textarea {
     justify-content: center;
     border: none;
     cursor: pointer;
-    min-width:fit-content;
-    height:fit-content;
+    min-width: fit-content;
+    height: fit-content;
     border-radius: 2px;
     padding: 0;
-    margin: 0 ;
+    margin: 0;
     outline: none;
     & i {
-        color:var(--element-color);
+        color: var(--element-color);
         transition: color 0.3s ease;
     }
     & svg path {
@@ -314,7 +330,7 @@ textarea {
 .background-click:active:not(:disabled) {
     border: none;
     background-color: transparent;
-    & i  {
+    & i {
         color: var(--selected-hover-bg-color);
     }
     & svg path {
@@ -326,7 +342,7 @@ textarea {
     border: none;
     background-color: transparent;
     outline: solid 1px var(--fg);
-    & i  {
+    & i {
         color: var(--selected-hover-bg-color);
     }
     & svg path {
@@ -347,7 +363,7 @@ textarea {
 .table {
     margin: 0 auto;
     background-color: var(--input-bg-color);
-    border: 2px solid  var(--border-color);
+    border: 2px solid var(--border-color);
 }
 .table thead {
     position: sticky;
@@ -380,8 +396,8 @@ textarea {
 .table td {
     background-color: #575a5c10;
     text-align: left;
-    height:30px;
-    padding:0 10px;
+    height: 30px;
+    padding: 0 10px;
     vertical-align: middle;
     font-size: clamp(8px, 1.6vw, 12px);
     transition: all 0.5s ease;
@@ -396,9 +412,9 @@ textarea {
     overflow-y: visible;
     min-height: fit-content;
     margin: 2px;
-    max-height: 500px!important;
+    max-height: 500px !important;
 }
-.component-box{
+.component-box {
     position: relative;
     display: flex;
     flex-direction: column;

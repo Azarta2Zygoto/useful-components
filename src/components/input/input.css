@@ -18,10 +18,14 @@ input:is(:-webkit-autofill, :autofill) + .floating-label,
     top: 15%;
     left: 20px;
     padding: 0 4px;
-    color:  var(--fg);
+    color: var(--fg);
     font-size: 12px;
     font-style: normal;
-    background-image: linear-gradient(to bottom, var(--bg) 0% 80%, transparent 80%);
+    background-image: linear-gradient(
+        to bottom,
+        var(--bg) 0% 80%,
+        transparent 80%
+    );
 }
 .floating-label-input:focus + .floating-label {
     color: var(--add-total-color);
@@ -107,7 +111,7 @@ input:is(:-webkit-autofill, :autofill) + .floating-label,
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
-    width:fit-content;
+    width: fit-content;
     margin: 5px;
     padding: 5px;
     border: solid 1px var(--fg);
@@ -145,14 +149,14 @@ input:is(:-webkit-autofill, :autofill) + .floating-label,
 .multi-input-table {
     border-collapse: collapse;
 }
-.valid-row{
+.valid-row {
     border-left: 1px solid var(--valid-border-color);
 }
-.invalid-row{
+.invalid-row {
     border-left: 1px solid var(--invalid-border-color);
 }
 .inline-actions {
-    display:flex;
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;

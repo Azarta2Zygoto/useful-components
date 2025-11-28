@@ -1,9 +1,10 @@
 import React, { JSX } from "react";
+
 import Tooltip from "../tooltip/tooltip";
 import "./checkbox.css";
 
 /**
- * 
+ *
  * @param param - The properties for the Checkbox component.
  * @param param.id - The unique identifier for the checkbox.
  * @param param.label - The label text for the checkbox.
@@ -56,29 +57,39 @@ export default function Checkbox({
     checkmark,
     style,
     boxStyle,
-    onChange
+    onChange,
 }: CheckboxProps): JSX.Element {
-    const renderedCheckmark = typeof checkmark === "function"
-        ? (checkmark as (c: boolean) => React.ReactNode)(checked)
-        : checkmark;
+    const renderedCheckmark =
+        typeof checkmark === "function"
+            ? (checkmark as (c: boolean) => React.ReactNode)(checked)
+            : checkmark;
 
     return (
-        <Tooltip title={label} active={tooltip??false}>
+        <Tooltip
+            title={label}
+            active={tooltip ?? false}
+        >
             <label
                 className={`checkbox-container${disabled ? " disabled" : ""}${side === "left" ? " reverse" : ""}`}
-                id={id+"-label"}
+                id={id + "-label"}
                 style={boxStyle}
                 htmlFor={id}
             >
                 {!hideLabel ? label : null}
-                {required && <span aria-hidden="true" style={{ color: "red", margin:"0 5px" }}>&nbsp;*</span>}
+                {required && (
+                    <span
+                        aria-hidden="true"
+                        style={{ color: "red", margin: "0 5px" }}
+                    >
+                        &nbsp;*
+                    </span>
+                )}
                 <input
                     id={id}
                     type="checkbox"
                     checked={checked}
                     disabled={disabled}
-                    name={name??id}
-
+                    name={name ?? id}
                     required={required}
                     aria-checked={checked}
                     aria-required={required}
@@ -88,13 +99,30 @@ export default function Checkbox({
                 />
                 <span
                     id={`${id}-checkmark`}
-                    className={!renderedCheckmark ? "checkbox-checkmark " : "checkbox-placement"+(className ? ` ${className}` : "")}
+                    className={
+                        !renderedCheckmark
+                            ? "checkbox-checkmark "
+                            : "checkbox-placement" +
+                              (className ? ` ${className}` : "")
+                    }
                     aria-hidden="true"
-                    style= {{
+                    style={{
                         ...style,
-                        right: side==="right"?hideLabel?'50%':sideOffset+"px":undefined,
-                        left: side==="left"?hideLabel?'50%':sideOffset+"px":undefined,
-                        transform: hideLabel?'translateX(50%) translateY(-50%)':undefined
+                        right:
+                            side === "right"
+                                ? hideLabel
+                                    ? "50%"
+                                    : sideOffset + "px"
+                                : undefined,
+                        left:
+                            side === "left"
+                                ? hideLabel
+                                    ? "50%"
+                                    : sideOffset + "px"
+                                : undefined,
+                        transform: hideLabel
+                            ? "translateX(50%) translateY(-50%)"
+                            : undefined,
                     }}
                 >
                     {renderedCheckmark ?? null}

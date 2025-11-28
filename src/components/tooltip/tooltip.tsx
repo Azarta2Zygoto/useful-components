@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useRef, JSX } from "react";
-import BodyAccess from "@/components/utils/bodyAccess";
+import { JSX, useRef, useState } from "react";
+
 import "./tooltip.css";
+
+import BodyAccess from "@/components/utils/bodyAccess";
 
 interface TooltipProps {
     title: string;
@@ -11,7 +13,7 @@ interface TooltipProps {
     active?: boolean;
     offset?: number;
     keepWrapper?: boolean;
-    targetRef?: React.RefObject<HTMLElement|null>;
+    targetRef?: React.RefObject<HTMLElement | null>;
     style?: React.CSSProperties;
 }
 
@@ -23,8 +25,8 @@ export default function Tooltip({
     offset = 4,
     keepWrapper,
     targetRef,
-    style
-}: TooltipProps) : JSX.Element {
+    style,
+}: TooltipProps): JSX.Element {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [coords, setCoords] = useState({ left: 0, top: 0 });
     const [showTooltip, setShowTooltip] = useState(false);
@@ -49,7 +51,7 @@ export default function Tooltip({
             left = rect.right + offset;
             top = rect.top + rect.height / 2;
         }
-        
+
         setCoords({ left, top });
         console.log("touch open");
         setShowTooltip(true);
@@ -64,7 +66,7 @@ export default function Tooltip({
         setShowTooltip(false);
     };
 
-    if (!active&&!keepWrapper) return <>{children}</>;
+    if (!active && !keepWrapper) return <>{children}</>;
     return (
         <div
             className="tooltip-wrapper"

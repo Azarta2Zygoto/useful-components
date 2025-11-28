@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React from "react";
 
 export default function NotFound() {
     const pathname = usePathname();
@@ -11,7 +11,10 @@ export default function NotFound() {
         <main>
             <h1>404 - Page Not Found</h1>
             <p>The page &quot;{pathname}&quot; does not exist.</p>
-            <p>Please check the URL or go back to the <Link href="/">home page</Link>.</p>
+            <p>
+                Please check the URL or go back to the{" "}
+                <Link href="/">home page</Link>.
+            </p>
         </main>
     );
 }

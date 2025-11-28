@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const GlobalContext = createContext<{
     openToolbar: boolean;
@@ -11,10 +11,12 @@ const GlobalContext = createContext<{
     openToolbar: false,
     width: 250,
     setOpenToolbar: () => {},
-    setWidth: () => {}
+    setWidth: () => {},
 });
 
-export const GlobalProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
+export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
+    children,
+}) => {
     const [openToolbar, setOpenToolbar] = useState(false);
     const [width, setWidth] = useState(250);
 
@@ -22,15 +24,15 @@ export const GlobalProvider: React.FC<{children: React.ReactNode}> = ({ children
         const handleResize = () => {
             setWidth(window.innerWidth);
         };
-        window.addEventListener('resize', handleResize);
+        window.addEventListener("resize", handleResize);
         handleResize();
-        return () => window.removeEventListener('resize', handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     return (
-        <GlobalContext.Provider value={{ openToolbar, setOpenToolbar,
-                                        width, setWidth
-                                        }}>
+        <GlobalContext.Provider
+            value={{ openToolbar, setOpenToolbar, width, setWidth }}
+        >
             {children}
         </GlobalContext.Provider>
     );

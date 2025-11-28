@@ -1,12 +1,19 @@
 "use client";
 
-import React, { useState, JSX, useEffect, useRef, useLayoutEffect } from "react";
+import React, {
+    JSX,
+    useEffect,
+    useLayoutEffect,
+    useRef,
+    useState,
+} from "react";
+
 import FloatingLabelInput from "../input/input";
 import Overlay from "../overlay/overlay";
 import BodyAccess from "../utils/bodyAccess";
-import { bestMatches } from "./levenshtein";
 import type { InputVariant } from "../utils/types";
 import "./combobox.css";
+import { bestMatches } from "./levenshtein";
 
 /**
  * @param param - The properties for the Combobox component.
@@ -72,7 +79,7 @@ export default function Combobox({
     validOnly,
     maximumOptions = 100,
     onChange,
-    onKeyDown
+    onKeyDown,
 }: ComboboxProps): JSX.Element {
     const inputRef = useRef<HTMLInputElement>(null);
     const maxHeight = 200;
@@ -81,15 +88,24 @@ export default function Combobox({
     const [viewableOptions, setViewableOptions] = useState<string[]>([]);
     const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
     const [valueVisible, setValueVisible] = useState<string>(value);
-    const [isOpenAnimation, setIsOpenAnimation] = useState<boolean|null>(null);
+    const [isOpenAnimation, setIsOpenAnimation] = useState<boolean | null>(
+        null,
+    );
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [menuSelectPosition, setMenuSelectPosition] = useState<{top:number, left:number}>({top:0, left:0});
-    
+    const [menuSelectPosition, setMenuSelectPosition] = useState<{
+        top: number;
+        left: number;
+    }>({ top: 0, left: 0 });
+
     useEffect(() => setValueVisible(value), [value]);
 
     useEffect(() => {
         setViewableOptions(options.filter((_, idx) => idx < maximumOptions));
-        setCaseInsensitive(options.map(opt => opt.toLowerCase()).filter((_, idx) => idx < maximumOptions));
+        setCaseInsensitive(
+            options
+                .map((opt) => opt.toLowerCase())
+                .filter((_, idx) => idx < maximumOptions),
+        );
     }, [options, maximumOptions]);
 
     useLayoutEffect(() => {
@@ -98,8 +114,14 @@ export default function Combobox({
         const update = () => {
             const rect = inputRef.current!.getBoundingClientRect();
             const exactHeight = Math.min(maxHeight, 6 + options.length * 32);
-            const elementTop = Math.min(rect.bottom + window.scrollY, window.innerHeight - exactHeight + window.scrollY);
-            setMenuSelectPosition({ top: elementTop, left: rect.left + window.scrollX });
+            const elementTop = Math.min(
+                rect.bottom + window.scrollY,
+                window.innerHeight - exactHeight + window.scrollY,
+            );
+            setMenuSelectPosition({
+                top: elementTop,
+                left: rect.left + window.scrollX,
+            });
         };
         update();
 
@@ -123,7 +145,10 @@ export default function Combobox({
             return;
         }
 
-        const best = bestMatches(inputValue, options, { perfectMatch: !!perfectMatch, maxResults: maximumOptions });
+        const best = bestMatches(inputValue, options, {
+            perfectMatch: !!perfectMatch,
+            maxResults: maximumOptions,
+        });
         setViewableOptions(best);
         setFocusedIndex(best.length > 0 ? 0 : null);
     }
@@ -173,28 +198,23 @@ export default function Combobox({
         if (e.key === "ArrowDown") {
             e.preventDefault();
             if (viewableOptions.length === 0) return;
-            setFocusedIndex(prev => {
+            setFocusedIndex((prev) => {
                 if (prev === null) return 0;
                 return prev === viewableOptions.length - 1 ? 0 : prev + 1;
-            }
-            );
-        }
-        else if (e.key === "ArrowUp") {
+            });
+        } else if (e.key === "ArrowUp") {
             e.preventDefault();
             if (viewableOptions.length === 0) return;
-            setFocusedIndex(prev => {
+            setFocusedIndex((prev) => {
                 if (prev === null) return 0;
                 return prev === 0 ? viewableOptions.length - 1 : prev - 1;
-            }
-            );
-        }
-        else if (e.key === "Enter") {
+            });
+        } else if (e.key === "Enter") {
             e.preventDefault();
             if (focusedIndex === null) return;
             const option = viewableOptions[focusedIndex];
             handleOptionClick(option);
-        }
-        else if (e.key === "Escape") {
+        } else if (e.key === "Escape") {
             e.preventDefault();
             handleOverlayClose();
         }
@@ -202,7 +222,7 @@ export default function Combobox({
 
     return (
         <div className="combobox-wrapper">
-            {isOpen&&(
+            {isOpen && (
                 <Overlay
                     id={`${id}-overlay`}
                     color="rgba(0, 0, 0, 0)"
@@ -215,7 +235,7 @@ export default function Combobox({
                     id={id}
                     ref={inputRef}
                     type="text"
-                    role='combobox'
+                    role="combobox"
                     variant={variant}
                     className={className}
                     style={style}
@@ -227,7 +247,7 @@ export default function Combobox({
                     size={size}
                     minLength={minLength}
                     maxLength={maxLength}
-                    placeholder={placeholder||""}
+                    placeholder={placeholder || ""}
                     getChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                     onFocus={handleOnFocus}
@@ -235,8 +255,11 @@ export default function Combobox({
                     aria={{
                         "aria-autocomplete": "list",
                         "aria-controls": `${id}-list`,
-                        "aria-activedescendant": focusedIndex !== null ? `${id}-option-${focusedIndex}` : undefined,
-                        "aria-expanded": String(isOpen)
+                        "aria-activedescendant":
+                            focusedIndex !== null
+                                ? `${id}-option-${focusedIndex}`
+                                : undefined,
+                        "aria-expanded": String(isOpen),
                     }}
                 />
             ) : (
@@ -244,7 +267,7 @@ export default function Combobox({
                     ref={inputRef}
                     id={id}
                     type="text"
-                    role='combobox'
+                    role="combobox"
                     className={`input-${variant} ${className}`}
                     style={style}
                     value={valueVisible}
@@ -255,45 +278,54 @@ export default function Combobox({
                     minLength={minLength}
                     maxLength={maxLength}
                     autoComplete={autoComplete}
-                    placeholder={placeholder||""}
+                    placeholder={placeholder || ""}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                     onFocus={handleOnFocus}
                     onBlur={handleOnBlur}
                     aria-autocomplete="list"
                     aria-controls={`${id}-list`}
-                    aria-activedescendant={focusedIndex !== null ? `${id}-option-${focusedIndex}` : undefined}
+                    aria-activedescendant={
+                        focusedIndex !== null
+                            ? `${id}-option-${focusedIndex}`
+                            : undefined
+                    }
                     aria-expanded={isOpen}
                 />
             )}
-            {isOpen&&(
+            {isOpen && (
                 <BodyAccess>
                     <ul
                         role="listbox"
-                        className={`combobox-list ${isOpenAnimation ? "open" : ""} ${isOpenAnimation===false? "closing" : ""}`}
+                        className={`combobox-list ${isOpenAnimation ? "open" : ""} ${isOpenAnimation === false ? "closing" : ""}`}
                         tabIndex={-1}
-                        aria-activedescendant={focusedIndex !== null ? `${id}-option-${focusedIndex}` : undefined}
+                        aria-activedescendant={
+                            focusedIndex !== null
+                                ? `${id}-option-${focusedIndex}`
+                                : undefined
+                        }
                         style={{
                             top: menuSelectPosition.top,
                             left: menuSelectPosition.left,
                             minWidth: inputRef.current?.offsetWidth,
-                            maxHeight: `min(${maxHeight}px, calc(100svh - 20px))`
+                            maxHeight: `min(${maxHeight}px, calc(100svh - 20px))`,
                         }}
                     >
-                        {viewableOptions.length>0 && viewableOptions.map((option, idx) => (
-                            <li
-                                key={option}
-                                id={`${id}-option-${idx}`}
-                                role="option"
-                                className={`combobox-option ${focusedIndex === idx ? "focused" : ""} ${value === option ? "selected" : ""}`}
-                                aria-selected={focusedIndex === idx}
-                                tabIndex={focusedIndex === idx ? 0 : -1}
-                                onClick={() => handleOptionClick(option)}
-                                onMouseEnter={() => setFocusedIndex(idx)}
+                        {viewableOptions.length > 0 &&
+                            viewableOptions.map((option, idx) => (
+                                <li
+                                    key={option}
+                                    id={`${id}-option-${idx}`}
+                                    role="option"
+                                    className={`combobox-option ${focusedIndex === idx ? "focused" : ""} ${value === option ? "selected" : ""}`}
+                                    aria-selected={focusedIndex === idx}
+                                    tabIndex={focusedIndex === idx ? 0 : -1}
+                                    onClick={() => handleOptionClick(option)}
+                                    onMouseEnter={() => setFocusedIndex(idx)}
                                 >
-                                {option}
-                            </li>
-                        ))}
+                                    {option}
+                                </li>
+                            ))}
                         {viewableOptions.length === 0 && (
                             <li
                                 className="combobox-option empty"
@@ -301,8 +333,9 @@ export default function Combobox({
                                 aria-selected="false"
                                 aria-disabled="true"
                                 tabIndex={-1}
-                                style={{ cursor: "not-allowed" }}>
-                                No options available    
+                                style={{ cursor: "not-allowed" }}
+                            >
+                                No options available
                             </li>
                         )}
                     </ul>

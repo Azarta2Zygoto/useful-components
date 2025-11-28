@@ -1,13 +1,12 @@
-import Icon from "@/components/utils/icon";
 import React, { JSX } from "react";
+
+import Icon from "@/components/utils/icon";
 
 interface MoreInfoProps {
     children: React.ReactNode;
 }
 
-export function InfoComponent({
-    children
-}: MoreInfoProps): JSX.Element {
+export function InfoComponent({ children }: MoreInfoProps): JSX.Element {
     return (
         <div className="info-component">
             <Icon
@@ -21,10 +20,7 @@ export function InfoComponent({
     );
 }
 
-
-export function WarningComponent({
-    children
-}: MoreInfoProps): JSX.Element {
+export function WarningComponent({ children }: MoreInfoProps): JSX.Element {
     return (
         <div className="warning-component">
             <Icon

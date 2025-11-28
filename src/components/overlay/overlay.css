@@ -11,9 +11,9 @@
     touch-action: none;
 }
 .overlay.closed {
-  opacity: 0;
-  pointer-events: none;
+    opacity: 0;
+    pointer-events: none;
 }
 .overlay.open {
-  opacity: 1;
+    opacity: 1;
 }

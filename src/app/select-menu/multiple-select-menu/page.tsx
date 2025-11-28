@@ -1,21 +1,11 @@
 "use client";
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
+
 import MultipleMenuSelect from "@/components/multipleMenuSelect/multipleMenuSelect";
 import { InfoComponent } from "@/self/moreInfo";
 
-const voidOptions = [
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-]
-
-
+const voidOptions = [[], [], [], [], [], [], [], []];
 
 const selectOptions = [
     "banana",
@@ -27,8 +17,8 @@ const selectOptions = [
     "strawberry",
     "blueberry",
     "watermelon",
-    "kiwi"
-]
+    "kiwi",
+];
 
 export default function MultipleMenuSelectPage() {
     const [chosenOptions, setChosenOptions] = useState<string[][]>(voidOptions);
@@ -42,7 +32,10 @@ export default function MultipleMenuSelectPage() {
     return (
         <main>
             <h1>Multiple Select Menu</h1>
-            <p>A multiple select menu allows the user to select multiple choices between a set of possible options.</p>
+            <p>
+                A multiple select menu allows the user to select multiple
+                choices between a set of possible options.
+            </p>
 
             <h2>Basic multiple select menu</h2>
             <div className="inner-component">
@@ -65,10 +58,12 @@ export default function MultipleMenuSelectPage() {
                 />
             </div>
             <InfoComponent>
-                The box used can be found to this&nbsp;<Link href="/components">link</Link>.
+                The box used can be found to this&nbsp;
+                <Link href="/components">link</Link>.
             </InfoComponent>
             <InfoComponent>
-                The variant and the version without icon exist such as in the regular select menu.
+                The variant and the version without icon exist such as in the
+                regular select menu.
             </InfoComponent>
             <h2>With checkbox</h2>
             <p>You can also add checkbox to each options easily.</p>
@@ -95,9 +90,11 @@ export default function MultipleMenuSelectPage() {
                 />
             </div>
 
-            
             <h2>Other features</h2>
-            <p>The same props as select menu can be used : required, disabled and tooltip</p>
+            <p>
+                The same props as select menu can be used : required, disabled
+                and tooltip
+            </p>
             <div className="inner-component">
                 <MultipleMenuSelect
                     id="example-select-required"

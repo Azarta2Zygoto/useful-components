@@ -6,7 +6,7 @@
     --light-background-color: #2f3236;
 }
 
-.toolbar{
+.toolbar {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -42,7 +42,9 @@
 
     cursor: pointer;
     overflow: hidden;
-    transition: background-color 0.3s ease, min-width 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        min-width 0.3s ease;
 }
 .toolbar .active-button:hover {
     background-color: var(--toolbar-button-hover-color);
@@ -78,7 +80,9 @@
 
     cursor: pointer;
     overflow: hidden;
-    transition: background-color 0.3s ease, min-width 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        min-width 0.3s ease;
 }
 .toolbar .link:hover {
     background-color: var(--toolbar-button-hover-color);
@@ -140,7 +144,6 @@
     transition: max-width 0.3s;
 }
 
-
 .toolbar .subpath {
     background-color: transparent;
     visibility: hidden;
@@ -153,7 +156,10 @@
     overflow: visible;
     list-style: none;
 
-    transition: height 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+    transition:
+        height 0.3s ease,
+        opacity 0.3s ease,
+        width 0.3s ease;
 }
 .toolbar .subpath.active {
     visibility: visible;
@@ -169,8 +175,8 @@
         position: absolute;
         top: 0;
         left: 0;
-        max-width:0;
-        min-width:0;
+        max-width: 0;
+        min-width: 0;
         opacity: 0;
         visibility: hidden;
         transform: translateX(-100%); /* Move off-screen */

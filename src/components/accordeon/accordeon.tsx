@@ -1,10 +1,17 @@
 "use client";
 
-import React, { JSX, useState, useEffect, useId, useRef, useLayoutEffect } from "react";
+import React, {
+    JSX,
+    useEffect,
+    useId,
+    useLayoutEffect,
+    useRef,
+    useState,
+} from "react";
+
 import Tooltip from "../tooltip/tooltip";
 import Icon from "../utils/icon";
 import "./accordeon.css";
-
 
 /**
  * @param param - The properties for the Accordeon component.
@@ -24,12 +31,12 @@ import "./accordeon.css";
  */
 
 interface AccordeonProps {
-    title: string|JSX.Element;
+    title: string | JSX.Element;
     isOpen?: boolean;
     className?: string;
-    height?:number;
+    height?: number;
     tooltip?: boolean;
-    view?:"simple" | "icon" | "card";
+    view?: "simple" | "icon" | "card";
     type?: "component" | "inner";
     transitionMs?: number;
     text?: {
@@ -38,7 +45,7 @@ interface AccordeonProps {
         expand?: string;
         collapseDesc?: string;
         expandDesc?: string;
-    }
+    };
     style?: React.CSSProperties;
     children: React.ReactNode;
     onToggle?: () => void;
@@ -56,7 +63,7 @@ export default function Accordeon({
     text,
     style,
     children,
-    onToggle
+    onToggle,
 }: AccordeonProps) {
     const contentId = useId();
     const headerId = useId();
@@ -65,16 +72,15 @@ export default function Accordeon({
     const [openState, setOpenState] = useState(!!isOpen);
     const [maxHeight, setMaxHeight] = useState<string>("0px");
 
-    
     useEffect(() => {
         setOpenState(Boolean(isOpen));
     }, [isOpen]);
 
     useLayoutEffect(() => {
         const el = contentRef.current;
-        let tidyTimer: number|undefined;
-        let raf1: number|undefined;
-        let raf2: number|undefined;
+        let tidyTimer: number | undefined;
+        let raf1: number | undefined;
+        let raf2: number | undefined;
 
         if (!el) {
             setMaxHeight(openState ? (height ? `${height}px` : "none") : "0px");
@@ -82,18 +88,16 @@ export default function Accordeon({
         }
 
         if (openState) {
-            
             const measured = height ? height : el.scrollHeight;
-            
+
             setMaxHeight(`${measured}px`);
             tidyTimer = window.setTimeout(() => {
                 setMaxHeight("none");
             }, transitionMs);
         } else {
-            
             const current = el.scrollHeight;
             setMaxHeight(`${current}px`);
-            
+
             raf1 = window.requestAnimationFrame(() => {
                 raf2 = window.requestAnimationFrame(() => {
                     setMaxHeight("0px");
@@ -102,11 +106,11 @@ export default function Accordeon({
         }
 
         return () => {
-            if (typeof tidyTimer !== "undefined") window.clearTimeout(tidyTimer);
+            if (typeof tidyTimer !== "undefined")
+                window.clearTimeout(tidyTimer);
             if (typeof raf1 !== "undefined") window.cancelAnimationFrame(raf1);
             if (typeof raf2 !== "undefined") window.cancelAnimationFrame(raf2);
         };
-        
     }, [openState, height, transitionMs]);
 
     function handleToggle() {
@@ -121,8 +125,10 @@ export default function Accordeon({
     }
 
     return (
-        <div className={`accordeon-wrapper${openState ? " open" : " closed"} ${className ?? ""}`}>
-            {view==="card"&&(
+        <div
+            className={`accordeon-wrapper${openState ? " open" : " closed"} ${className ?? ""}`}
+        >
+            {view === "card" && (
                 <div
                     id={headerId}
                     role="button"
@@ -137,18 +143,29 @@ export default function Accordeon({
                     <span></span>
                     <span className="accordeon-title">{title}</span>
                     <Icon
-                        title={openState?text?.collapse||"Collapse":text?.expand||"Expand"}
-                        desc={openState?text?.collapseDesc||"Collapse the content of the accordeon":
-                            text?.expandDesc||"Expand the content of the accordeon"}
+                        title={
+                            openState
+                                ? text?.collapse || "Collapse"
+                                : text?.expand || "Expand"
+                        }
+                        desc={
+                            openState
+                                ? text?.collapseDesc ||
+                                  "Collapse the content of the accordeon"
+                                : text?.expandDesc ||
+                                  "Expand the content of the accordeon"
+                        }
                         name="caret-up-fill"
                         style={{
-                            transform: openState ? "rotate(0deg)" : "rotate(180deg)",
+                            transform: openState
+                                ? "rotate(0deg)"
+                                : "rotate(180deg)",
                             transition: `transform ${transitionMs}ms ease`,
                         }}
                     />
                 </div>
             )}
-            {view==="icon"&&(
+            {view === "icon" && (
                 <div
                     id={headerId}
                     className={`accordeon-header ${type}`}
@@ -156,7 +173,11 @@ export default function Accordeon({
                     <span></span>
                     <span className="accordeon-title">{title}</span>
                     <Tooltip
-                        title={openState?text?.collapse||"Collapse":text?.expand||"Expand"}
+                        title={
+                            openState
+                                ? text?.collapse || "Collapse"
+                                : text?.expand || "Expand"
+                        }
                         active={tooltip}
                     >
                         <button
@@ -170,7 +191,9 @@ export default function Accordeon({
                             <Icon
                                 name="caret-up-fill"
                                 style={{
-                                    transform: openState ? "rotate(0deg)" : "rotate(180deg)",
+                                    transform: openState
+                                        ? "rotate(0deg)"
+                                        : "rotate(180deg)",
                                     transition: `transform ${transitionMs}ms ease`,
                                 }}
                             />
@@ -181,7 +204,7 @@ export default function Accordeon({
             <div
                 ref={contentRef}
                 id={contentId}
-                className={`accordeon-content${view==="simple"?" accordeon-simple":""} ${type}`}
+                className={`accordeon-content${view === "simple" ? " accordeon-simple" : ""} ${type}`}
                 role="region"
                 aria-labelledby={view !== "simple" ? headerId : undefined}
                 aria-hidden={!openState}

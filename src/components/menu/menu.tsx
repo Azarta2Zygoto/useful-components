@@ -1,9 +1,17 @@
 "use client";
 
-import React, { JSX, useState, useEffect, useRef, useLayoutEffect, useCallback } from "react";
-import Icon from "../utils/icon";
+import React, {
+    JSX,
+    useCallback,
+    useEffect,
+    useLayoutEffect,
+    useRef,
+    useState,
+} from "react";
+
 import Overlay from "../overlay/overlay";
 import BodyAccess from "../utils/bodyAccess";
+import Icon from "../utils/icon";
 import type { MenuVariant } from "../utils/types";
 import "./menu.css";
 
@@ -15,11 +23,10 @@ interface MenuItem {
     subItems?: MenuItem[];
 }
 
-
 interface MenuProps {
     data: MenuItem[];
     isOpen: boolean;
-    parentRef: React.RefObject<HTMLElement|null>;
+    parentRef: React.RefObject<HTMLElement | null>;
     openType?: "onHover" | "onClick" | "none";
     placement?: "top" | "bottom" | "left" | "right";
     variant?: MenuVariant;
@@ -46,36 +53,43 @@ export default function Menu({
     style,
     focusOnOpen = true,
     onSelect,
-    onKeyDown
+    onKeyDown,
 }: MenuProps): JSX.Element {
     const menuRef = useRef<HTMLUListElement>(null);
     const liRefs = useRef<Array<HTMLLIElement | null>>([]);
 
     const [open, setOpen] = useState<boolean>(isOpen);
-    const [subOpen, setSubOpen] = useState<boolean[]>(Array(data.length).fill(false));
+    const [subOpen, setSubOpen] = useState<boolean[]>(
+        Array(data.length).fill(false),
+    );
     const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
-    const [position, setPosition] = useState<{top:number, left:number}>({top:0, left:0});
+    const [position, setPosition] = useState<{ top: number; left: number }>({
+        top: 0,
+        left: 0,
+    });
 
     useEffect(() => {
         setOpen(isOpen);
     }, [isOpen]);
 
-    const setMenuRef = useCallback((el: HTMLUListElement | null) => {
-        menuRef.current = el;
-        if (el) {
-            if (focusOnOpen && isOpen) {
-                // focus safely after mount
-                requestAnimationFrame(() => el.focus());
+    const setMenuRef = useCallback(
+        (el: HTMLUListElement | null) => {
+            menuRef.current = el;
+            if (el) {
+                if (focusOnOpen && isOpen) {
+                    // focus safely after mount
+                    requestAnimationFrame(() => el.focus());
+                }
             }
-        }
-    }, [focusOnOpen, isOpen]);
+        },
+        [focusOnOpen, isOpen],
+    );
 
     useLayoutEffect(() => {
-
         const resize = () => {
             const parentEl = parentRef?.current ?? null;
             if (!parentEl) return;
-            
+
             const rect = parentEl.getBoundingClientRect();
             if (!rect) return;
             let top = 0;
@@ -83,16 +97,13 @@ export default function Menu({
             if (placement === "bottom") {
                 top = rect.bottom;
                 left = rect.left;
-            }
-            else if (placement === "top") {
+            } else if (placement === "top") {
                 top = rect.top - (menuRef.current?.offsetHeight || 0);
                 left = rect.left;
-            }
-            else if (placement === "left") {
+            } else if (placement === "left") {
                 top = rect.top;
                 left = rect.left - (menuRef.current?.offsetWidth || 0);
-            }
-            else if (placement === "right") {
+            } else if (placement === "right") {
                 top = rect.top;
                 left = rect.right;
             }
@@ -105,15 +116,26 @@ export default function Menu({
         return () => {
             window.removeEventListener("resize", resize);
             window.removeEventListener("scroll", resize, true);
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [placement, parentRef, parentRef.current]);
 
-    const handleItemClick = (item: string, index: [number, number], e?:React.MouseEvent) => {
+    const handleItemClick = (
+        item: string,
+        index: [number, number],
+        e?: React.MouseEvent,
+    ) => {
         if (e) e.stopPropagation();
 
-        if (openType === "onClick" && index[0] >=0 && data[index[0]].subItems && data[index[0]].subItems!.length > 0) {
-            const newSubOpen = subOpen.map((bool, i) => i === index[0]?!bool:bool);
+        if (
+            openType === "onClick" &&
+            index[0] >= 0 &&
+            data[index[0]].subItems &&
+            data[index[0]].subItems!.length > 0
+        ) {
+            const newSubOpen = subOpen.map((bool, i) =>
+                i === index[0] ? !bool : bool,
+            );
             setSubOpen(newSubOpen);
             setFocusedIndex(-1);
             return;
@@ -127,18 +149,23 @@ export default function Menu({
         onKeyDown?.(e);
 
         const key = e.key.toLowerCase();
-        if (key.length === 1) { // If it's a character key
-            const matchingIndex = data.map(c=>c.name).findIndex(opt => 
-                opt.toLowerCase().startsWith(key)
-            );
+        if (key.length === 1) {
+            // If it's a character key
+            const matchingIndex = data
+                .map((c) => c.name)
+                .findIndex((opt) => opt.toLowerCase().startsWith(key));
             if (matchingIndex >= 0) {
                 setFocusedIndex(matchingIndex);
             }
         }
 
-        if (menuRef.current && document.activeElement !== menuRef.current) return;
+        if (menuRef.current && document.activeElement !== menuRef.current)
+            return;
         if (e.key === "ArrowDown") {
-            const newFocusedIndex = focusedIndex === null ? 0 : Math.min(focusedIndex + 1, data.length - 1);
+            const newFocusedIndex =
+                focusedIndex === null
+                    ? 0
+                    : Math.min(focusedIndex + 1, data.length - 1);
             if (data[newFocusedIndex].name === separatorValue) {
                 setFocusedIndex(Math.min(newFocusedIndex + 1, data.length - 1));
                 e.preventDefault();
@@ -147,7 +174,10 @@ export default function Menu({
             setFocusedIndex(newFocusedIndex);
             e.preventDefault();
         } else if (e.key === "ArrowUp") {
-            const newFocusedIndex = focusedIndex === null ? data.length - 1 : Math.max(focusedIndex - 1, 0);
+            const newFocusedIndex =
+                focusedIndex === null
+                    ? data.length - 1
+                    : Math.max(focusedIndex - 1, 0);
             if (data[newFocusedIndex].name === separatorValue) {
                 setFocusedIndex(Math.max(newFocusedIndex - 1, 0));
                 e.preventDefault();
@@ -170,16 +200,20 @@ export default function Menu({
             }
             e.preventDefault();
         }
-    };
+    }
 
-
-    function handleKeyDownSubMenu(e: React.KeyboardEvent, itemName:string, index:number, depth:number) {
+    function handleKeyDownSubMenu(
+        e: React.KeyboardEvent,
+        itemName: string,
+        index: number,
+        depth: number,
+    ) {
         onKeyDown?.(e);
 
         if (e.key === "Enter" || e.key === " ") {
             handleItemClick(itemName, [index, depth]);
         }
-    };
+    }
 
     function handleMouseLeave(e: React.MouseEvent) {
         const target = e.relatedTarget as HTMLElement | null;
@@ -196,17 +230,29 @@ export default function Menu({
             setFocusedIndex(-1);
         }
     }
-    function handleOnMouseEnterSubMenu(index:number) {
+    function handleOnMouseEnterSubMenu(index: number) {
         setFocusedIndex(index);
 
-        if (openType==="onHover" && data[index].subItems && data[index].subItems.length > 0) {
-            const newSubOpen = subOpen.map((bool, i) => i === index?!bool:bool);
+        if (
+            openType === "onHover" &&
+            data[index].subItems &&
+            data[index].subItems.length > 0
+        ) {
+            const newSubOpen = subOpen.map((bool, i) =>
+                i === index ? !bool : bool,
+            );
             setSubOpen(newSubOpen);
         }
     }
-    function handleOnMouseLeaveSubMenu(index:number) {
-        if (openType==="onHover" && data[index].subItems && data[index].subItems.length > 0) {
-            const newSubOpen = subOpen.map((bool, i) => i === index?false:bool);
+    function handleOnMouseLeaveSubMenu(index: number) {
+        if (
+            openType === "onHover" &&
+            data[index].subItems &&
+            data[index].subItems.length > 0
+        ) {
+            const newSubOpen = subOpen.map((bool, i) =>
+                i === index ? false : bool,
+            );
             setSubOpen(newSubOpen);
         }
     }
@@ -214,10 +260,10 @@ export default function Menu({
     function closeMenu() {
         setSubOpen(Array(data.length).fill(false));
         setFocusedIndex(-1);
-        if (depth===0) setOpen(false);
+        if (depth === 0) setOpen(false);
     }
 
-    function childOnSelect(item:string, index?:[number, number]) {
+    function childOnSelect(item: string, index?: [number, number]) {
         if (item === "---ChildIsClosing---") {
             menuRef.current?.focus();
             return;
@@ -231,20 +277,20 @@ export default function Menu({
         <BodyAccess>
             <ul
                 ref={setMenuRef}
-                className={`menu-list ${variant} ${open?"open":"close"} ${className ?? ""}`}
+                className={`menu-list ${variant} ${open ? "open" : "close"} ${className ?? ""}`}
                 role="menu"
                 aria-orientation="vertical"
                 style={{
                     top: position.top,
                     left: position.left,
-                    ...style
+                    ...style,
                 }}
                 tabIndex={0}
                 onKeyDown={handleKeyDown}
                 onPointerLeave={handleMouseLeave}
                 onMouseEnter={handleMouseEnter}
             >
-                {openType==="onClick"&&(
+                {openType === "onClick" && (
                     <Overlay
                         open={open}
                         tobody={true}
@@ -256,62 +302,108 @@ export default function Menu({
                     const itemName = item.name;
                     const itemIcon = item.icon;
                     const itemShortcut = item.shortcut;
-                    const hasSubItems = item.subItems && item.subItems.length > 0;
-                    if (itemName !== separatorValue) return (
-                        <li
-                            key={index}
-                            ref={(el) => { liRefs.current[index] = el; }}
-                            className={`menu-item ${variant} ${focusedIndex === index ? "focused" : ""}`}
-                            role="menuitem"
-                            aria-haspopup={hasSubItems ? "true" : undefined}
-                            aria-expanded={hasSubItems ? (subOpen[index] ? "true" : "false") : undefined}
-                            tabIndex={-1}
-                            onClick={(e) => handleItemClick(itemName, [index, depth], e)}
-                            onKeyDown={(e) => handleKeyDownSubMenu(e, itemName, index, depth)}
-                            onMouseEnter={() => handleOnMouseEnterSubMenu(index)}
-                            onMouseLeave={() => {handleOnMouseLeaveSubMenu(index)}}
-                        >
-                            <div>
-                                {itemIcon && <span aria-hidden="true" >{itemIcon}</span>}
-                                {item.svgIcon && <span className="svg-icon" aria-hidden="true">{item.svgIcon}</span>}
-                                <span className="menu-item-name">{itemName}</span>
-                            </div>
-                            {itemShortcut && <span className="menu-item-shortcut">{itemShortcut}</span>}
-                            {hasSubItems && (
-                                <Icon
-                                    name="caret-down-fill"
-                                    className={`submenu-icon ${subOpen[index]?"open":""}`}
-                                    title="Submenu"
-                                />
-                            )}
-                            {hasSubItems && subOpen[index] && (
-                                <Menu
-                                    data={item.subItems || []}
-                                    isOpen={subOpen[index]}
-                                    openType={openType}
-                                    parentRef={{ current: liRefs.current[index] }}
-                                    placement={placement === "left"?"left": "right"}
-                                    variant={variant}
-                                    className={className}
-                                    style={style}
-                                    depth={depth + 1}
-                                    separatorValue={separatorValue}
-                                    focusOnOpen={focusOnOpen}
-                                    onSelect={childOnSelect}
-                                    onKeyDown={onKeyDown}
-                                />
-                            )}
-                        </li>
-                    );
-                    else return (
-                        <li
-                            key={index}
-                            className={`menu-separator ${variant}`}
-                            role="separator"
-                        />
-                    );
-                }
-                )}
+                    const hasSubItems =
+                        item.subItems && item.subItems.length > 0;
+                    if (itemName !== separatorValue)
+                        return (
+                            <li
+                                key={index}
+                                ref={(el) => {
+                                    liRefs.current[index] = el;
+                                }}
+                                className={`menu-item ${variant} ${focusedIndex === index ? "focused" : ""}`}
+                                role="menuitem"
+                                aria-haspopup={hasSubItems ? "true" : undefined}
+                                aria-expanded={
+                                    hasSubItems
+                                        ? subOpen[index]
+                                            ? "true"
+                                            : "false"
+                                        : undefined
+                                }
+                                tabIndex={-1}
+                                onClick={(e) =>
+                                    handleItemClick(itemName, [index, depth], e)
+                                }
+                                onKeyDown={(e) =>
+                                    handleKeyDownSubMenu(
+                                        e,
+                                        itemName,
+                                        index,
+                                        depth,
+                                    )
+                                }
+                                onMouseEnter={() =>
+                                    handleOnMouseEnterSubMenu(index)
+                                }
+                                onMouseLeave={() => {
+                                    handleOnMouseLeaveSubMenu(index);
+                                }}
+                            >
+                                <div>
+                                    {itemIcon && (
+                                        <span aria-hidden="true">
+                                            {itemIcon}
+                                        </span>
+                                    )}
+                                    {item.svgIcon && (
+                                        <span
+                                            className="svg-icon"
+                                            aria-hidden="true"
+                                        >
+                                            {item.svgIcon}
+                                        </span>
+                                    )}
+                                    <span className="menu-item-name">
+                                        {itemName}
+                                    </span>
+                                </div>
+                                {itemShortcut && (
+                                    <span className="menu-item-shortcut">
+                                        {itemShortcut}
+                                    </span>
+                                )}
+                                {hasSubItems && (
+                                    <Icon
+                                        name="caret-down-fill"
+                                        className={`submenu-icon ${subOpen[index] ? "open" : ""}`}
+                                        title="Submenu"
+                                    />
+                                )}
+                                {hasSubItems && subOpen[index] && (
+                                    <Menu
+                                        data={item.subItems || []}
+                                        isOpen={subOpen[index]}
+                                        openType={openType}
+                                        parentRef={{
+                                            current: liRefs.current[index],
+                                        }}
+                                        placement={
+                                            placement === "left"
+                                                ? "left"
+                                                : "right"
+                                        }
+                                        variant={variant}
+                                        className={className}
+                                        style={style}
+                                        depth={depth + 1}
+                                        separatorValue={separatorValue}
+                                        focusOnOpen={focusOnOpen}
+                                        onSelect={childOnSelect}
+                                        onKeyDown={onKeyDown}
+                                    />
+                                )}
+                            </li>
+                        );
+                    else
+                        return (
+                            <li
+                                key={index}
+                                className={`menu-separator ${variant}`}
+                                role="separator"
+                            />
+                        );
+                })}
             </ul>
         </BodyAccess>
     );

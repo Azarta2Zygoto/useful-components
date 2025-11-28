@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useRef, useState } from "react";
+
 import Menu from "@/components/menu/menu";
 
 export default function MenuPage() {
@@ -11,27 +12,32 @@ export default function MenuPage() {
         { icon: "🔍", name: "Search", shortcut: "Ctrl+F" },
         { icon: "⚙️", name: "Settings", shortcut: "Ctrl+S" },
         { icon: "🚪", name: "---", shortcut: "Ctrl+L" },
-        { icon: "❓", name: "Help", shortcut: "F1", subItems: [
-            { name: "Documentation" },
-            { name: "Support" },
-            { name: "Feedback" },
-        ] },
+        {
+            icon: "❓",
+            name: "Help",
+            shortcut: "F1",
+            subItems: [
+                { name: "Documentation" },
+                { name: "Support" },
+                { name: "Feedback" },
+            ],
+        },
         { icon: "🚪", name: "Logout", shortcut: "Ctrl+L" },
     ];
 
     const handleSelect = (item: string, index?: [number, number]) => {
         setMenuOpen(false);
-    }
-
+    };
 
     return (
         <main>
             <h1>Menu Component</h1>
-            <button 
+            <button
                 className="button"
                 style={{ position: "relative" }}
                 ref={parentRef}
-                onClick={() => setMenuOpen(!menuOpen)}>
+                onClick={() => setMenuOpen(!menuOpen)}
+            >
                 {menuOpen ? "Close Menu" : "Open Menu"}
                 <Menu
                     data={menuData}

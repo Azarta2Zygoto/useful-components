@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Accordeon from "@/components/accordeon/accordeon";
 
+import Accordeon from "@/components/accordeon/accordeon";
 
 export default function AccordeonPage() {
     const [openSimple, setOpenSimple] = useState(false);
@@ -27,8 +27,9 @@ export default function AccordeonPage() {
                     title="Simple Accordeon"
                     isOpen={openSimple}
                     height={110}
-                    view="simple">
-                    <div style={{padding: "1rem"}}>
+                    view="simple"
+                >
+                    <div style={{ padding: "1rem" }}>
                         <p>This is the content of the accordeon.</p>
                         <p>You can put any JSX element here.</p>
                     </div>
@@ -49,8 +50,9 @@ export default function AccordeonPage() {
                     isOpen={openSimple2}
                     height={110}
                     type="inner"
-                    view="simple">
-                    <div style={{padding: "1rem"}}>
+                    view="simple"
+                >
+                    <div style={{ padding: "1rem" }}>
                         <p>This is the content of the accordeon.</p>
                         <p>You can put any JSX element here.</p>
                     </div>
@@ -60,29 +62,46 @@ export default function AccordeonPage() {
             <p>The accordeon can also be controlled by itself.</p>
             <div className="inner-component">
                 <Accordeon
-                    title={<span style={{fontWeight: "bold"}}>Icon View Accordeon</span>}
-                    view="icon">
-                    <div style={{padding: "1rem"}}>
+                    title={
+                        <span style={{ fontWeight: "bold" }}>
+                            Icon View Accordeon
+                        </span>
+                    }
+                    view="icon"
+                >
+                    <div style={{ padding: "1rem" }}>
                         <p>This is an accordeon with icon view.</p>
                         <p>Click the icon to toggle.</p>
                     </div>
                 </Accordeon>
                 <Accordeon
-                    title={<span style={{fontWeight: "bold"}}>Icon View Accordeon with another variant</span>}
+                    title={
+                        <span style={{ fontWeight: "bold" }}>
+                            Icon View Accordeon with another variant
+                        </span>
+                    }
                     type="inner"
-                    view="icon">
+                    view="icon"
+                >
                     <div>
-                        <p>This accordeon has less style to fit it more easily in our website.</p>
+                        <p>
+                            This accordeon has less style to fit it more easily
+                            in our website.
+                        </p>
                         <p>It only has a left border</p>
                     </div>
                 </Accordeon>
             </div>
             <h2>Card accordeon</h2>
-            <p>The accordeon can also have a card view. You can click wherever on the card, it will open the accordeon.</p>
+            <p>
+                The accordeon can also have a card view. You can click wherever
+                on the card, it will open the accordeon.
+            </p>
             <div className="inner-component">
                 <Accordeon
                     title="Card View Accordeon"
-                    view="card">
+                    view="card"
+                >
                     <div>
                         <p>This is an accordeon with card view.</p>
                     </div>
@@ -90,7 +109,8 @@ export default function AccordeonPage() {
                 <Accordeon
                     title="Card View Accordeon"
                     view="card"
-                    type="inner">
+                    type="inner"
+                >
                     <div>
                         <p>This is another accordeon with card view.</p>
                         <p>It has a different style.</p>

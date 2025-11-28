@@ -1,9 +1,16 @@
 "use client";
 
-import React, { JSX, useState, useRef, useEffect, useLayoutEffect } from "react";
-import BodyAccess from "../utils/bodyAccess";
+import React, {
+    JSX,
+    useEffect,
+    useLayoutEffect,
+    useRef,
+    useState,
+} from "react";
+
 import Overlay from "../overlay/overlay";
 import Tooltip from "../tooltip/tooltip";
+import BodyAccess from "../utils/bodyAccess";
 import Icon from "../utils/icon";
 import type { InputVariant } from "../utils/types";
 import "./menuSelect.css";
@@ -27,8 +34,8 @@ interface MenuSelectProps {
     backgroundColor?: string;
     onSelect: (value: string) => void;
     onKeyDown?: (event: React.KeyboardEvent) => void;
-    setCustomOption?:(name:string) => React.ReactNode;
-    setCustomList?: (index:number, name?:string) => React.ReactNode;
+    setCustomOption?: (name: string) => React.ReactNode;
+    setCustomList?: (index: number, name?: string) => React.ReactNode;
 }
 
 export default function MenuSelect({
@@ -50,24 +57,35 @@ export default function MenuSelect({
     onSelect,
     onKeyDown,
     setCustomOption,
-    setCustomList
+    setCustomList,
 }: MenuSelectProps): JSX.Element {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const maxHeight = 200;
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [isOpenAnimation, setIsOpenAnimation] = useState<boolean|null>(null);
+    const [isOpenAnimation, setIsOpenAnimation] = useState<boolean | null>(
+        null,
+    );
     const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
     const [showBg, setShowBg] = useState<boolean>(true);
-    const [menuSelectPosition, setMenuSelectPosition] = useState<{top:number, left:number}>({top:0, left:0});
+    const [menuSelectPosition, setMenuSelectPosition] = useState<{
+        top: number;
+        left: number;
+    }>({ top: 0, left: 0 });
 
     useLayoutEffect(() => {
         if (!isOpen || !buttonRef.current) return;
         const update = () => {
             const rect = buttonRef.current!.getBoundingClientRect();
             const exactHeight = Math.min(maxHeight, 6 + options.length * 32);
-            const elementTop = Math.min(rect.bottom + window.scrollY, window.innerHeight - exactHeight + window.scrollY);
-            setMenuSelectPosition({ top: elementTop, left: rect.left + window.scrollX });
+            const elementTop = Math.min(
+                rect.bottom + window.scrollY,
+                window.innerHeight - exactHeight + window.scrollY,
+            );
+            setMenuSelectPosition({
+                top: elementTop,
+                left: rect.left + window.scrollX,
+            });
         };
         update();
         window.addEventListener("resize", update);
@@ -79,23 +97,22 @@ export default function MenuSelect({
     }, [isOpen, options.length]);
 
     useEffect(() => {
-        if (options.length === 0||typeof selectedOption!=="string") return;
+        if (options.length === 0 || typeof selectedOption !== "string") return;
 
         const initialIndex = options.indexOf(selectedOption);
         if (initialIndex !== -1) {
             setFocusedIndex(initialIndex);
-        }
-        else {
+        } else {
             setFocusedIndex(0);
         }
     }, [options, selectedOption, isOpen]);
 
     useEffect(() => {
-        if (isOpen && selectedOption ==="") {
+        if (isOpen && selectedOption === "") {
             const timeout = setTimeout(() => setShowBg(true), 140); // 500ms delay
             return () => clearTimeout(timeout);
         } else {
-            if (selectedOption ==="") {
+            if (selectedOption === "") {
                 setShowBg(false);
             } else {
                 setShowBg(true);
@@ -110,7 +127,7 @@ export default function MenuSelect({
             setIsOpen(false);
             setIsOpenAnimation(null);
         }, 200);
-    };
+    }
 
     function handleKeyDown(e: React.KeyboardEvent) {
         onKeyDown?.(e);
@@ -127,9 +144,10 @@ export default function MenuSelect({
         }
 
         const key = e.key.toLowerCase();
-        if (key.length === 1) { // If it's a character key
-            const matchingIndex = options.findIndex(opt => 
-                opt.toLowerCase().startsWith(key)
+        if (key.length === 1) {
+            // If it's a character key
+            const matchingIndex = options.findIndex((opt) =>
+                opt.toLowerCase().startsWith(key),
             );
             if (matchingIndex >= 0) {
                 setFocusedIndex(matchingIndex);
@@ -137,7 +155,9 @@ export default function MenuSelect({
         }
 
         if (e.key === "ArrowDown") {
-            setFocusedIndex((i) => (i === null ? 0 : Math.min(i + 1, options.length - 1)));
+            setFocusedIndex((i) =>
+                i === null ? 0 : Math.min(i + 1, options.length - 1),
+            );
             e.preventDefault();
         } else if (e.key === "ArrowUp") {
             setFocusedIndex((i) => (i === null ? 0 : Math.max(i - 1, 0)));
@@ -155,7 +175,7 @@ export default function MenuSelect({
             }
             e.preventDefault();
         }
-    };
+    }
 
     function handleOpen() {
         setIsOpen(true);
@@ -174,22 +194,25 @@ export default function MenuSelect({
 
     return (
         <div
-            className={`menu-select-container ${boxClassName?? ""}`}
+            className={`menu-select-container ${boxClassName ?? ""}`}
             style={boxStyle}
         >
-            {isOpen&&(
+            {isOpen && (
                 <Overlay
                     id={`${id}-overlay`}
                     color="rgba(0, 0, 0, 0)"
                     onClose={handleOverlayClose}
                 />
             )}
-            <Tooltip title={label||""} active={tooltip??false}>
+            <Tooltip
+                title={label || ""}
+                active={tooltip ?? false}
+            >
                 <button
                     ref={buttonRef}
                     type="button"
                     role="button"
-                    className={`menu-select-button-${variant}${required&&selectedOption===""?" invalid ":""}${className?" "+className:""}`}
+                    className={`menu-select-button-${variant}${required && selectedOption === "" ? " invalid " : ""}${className ? " " + className : ""}`}
                     style={{
                         ...(hideIcon ? { paddingRight: "10px" } : {}),
                         ...style,
@@ -199,55 +222,79 @@ export default function MenuSelect({
                     aria-disabled={disabled}
                     aria-haspopup="listbox"
                     aria-expanded={isOpen}
-                    aria-labelledby={id+'-label'}
+                    aria-labelledby={id + "-label"}
                     onClick={handleOpen}
                     onKeyDown={handleKeyDown}
                 >
-                    {setCustomOption ? setCustomOption(selectedOption) : selectedOption}
-                    {!hideIcon&&<Icon name="caret-down-fill" className={`menu-select-icon ${isOpenAnimation ? "open" : ""}`} />}
+                    {setCustomOption
+                        ? setCustomOption(selectedOption)
+                        : selectedOption}
+                    {!hideIcon && (
+                        <Icon
+                            name="caret-down-fill"
+                            className={`menu-select-icon ${isOpenAnimation ? "open" : ""}`}
+                        />
+                    )}
                 </button>
             </Tooltip>
-            {label&&!tooltip&&(
+            {label && !tooltip && (
                 <label
-                    id={id+'-label'}
-                    className={`menu-select-label ${floatingLabel ? "floating" : ""} ${selectedOption===""&&!isOpen ? "void" : ""}`}
+                    id={id + "-label"}
+                    className={`menu-select-label ${floatingLabel ? "floating" : ""} ${selectedOption === "" && !isOpen ? "void" : ""}`}
                     htmlFor={id}
                     style={{
-                        backgroundImage: showBg ? `linear-gradient(to bottom, ${backgroundColor} 0% 80%, transparent 80%)` : "none",
-                    }}>
+                        backgroundImage: showBg
+                            ? `linear-gradient(to bottom, ${backgroundColor} 0% 80%, transparent 80%)`
+                            : "none",
+                    }}
+                >
                     {label}
-                    {required && <span aria-hidden="true" style={{ color: "red", margin:"0 5px" }}>&nbsp;*</span>}
+                    {required && (
+                        <span
+                            aria-hidden="true"
+                            style={{ color: "red", margin: "0 5px" }}
+                        >
+                            &nbsp;*
+                        </span>
+                    )}
                 </label>
             )}
-            {isOpen&&(
+            {isOpen && (
                 <BodyAccess>
                     <ul
                         role="listbox"
-                        className={`menu-select-list ${isOpenAnimation ? "open" : ""} ${isOpenAnimation===false? "closing" : ""}`}
-                        aria-labelledby={id + '-label'}
+                        className={`menu-select-list ${isOpenAnimation ? "open" : ""} ${isOpenAnimation === false ? "closing" : ""}`}
+                        aria-labelledby={id + "-label"}
                         tabIndex={-1}
-                        aria-activedescendant={focusedIndex !== null ? `${id}-option-${focusedIndex}` : undefined}
+                        aria-activedescendant={
+                            focusedIndex !== null
+                                ? `${id}-option-${focusedIndex}`
+                                : undefined
+                        }
                         style={{
                             top: menuSelectPosition.top,
                             left: menuSelectPosition.left,
                             minWidth: buttonRef.current?.offsetWidth,
-                            maxHeight: `min(${maxHeight}px, calc(100svh - 20px))`
+                            maxHeight: `min(${maxHeight}px, calc(100svh - 20px))`,
                         }}
                     >
-                        {options.length>0 && options.map((option, idx) => (
-                            <li
-                                key={option}
-                                id={`${id}-option-${idx}`}
-                                role="option"
-                                className={`menu-select-option ${focusedIndex === idx ? "focused" : ""} ${selectedOption === option ? "selected" : ""}`}
-                                aria-selected={focusedIndex === idx}
-                                tabIndex={focusedIndex === idx ? 0 : -1}
-                                onClick={() => handleOptionClick(option)}
-                                onMouseEnter={() => setFocusedIndex(idx)}
+                        {options.length > 0 &&
+                            options.map((option, idx) => (
+                                <li
+                                    key={option}
+                                    id={`${id}-option-${idx}`}
+                                    role="option"
+                                    className={`menu-select-option ${focusedIndex === idx ? "focused" : ""} ${selectedOption === option ? "selected" : ""}`}
+                                    aria-selected={focusedIndex === idx}
+                                    tabIndex={focusedIndex === idx ? 0 : -1}
+                                    onClick={() => handleOptionClick(option)}
+                                    onMouseEnter={() => setFocusedIndex(idx)}
                                 >
-                                {setCustomList ? setCustomList(idx) : option}
-                            </li>
-                        ))}
+                                    {setCustomList
+                                        ? setCustomList(idx)
+                                        : option}
+                                </li>
+                            ))}
                         {options.length === 0 && (
                             <li
                                 className="menu-select-option empty"
@@ -255,8 +302,9 @@ export default function MenuSelect({
                                 aria-selected="false"
                                 aria-disabled="true"
                                 tabIndex={-1}
-                                style={{ cursor: "not-allowed" }}>
-                                No options available    
+                                style={{ cursor: "not-allowed" }}
+                            >
+                                No options available
                             </li>
                         )}
                     </ul>

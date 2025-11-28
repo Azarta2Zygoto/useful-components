@@ -1,15 +1,17 @@
 "use client";
 
-import React, { JSX, Fragment } from "react";
-import MenuSelect from "./menuSelect";
-import { InputVariant } from "../utils/types";
-import Icon from "../utils/icon";
+import React, { Fragment, JSX } from "react";
+
 import * as FlagIcons from "country-flag-icons/react/3x2";
+
+import Icon from "../utils/icon";
+import { InputVariant } from "../utils/types";
 import "./flagSelect.css";
+import MenuSelect from "./menuSelect";
 
 interface FlagSelectProps {
     id: string;
-    countries: {name:string, code:string}[];
+    countries: { name: string; code: string }[];
     selectCountry: string;
     flagOnly?: boolean;
     variant?: InputVariant;
@@ -43,17 +45,18 @@ export default function FlagSelect({
     boxStyle,
     style,
     tooltip,
-    variant="outlined",
+    variant = "outlined",
     className,
     backgroundColor = "var(--bg)",
     onSelect,
-    onKeyDown
+    onKeyDown,
 }: FlagSelectProps): JSX.Element {
-
-    function setCountryFlag(index:number):React.ReactNode {
+    function setCountryFlag(index: number): React.ReactNode {
         const countryCode = countries[index].code.toUpperCase();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const FlagComponent = (FlagIcons as Record<string, React.ComponentType<any>>)[countryCode];
+        const FlagComponent = (
+            FlagIcons as Record<string, React.ComponentType<any>>
+        )[countryCode];
 
         if (!FlagComponent) {
             return (
@@ -75,12 +78,14 @@ export default function FlagSelect({
         );
     }
 
-    function setCountryFlagOption(name:string):React.ReactNode {
-        const country = countries.find(c=>c.name === name);
+    function setCountryFlagOption(name: string): React.ReactNode {
+        const country = countries.find((c) => c.name === name);
         if (!country) return <span className="flag-placeholder" />;
         const countryCode = country.code;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const FlagComponent = (FlagIcons as Record<string, React.ComponentType<any>>)[countryCode];
+        const FlagComponent = (
+            FlagIcons as Record<string, React.ComponentType<any>>
+        )[countryCode];
         if (!FlagComponent) {
             return (
                 <Fragment>
@@ -103,7 +108,7 @@ export default function FlagSelect({
     return (
         <MenuSelect
             id={id}
-            options={countries.map(c=>c.name)}
+            options={countries.map((c) => c.name)}
             selectedOption={selectCountry}
             variant={flagOnly ? "invisible" : variant}
             tooltip={flagOnly ? undefined : tooltip}
@@ -121,8 +126,9 @@ export default function FlagSelect({
             boxStyle={boxStyle}
             style={{
                 ...style,
-                paddingRight: flagOnly ? 0 : undefined,}}
+                paddingRight: flagOnly ? 0 : undefined,
+            }}
             className={className}
         />
-    )
+    );
 }

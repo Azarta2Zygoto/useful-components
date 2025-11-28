@@ -1,4 +1,4 @@
-:root{
+:root {
     --bg2: #161a1f;
 }
 .sub-body {
@@ -39,7 +39,7 @@ p {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;           /* allow children to wrap to next line */
+    flex-wrap: wrap; /* allow children to wrap to next line */
     gap: 16px;
     width: calc(100% - 62px);
     padding: 30px 30px;
@@ -47,11 +47,13 @@ p {
     border: 1px solid var(--fg);
     border-radius: 20px;
     background-color: #161a1f;
-    
+
     box-shadow: 1px 1px 3px var(--fg);
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s;
 }
-.inner-component-description{
+.inner-component-description {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -115,10 +117,10 @@ p {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 5px 10px!important;
-    margin: 5px!important;
-    background-color: #5c5454!important;
-    border: solid 1px var(--fg)!important;
-    box-shadow: 1px 1px 3px var(--fg)!important;
-    border-radius: 10px!important;
+    padding: 5px 10px !important;
+    margin: 5px !important;
+    background-color: #5c5454 !important;
+    border: solid 1px var(--fg) !important;
+    box-shadow: 1px 1px 3px var(--fg) !important;
+    border-radius: 10px !important;
 }

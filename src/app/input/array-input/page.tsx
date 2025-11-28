@@ -1,15 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+
 import ArrayInput from "@/components/input/arrayInput";
 import { InfoComponent } from "@/self/moreInfo";
 
-const arrayValues = [
-    [],
-    [],
-    [],
-    [],
-]
+const arrayValues = [[], [], [], []];
 
 const comboboxOptions = [
     "banana",
@@ -26,21 +22,26 @@ const comboboxOptions = [
 ];
 
 export default function ArrayInputPage() {
-    const [arrayValue, setArrayValue] = useState<(string[])[]>(arrayValues);
+    const [arrayValue, setArrayValue] = useState<string[][]>(arrayValues);
 
-    const handleInputChange = (value:string[], index:number) => {
-        setArrayValue(prevValues => {
+    const handleInputChange = (value: string[], index: number) => {
+        setArrayValue((prevValues) => {
             const newValues = [...prevValues];
             newValues[index] = value;
             return newValues;
         });
-    }
+    };
 
     return (
         <main>
             <h1>Array Input</h1>
-            <p>Array Input allows user to enter multiple values in a single input component.<br/>
-            You can use it with all different type of input including the custom number input.</p>
+            <p>
+                Array Input allows user to enter multiple values in a single
+                input component.
+                <br />
+                You can use it with all different type of input including the
+                custom number input.
+            </p>
             <h2>Basic Array Input</h2>
             <div className="inner-component">
                 <ArrayInput
@@ -52,11 +53,21 @@ export default function ArrayInputPage() {
                 />
             </div>
             <InfoComponent>
-                <p>The Array Input component is designed to handle multiple input values efficiently. It provides a user-friendly interface for adding, removing, and managing a list of inputs.</p>
+                <p>
+                    The Array Input component is designed to handle multiple
+                    input values efficiently. It provides a user-friendly
+                    interface for adding, removing, and managing a list of
+                    inputs.
+                </p>
             </InfoComponent>
             <h2>Without reset</h2>
-            <p>You can disable the reset button if you don&apos;t want the user to make the error to reset the input.<br/>
-            It is usefull mainly when you the user need to enter a large number of element</p>
+            <p>
+                You can disable the reset button if you don&apos;t want the user
+                to make the error to reset the input.
+                <br />
+                It is usefull mainly when you the user need to enter a large
+                number of element
+            </p>
             <div className="inner-component">
                 <ArrayInput
                     id="array-input-2"
@@ -68,7 +79,11 @@ export default function ArrayInputPage() {
                 />
             </div>
             <h2>Custom box style</h2>
-            <p>You can customize the style of the boxes containing the values by using the <code>boxStyle</code> and <code>boxClassName</code> props.</p>
+            <p>
+                You can customize the style of the boxes containing the values
+                by using the <code>boxStyle</code> and <code>boxClassName</code>{" "}
+                props.
+            </p>
             <div className="inner-component">
                 <ArrayInput
                     id="array-input-3"
@@ -93,7 +108,10 @@ export default function ArrayInputPage() {
                 />
             </div>
             <InfoComponent>
-                <p>You can&apos;t combine it with a select menu, use a multiple select menu instead</p>
+                <p>
+                    You can&apos;t combine it with a select menu, use a multiple
+                    select menu instead
+                </p>
             </InfoComponent>
         </main>
     );

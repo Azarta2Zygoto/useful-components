@@ -1,6 +1,8 @@
-import MenuSelect from "@/components/menuSelect/menuSelect";
-import { useGlobal } from "./globalProvider";
 import React, { JSX } from "react";
+
+import { useGlobal } from "./globalProvider";
+
+import MenuSelect from "@/components/menuSelect/menuSelect";
 
 export interface ComponentSelectProps {
     options: string[];
@@ -21,19 +23,17 @@ export default function ComponentSelect({
     id,
     children,
     style,
-    show = true
-}: ComponentSelectProps) : JSX.Element {
+    show = true,
+}: ComponentSelectProps): JSX.Element {
     const { width } = useGlobal();
     return (
-        <div className="inner-component"
-            style={style}>
-            {show&&(
-                <span></span>
-            )}
-            <div className="inner-component-description">
-                {children}
-            </div>
-            {show&&(
+        <div
+            className="inner-component"
+            style={style}
+        >
+            {show && <span></span>}
+            <div className="inner-component-description">{children}</div>
+            {show && (
                 <MenuSelect
                     id={id}
                     boxClassName="inner-component-select"
@@ -43,7 +43,7 @@ export default function ComponentSelect({
                     backgroundColor="var(--bg2)"
                     floatingLabel
                     label={label}
-                    boxStyle={{margin:width<600?"0 auto":undefined}}
+                    boxStyle={{ margin: width < 600 ? "0 auto" : undefined }}
                 />
             )}
         </div>

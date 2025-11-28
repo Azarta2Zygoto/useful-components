@@ -3,9 +3,9 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    min-width:250px;
-    max-width:250px;
-    height:fit-content;
+    min-width: 250px;
+    max-width: 250px;
+    height: fit-content;
     padding: 10px;
     border: solid 1px var(--border-color);
     border-radius: 10px;
@@ -15,7 +15,7 @@
 }
 .display-info {
     display: flex;
-    width:fit-content;
+    width: fit-content;
     flex-direction: row;
     gap: 5px;
     color: var(--fg);
@@ -23,8 +23,8 @@
 
 .tooltip {
     display: inline-block;
-    width:fit-content;
-    height:fit-content;
+    width: fit-content;
+    height: fit-content;
 }
 .tooltip-content {
     z-index: 3;

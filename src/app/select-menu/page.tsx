@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment, useState } from "react";
+
 import MenuSelect from "@/components/menuSelect/menuSelect";
 
 const selectOptionsList = [
@@ -16,8 +17,8 @@ const selectOptionsList = [
     "",
     "",
     "apple",
-    "apple"
-]
+    "apple",
+];
 
 const selectOptions = [
     "banana",
@@ -29,44 +30,57 @@ const selectOptions = [
     "strawberry",
     "blueberry",
     "watermelon",
-    "kiwi"
-]
+    "kiwi",
+];
 
-export default function MenuSelectPage(){
-    const [selectedOption, setSelectedOption] = useState<string[]>(selectOptionsList);
+export default function MenuSelectPage() {
+    const [selectedOption, setSelectedOption] =
+        useState<string[]>(selectOptionsList);
 
-    const handleInputChange = (newValue:string, index:number) => {
-        setSelectedOption(prevValues => {
+    const handleInputChange = (newValue: string, index: number) => {
+        setSelectedOption((prevValues) => {
             const newValues = [...prevValues];
             newValues[index] = newValue;
             return newValues;
         });
     };
 
-    function customOptions(option:string){
+    function customOptions(option: string) {
         return (
             <Fragment>
                 <i className="bi bi-emoji-smile"></i>&nbsp;
-                <span style={{textTransform:"capitalize"}}>{option}</span>
+                <span style={{ textTransform: "capitalize" }}>{option}</span>
             </Fragment>
-        )
+        );
     }
 
-    function customListOptions(index:number){
+    function customListOptions(index: number) {
         const value = selectOptions[index];
         return (
             <Fragment>
                 {/* eslint-disable-next-line @next/next/no-img-element*/}
-                <img src={`/useful-components/icons/${value}-icon.svg`} alt={value} style={{width:"20px", height:"20px", verticalAlign:"middle"}}/>
-                &nbsp;<span style={{textTransform:"capitalize"}}>{value}</span>
+                <img
+                    src={`/useful-components/icons/${value}-icon.svg`}
+                    alt={value}
+                    style={{
+                        width: "20px",
+                        height: "20px",
+                        verticalAlign: "middle",
+                    }}
+                />
+                &nbsp;
+                <span style={{ textTransform: "capitalize" }}>{value}</span>
             </Fragment>
-        )
+        );
     }
-        
+
     return (
         <main>
             <h1>Select Menu</h1>
-            <p>A select menu allows the user to select information defined but the owner of the website</p>
+            <p>
+                A select menu allows the user to select information defined but
+                the owner of the website
+            </p>
 
             <h2>Basic select menu</h2>
             <div className="inner-component">
@@ -90,7 +104,10 @@ export default function MenuSelectPage(){
             </div>
 
             <h2>Different variant</h2>
-            <p>Select menu can have different variants : standard, filled, compact and outlined.</p>
+            <p>
+                Select menu can have different variants : standard, filled,
+                compact and outlined.
+            </p>
             <div className="inner-component">
                 <MenuSelect
                     id="example-select-compact"
@@ -121,9 +138,12 @@ export default function MenuSelectPage(){
                 />
             </div>
 
-            
             <h2>Without icon</h2>
-            <p>If you want, you can hide the icon. However, it doesn&apos;t help user to see the difference between a select menu and an input.</p>
+            <p>
+                If you want, you can hide the icon. However, it doesn&apos;t
+                help user to see the difference between a select menu and an
+                input.
+            </p>
             <div className="inner-component">
                 <MenuSelect
                     id="example-select-icon"
@@ -160,9 +180,13 @@ export default function MenuSelectPage(){
                 />
             </div>
             <h2>Special variant - invisible</h2>
-            <p>The invisible variant is used when you want to integrate the select menu in a text or a sentence.</p>
+            <p>
+                The invisible variant is used when you want to integrate the
+                select menu in a text or a sentence.
+            </p>
             <div className="inner-component">
-                I like to eat&nbsp;: <MenuSelect
+                I like to eat&nbsp;:{" "}
+                <MenuSelect
                     id="example-select-invisible"
                     options={selectOptions}
                     variant="invisible"
@@ -173,9 +197,13 @@ export default function MenuSelectPage(){
                 />
             </div>
             <h2>Tooltip</h2>
-            <p>When uses with invisible or for other reason, it is possible to attach a tooltip to the select menu</p>
+            <p>
+                When uses with invisible or for other reason, it is possible to
+                attach a tooltip to the select menu
+            </p>
             <div className="inner-component">
-                I like to eat&nbsp;: <MenuSelect
+                I like to eat&nbsp;:{" "}
+                <MenuSelect
                     id="example-select-invisible-tooltip"
                     label="Invisible with tooltip"
                     options={selectOptions}

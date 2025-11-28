@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column-reverse;
     width: fit-content;
-    margin:5px 10px;
+    margin: 5px 10px;
 }
 .menu-select-button-outlined {
     position: relative;
@@ -20,17 +20,20 @@
     box-sizing: border-box;
     border: 2px solid var(--input-border-color);
     background-color: var(--input-bg-color);
-    color:var(--fg);
+    color: var(--fg);
     cursor: pointer;
-    user-select:text;
+    user-select: text;
     overflow: hidden;
     flex-wrap: wrap; /* Allow content to wrap */
     gap: 2px;
-    
+
     outline: 1px solid transparent;
     outline-offset: -3px;
     box-shadow: 0 0 0 3px #1167b10f;
-    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s,
+        background-color 0.3s;
 }
 .menu-select-button-outlined:hover:not(:disabled) {
     outline: 1px solid var(--input-focus-border-color);
@@ -54,10 +57,11 @@
     }
 }
 .menu-select-button-outlined.invalid:not(:disabled) {
-    background-color: var(--invalid-bg-color)!important;
-    border-color: var(--invalid-border-color)!important;
+    background-color: var(--invalid-bg-color) !important;
+    border-color: var(--invalid-border-color) !important;
 }
-.menu-select-button-outlined.invalid:not(:disabled) ~ .menu-select-label.floating {
+.menu-select-button-outlined.invalid:not(:disabled)
+    ~ .menu-select-label.floating {
     color: var(--invalid-border-color);
 }
 .menu-select-button-standard {
@@ -76,16 +80,19 @@
     border: none;
     border-bottom: 2px solid var(--selected-bg-color);
     background-color: transparent;
-    color:var(--fg);
+    color: var(--fg);
     cursor: pointer;
-    user-select:text;
+    user-select: text;
     overflow: hidden;
     flex-wrap: wrap; /* Allow content to wrap */
     gap: 2px;
-    
+
     outline: none;
     box-shadow: 0 2px 10px #1167b10f;
-    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s,
+        background-color 0.3s;
 }
 .menu-select-button-standard:hover:not(:disabled) {
     border-bottom-color: var(--selected-tabuled-hover-bg-color);
@@ -93,7 +100,7 @@
 .menu-select-button-standard:focus {
     border-bottom-color: var(--selected-tabuled-hover-bg-color);
     box-shadow: 0 0 0 3px var(--border-color-shadow-special);
-    outline:none;
+    outline: none;
 }
 .menu-select-button-standard:focus ~ .menu-select-label.floating {
     color: var(--add-total-color);
@@ -107,10 +114,11 @@
     }
 }
 .menu-select-button-standard.invalid:not(:disabled) {
-    background-color: var(--invalid-bg-color)!important;
-    border-color: var(--invalid-border-color)!important;
+    background-color: var(--invalid-bg-color) !important;
+    border-color: var(--invalid-border-color) !important;
 }
-.menu-select-button-standard.invalid:not(:disabled) ~ .menu-select-label.floating {
+.menu-select-button-standard.invalid:not(:disabled)
+    ~ .menu-select-label.floating {
     color: var(--invalid-border-color);
 }
 .menu-select-button-compact {
@@ -129,15 +137,18 @@
     border: none;
     border: 1px solid var(--selected-bg-color);
     background-color: var(--bg);
-    color:var(--fg);
+    color: var(--fg);
     cursor: pointer;
-    user-select:text;
+    user-select: text;
     overflow: hidden;
     flex-wrap: wrap; /* Allow content to wrap */
     gap: 2px;
-    
+
     box-shadow: 0 2px 10px #1167b10f;
-    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s,
+        background-color 0.3s;
 }
 .menu-select-button-compact:hover:not(:disabled) {
     border-color: var(--selected-tabuled-hover-bg-color);
@@ -158,10 +169,11 @@
     }
 }
 .menu-select-button-compact.invalid:not(:disabled) {
-    background-color: var(--invalid-bg-color)!important;
-    border-color: var(--invalid-border-color)!important;
+    background-color: var(--invalid-bg-color) !important;
+    border-color: var(--invalid-border-color) !important;
 }
-.menu-select-button-compact.invalid:not(:disabled) ~ .menu-select-label.floating {
+.menu-select-button-compact.invalid:not(:disabled)
+    ~ .menu-select-label.floating {
     color: var(--invalid-border-color);
 }
 
@@ -180,15 +192,18 @@
     box-sizing: border-box;
     border: none;
     background-color: var(--input-bg-color);
-    color:var(--fg);
+    color: var(--fg);
     cursor: pointer;
-    user-select:text;
+    user-select: text;
     overflow: hidden;
     flex-wrap: wrap; /* Allow content to wrap */
     gap: 2px;
-    
+
     box-shadow: 0 0 0 3px #1167b10f;
-    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s,
+        background-color 0.3s;
 }
 .menu-select-button-filled:hover:not(:disabled) {
     background-color: var(--hover-bg-color);
@@ -210,10 +225,11 @@
     }
 }
 .menu-select-button-filled.invalid:not(:disabled) {
-    background-color: var(--invalid-bg-color)!important;
-    border-color: var(--invalid-border-color)!important;
+    background-color: var(--invalid-bg-color) !important;
+    border-color: var(--invalid-border-color) !important;
 }
-.menu-select-button-filled.invalid:not(:disabled) ~ .menu-select-label.floating {
+.menu-select-button-filled.invalid:not(:disabled)
+    ~ .menu-select-label.floating {
     color: var(--invalid-border-color);
 }
 
@@ -226,18 +242,21 @@
     width: fit-content;
     font-size: 16px;
     padding: 0 25px 0 0;
-    margin:0;
+    margin: 0;
     box-sizing: border-box;
     border: none;
     background-color: transparent;
-    color:var(--fg);
+    color: var(--fg);
     cursor: pointer;
-    user-select:text;
+    user-select: text;
     overflow: hidden;
     flex-wrap: wrap; /* Allow content to wrap */
     gap: 2px;
-    
-    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s,
+        background-color 0.3s;
 }
 .menu-select-button-filled:hover:not(:disabled) {
     background-color: transparent;
@@ -259,14 +278,15 @@
     }
 }
 .menu-select-button-filled.invalid:not(:disabled) {
-    background-color: var(--invalid-bg-color)!important;
-    border-color: var(--invalid-border-color)!important;
+    background-color: var(--invalid-bg-color) !important;
+    border-color: var(--invalid-border-color) !important;
 }
-.menu-select-button-filled.invalid:not(:disabled) ~ .menu-select-label.floating {
+.menu-select-button-filled.invalid:not(:disabled)
+    ~ .menu-select-label.floating {
     color: var(--invalid-border-color);
 }
 
-.menu-select-icon{
+.menu-select-icon {
     position: absolute;
     right: 5px;
     top: 50%;
@@ -282,7 +302,7 @@
     position: absolute;
     top: calc(100%);
     left: 0;
-    min-width:calc(100% - 25px);
+    min-width: calc(100% - 25px);
     width: fit-content;
     max-width: calc(100vw - 25px);
     max-height: min(200px, calc(100svh - 20px));
@@ -312,7 +332,7 @@
 
 .menu-select-option {
     display: flex;
-    align-items: center;    
+    align-items: center;
     height: 32px;
     width: calc(100% - 30px);
     padding: 0 15px;
@@ -323,7 +343,7 @@
 .menu-select-option:not(.empty):hover {
     background-color: var(--hover-bg-color);
 }
-.menu-select-option.focused, 
+.menu-select-option.focused,
 .menu-select-option.focused:hover {
     background-color: var(--focus-bg-color);
 }
@@ -346,7 +366,7 @@
     width: fit-content; /* Let it size to content */
     max-width: calc(100% - 30px); /* Prevent overflow */
     padding: 0 8px 0 2px;
-    margin:0;
+    margin: 0;
     font-size: 12px;
     font-style: normal;
     pointer-events: none;

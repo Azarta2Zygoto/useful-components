@@ -1,13 +1,14 @@
 "use client";
 
-import { JSX, useState, useEffect, Fragment } from "react";
+import { Fragment, JSX, useEffect, useState } from "react";
+
 import Box from "../box/box";
-import Icon from "../utils/icon";
 import Combobox from "../combobox/combobox";
-import FloatingLabelInput from "./input";
-import NumberInput from "./numberInput";
+import Icon from "../utils/icon";
 import type { InputVariant } from "../utils/types";
-import "./input.css"
+import FloatingLabelInput from "./input";
+import "./input.css";
+import NumberInput from "./numberInput";
 
 interface ArrayInputProps {
     id: string;
@@ -35,7 +36,7 @@ interface ArrayInputProps {
     boxStyle?: React.CSSProperties;
     boxClassName?: string;
     style?: React.CSSProperties;
-    getValues: (values:string[]) => void;
+    getValues: (values: string[]) => void;
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -43,7 +44,7 @@ export default function ArrayInput({
     id,
     values,
     placeholder,
-    type="text",
+    type = "text",
     variant = "outlined",
     className,
     required,
@@ -66,18 +67,17 @@ export default function ArrayInput({
     style,
     maxElements,
     getValues,
-    onKeyDown
-}:ArrayInputProps): JSX.Element {
+    onKeyDown,
+}: ArrayInputProps): JSX.Element {
     const [currentValue, setCurrentValue] = useState<string>("");
     const [currentValues, setCurrentValues] = useState<string[]>(values);
     const [valueChange, setValueChange] = useState<string>("");
-
 
     useEffect(() => {
         setCurrentValues(values);
     }, [values]);
 
-    const handleInputChange = (newValue:string) => {
+    const handleInputChange = (newValue: string) => {
         setCurrentValue(newValue);
     };
     const handleAddInput = () => {
@@ -88,82 +88,94 @@ export default function ArrayInput({
         setCurrentValues(newValues);
         setCurrentValue("");
         getValues(newValues);
-    }
+    };
     const handleRemoveInput = (e: React.MouseEvent, value: string) => {
         e.stopPropagation();
         const newValues = currentValues.filter((val) => val !== value);
         getValues(newValues);
-    }
+    };
     const handleModifyInput = (value: string) => {
         setCurrentValue(value);
         setValueChange(value);
-    }
+    };
 
     const handleValidateChange = () => {
         if (currentValue.trim() === "") return;
-        if (currentValues.includes(currentValue.trim())&&currentValue.trim()!==valueChange) return;
-        const newValues = currentValues.map((val) => val === valueChange ? currentValue.trim() : val);
+        if (
+            currentValues.includes(currentValue.trim()) &&
+            currentValue.trim() !== valueChange
+        )
+            return;
+        const newValues = currentValues.map((val) =>
+            val === valueChange ? currentValue.trim() : val,
+        );
         setCurrentValues(newValues);
         setCurrentValue("");
         setValueChange("");
         getValues(newValues);
-    }
+    };
 
     const handleStopChange = () => {
         setValueChange("");
-    }
+    };
 
     const handleReset = () => {
         setCurrentValue("");
         setValueChange("");
         getValues([]);
-    }
+    };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         onKeyDown?.(e);
-        if (e.key === 'Enter') {
+        if (e.key === "Enter") {
             e.preventDefault();
             if (valueChange === "") {
                 handleAddInput();
-            }
-            else {
+            } else {
                 handleValidateChange();
             }
         }
-        if (e.key === 'Escape' && valueChange !== "") {
+        if (e.key === "Escape" && valueChange !== "") {
             e.preventDefault();
             handleStopChange();
         }
-    }
+    };
 
     return (
-        <div className={`array-input-container ${className ?? ""}`} style={style}>
+        <div
+            className={`array-input-container ${className ?? ""}`}
+            style={style}
+        >
             <div className="array-input-label">
-                {(type==="tel"||type==="text"||type==="email"||type==="url")&&floatingLabel&&(
-                    <FloatingLabelInput
-                        id={id}
-                        type={type}
-                        value={currentValue}
-                        variant={variant}
-                        placeholder={placeholder + (required?" *":"")}
-                        className={`${required&&currentValues.length===0?" invalid ":""} ${className || ''}`}
-                        disabled={disabled}
-                        autoComplete={autoComplete}
-                        size={size}
-                        pattern={pattern}
-                        minLength={minLength}
-                        maxLength={maxLength}
-                        getChange={(e)=>handleInputChange(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                    />
-                )}
-                {type!=="number"&&!floatingLabel&&(
+                {(type === "tel" ||
+                    type === "text" ||
+                    type === "email" ||
+                    type === "url") &&
+                    floatingLabel && (
+                        <FloatingLabelInput
+                            id={id}
+                            type={type}
+                            value={currentValue}
+                            variant={variant}
+                            placeholder={placeholder + (required ? " *" : "")}
+                            className={`${required && currentValues.length === 0 ? " invalid " : ""} ${className || ""}`}
+                            disabled={disabled}
+                            autoComplete={autoComplete}
+                            size={size}
+                            pattern={pattern}
+                            minLength={minLength}
+                            maxLength={maxLength}
+                            getChange={(e) => handleInputChange(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                        />
+                    )}
+                {type !== "number" && !floatingLabel && (
                     <input
                         id={id}
                         type={type}
                         value={currentValue}
-                        placeholder={placeholder + (required?" *":"")}
-                        className={`input-${variant}${required&&currentValues.length===0?" invalid ":""} ${className || ''}`}
+                        placeholder={placeholder + (required ? " *" : "")}
+                        className={`input-${variant}${required && currentValues.length === 0 ? " invalid " : ""} ${className || ""}`}
                         disabled={disabled}
                         autoComplete={autoComplete}
                         size={size}
@@ -171,17 +183,25 @@ export default function ArrayInput({
                         pattern={pattern}
                         minLength={minLength}
                         maxLength={maxLength}
-                        onChange={(e)=>handleInputChange(e.target.value)}
+                        onChange={(e) => handleInputChange(e.target.value)}
                         onKeyDown={handleKeyDown}
                     />
                 )}
-                {type==="number"&&(
+                {type === "number" && (
                     <NumberInput
                         id={id}
-                        value={currentValue===""?0:parseFloat(currentValue)}
-                        placeholder={placeholder + (required?" *":"")}
+                        value={
+                            currentValue === "" ? 0 : parseFloat(currentValue)
+                        }
+                        placeholder={placeholder + (required ? " *" : "")}
                         variant={variant}
-                        className={"array-input " + (required&&currentValues.length===0?"invalid ":"") + (className || '')}
+                        className={
+                            "array-input " +
+                            (required && currentValues.length === 0
+                                ? "invalid "
+                                : "") +
+                            (className || "")
+                        }
                         disabled={disabled}
                         autoComplete={autoComplete}
                         icon={icon}
@@ -189,33 +209,36 @@ export default function ArrayInput({
                         min={min}
                         max={max}
                         step={step}
-                        getChange={(v)=>setCurrentValue(v.toString())}
+                        getChange={(v) => setCurrentValue(v.toString())}
                         onKeyDown={handleKeyDown}
                         int={int}
                     />
                 )}
-                {type==="combobox"&&options&&(
+                {type === "combobox" && options && (
                     <Combobox
                         id={id}
                         value={currentValue}
                         placeholder={placeholder}
                         variant={variant}
                         options={options}
-                        className={`array-input ${required&&currentValues.length===0?" invalid ":""} ${className || ''}`}
+                        className={`array-input ${required && currentValues.length === 0 ? " invalid " : ""} ${className || ""}`}
                         disabled={disabled}
                         autoComplete={autoComplete}
                         pattern={pattern}
                         size={size}
                         minLength={minLength}
                         maxLength={maxLength}
-                        style={{position:"relative"}}
+                        style={{ position: "relative" }}
                         onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
                     />
                 )}
-                {valueChange===""&&currentValue.trim()!==""&&
-                    !currentValues.includes(currentValue.trim())&&
-                    (maxElements?maxElements>currentValues.length:true)&&(
+                {valueChange === "" &&
+                    currentValue.trim() !== "" &&
+                    !currentValues.includes(currentValue.trim()) &&
+                    (maxElements
+                        ? maxElements > currentValues.length
+                        : true) && (
                         <Fragment>
                             <button
                                 type="button"
@@ -236,28 +259,36 @@ export default function ArrayInput({
                                 </button>
                             )}
                         </Fragment>
-                )}
-                {valueChange===""&&currentValues.includes(currentValue.trim())&&
-                    (maxElements?maxElements>currentValues.length:true)&&(
-                    <Icon
-                        name="plus-circle-fill"
-                        color="var(--invalid-border-color)"
-                        className="array-input-duplicate-icon"
-                        title={"Already in the list"}
-                        desc={"This value is already in the list"}
-                    />
-                )}
-                {valueChange===""&&maxElements&&maxElements<=currentValues.length&&(
-                    <Icon
-                        name="full"
-                        color={maxElements===currentValues.length?
-                            "var(--warning-border-color)":"var(--invalid-border-color)"}
-                        className="array-input-maximum-icon"
-                        title={"Maximum reached"}
-                        desc={"Maximum number of elements reached"}
-                    />
-                )}
-                {valueChange!==""&&currentValue.trim()!==""&&(
+                    )}
+                {valueChange === "" &&
+                    currentValues.includes(currentValue.trim()) &&
+                    (maxElements
+                        ? maxElements > currentValues.length
+                        : true) && (
+                        <Icon
+                            name="plus-circle-fill"
+                            color="var(--invalid-border-color)"
+                            className="array-input-duplicate-icon"
+                            title={"Already in the list"}
+                            desc={"This value is already in the list"}
+                        />
+                    )}
+                {valueChange === "" &&
+                    maxElements &&
+                    maxElements <= currentValues.length && (
+                        <Icon
+                            name="full"
+                            color={
+                                maxElements === currentValues.length
+                                    ? "var(--warning-border-color)"
+                                    : "var(--invalid-border-color)"
+                            }
+                            className="array-input-maximum-icon"
+                            title={"Maximum reached"}
+                            desc={"Maximum number of elements reached"}
+                        />
+                    )}
+                {valueChange !== "" && currentValue.trim() !== "" && (
                     <Fragment>
                         <button
                             type="button"
@@ -278,31 +309,36 @@ export default function ArrayInput({
                     </Fragment>
                 )}
             </div>
-            <div className={`array-input-boxes-container ${currentValues.length===maxElements?"full":""} ${maxElements&&currentValues.length>maxElements?"too-full":""}`}>
+            <div
+                className={`array-input-boxes-container ${currentValues.length === maxElements ? "full" : ""} ${maxElements && currentValues.length > maxElements ? "too-full" : ""}`}
+            >
                 {values.map((value, index) => (
                     <Box
                         key={index}
-                        className={`${boxClassName??""} array-input-box${valueChange===value?" selected":""}`}
+                        className={`${boxClassName ?? ""} array-input-box${valueChange === value ? " selected" : ""}`}
                         onClick={() => handleModifyInput(value)}
                         style={{
-                            width: 'fit-content',
-                            cursor: disabled ? 'not-allowed' : 'pointer',
+                            width: "fit-content",
+                            cursor: disabled ? "not-allowed" : "pointer",
                             opacity: disabled ? 0.6 : 1,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            ...boxStyle
+                            flexDirection: "row",
+                            alignItems: "center",
+                            ...boxStyle,
                         }}
-                        disabled={disabled}>
+                        disabled={disabled}
+                    >
                         {value}
-                        {!disabled&&valueChange!==value&&(
+                        {!disabled && valueChange !== value && (
                             <button
                                 type="button"
-                                className="background-click" 
+                                className="background-click"
                                 onClick={(e) => handleRemoveInput(e, value)}
-                                disabled={disabled||valueChange===value}
-                                aria-disabled={disabled||valueChange===value}
+                                disabled={disabled || valueChange === value}
+                                aria-disabled={
+                                    disabled || valueChange === value
+                                }
                                 aria-label={`Remove input ${value}`}
-                                style={{marginLeft: '8px'}}
+                                style={{ marginLeft: "8px" }}
                             >
                                 <Icon name="trash-fill" />
                             </button>

@@ -1,46 +1,38 @@
 "use client";
 
 import React, { useState } from "react";
+
 import FloatingLabelInput from "@/components/input/input";
 import MenuSelect from "@/components/menuSelect/menuSelect";
 import ComponentSelect from "@/self/componentSelect";
 import { InfoComponent } from "@/self/moreInfo";
 
-const inputValues = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-]
+const inputValues = ["", "", "", "", "", "", "", ""];
 
-const selectedOptionDefault = [
-    'standard',
-    'filled',
-    'outlined',
-    'outlined'
-]
+const selectedOptionDefault = ["standard", "filled", "outlined", "outlined"];
 
-const options = ['standard', 'filled', 'compact', 'outlined'];
+const options = ["standard", "filled", "compact", "outlined"];
 export default function InputPage() {
     const [inputValue, setInputValue] = useState<string[]>(inputValues);
     const [numberValue, setNumberValue] = useState<number>(0);
     const [dateValue, setDateValue] = useState<string>("");
-    const [selectedOption, setSelectedOption] = useState<string[]>(selectedOptionDefault);
+    const [selectedOption, setSelectedOption] = useState<string[]>(
+        selectedOptionDefault,
+    );
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index:number) => {
-        setInputValue(prevValues => {
+    const handleInputChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        index: number,
+    ) => {
+        setInputValue((prevValues) => {
             const newValues = [...prevValues];
             newValues[index] = e.target.value;
             return newValues;
         });
     };
 
-    const handleSelectChange = (value: string, index:number) => {
-        setSelectedOption(prevValues => {
+    const handleSelectChange = (value: string, index: number) => {
+        setSelectedOption((prevValues) => {
             const newValues = [...prevValues];
             newValues[index] = value;
             return newValues;
@@ -54,7 +46,6 @@ export default function InputPage() {
 
             <h2>Basic input</h2>
 
-
             <div className="inner-component">
                 <div className="colonne">
                     <label htmlFor="text">A text input</label>
@@ -64,15 +55,17 @@ export default function InputPage() {
                         className="input-standard"
                         value={inputValue[0]}
                         placeholder="Enter text"
-                        onChange={(e)=>handleInputChange(e, 0)}
-                        style={{maxWidth:"100%"}}
+                        onChange={(e) => handleInputChange(e, 0)}
+                        style={{ maxWidth: "100%" }}
                     />
                 </div>
             </div>
 
-            
             <h2>Different variant</h2>
-            <p>Input can have different variants : standard, filled, compact and outlined.</p>
+            <p>
+                Input can have different variants : standard, filled, compact
+                and outlined.
+            </p>
             <div className="inner-component">
                 <div className="colonne">
                     <label htmlFor="filled">Filled</label>
@@ -82,7 +75,7 @@ export default function InputPage() {
                         className="input-filled"
                         value={inputValue[1]}
                         placeholder="Enter text"
-                        onChange={(e)=>handleInputChange(e, 1)}
+                        onChange={(e) => handleInputChange(e, 1)}
                     />
                 </div>
                 <div className="colonne">
@@ -93,7 +86,7 @@ export default function InputPage() {
                         className="input-compact"
                         value={inputValue[2]}
                         placeholder="Enter text"
-                        onChange={(e)=>handleInputChange(e, 2)}
+                        onChange={(e) => handleInputChange(e, 2)}
                     />
                 </div>
                 <div className="colonne">
@@ -104,7 +97,7 @@ export default function InputPage() {
                         className="input-outlined"
                         value={inputValue[3]}
                         placeholder="Enter text"
-                        onChange={(e)=>handleInputChange(e, 3)}
+                        onChange={(e) => handleInputChange(e, 3)}
                     />
                 </div>
             </div>
@@ -119,7 +112,7 @@ export default function InputPage() {
                         className={`input-${selectedOption[0]}`}
                         value={numberValue}
                         placeholder="Enter text"
-                        onChange={(e)=>setNumberValue(Number(e.target.value))}
+                        onChange={(e) => setNumberValue(Number(e.target.value))}
                     />
                 </div>
                 <div className="colonne">
@@ -130,21 +123,25 @@ export default function InputPage() {
                         className={`input-${selectedOption[1]}`}
                         value={dateValue}
                         placeholder="Enter text"
-                        onChange={(e)=>setDateValue(e.target.value)}
+                        onChange={(e) => setDateValue(e.target.value)}
                     />
                 </div>
             </div>
-            <p> You can change the variant of these two inputs with the select below :</p>
+            <p>
+                {" "}
+                You can change the variant of these two inputs with the select
+                below :
+            </p>
             <div className="ligne">
                 <MenuSelect
                     id={"select-change-number-1"}
                     boxClassName="inner-component-select"
                     options={options}
                     selectedOption={selectedOption[0]}
-                    onSelect={(val)=>handleSelectChange(val, 0)}
+                    onSelect={(val) => handleSelectChange(val, 0)}
                     floatingLabel
                     backgroundColor="var(--bg2)"
-                    style={{width:140}}
+                    style={{ width: 140 }}
                     label={"Number input style"}
                 />
                 <MenuSelect
@@ -152,42 +149,56 @@ export default function InputPage() {
                     boxClassName="inner-component-select"
                     options={options}
                     selectedOption={selectedOption[1]}
-                    onSelect={(val)=>handleSelectChange(val, 1)}
+                    onSelect={(val) => handleSelectChange(val, 1)}
                     floatingLabel
                     backgroundColor="var(--bg2)"
-                    style={{width:140}}
+                    style={{ width: 140 }}
                     label={"Date input style"}
                 />
             </div>
             <h2>Floating label</h2>
             <p>Input can also have floating label</p>
             <InfoComponent>
-                <p>The floating label input can be used with all variants and most features of the basic input.<br/>
-                To provide the label to the component, you only need to provide the placeholder ! It will be use for both aspect.</p>
+                <p>
+                    The floating label input can be used with all variants and
+                    most features of the basic input.
+                    <br />
+                    To provide the label to the component, you only need to
+                    provide the placeholder ! It will be use for both aspect.
+                </p>
             </InfoComponent>
             <ComponentSelect
                 options={options}
                 value={selectedOption[2]}
-                onChange={(val)=>handleSelectChange(val, 2)}
+                onChange={(val) => handleSelectChange(val, 2)}
                 label={"Input style"}
                 id={"select-change-floating-label-style"}
-                style={{justifyContent:"space-between"}}
+                style={{ justifyContent: "space-between" }}
             >
                 <FloatingLabelInput
                     id="floating-label-input"
                     type="text"
                     value={inputValue[4]}
-                    variant={selectedOption[2] as "standard" | "filled" | "compact" | "outlined"}
+                    variant={
+                        selectedOption[2] as
+                            | "standard"
+                            | "filled"
+                            | "compact"
+                            | "outlined"
+                    }
                     placeholder="Enter text"
-                    getChange={(e)=>handleInputChange(e, 4)}
+                    getChange={(e) => handleInputChange(e, 4)}
                 />
             </ComponentSelect>
             <h2>Floating label with other features</h2>
-            <p>Floating label also works with other features like required, disabled, invalid...</p>
+            <p>
+                Floating label also works with other features like required,
+                disabled, invalid...
+            </p>
             <ComponentSelect
                 options={options}
                 value={selectedOption[3]}
-                onChange={(val)=>handleSelectChange(val, 3)}
+                onChange={(val) => handleSelectChange(val, 3)}
                 label={"Input style"}
                 id={"select-change-floating-label-style-fields"}
             >
@@ -196,27 +207,45 @@ export default function InputPage() {
                     type="text"
                     required
                     value={inputValue[5]}
-                    variant={selectedOption[3] as "standard" | "filled" | "compact" | "outlined"}
+                    variant={
+                        selectedOption[3] as
+                            | "standard"
+                            | "filled"
+                            | "compact"
+                            | "outlined"
+                    }
                     placeholder="Enter text"
-                    getChange={(e)=>handleInputChange(e, 5)}
+                    getChange={(e) => handleInputChange(e, 5)}
                 />
                 <FloatingLabelInput
                     id="floating-label-input-disabled"
                     type="text"
                     disabled
                     value={inputValue[6]}
-                    variant={selectedOption[3] as "standard" | "filled" | "compact" | "outlined"}
+                    variant={
+                        selectedOption[3] as
+                            | "standard"
+                            | "filled"
+                            | "compact"
+                            | "outlined"
+                    }
                     placeholder="Enter text"
-                    getChange={(e)=>handleInputChange(e, 6)}
+                    getChange={(e) => handleInputChange(e, 6)}
                 />
                 <FloatingLabelInput
                     id="floating-label-input-invalid"
                     type="text"
                     pattern={"^[A-Za-z]+$"}
                     value={inputValue[7]}
-                    variant={selectedOption[3] as "standard" | "filled" | "compact" | "outlined"}
+                    variant={
+                        selectedOption[3] as
+                            | "standard"
+                            | "filled"
+                            | "compact"
+                            | "outlined"
+                    }
                     placeholder="Enter only letters"
-                    getChange={(e)=>handleInputChange(e, 7)}
+                    getChange={(e) => handleInputChange(e, 7)}
                 />
             </ComponentSelect>
         </main>

@@ -1,6 +1,7 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
+
 import MultiInput from "@/components/input/multiInput";
 
 export default function Page() {
@@ -11,25 +12,31 @@ export default function Page() {
     }>({
         firstName: [],
         lastName: [],
-        age: []
+        age: [],
     });
 
-    function handleFistNameChange(e: ChangeEvent<HTMLInputElement>, index: number) {
+    function handleFistNameChange(
+        e: ChangeEvent<HTMLInputElement>,
+        index: number,
+    ) {
         const newValues = [...inputValues.firstName];
         newValues[index] = e.target.value;
-        setInputValues(prev => ({ ...prev, firstName: newValues }));
+        setInputValues((prev) => ({ ...prev, firstName: newValues }));
     }
 
-    function handleLastNameChange(e: ChangeEvent<HTMLInputElement>, index: number) {
+    function handleLastNameChange(
+        e: ChangeEvent<HTMLInputElement>,
+        index: number,
+    ) {
         const newValues = [...inputValues.lastName];
         newValues[index] = e.target.value;
-        setInputValues(prev => ({ ...prev, lastName: newValues }));
+        setInputValues((prev) => ({ ...prev, lastName: newValues }));
     }
 
-    function handleAgeChange(value:number, index: number) {
+    function handleAgeChange(value: number, index: number) {
         const newValues = [...inputValues.age];
         newValues[index] = value;
-        setInputValues(prev => ({ ...prev, age: newValues }));
+        setInputValues((prev) => ({ ...prev, age: newValues }));
     }
     return (
         <div>
@@ -40,42 +47,42 @@ export default function Page() {
                 inputs={[
                     {
                         id: "firstName",
-                        label:"firstName",
+                        label: "firstName",
                         type: "text",
                         value: inputValues.firstName,
-                        getChange: handleFistNameChange
-
+                        getChange: handleFistNameChange,
                     },
                     {
                         id: "lastName",
-                        label:"firstName",
+                        label: "firstName",
                         type: "text",
                         value: inputValues.lastName,
-                        getChange: handleLastNameChange
+                        getChange: handleLastNameChange,
                     },
                     {
                         id: "age",
-                        label:"firstName",
+                        label: "firstName",
                         type: "number",
                         value: inputValues.age,
-                        getNumber: handleAgeChange
+                        getNumber: handleAgeChange,
                     },
                     {
                         id: "disabledInput",
-                        label:"firstName",
+                        label: "firstName",
                         type: "text_array",
                         value: ["Disabled"],
-                        disabled: true
-                    }
+                        disabled: true,
+                    },
                 ]}
             />
             <div>
                 <h2>Current Values:</h2>
                 <ul>
                     {Object.keys(inputValues).map((value, index) => (
-                        
                         <li key={index}>
-                            {inputValues[value as keyof typeof inputValues].join(", ")}
+                            {inputValues[
+                                value as keyof typeof inputValues
+                            ].join(", ")}
                         </li>
                     ))}
                 </ul>

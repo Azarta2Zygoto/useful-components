@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import FormInfo from "@/components/formInfo/formInfo";
 import InputInfo from "@/components/formInfo/inputInfo";
 
@@ -11,8 +12,8 @@ export default function FormPage() {
             <h1>Form Info Component</h1>
             <FormInfo
                 isInfo={infoVisible}
-                text={{see: "Show Info"}}
-                getInfo={() => setInfoVisible(prev=>!prev)}
+                text={{ see: "Show Info" }}
+                getInfo={() => setInfoVisible((prev) => !prev)}
                 tooltip
             >
                 <h2>Form Title</h2>

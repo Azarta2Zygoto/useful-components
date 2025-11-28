@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef, JSX } from 'react';
-import BodyAccess from '@/components/utils/bodyAccess';
-import './overlay.css';
+import React, { JSX, useEffect, useRef } from "react";
+
+import "./overlay.css";
+
+import BodyAccess from "@/components/utils/bodyAccess";
 
 interface OverlayProps {
     open?: boolean;
@@ -18,10 +20,10 @@ export default function Overlay({
     id,
     style,
     color = "rgba(0, 0, 0, 0.5)",
-    open=true,
+    open = true,
     tobody,
     children,
-    onClose
+    onClose,
 }: OverlayProps): JSX.Element {
     const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -43,23 +45,24 @@ export default function Overlay({
     const overlay = (
         <div
             id={id}
-            className={`overlay ${open ? 'open' : 'closed'}`}
+            className={`overlay ${open ? "open" : "closed"}`}
             ref={overlayRef}
             role="dialog"
             aria-modal="true"
             aria-hidden={!open}
             style={{
                 ...style,
-                display: open ? 'block' : 'none',
-                backgroundColor: color
+                display: open ? "block" : "none",
+                backgroundColor: color,
             }}
             onKeyDown={(e) => {
-                if (e.key === 'Escape') {
+                if (e.key === "Escape") {
                     onClose();
                 }
             }}
-            tabIndex={-1}>
-                {children}
+            tabIndex={-1}
+        >
+            {children}
         </div>
     );
     return tobody ? <BodyAccess>{overlay}</BodyAccess> : overlay;
