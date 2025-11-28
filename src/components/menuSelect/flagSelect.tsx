@@ -53,8 +53,8 @@ export default function FlagSelect({
 }: FlagSelectProps): JSX.Element {
     function setCountryFlag(index: number): React.ReactNode {
         const countryCode = countries[index].code.toUpperCase();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const FlagComponent = (
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             FlagIcons as Record<string, React.ComponentType<any>>
         )[countryCode];
 
@@ -82,8 +82,8 @@ export default function FlagSelect({
         const country = countries.find((c) => c.name === name);
         if (!country) return <span className="flag-placeholder" />;
         const countryCode = country.code;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const FlagComponent = (
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             FlagIcons as Record<string, React.ComponentType<any>>
         )[countryCode];
         if (!FlagComponent) {
