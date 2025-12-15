@@ -15,16 +15,16 @@ export const metadata: Metadata = {
     description:
         "A collection of reusable components for building user interfaces in react.",
     icons: {
-        icon: "/useful-components/logo-components.png",
-        shortcut: "/useful-components/logo-components.png",
-        apple: "/useful-components/logo-components.png",
+        icon: "/useful-components/logo-components-sombre.png",
+        shortcut: "/useful-components/logo-components-sombre.png",
+        apple: "/useful-components/logo-components-sombre.png",
     },
     openGraph: {
         title: "Component Library",
         description:
             "A collection of reusable components for building user interfaces in react.",
         url: "/",
-        images: "/logo-components.png",
+        images: "/logo-components-sombre.png",
         type: "website",
         siteName: "Useful Components",
         locale: "fr_FR",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         title: "Component Library",
         description:
             "A collection of reusable components for building user interfaces in react.",
-        images: "/logo-components.png",
+        images: "/logo-components-sombre.png",
     },
     authors: [
         {

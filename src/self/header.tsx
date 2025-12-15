@@ -30,7 +30,7 @@ export default function Header(): JSX.Element {
                 </Tooltip>
             )}
             <Image
-                src="/useful-components/logo-components.png"
+                src="/useful-components/logo-components-sombre.png"
                 alt="Useful Components Logo"
                 width={40}
                 height={40}
