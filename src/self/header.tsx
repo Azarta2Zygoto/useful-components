@@ -5,6 +5,7 @@ import React, { JSX, useRef } from "react";
 import { useGlobal } from "./globalProvider";
 
 import Tooltip from "@/components/tooltip/tooltip";
+import Image from "next/image";
 
 export default function Header(): JSX.Element {
     const buttonRef = useRef<HTMLButtonElement>(null);
@@ -28,9 +29,17 @@ export default function Header(): JSX.Element {
                     </button>
                 </Tooltip>
             )}
+            <Image
+                src="/useful-components/logo-components.png"
+                alt="Useful Components Logo"
+                width={40}
+                height={40}
+                style={{ borderRadius: 8 }}
+            />
             <h1 style={{ color: "white", margin: "10px 0" }}>
                 Component Library
             </h1>
+            <span></span>
         </header>
     );
 }
