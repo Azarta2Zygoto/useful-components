@@ -72,6 +72,10 @@ jobs:
 
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      - name: Add secrets
+        run: |
+          touch .env
+          echo "NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> .env
 
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
