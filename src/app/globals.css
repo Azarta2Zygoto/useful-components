@@ -1,6 +1,5 @@
 @import url("../components/component.css");
 @import url("./index.css");
-@import "bootstrap-icons/font/bootstrap-icons";
 
 :root {
     --bg: #1e1f20;

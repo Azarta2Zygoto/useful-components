@@ -13,16 +13,16 @@ import {
 
 import Button from "../button/button";
 import Icon from "../utils/icon";
-import "./accordeon.css";
+import "./accordion.css";
 
-interface AccordeonTextProps {
+interface AccordionTextProps {
     collapse?: string;
     expand?: string;
     collapseDesc?: string;
     expandDesc?: string;
 }
 
-const defaultText: Required<AccordeonTextProps> = {
+const defaultText: Required<AccordionTextProps> = {
     collapse: "Collapse",
     expand: "Expand",
     collapseDesc: "Collapse the content of the accordion",
@@ -38,11 +38,11 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     view?: "simple" | "icon" | "card";
     variant?: "primary" | "secondary" | "transparent";
     transitionMs?: number;
-    text?: AccordeonTextProps;
+    text?: AccordionTextProps;
     onToggleChange?: (open: boolean) => void;
 }
 
-export default function Accordeon({
+export default function Accordion({
     header,
     open,
     defaultOpen,
@@ -134,8 +134,8 @@ export default function Accordeon({
             ref={contentRef}
             id={contentId}
             data-expanded={expanded}
-            data-accordeon={view}
-            data-accordeon-variant={variant}
+            data-accordion={view}
+            data-accordion-variant={variant}
             role="region"
             aria-labelledby={view !== "simple" ? headerId : undefined}
             aria-hidden={!expanded}
@@ -157,12 +157,12 @@ export default function Accordeon({
     }
 
     return (
-        <div className="accordeon-wrapper">
+        <div className="accordion-wrapper">
             {view === "card" && (
                 <button
                     type="button"
                     id={headerId}
-                    data-accordeon-header={variant}
+                    data-accordion-header={variant}
                     aria-expanded={expanded}
                     aria-controls={contentId}
                     onClick={handleToggle}
@@ -185,7 +185,7 @@ export default function Accordeon({
             {view === "icon" && (
                 <div
                     id={headerId}
-                    data-accordeon-header={variant}
+                    data-accordion-header={variant}
                 >
                     {header}
                     <Button

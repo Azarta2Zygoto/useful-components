@@ -22,24 +22,23 @@
         "format": "prettier --write ."
     },
     "dependencies": {
-        "bootstrap-icons": "^1.13.1",
-        "country-flag-icons": "^1.5.20",
-        "next": "^15.5.28",
-        "react": "19.1.0",
-        "react-dom": "19.1.0",
-        "react-virtuoso": "^4.14.0"
+        "country-flag-icons": "^1.6.20",
+        "next": "^16.4.2",
+        "react": "^19.3.1",
+        "react-dom": "19.3.1",
+        "react-virtuoso": "^4.18.19"
     },
     "devDependencies": {
-        "@eslint/eslintrc": "^3",
-        "@tailwindcss/postcss": "^4",
-        "@trivago/prettier-plugin-sort-imports": "^6.0.0",
-        "@types/node": "^20",
-        "@types/react": "^19",
-        "@types/react-dom": "^19",
+        "@tailwindcss/postcss": "^4.3.3",
+        "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+        "@types/node": "^26.6.5",
+        "@types/react": "^19.3.0",
+        "@types/react-dom": "^19.3.0",
         "eslint": "^9",
-        "eslint-config-next": "^14.2.35",
-        "prettier": "^3.7.1",
-        "tailwindcss": "^4",
-        "typescript": "^5"
+        "eslint-config-next": "^16.4.2",
+        "prettier": "^3.9.10",
+        "tailwindcss": "^4.3.3",
+        "typescript": "^5",
+        "vitest": "^5.0.5"
     }
 }

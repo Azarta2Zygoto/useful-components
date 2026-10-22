@@ -1,6 +1,6 @@
 # Useful components
 
-This repository is used to compile all useful components that I made for my React projects
+This repository is used to gather all useful components that I made for my React projects.
 
 ## Installation
 
@@ -12,7 +12,8 @@ cd useful-components
 ```
 
 2.  **Download all dependences :**
-    You need to have <https://nodejs.org/en/download/>[npm] on your computer or another package manager (yarn, pnp, bun).
+
+You need to have <https://nodejs.org/en/download/>[npm] on your computer or another package manager (yarn, pnp, bun).
 
 ```bash
 npm install
@@ -37,7 +38,7 @@ To build the project at a production mode :
 npm run build
 ```
 
-The webpage is host at http://localhost:3000.
+The webpage is host at http://localhost:3000/useful-components.
 
 ## Auteurs
 

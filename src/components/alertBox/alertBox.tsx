@@ -36,25 +36,6 @@ interface ValidateBoxProps {
     onContact?: () => void;
 }
 
-/**
- *
- * @param param - The properties for the AlertBox component.
- * @param param.error - The error state (-1 Dev Error, 0: error, 1: success, 2: warning).
- * @param param.message - The message to display.
- * @param param.position - Optional position of the box (default is "bottom left").
- * @param param.visible - Optional visibility state of the box (default is true).
- * @param param.zIndex - Optional z-index for the box (default is 3).
- * @param param.text - Optional text for dev error, info, and close buttons.
- * @param param.tooltip - Optional tooltip for the box (default is true).
- * @param param.view - Optional view type ("default" or "compact", default is "default").
- * @param param.className - Optional additional class name for custom styling.
- * @param param.style - Optional inline styles for the box.
- * @param param.children - Optional children elements to display inside the box.
- * @param param.onInfo - Optional callback for additional information.
- * @param param.onClose - Optional callback to close the box.
- * @param param.onContact - Optional callback to contact support.
- * @returns A JSX element representing the AlertBox component.
- */
 export default function AlertBox({
     error,
     message,
