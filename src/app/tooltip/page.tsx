@@ -34,8 +34,8 @@ export default function TooltipPage(): ReactNode {
             </p>
             <h2>Basic tooltip</h2>
             <p>
-                You just need to put some texts into "data-tooltip" and, most of
-                the time, a tooltip entirely made with CSS appears
+                You just need to put some texts into &quot;data-tooltip&quot;
+                and, most of the time, a tooltip entirely made with CSS appears
             </p>
             <div className="inner-component">
                 <Button
@@ -55,11 +55,11 @@ export default function TooltipPage(): ReactNode {
             </div>
             <h2>More develop tooltip</h2>
             <p>
-                Sometimes, the precedent solution isn't working due to CSS
+                Sometimes, the precedent solution is not working due to CSS
                 (skill) issues or want more control over the tooltip. Then, you
                 have a more advanced solution with a little bit of custom code.
-                You can use the "useTooltip" hook to create a tooltip with more
-                control over its behavior and appearance.
+                You can use the &quot;useTooltip&quot; hook to create a tooltip
+                with more control over its behavior and appearance.
             </p>
             <div className="inner-component">
                 <Button

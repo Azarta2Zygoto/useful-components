@@ -16,6 +16,7 @@ export default function BodyAccess({
 
     useEffect(() => {
         if (parent) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setContainer(parent);
             return;
         }
@@ -23,7 +24,6 @@ export default function BodyAccess({
         const el = document.createElement("div");
         el.dataset.bodyAccess = "";
         document.body.appendChild(el);
-
         setContainer(el);
 
         return () => {

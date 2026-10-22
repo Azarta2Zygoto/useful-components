@@ -36,7 +36,7 @@ export function useTooltip({
                 });
             }
         },
-        [content, show],
+        [content, offset, placement, time, show],
     );
 
     const close = useCallback(() => {

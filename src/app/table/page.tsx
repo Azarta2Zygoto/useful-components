@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 import AlertBox from "@/components/alertBox/alertBox";
 import Table from "@/components/table/table";
@@ -12,8 +12,6 @@ const data = [
     { id: 3, name: "orange", quantity: 42, buying_date: "2023-10-10" },
     { id: 4, name: "grape", quantity: 8, buying_date: "2023-10-12" },
 ];
-
-const manyColumns = Array.from({ length: 20 }, (_, i) => `Column ${i + 1}`);
 
 export default function TablePage() {
     const [message, setMessage] = useState("This is an alert box message.");

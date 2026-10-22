@@ -17,6 +17,7 @@ export function TooltipLayer(): ReactNode {
         const element = document.createElement("div");
         element.dataset.tooltipLayer = "";
         document.body.appendChild(element);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setContainer(element);
 
         return () => element.remove();

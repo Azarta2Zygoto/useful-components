@@ -300,7 +300,6 @@ export default function MultipleMenuSelect({
                                             }
                                             onChange={() => {}}
                                             disabled={disabled}
-                                            boxStyle={{ pointerEvents: "none" }}
                                         />
                                     ) : (
                                         option

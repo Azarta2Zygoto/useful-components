@@ -118,7 +118,7 @@ export default function ButtonPage(): ReactNode {
             <h2>Icon Buttons</h2>
             <p>
                 An icon button is just the use of a button with an icon with it.
-                You don't need to put an aria-label on the icon but on the
+                You don&apos;t need to put an aria-label on the icon but on the
                 button !
             </p>
             <div className="inner-component">
@@ -178,10 +178,10 @@ export default function ButtonPage(): ReactNode {
                     width={300}
                 >
                     <Github></Github>
-                    C'est un bouton vraiment très long avec un texte qui dépasse
-                    la largeur du bouton et qui est très long pour voir comment
-                    le bouton se comporte avec un texte très long et un icône à
-                    côté.
+                    C&apos;est un bouton vraiment très long avec un texte qui
+                    dépasse la largeur du bouton et qui est très long pour voir
+                    comment le bouton se comporte avec un texte très long et un
+                    icône à côté.
                 </Button>
             </div>
             <h2>Buttons pressed</h2>

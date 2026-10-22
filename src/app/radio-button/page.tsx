@@ -42,7 +42,8 @@ const options5Disabled = [
 ];
 
 export default function RadioButtonPage() {
-    const [selectedValue, setSelectedValue] = useState<string[]>(radioList);
+    const [selectedValue, setSelectedValue] =
+        useState<(string | null)[]>(radioList);
 
     const options5Images = options5.map((value) => ({
         value: value.value,

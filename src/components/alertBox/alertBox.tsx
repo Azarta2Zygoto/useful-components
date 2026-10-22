@@ -57,16 +57,12 @@ export default function AlertBox({
 
     const classNameView = view === "compact" ? "info-box-compact" : "info-box";
 
-    const [icon, setIcon] = useState<JSX.Element | string>("");
+    const [icon] = useState<JSX.Element | string>("");
     const [positioning, setPositioning] = useState<{
         top?: string;
         left?: string;
         transform?: string | undefined;
     }>({ top: "97%", left: "3%", transform: "translateY(-100%)" });
-
-    useEffect(() => {
-        setIcon(iconShow(error));
-    }, [error]);
 
     useEffect(() => {
         const [posX, posY] = position.split(" ");

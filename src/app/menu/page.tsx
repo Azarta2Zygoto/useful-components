@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import Menu from "@/components/menu/menu";
 
@@ -25,7 +25,7 @@ export default function MenuPage() {
         { icon: "🚪", name: "Logout", shortcut: "Ctrl+L" },
     ];
 
-    const handleSelect = (item: string, index?: [number, number]) => {
+    const handleSelect = () => {
         setMenuOpen(false);
     };
 
