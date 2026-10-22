@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import Accordeon from "@/components/accordeon/accordeon";
+import Button from "@/components/button/button";
 
 export default function AccordeonPage() {
     const [openSimple, setOpenSimple] = useState(false);
@@ -15,19 +16,23 @@ export default function AccordeonPage() {
 
             <h2>Basic Accordeon</h2>
             <p>The most basic accordeon is control outside of the component</p>
-            <div className="inner-component">
-                <button
-                    type="button"
-                    className="button"
+            <div
+                className="inner-component"
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1rem",
+                }}
+            >
+                <Button
                     onClick={() => setOpenSimple(!openSimple)}
+                    width={150}
                 >
                     {openSimple ? "Close Accordeon" : "Open Accordeon"}
-                </button>
+                </Button>
                 <Accordeon
-                    title="Simple Accordeon"
-                    isOpen={openSimple}
-                    height={110}
-                    view="simple"
+                    open={openSimple}
+                    variant="primary"
                 >
                     <div style={{ padding: "1rem" }}>
                         <p>This is the content of the accordeon.</p>
@@ -38,36 +43,37 @@ export default function AccordeonPage() {
             <h2>Other variant</h2>
             <p>There is another variant of the accordeon with less style.</p>
             <div className="inner-component">
-                <button
-                    type="button"
-                    className="button"
+                <Button
                     onClick={() => setOpenSimple2(!openSimple2)}
+                    width={150}
                 >
                     {openSimple2 ? "Close Accordeon" : "Open Accordeon"}
-                </button>
+                </Button>
                 <Accordeon
                     title="Simple Accordeon variant"
-                    isOpen={openSimple2}
-                    height={110}
-                    type="inner"
-                    view="simple"
+                    variant="secondary"
+                    open={openSimple2}
+                    height={80}
                 >
-                    <div style={{ padding: "1rem" }}>
-                        <p>This is the content of the accordeon.</p>
-                        <p>You can put any JSX element here.</p>
-                    </div>
+                    <p>This is the content of the accordeon.</p>
+                    <p>You can put any JSX element here.</p>
+                </Accordeon>
+                <Accordeon
+                    title="Simple Accordeon variant"
+                    open={openSimple2}
+                    height={80}
+                >
+                    <p>This is the content of the accordeon.</p>
+                    <p>You can put any JSX element here.</p>
                 </Accordeon>
             </div>
             <h2>Icon accordeon</h2>
             <p>The accordeon can also be controlled by itself.</p>
             <div className="inner-component">
                 <Accordeon
-                    title={
-                        <span style={{ fontWeight: "bold" }}>
-                            Icon View Accordeon
-                        </span>
-                    }
+                    header="Icon View Accordeon"
                     view="icon"
+                    variant="primary"
                 >
                     <div style={{ padding: "1rem" }}>
                         <p>This is an accordeon with icon view.</p>
@@ -75,12 +81,11 @@ export default function AccordeonPage() {
                     </div>
                 </Accordeon>
                 <Accordeon
-                    title={
+                    header={
                         <span style={{ fontWeight: "bold" }}>
                             Icon View Accordeon with another variant
                         </span>
                     }
-                    type="inner"
                     view="icon"
                 >
                     <div>
@@ -89,6 +94,12 @@ export default function AccordeonPage() {
                             in our website.
                         </p>
                         <p>It only has a left border</p>
+                        <Button
+                            variant="primary"
+                            onClick={() => alert("Hello")}
+                        >
+                            Click me
+                        </Button>
                     </div>
                 </Accordeon>
             </div>
@@ -99,17 +110,17 @@ export default function AccordeonPage() {
             </p>
             <div className="inner-component">
                 <Accordeon
-                    title="Card View Accordeon"
+                    header="Card View Accordeon"
                     view="card"
+                    variant="primary"
                 >
                     <div>
                         <p>This is an accordeon with card view.</p>
                     </div>
                 </Accordeon>
                 <Accordeon
-                    title="Card View Accordeon"
+                    header="Card View Accordeon"
                     view="card"
-                    type="inner"
                 >
                     <div>
                         <p>This is another accordeon with card view.</p>

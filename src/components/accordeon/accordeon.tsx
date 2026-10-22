@@ -1,102 +1,100 @@
 "use client";
 
-import React, {
-    JSX,
-    useEffect,
+import {
+    CSSProperties,
+    type HTMLAttributes,
+    type PropsWithChildren,
+    type ReactNode,
     useId,
     useLayoutEffect,
     useRef,
     useState,
 } from "react";
 
-import Tooltip from "../tooltip/tooltip";
+import Button from "../button/button";
 import Icon from "../utils/icon";
 import "./accordeon.css";
 
-/**
- * @param param - The properties for the Accordeon component.
- * @param param.title - The title of the accordeon (string or JSX element).
- * @param param.isOpen - Optional initial open state of the accordeon (default is false).
- * @param param.className - Optional additional class name for custom styling.
- * @param param.height - Optional fixed height for the content area (default is auto).
- * @param param.tooltip - Optional tooltip for the toggle button (default is true).
- * @param param.view - Optional view type ("simple", "icon", or "card", default is "simple").
- * @param param.type - Optional type of header ("component" or "inner", default is "component").
- * @param param.transitionMs - Optional transition duration in milliseconds (default is 300ms).
- * @param param.text - Optional text for toggle, collapse, and expand buttons.
- * @param param.style - Optional inline styles for the content area.
- * @param param.children - The content to display inside the accordeon.
- * @param param.onToggle - Optional callback function to execute when the accordeon is toggled.
- * @returns A JSX element representing the Accordeon component.
- */
+interface AccordeonTextProps {
+    collapse?: string;
+    expand?: string;
+    collapseDesc?: string;
+    expandDesc?: string;
+}
 
-interface AccordeonProps {
-    title: string | JSX.Element;
-    isOpen?: boolean;
-    className?: string;
+const defaultText: Required<AccordeonTextProps> = {
+    collapse: "Collapse",
+    expand: "Expand",
+    collapseDesc: "Collapse the content of the accordion",
+    expandDesc: "Expand the content of the accordion",
+};
+
+interface Props extends HTMLAttributes<HTMLDivElement> {
+    header?: ReactNode;
+    open?: boolean;
+    defaultOpen?: boolean;
     height?: number;
     tooltip?: boolean;
     view?: "simple" | "icon" | "card";
-    type?: "component" | "inner";
+    variant?: "primary" | "secondary" | "transparent";
     transitionMs?: number;
-    text?: {
-        toggle?: string;
-        collapse?: string;
-        expand?: string;
-        collapseDesc?: string;
-        expandDesc?: string;
-    };
-    style?: React.CSSProperties;
-    children: React.ReactNode;
-    onToggle?: () => void;
+    text?: AccordeonTextProps;
+    onToggleChange?: (open: boolean) => void;
 }
 
 export default function Accordeon({
-    title,
-    isOpen,
-    className,
+    header,
+    open,
+    defaultOpen,
     height,
     tooltip = true,
     view = "simple",
-    type = "component",
+    variant = "transparent",
     transitionMs = 300,
     text,
     style,
     children,
-    onToggle,
-}: AccordeonProps) {
+    onToggleChange,
+    ...props
+}: Readonly<PropsWithChildren<Props>>): ReactNode {
     const contentId = useId();
     const headerId = useId();
     const contentRef = useRef<HTMLDivElement | null>(null);
 
-    const [openState, setOpenState] = useState(!!isOpen);
+    const isControlled = open !== undefined;
+    const [internalOpen, setInternalOpen] = useState(defaultOpen ?? false);
     const [maxHeight, setMaxHeight] = useState<string>("0px");
 
-    useEffect(() => {
-        setOpenState(Boolean(isOpen));
-    }, [isOpen]);
+    const expanded = isControlled ? open : internalOpen;
+    const texts = {
+        ...defaultText,
+        ...text,
+    };
 
     useLayoutEffect(() => {
         const el = contentRef.current;
-        let tidyTimer: number | undefined;
-        let raf1: number | undefined;
-        let raf2: number | undefined;
 
         if (!el) {
-            setMaxHeight(openState ? (height ? `${height}px` : "none") : "0px");
+            setMaxHeight(
+                expanded ? (height != null ? `${height}px` : "none") : "0px",
+            );
             return;
         }
 
-        if (openState) {
-            const measured = height ? height : el.scrollHeight;
+        let timeoutId: number | undefined;
+        let raf1: number | undefined;
+        let raf2: number | undefined;
+
+        if (expanded) {
+            const measured = height ?? el.scrollHeight;
 
             setMaxHeight(`${measured}px`);
-            tidyTimer = window.setTimeout(() => {
+
+            timeoutId = window.setTimeout(() => {
                 setMaxHeight("none");
             }, transitionMs);
         } else {
-            const current = el.scrollHeight;
-            setMaxHeight(`${current}px`);
+            setMaxHeight(`${el.scrollHeight}px`);
 
             raf1 = window.requestAnimationFrame(() => {
                 raf2 = window.requestAnimationFrame(() => {
@@ -106,116 +104,117 @@ export default function Accordeon({
         }
 
         return () => {
-            if (typeof tidyTimer !== "undefined")
-                window.clearTimeout(tidyTimer);
-            if (typeof raf1 !== "undefined") window.cancelAnimationFrame(raf1);
-            if (typeof raf2 !== "undefined") window.cancelAnimationFrame(raf2);
+            if (timeoutId !== undefined) {
+                window.clearTimeout(timeoutId);
+            }
+
+            if (raf1 !== undefined) {
+                window.cancelAnimationFrame(raf1);
+            }
+
+            if (raf2 !== undefined) {
+                window.cancelAnimationFrame(raf2);
+            }
         };
-    }, [openState, height, transitionMs]);
+    }, [expanded, height, transitionMs]);
 
-    function handleToggle() {
-        setOpenState(!openState);
-        onToggle?.();
-    }
+    const handleToggle = () => {
+        const next = !expanded;
 
-    function handleKeyDown(e: React.KeyboardEvent) {
-        if (e.key === "Enter" || e.key === " ") {
-            handleToggle();
+        if (!isControlled) {
+            setInternalOpen(next);
         }
+
+        onToggleChange?.(next);
+    };
+
+    const child = (
+        <div
+            {...props}
+            ref={contentRef}
+            id={contentId}
+            data-expanded={expanded}
+            data-accordeon={view}
+            data-accordeon-variant={variant}
+            role="region"
+            aria-labelledby={view !== "simple" ? headerId : undefined}
+            aria-hidden={!expanded}
+            inert={!expanded}
+            style={
+                {
+                    "--transition-duration": `${transitionMs}ms`,
+                    maxHeight: maxHeight === "none" ? undefined : maxHeight,
+                    ...style,
+                } as CSSProperties
+            }
+        >
+            {children}
+        </div>
+    );
+
+    if (view === "simple") {
+        return child;
     }
 
     return (
-        <div
-            className={`accordeon-wrapper${openState ? " open" : " closed"} ${className ?? ""}`}
-        >
+        <div className="accordeon-wrapper">
             {view === "card" && (
-                <div
+                <button
+                    type="button"
                     id={headerId}
-                    role="button"
-                    className={`accordeon-header ${type}`}
-                    onClick={handleToggle}
-                    onKeyDown={handleKeyDown}
-                    tabIndex={0}
-                    aria-expanded={openState}
+                    data-accordeon-header={variant}
+                    aria-expanded={expanded}
                     aria-controls={contentId}
-                    aria-label={text?.toggle || "Toggle Accordeon"}
+                    onClick={handleToggle}
                 >
-                    <span></span>
-                    <span className="accordeon-title">{title}</span>
+                    {header}
                     <Icon
-                        title={
-                            openState
-                                ? text?.collapse || "Collapse"
-                                : text?.expand || "Expand"
-                        }
-                        desc={
-                            openState
-                                ? text?.collapseDesc ||
-                                  "Collapse the content of the accordeon"
-                                : text?.expandDesc ||
-                                  "Expand the content of the accordeon"
-                        }
+                        title={expanded ? texts.collapse : texts.expand}
+                        desc={expanded ? texts.collapseDesc : texts.expandDesc}
                         name="caret-up-fill"
                         style={{
-                            transform: openState
+                            transform: expanded
                                 ? "rotate(0deg)"
                                 : "rotate(180deg)",
                             transition: `transform ${transitionMs}ms ease`,
                         }}
                     />
-                </div>
+                </button>
             )}
+
             {view === "icon" && (
                 <div
                     id={headerId}
-                    className={`accordeon-header ${type}`}
+                    data-accordeon-header={variant}
                 >
-                    <span></span>
-                    <span className="accordeon-title">{title}</span>
-                    <Tooltip
-                        title={
-                            openState
-                                ? text?.collapse || "Collapse"
-                                : text?.expand || "Expand"
+                    {header}
+                    <Button
+                        data-tooltip={
+                            tooltip
+                                ? expanded
+                                    ? texts.collapse
+                                    : texts.expand
+                                : undefined
                         }
-                        active={tooltip}
+                        variant="transparent"
+                        aria-label={expanded ? texts.collapse : texts.expand}
+                        aria-controls={contentId}
+                        aria-expanded={expanded}
+                        onClick={handleToggle}
                     >
-                        <button
-                            type="button"
-                            className={`background-click${openState ? " selected" : ""}`}
-                            onClick={handleToggle}
-                            aria-label={text?.toggle || "Toggle Accordeon"}
-                            aria-controls={contentId}
-                            aria-expanded={openState}
-                        >
-                            <Icon
-                                name="caret-up-fill"
-                                style={{
-                                    transform: openState
-                                        ? "rotate(0deg)"
-                                        : "rotate(180deg)",
-                                    transition: `transform ${transitionMs}ms ease`,
-                                }}
-                            />
-                        </button>
-                    </Tooltip>
+                        <Icon
+                            name="caret-up-fill"
+                            style={{
+                                transform: expanded
+                                    ? "rotate(0deg)"
+                                    : "rotate(-180deg)",
+                                transition: `transform ${transitionMs}ms ease`,
+                            }}
+                        />
+                    </Button>
                 </div>
             )}
-            <div
-                ref={contentRef}
-                id={contentId}
-                className={`accordeon-content${view === "simple" ? " accordeon-simple" : ""} ${type}`}
-                role="region"
-                aria-labelledby={view !== "simple" ? headerId : undefined}
-                aria-hidden={!openState}
-                style={{
-                    maxHeight: maxHeight === "none" ? undefined : maxHeight,
-                    transition: `max-height ${transitionMs}ms ease, padding ${transitionMs}ms ease, border-color ${transitionMs}ms ease`,
-                    ...style,
-                }}
-            >
-                {children}
-            </div>
+            {child}
         </div>
     );
 }

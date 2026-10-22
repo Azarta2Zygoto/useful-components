@@ -5,7 +5,19 @@ import { useState } from "react";
 import Switch from "@/components/switch/switch";
 import { InfoComponent } from "@/self/moreInfo";
 
-const radioList = [true, false, true, false, true];
+const radioList = [
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+];
 
 export default function SwitchPage() {
     const [selectedValue, setSelectedValue] = useState<boolean[]>(radioList);
@@ -28,31 +40,61 @@ export default function SwitchPage() {
             </p>
 
             <h2>Basic switch</h2>
+            <div
+                className="inner-component"
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                }}
+            >
+                <Switch
+                    label="Enable feature left"
+                    checked={selectedValue[0]}
+                    onChange={(e) => handleChange(e.currentTarget.checked, 0)}
+                />
+                <Switch
+                    label="Enable feature right"
+                    side="right"
+                    checked={selectedValue[1]}
+                    onChange={(e) => handleChange(e.currentTarget.checked, 1)}
+                />
+                <Switch
+                    label="Enable feature top"
+                    side="top"
+                    checked={selectedValue[2]}
+                    onChange={(e) => handleChange(e.currentTarget.checked, 2)}
+                />
+                <Switch
+                    label="Enable feature bottom"
+                    side="bottom"
+                    checked={selectedValue[3]}
+                    onChange={(e) => handleChange(e.currentTarget.checked, 3)}
+                />
+            </div>
+
+            <h2>Switch with labels</h2>
+            <p>This type of switch informs which value is currently put.</p>
             <div className="inner-component">
                 <Switch
-                    id="switch"
-                    label="Enable feature"
-                    checked={selectedValue[0]}
-                    onChange={(checked) => handleChange(checked, 0)}
+                    label="Enable feature left"
+                    checked={selectedValue[4]}
+                    values={{ on: "On", off: "Off" }}
+                    onChange={(e) => handleChange(e.currentTarget.checked, 4)}
                 />
-                <span>&nbsp;{selectedValue[0] ? "On" : "Off"}</span>
             </div>
 
             <h2>Disabled option</h2>
             <p>As input or checkbox, a switch can be disabled.</p>
             <div className="inner-component">
                 <Switch
-                    id="switch-disabled-on"
                     label="Disabled switch on"
-                    checked={true}
-                    onChange={() => {}}
+                    checked
                     disabled
                 />
                 <Switch
-                    id="switch-disabled-off"
                     label="Disabled switch off"
                     checked={false}
-                    onChange={() => {}}
                     disabled
                 />
             </div>
@@ -68,8 +110,8 @@ export default function SwitchPage() {
                 <Switch
                     id="switch-required"
                     label="Required switch"
-                    checked={selectedValue[1]}
-                    onChange={(checked) => handleChange(checked, 1)}
+                    checked={selectedValue[5]}
+                    onChange={(e) => handleChange(e.currentTarget.checked, 5)}
                     required
                 />
             </div>
@@ -89,10 +131,10 @@ export default function SwitchPage() {
             <div className="inner-component">
                 <Switch
                     id="switch-colors"
-                    checked={selectedValue[2]}
+                    checked={selectedValue[6]}
                     label="Custom colors"
                     colors={["#4caf50", "#f44336"]}
-                    onChange={(checked) => handleChange(checked, 2)}
+                    onChange={(e) => handleChange(e.currentTarget.checked, 6)}
                 />
             </div>
             <h2>Tooltip</h2>
@@ -102,19 +144,36 @@ export default function SwitchPage() {
             </p>
             <div className="inner-component">
                 <Switch
-                    id="example no label"
-                    checked={selectedValue[3]}
-                    tooltip
-                    onChange={(checked) => handleChange(checked, 3)}
+                    label="Switch with tooltip"
+                    checked={selectedValue[7]}
+                    tooltip="informations about the switch"
+                    onChange={(e) => handleChange(e.currentTarget.checked, 7)}
                 />
                 <Switch
-                    id="no-label-required"
-                    checked={selectedValue[4]}
+                    label="Switch with tooltip"
+                    required
+                    checked={selectedValue[8]}
                     tooltip={{
                         on: "This switch is on",
                         off: "This switch is off",
                     }}
-                    onChange={(checked) => handleChange(checked, 4)}
+                    onChange={(e) => handleChange(e.currentTarget.checked, 8)}
+                />
+            </div>
+            <h2>Without label</h2>
+            <p>
+                You can hide the label of the switch with the hideLabel
+                property. An aria-label is automatically added to the switch for
+                accessibility. It is recommended to use the tooltip property to
+                help the user understand what the switch is for.
+            </p>
+            <div className="inner-component">
+                <Switch
+                    label="Switch without label"
+                    hideLabel
+                    checked={selectedValue[9]}
+                    tooltip="Switch without label"
+                    onChange={(e) => handleChange(e.currentTarget.checked, 9)}
                 />
             </div>
         </main>

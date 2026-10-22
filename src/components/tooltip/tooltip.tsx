@@ -53,7 +53,6 @@ export default function Tooltip({
         }
 
         setCoords({ left, top });
-        console.log("touch open");
         setShowTooltip(true);
     };
 
@@ -62,7 +61,6 @@ export default function Tooltip({
     };
 
     const onTouchCancelEvent = () => {
-        console.log("touch cancel");
         setShowTooltip(false);
     };
 

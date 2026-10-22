@@ -1,19 +1,25 @@
-import { JSX } from "react";
+import {
+    type ChangeEvent,
+    type InputHTMLAttributes,
+    type MouseEvent,
+    type PointerEvent,
+    type ReactNode,
+    useId,
+} from "react";
 
-import Tooltip from "../tooltip/tooltip";
+import "../button/button.css";
+import { applyRippleEffect } from "../utils/ripple";
 import "./radioButton.css";
 
-interface RadioButtonProps {
+export interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string;
     value: string;
-    label?: React.ReactNode;
-    checked?: boolean;
-    disabled?: boolean;
-    className?: string;
+    label?: ReactNode;
     deselect?: boolean;
-    style?: React.CSSProperties;
-    tooltip?: boolean;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    tooltip?: boolean | string;
+    ripple?: boolean;
+    variant?: "primary" | "secondary" | "basic";
+    width?: number | string;
 }
 
 export default function RadioButton({
@@ -21,61 +27,75 @@ export default function RadioButton({
     value,
     label,
     checked,
-    disabled,
-    className,
     deselect,
-    style,
     tooltip,
+    ripple,
+    variant = "secondary",
+    disabled,
+    width,
+    className,
+    style,
     onChange,
-}: RadioButtonProps): JSX.Element {
-    function handleDeselect(event: React.MouseEvent<HTMLInputElement>) {
+    ...props
+}: Readonly<RadioButtonProps>): ReactNode {
+    const generatedId = useId();
+
+    const shouldRipple = ripple ?? variant !== "basic";
+    const correctWidth = typeof width === "number" ? `${width}px` : width;
+
+    function handleDeselect(event: MouseEvent<HTMLInputElement>) {
         if (!deselect || !checked) return;
 
         if (onChange) {
             const syntheticEvent = {
                 target: {
                     name,
-                    value: "",
+                    value: null,
                     checked: false,
                 },
                 currentTarget: event.currentTarget,
                 preventDefault: () => {},
                 stopPropagation: () => {},
-            } as unknown as React.ChangeEvent<HTMLInputElement>;
+            } as unknown as ChangeEvent<HTMLInputElement>;
 
             onChange(syntheticEvent);
         }
     }
+
+    const handlePointerDown = (event: PointerEvent<HTMLLabelElement>): void => {
+        if (!disabled && shouldRipple) {
+            applyRippleEffect(event);
+        }
+    };
+
     return (
-        <Tooltip
-            title={value}
-            active={tooltip ?? false}
+        <label
+            id={`${generatedId}-label`}
+            htmlFor={generatedId}
+            data-variant={variant}
+            data-tooltip={tooltip === true ? value : tooltip}
+            data-checked={checked}
+            aria-disabled={disabled}
+            className={className}
+            onPointerDown={handlePointerDown}
+            style={{
+                ...style,
+                ...(correctWidth !== undefined ? { width: correctWidth } : {}),
+            }}
         >
-            <div
-                className={`radio-button-container ${className ? className + "-container" : ""}`}
-            >
-                <input
-                    type="radio"
-                    id={name + "-" + value}
-                    className={`radio-input ${className ? className + "-input" : ""}`}
-                    name={name}
-                    value={value}
-                    onChange={onChange}
-                    onClick={handleDeselect}
-                    checked={checked}
-                    aria-checked={checked}
-                    aria-disabled={disabled}
-                    disabled={disabled}
-                />
-                <label
-                    htmlFor={name + "-" + value}
-                    className={`radio-label ${className ? className + "-label" : ""}`}
-                    style={style}
-                    aria-label={label ? label.toString() : undefined}
-                >
-                    {label || value}
-                </label>
-            </div>
-        </Tooltip>
+            <input
+                {...props}
+                type="radio"
+                id={generatedId}
+                name={name}
+                value={value}
+                checked={checked}
+                disabled={disabled}
+                onChange={onChange}
+                onClick={handleDeselect}
+            />
+            {shouldRipple && <span className="ripple" />}
+            {label || value}
+        </label>
     );
 }

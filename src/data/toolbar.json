@@ -5,6 +5,30 @@
             "icon": "bi bi-house-fill"
         },
         {
+            "name": "Accordeon",
+            "icon": "bi bi-arrows-collapse"
+        },
+        {
+            "name": "Button",
+            "icon": "bi bi-hand-index-fill"
+        },
+        {
+            "name": "Checkbox",
+            "icon": "bi bi-check2-square"
+        },
+        {
+            "name": "Radio Button",
+            "icon": "bi bi-ui-radios"
+        },
+        {
+            "name": "Switch",
+            "icon": "bi bi-toggle-on"
+        },
+        {
+            "name": "Tooltip",
+            "icon": "bi bi-marker-tip"
+        },
+        {
             "name": "Input",
             "icon": "bi bi-piggy-bank-fill",
             "subpath": [
@@ -41,24 +65,8 @@
             "icon": "bi bi-exclamation-triangle-fill"
         },
         {
-            "name": "Switch",
-            "icon": "bi bi-toggle-on"
-        },
-        {
-            "name": "Radio Button",
-            "icon": "bi bi-ui-radios"
-        },
-        {
-            "name": "Checkbox",
-            "icon": "bi bi-check2-square"
-        },
-        {
             "name": "Table",
             "icon": "bi bi-table"
-        },
-        {
-            "name": "Accordeon",
-            "icon": "bi bi-arrows-collapse"
         },
         {
             "name": "Combobox",

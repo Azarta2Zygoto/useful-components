@@ -5,14 +5,67 @@ import React, { Fragment, useState } from "react";
 import RadioGroup from "@/components/radioButton/radioGroup";
 import { WarningComponent } from "@/self/moreInfo";
 
-const radioList = ["", "", "", "", "", "", ""];
+const radioList = [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+];
 
-const options3 = ["banana", "apple", "orange"];
+const options3 = [
+    { value: "banana", name: "banana" },
+    { value: "apple", name: "apple" },
+    { value: "orange", name: "orange" },
+];
 
-const options5 = ["banana", "apple", "orange", "grape", "mango"];
+const options5 = [
+    { value: "banana", name: "banana" },
+    { value: "apple", name: "apple" },
+    { value: "orange", name: "orange" },
+    { value: "grape", name: "grape" },
+    { value: "mango", name: "mango" },
+];
+
+const options5Disabled = [
+    { value: "banana", name: "banana" },
+    { value: "apple", name: "apple", disabled: true },
+    { value: "orange", name: "orange" },
+    { value: "grape", name: "grape", disabled: true },
+    { value: "mango", name: "mango" },
+];
 
 export default function RadioButtonPage() {
     const [selectedValue, setSelectedValue] = useState<string[]>(radioList);
+
+    const options5Images = options5.map((value) => ({
+        value: value.value,
+        name: value.name,
+        label: (
+            <Fragment key={value.value}>
+                {/* eslint-disable-next-line @next/next/no-img-element*/}
+                <img
+                    src={`/useful-components/icon/${value.value}-icon.svg`}
+                    alt={value.value}
+                    style={{
+                        width: "20px",
+                        height: "20px",
+                        verticalAlign: "middle",
+                    }}
+                />
+                &nbsp;
+                <span style={{ textTransform: "capitalize" }}>
+                    {value.value}
+                </span>
+            </Fragment>
+        ),
+    }));
 
     const handleChange = (
         event: React.ChangeEvent<HTMLInputElement>,
@@ -36,47 +89,68 @@ export default function RadioButtonPage() {
             <h2>Basic radio button</h2>
             <div className="inner-component">
                 <RadioGroup
-                    name="radio-group-3"
-                    title="Choose an option"
-                    values={options3}
+                    name="radio-group-3-primary"
+                    label="Choose an option - primary"
+                    variant="primary"
+                    elements={options3}
                     selectedValue={selectedValue[0]}
                     onChange={(e) => handleChange(e, 0)}
-                    size={2}
-                    individualStyle={{ width: "100px" }}
+                    columns={2}
+                    width={100}
+                />
+                <RadioGroup
+                    name="radio-group-3-secondary"
+                    label="Choose an option - secondary"
+                    variant="secondary"
+                    elements={options3}
+                    selectedValue={selectedValue[1]}
+                    onChange={(e) => handleChange(e, 1)}
+                    columns={2}
+                    style={{ width: "100px" }}
+                />
+                <RadioGroup
+                    name="radio-group-3-basic"
+                    label="Choose an option - basic"
+                    variant="basic"
+                    elements={options3}
+                    selectedValue={selectedValue[3]}
+                    onChange={(e) => handleChange(e, 3)}
+                    columns={2}
+                    style={{ width: "100px" }}
                 />
             </div>
             <h2>Line control</h2>
             <p>
-                You can control the number of item per line with the size
+                You can control the number of item per line with the columns
                 property
             </p>
             <div className="inner-component">
                 <RadioGroup
                     name="radio-group-5-1"
-                    title="One per lines"
-                    values={options5}
+                    label="One per lines"
+                    elements={options5}
                     selectedValue={selectedValue[1]}
                     onChange={(e) => handleChange(e, 1)}
-                    size={1}
-                    individualStyle={{ width: "100px" }}
+                    columns={1}
+                    style={{ width: "100px" }}
                 />
                 <RadioGroup
                     name="radio-group-5-2"
-                    title="Two per lines"
-                    values={options5}
+                    label="Two per lines"
+                    elements={options5}
                     selectedValue={selectedValue[2]}
                     onChange={(e) => handleChange(e, 2)}
-                    size={2}
-                    individualStyle={{ width: "100px" }}
+                    columns={2}
+                    style={{ width: "100px" }}
                 />
                 <RadioGroup
                     name="radio-group-5-3"
-                    title="Three per lines"
-                    values={options5}
+                    label="Three per lines"
+                    elements={options5}
                     selectedValue={selectedValue[3]}
                     onChange={(e) => handleChange(e, 3)}
-                    size={3}
-                    individualStyle={{ width: "100px" }}
+                    columns={3}
+                    style={{ width: "100px" }}
                 />
             </div>
             <WarningComponent>
@@ -86,27 +160,27 @@ export default function RadioButtonPage() {
                 </p>
             </WarningComponent>
             <h2>Disabled</h2>
-            <p>You can disable the entire radio group or specific values.</p>
+            <p>You can disable the entire radio group or specific elements.</p>
             <div className="inner-component">
                 <RadioGroup
                     name="radio-group-disabled"
-                    title="Disabled options"
-                    values={options3}
+                    label="Disabled options"
+                    elements={options3}
                     selectedValue={"banane"}
                     onChange={() => {}}
                     disabled
-                    size={2}
-                    individualStyle={{ width: "100px" }}
+                    columns={2}
+                    style={{ width: "100px" }}
                 />
                 <RadioGroup
-                    name="radio-group-disabled-values"
-                    title="Disabled values"
-                    values={options5}
+                    name="radio-group-disabled-elements"
+                    label="Disabled elements"
+                    elements={options5Disabled}
                     selectedValue={selectedValue[4]}
                     onChange={(e) => handleChange(e, 4)}
-                    disabledValues={["apple", "grape"]}
-                    size={2}
-                    individualStyle={{ width: "100px" }}
+                    columns={2}
+                    variant="basic"
+                    style={{ width: "100px" }}
                 />
             </div>
             <h2>Required</h2>
@@ -114,13 +188,13 @@ export default function RadioButtonPage() {
             <div className="inner-component">
                 <RadioGroup
                     name="radio-group-required"
-                    title="You must choose an option"
-                    values={options3}
+                    label="You must choose an option"
+                    elements={options3}
                     selectedValue={selectedValue[5]}
                     onChange={(e) => handleChange(e, 5)}
                     required
-                    size={2}
-                    individualStyle={{ width: "100px" }}
+                    columns={2}
+                    style={{ width: "100px" }}
                 />
             </div>
             <h2>Deselect</h2>
@@ -131,14 +205,14 @@ export default function RadioButtonPage() {
             <div className="inner-component">
                 <RadioGroup
                     name="radio-group-deselect"
-                    title="Choose an option and deselect if needed"
-                    values={options3}
+                    label="Choose an option and deselect if needed"
+                    elements={options3}
                     selectedValue={selectedValue[6]}
                     onChange={(e) => handleChange(e, 6)}
                     required
-                    size={2}
+                    columns={2}
                     deselect
-                    individualStyle={{ width: "100px" }}
+                    style={{ width: "100px" }}
                 />
             </div>
             <h2>Labeling</h2>
@@ -152,31 +226,13 @@ export default function RadioButtonPage() {
             <div className="inner-component">
                 <RadioGroup
                     name="radio-group-tooltip"
-                    title="Choose an option"
-                    values={options5}
+                    label="Choose an option"
+                    elements={options5Images}
                     selectedValue={selectedValue[7]}
-                    label={options5.map((value) => (
-                        <Fragment key={value}>
-                            {/* eslint-disable-next-line @next/next/no-img-element*/}
-                            <img
-                                src={`/useful-components/icons/${value}-icon.svg`}
-                                alt={value}
-                                style={{
-                                    width: "20px",
-                                    height: "20px",
-                                    verticalAlign: "middle",
-                                }}
-                            />
-                            &nbsp;
-                            <span style={{ textTransform: "capitalize" }}>
-                                {value}
-                            </span>
-                        </Fragment>
-                    ))}
                     onChange={(e) => handleChange(e, 7)}
-                    size={2}
+                    columns={2}
                     deselect
-                    individualStyle={{ width: "100px" }}
+                    style={{ width: "100px" }}
                 />
             </div>
             <h2>Tooltip</h2>
@@ -188,28 +244,14 @@ export default function RadioButtonPage() {
             <div className="inner-component">
                 <RadioGroup
                     name="radio-group-tooltip"
-                    title="Choose an option"
-                    values={options5}
+                    label="Choose an option"
+                    elements={options5Images}
                     selectedValue={selectedValue[7]}
-                    label={options5.map((value) => (
-                        <Fragment key={value}>
-                            {/* eslint-disable-next-line @next/next/no-img-element*/}
-                            <img
-                                src={`/useful-components/icons/${value}-icon.svg`}
-                                alt={value}
-                                style={{
-                                    width: "20px",
-                                    height: "20px",
-                                    verticalAlign: "middle",
-                                }}
-                            />
-                        </Fragment>
-                    ))}
                     onChange={(e) => handleChange(e, 7)}
-                    size={2}
+                    columns={2}
                     deselect
                     tooltip
-                    individualStyle={{ width: "100px" }}
+                    style={{ width: "100px" }}
                 />
             </div>
         </main>

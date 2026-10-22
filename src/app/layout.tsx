@@ -2,10 +2,11 @@ import type { Metadata, Viewport } from "next";
 
 import "./globals.css";
 
+import { TooltipContextProvider } from "@/components/tooltip/tooltip-context";
+import { TooltipLayer } from "@/components/tooltip/tooltip-layer";
 import { GlobalProvider } from "@/self/globalProvider";
 import Header from "@/self/header";
 import ToolbarWrapper from "@/self/subToolbar";
-
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 
@@ -42,14 +43,7 @@ export const metadata: Metadata = {
             url: "useful-components/humans.txt",
         },
     ],
-    keywords: [
-        "react",
-        "components",
-        "library",
-        "ui",
-        "user interface",
-        "dev",
-    ],
+    keywords: ["react", "components", "library", "ui", "user interface", "dev"],
 };
 
 export const viewport: Viewport = {
@@ -69,11 +63,14 @@ export default function RootLayout({
         <html lang="fr">
             <body>
                 <GlobalProvider>
-                    <ToolbarWrapper />
-                    <div className="sub-body">
-                        <Header />
-                        {children}
-                    </div>
+                    <TooltipContextProvider>
+                        <ToolbarWrapper />
+                        <div className="sub-body">
+                            <Header />
+                            {children}
+                        </div>
+                        <TooltipLayer />
+                    </TooltipContextProvider>
                 </GlobalProvider>
             </body>
         </html>

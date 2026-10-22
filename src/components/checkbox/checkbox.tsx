@@ -1,133 +1,82 @@
-import React, { JSX } from "react";
+import {
+    type CSSProperties,
+    type InputHTMLAttributes,
+    type ReactNode,
+    useId,
+} from "react";
 
-import Tooltip from "../tooltip/tooltip";
+import Required from "../required/required";
 import "./checkbox.css";
 
-/**
- *
- * @param param - The properties for the Checkbox component.
- * @param param.id - The unique identifier for the checkbox.
- * @param param.label - The label text for the checkbox.
- * @param param.checked - The checked state of the checkbox.
- * @param param.className - Optional additional class name for custom styling.
- * @param param.name - Optional name attribute for the checkbox input.
- * @param param.side - Optional side for the checkbox ("left" or "right", default is "right").
- * @param param.sideOffset - Optional offset in pixels for the checkbox from the side (default is 0).
- * @param param.hideLabel - Optional boolean to hide the label (default is false).
- * @param param.disabled - Optional disabled state of the checkbox (default is false).
- * @param param.required - Optional required state of the checkbox (default is false).
- * @param param.tooltip - Optional boolean to enable tooltip on hover (default is false).
- * @param param.style - Optional inline styles for the checkbox.
- * @param param.boxStyle - Optional inline styles for the checkbox container.
- * @param param.checkmark - Optional custom checkmark (React node or function returning a React node).
- * @param param.onChange - The change event handler for the checkbox.
- * @return A JSX element representing the Checkbox component.
- */
-
-interface CheckboxProps {
-    id: string;
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
     label: string;
     checked: boolean;
-    className?: string;
-    name?: string;
     side?: "left" | "right";
     sideOffset?: number;
     hideLabel?: boolean;
-    disabled?: boolean;
-    required?: boolean;
-    tooltip?: boolean;
-    style?: React.CSSProperties;
-    boxStyle?: React.CSSProperties;
-    checkmark?: React.ReactNode | ((checked: boolean) => React.ReactNode);
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    tooltip?: string;
+    checkmark?: ReactNode | ((checked: boolean) => ReactNode);
 }
 
 export default function Checkbox({
     id,
     label,
     checked,
-    className,
-    name,
-    side = "right",
-    sideOffset = 0,
+    side = "left",
+    sideOffset = 35,
     hideLabel,
     disabled,
     required,
     tooltip,
     checkmark,
+    className,
     style,
-    boxStyle,
-    onChange,
-}: CheckboxProps): JSX.Element {
+    ...props
+}: Readonly<Props>): ReactNode {
+    const generatedId = useId();
+
+    const idToUse = id ?? generatedId;
     const renderedCheckmark =
         typeof checkmark === "function"
-            ? (checkmark as (c: boolean) => React.ReactNode)(checked)
+            ? (checkmark as (c: boolean) => ReactNode)(checked)
             : checkmark;
 
     return (
-        <Tooltip
-            title={label}
-            active={tooltip ?? false}
+        <label
+            id={`${idToUse}-label`}
+            htmlFor={idToUse}
+            data-side={hideLabel ? undefined : side}
+            data-tooltip={tooltip}
+            data-label={!hideLabel}
+            aria-disabled={disabled}
+            className={`checkbox-label${className ? ` ${className}` : ""}`}
+            style={
+                {
+                    ...style,
+                    "--offset": `${sideOffset}px`,
+                } as CSSProperties
+            }
         >
-            <label
-                className={`checkbox-container${disabled ? " disabled" : ""}${side === "left" ? " reverse" : ""}`}
-                id={id + "-label"}
-                style={boxStyle}
-                htmlFor={id}
+            {hideLabel ? null : label}
+            <Required required={required} />
+            <input
+                {...props}
+                id={idToUse}
+                type="checkbox"
+                checked={checked}
+                disabled={disabled}
+                required={required}
+                {...(hideLabel ? { "aria-label": label } : {})}
+            />
+            <span
+                id={`${idToUse}-checkmark`}
+                aria-hidden="true"
+                className={
+                    renderedCheckmark ? "checkbox-custom" : "checkbox-checkmark"
+                }
             >
-                {!hideLabel ? label : null}
-                {required && (
-                    <span
-                        aria-hidden="true"
-                        style={{ color: "red", margin: "0 5px" }}
-                    >
-                        &nbsp;*
-                    </span>
-                )}
-                <input
-                    id={id}
-                    type="checkbox"
-                    checked={checked}
-                    disabled={disabled}
-                    name={name ?? id}
-                    required={required}
-                    aria-checked={checked}
-                    aria-required={required}
-                    aria-disabled={disabled}
-                    onChange={onChange}
-                    {...(hideLabel ? { "aria-label": label } : {})}
-                />
-                <span
-                    id={`${id}-checkmark`}
-                    className={
-                        !renderedCheckmark
-                            ? "checkbox-checkmark "
-                            : "checkbox-placement" +
-                              (className ? ` ${className}` : "")
-                    }
-                    aria-hidden="true"
-                    style={{
-                        ...style,
-                        right:
-                            side === "right"
-                                ? hideLabel
-                                    ? "50%"
-                                    : sideOffset + "px"
-                                : undefined,
-                        left:
-                            side === "left"
-                                ? hideLabel
-                                    ? "50%"
-                                    : sideOffset + "px"
-                                : undefined,
-                        transform: hideLabel
-                            ? "translateX(50%) translateY(-50%)"
-                            : undefined,
-                    }}
-                >
-                    {renderedCheckmark ?? null}
-                </span>
-            </label>
-        </Tooltip>
+                {renderedCheckmark ?? null}
+            </span>
+        </label>
     );
 }

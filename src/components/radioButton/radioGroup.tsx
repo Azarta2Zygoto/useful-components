@@ -1,83 +1,59 @@
-import { JSX } from "react";
+import type { InputHTMLAttributes, ReactNode } from "react";
 
-import RadioButton from "./radioButton";
+import Required from "../required/required";
+import RadioButton, { RadioButtonProps } from "./radioButton";
 
-interface RadioGroupProps {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
     name: string;
-    values: string[];
-    label?: React.ReactNode[];
-    selectedValue?: string;
-    disabled?: boolean;
-    title?: string;
-    size?: number;
-    className?: string;
-    individualStyle?: React.CSSProperties;
-    style?: React.CSSProperties;
+    elements: Omit<RadioButtonProps, "name" | "checked" | "id">[];
+    label: string;
+    selectedValue: string | null;
+    ripple?: boolean;
     deselect?: boolean;
-    required?: boolean;
-    disabledValues?: string[];
     tooltip?: boolean;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    variant?: "primary" | "secondary" | "basic";
+    columns?: number;
+    width?: number | string;
 }
 
 export default function RadioGroup({
     name,
-    values,
+    elements,
     selectedValue,
-    label,
     disabled,
-    title,
-    size = 1,
-    deselect,
-    individualStyle,
-    className,
-    style,
+    label,
+    columns = 1,
     required,
-    disabledValues,
-    tooltip,
-    onChange,
-}: RadioGroupProps): JSX.Element {
+    ...props
+}: Readonly<Props>): ReactNode {
+    const validity = required
+        ? selectedValue !== null
+            ? "true"
+            : "false"
+        : undefined;
+
     return (
         <fieldset
-            className={`radio-group-container ${className ? className : ""} ${required && selectedValue === "" ? "required" : ""}`}
-            role="radiogroup"
-            style={{
-                ...style,
-                gridTemplateColumns: `repeat(${size}, 1fr)`,
-            }}
+            data-valid={validity}
             disabled={disabled}
-            aria-required={required}
-            aria-disabled={disabled}
+            className="radio-group-container"
+            style={{
+                gridTemplateColumns: `repeat(${columns}, 1fr)`,
+            }}
         >
-            {title && (
-                <legend className="radio-group-title">
-                    {title}
-                    {required && (
-                        <span
-                            aria-hidden="true"
-                            style={{ color: "red", margin: "0 5px" }}
-                        >
-                            &nbsp;*
-                        </span>
-                    )}
-                </legend>
-            )}
-            {values.map((val, j) => (
+            <legend>
+                {label}
+                <Required required={required} />
+            </legend>
+            {elements.map((element) => (
                 <RadioButton
-                    key={`${name}-${val}`}
+                    {...props}
+                    {...element}
+                    key={`${name}-${element.value}`}
                     name={name}
-                    value={val}
-                    checked={selectedValue === val}
-                    label={label ? label[j] : undefined}
-                    disabled={
-                        disabled ||
-                        (disabledValues && disabledValues.includes(val))
-                    }
-                    onChange={onChange}
-                    deselect={deselect}
-                    style={individualStyle}
-                    tooltip={tooltip}
-                    className={className}
+                    required={required}
+                    checked={selectedValue === element.value}
+                    disabled={element.disabled || disabled}
                 />
             ))}
         </fieldset>

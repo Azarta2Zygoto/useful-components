@@ -5,7 +5,19 @@ import { useState } from "react";
 import Checkbox from "@/components/checkbox/checkbox";
 import { WarningComponent } from "@/self/moreInfo";
 
-const defaultChecked = [false, false, false, false, true, false, false, false];
+const defaultChecked = [
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+];
 export default function CheckboxPage() {
     const [checked, setChecked] = useState<boolean[]>(defaultChecked);
 
@@ -22,8 +34,8 @@ export default function CheckboxPage() {
             return (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
+                    width="24"
+                    height="24"
                     fill="red"
                     viewBox="0 0 16 16"
                 >
@@ -34,8 +46,8 @@ export default function CheckboxPage() {
             return (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
+                    width="24"
+                    height="24"
                     fill="red"
                     viewBox="0 0 16 16"
                 >
@@ -57,19 +69,18 @@ export default function CheckboxPage() {
             </p>
 
             <h2>Basic checkbox</h2>
+            <p>By default, the checkbox is at the left side.</p>
             <div className="inner-component">
                 <Checkbox
-                    id="checkbox-example"
-                    label="Right Checkbox"
-                    checked={checked[0]}
-                    onChange={() => handleCheckboxChange(0)}
-                />
-                <Checkbox
-                    id="checkbox-example-left"
                     label="Left Checkbox"
                     checked={checked[1]}
-                    side="left"
                     onChange={() => handleCheckboxChange(1)}
+                />
+                <Checkbox
+                    label="Right Checkbox"
+                    checked={checked[0]}
+                    side="right"
+                    onChange={() => handleCheckboxChange(0)}
                 />
             </div>
             <h2>Required</h2>
@@ -78,7 +89,6 @@ export default function CheckboxPage() {
             </p>
             <div className="inner-component">
                 <Checkbox
-                    id="checkbox-example-required"
                     label="Required Checkbox"
                     required
                     checked={checked[2]}
@@ -100,7 +110,7 @@ export default function CheckboxPage() {
                     label="Disabled Checked Checkbox"
                     disabled
                     checked={checked[4]}
-                    tooltip
+                    tooltip="This checkbox is disabled and checked"
                     onChange={() => handleCheckboxChange(4)}
                 />
             </div>
@@ -124,7 +134,7 @@ export default function CheckboxPage() {
                     label="Without label Checkbox"
                     checked={checked[6]}
                     hideLabel
-                    tooltip
+                    tooltip="This checkbox has no label"
                     onChange={() => handleCheckboxChange(6)}
                 />
             </div>
@@ -149,6 +159,30 @@ export default function CheckboxPage() {
                     checked={checked[7]}
                     checkmark={handleHeart(checked[7])}
                     onChange={() => handleCheckboxChange(7)}
+                />
+                <Checkbox
+                    id="checkbox-example-heart-disabled"
+                    label="Heart Checkbox disabled"
+                    disabled
+                    checked={checked[9]}
+                    checkmark={handleHeart(checked[9])}
+                    onChange={() => handleCheckboxChange(9)}
+                />
+                <Checkbox
+                    id="checkbox-example-heart-disabled-true"
+                    label="Heart Checkbox disabled true"
+                    disabled
+                    checked={checked[10]}
+                    checkmark={handleHeart(checked[10])}
+                    onChange={() => handleCheckboxChange(10)}
+                />
+                <Checkbox
+                    id="checkbox-example-heart-required"
+                    label="Heart Checkbox required"
+                    required
+                    checked={checked[8]}
+                    checkmark={handleHeart(checked[8])}
+                    onChange={() => handleCheckboxChange(8)}
                 />
             </div>
         </main>

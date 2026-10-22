@@ -1,101 +1,97 @@
-import { JSX } from "react";
+import {
+    Fragment,
+    type InputHTMLAttributes,
+    type ReactNode,
+    useId,
+} from "react";
 
-import Tooltip from "../tooltip/tooltip";
+import Required from "../required/required";
 import "./switch.css";
 
-interface SwitchProps {
-    id: string;
+interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
     checked: boolean;
-    tooltip?: boolean | { on: string; off: string };
-    disabled?: boolean;
-    label?: string;
-    required?: boolean;
-    style?: React.CSSProperties;
-    colors?: [string, string] | "default" | "opposite";
-    onChange: (checked: boolean) => void;
+    label: string;
+    values?: { on: string; off: string };
+    side?: "left" | "right" | "top" | "bottom";
+    hideLabel?: boolean;
+    tooltip?: string | { on: string; off: string };
+    colors?: [string, string] | "default" | "danger";
 }
 
 export default function Switch({
     id,
     checked,
-    style,
     label,
+    values,
+    side = "left",
     tooltip,
     disabled,
     required,
+    hideLabel,
     colors = "default",
-    onChange,
-}: SwitchProps): JSX.Element {
-    const tooltipText = label
-        ? label
-        : checked
-          ? typeof tooltip === "object"
-              ? tooltip.on
-              : "On"
-          : typeof tooltip === "object"
-            ? tooltip.off
-            : "Off";
+    className,
+    style,
+    ...props
+}: Readonly<Props>): ReactNode {
+    const generatedId = useId();
 
-    let sliderBg: string | undefined;
+    const idToUse = id ?? generatedId;
+
+    const tooltipText = tooltip
+        ? typeof tooltip === "string"
+            ? tooltip
+            : checked
+              ? tooltip.on
+              : tooltip.off
+        : undefined;
+
+    let thumbColor: string | undefined;
     if (!disabled) {
-        if (colors === "default" && !required) {
-            sliderBg = "var(--border-color-special)";
-        } else if (colors === "opposite" || required) {
-            sliderBg = checked
-                ? "var(--valid-border-color)"
-                : "var(--invalid-border-color)";
-        } else if (Array.isArray(colors)) {
-            sliderBg = checked ? colors[0] : colors[1];
+        if (Array.isArray(colors)) {
+            thumbColor = checked ? colors[0] : colors[1];
+        } else if (colors === "danger" || required) {
+            thumbColor = checked
+                ? "var(--borderE-success)"
+                : "var(--borderE-danger)";
+        } else {
+            thumbColor = "var(--add-total-color)";
         }
     }
+
     return (
-        <label
-            htmlFor={id}
-            id={id + "-label"}
-            className={`switch-container ${disabled ? "disabled" : ""}`}
-            style={style}
-        >
-            <Tooltip
-                title={tooltipText}
-                active={tooltip ? true : false}
+        <Fragment>
+            <label
+                id={`${idToUse}-label`}
+                htmlFor={idToUse}
+                data-side={side}
+                data-tooltip={tooltipText}
+                aria-disabled={disabled}
+                className={`switch-container${className ? ` ${className}` : ""}`}
+                style={style}
             >
-                <div className={`switch-wrapper`}>
+                {!hideLabel && (
+                    <span>
+                        {label}
+                        <Required required={required} />
+                    </span>
+                )}
+                <div className="switch-wrapper">
                     <input
-                        id={id}
+                        {...props}
+                        id={idToUse}
                         type="checkbox"
-                        className="switch-checkbox"
                         checked={checked}
                         disabled={disabled}
-                        aria-checked={checked}
-                        aria-labelledby={id + "-label"}
-                        aria-required={required}
-                        {...(label ? { "aria-label": label } : {})}
-                        onChange={(e) => onChange(e.target.checked)}
+                        required={required}
+                        {...(hideLabel ? { "aria-label": label } : {})}
                     />
                     <span
                         aria-hidden="true"
-                        className="switch-bg"
-                    />
-                    <span
-                        aria-hidden="true"
-                        className="switch-slider"
-                        style={{ backgroundColor: sliderBg }}
+                        style={{ backgroundColor: thumbColor }}
                     />
                 </div>
-            </Tooltip>
-            {label && (
-                <span className="switch-label">
-                    {label}
-                    {required && (
-                        <span
-                            aria-hidden="true"
-                            style={{ color: "red", margin: "0 5px" }}
-                        >
-                            &nbsp;*
-                        </span>
-                    )}
-                </span>
-            )}
-        </label>
+            </label>
+            {values && <span>{checked ? values.on : values.off}</span>}
+        </Fragment>
     );
 }
