@@ -1,6 +1,7 @@
 "use client";
 
 import {
+    type PropsWithChildren,
     type ReactNode,
     createContext,
     useContext,
@@ -10,14 +11,7 @@ import {
 } from "react";
 
 export type TooltipPlacement =
-    | "t"
-    | "b"
-    | "l"
-    | "r"
-    | "tl"
-    | "tr"
-    | "bl"
-    | "br";
+    "t" | "b" | "l" | "r" | "tl" | "tr" | "bl" | "br";
 
 export interface TooltipState {
     anchor: HTMLElement;
@@ -46,7 +40,9 @@ const EXIT_DURATION = 150;
 
 const TooltipContext = createContext<TooltipContextValue | null>(null);
 
-export function TooltipContextProvider({ children }: { children: ReactNode }) {
+export function TooltipContextProvider({
+    children,
+}: Readonly<PropsWithChildren>): ReactNode {
     const [active, setActive] = useState<TooltipState | null>(null);
     const timeoutRef = useRef<{
         id: ReturnType<typeof setTimeout>;

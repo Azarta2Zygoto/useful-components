@@ -25,6 +25,10 @@
             "icon": "bi bi-toggle-on"
         },
         {
+            "name": "Toast",
+            "icon": "bi bi-exclamation-triangle-fill"
+        },
+        {
             "name": "Tooltip",
             "icon": "bi bi-marker-tip"
         },

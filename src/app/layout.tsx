@@ -2,8 +2,7 @@ import type { Metadata, Viewport } from "next";
 
 import "./globals.css";
 
-import { TooltipContextProvider } from "@/components/tooltip/tooltip-context";
-import { TooltipLayer } from "@/components/tooltip/tooltip-layer";
+import ComponentProvider from "@/components/provider/component-provider";
 import { GlobalProvider } from "@/self/globalProvider";
 import Header from "@/self/header";
 import ToolbarWrapper from "@/self/subToolbar";
@@ -63,14 +62,13 @@ export default function RootLayout({
         <html lang="fr">
             <body>
                 <GlobalProvider>
-                    <TooltipContextProvider>
+                    <ComponentProvider>
                         <ToolbarWrapper />
                         <div className="sub-body">
                             <Header />
                             {children}
                         </div>
-                        <TooltipLayer />
-                    </TooltipContextProvider>
+                    </ComponentProvider>
                 </GlobalProvider>
             </body>
         </html>

@@ -119,6 +119,7 @@
     padding: 0.5rem;
     border: none;
     background-color: transparent;
+    box-shadow: none;
 }
 [data-variant="transparent"]:not(:disabled, [aria-disabled="true"]):hover {
     color: var(--fg2);
