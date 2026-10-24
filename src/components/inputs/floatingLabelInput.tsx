@@ -26,7 +26,6 @@ export default function FloatingLabelInput({
 
     return (
         <div
-            className="fli"
             data-floating-variant={variant}
             data-side={label ? side : undefined}
             style={{ width: correctWidth }}
@@ -43,10 +42,7 @@ export default function FloatingLabelInput({
                 placeholder={placeholder ?? " "}
             />
             {variant === "outlined" && (
-                <fieldset
-                    className="fli-notch"
-                    aria-hidden="true"
-                >
+                <fieldset aria-hidden="true">
                     <legend>
                         <span>
                             {label}

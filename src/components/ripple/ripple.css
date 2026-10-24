@@ -1,0 +1,16 @@
+.ripple {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.ripple-wave {
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--color);
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+}

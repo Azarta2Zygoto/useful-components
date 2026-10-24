@@ -12,6 +12,7 @@ import {
 } from "react";
 
 import Button from "../button/button";
+import { useRipple } from "../ripple/useRipple.hook";
 import Icon from "../utils/icon";
 import "./accordion.css";
 
@@ -35,6 +36,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     defaultOpen?: boolean;
     height?: number;
     tooltip?: boolean;
+    ripple?: boolean;
     view?: "simple" | "icon" | "card";
     variant?: "primary" | "secondary" | "transparent";
     transitionMs?: number;
@@ -48,6 +50,7 @@ export default function Accordion({
     defaultOpen,
     height,
     tooltip = true,
+    ripple,
     view = "simple",
     variant = "transparent",
     transitionMs = 300,
@@ -62,7 +65,12 @@ export default function Accordion({
     const contentRef = useRef<HTMLDivElement | null>(null);
 
     const isControlled = open !== undefined;
+    const shouldRipple = ripple ?? variant === "primary";
     const [internalOpen, setInternalOpen] = useState(defaultOpen ?? false);
+    const { rippleRef, onPointerDown: handlePointerDown } =
+        useRipple<HTMLButtonElement>({
+            disabled: !shouldRipple,
+        });
 
     const expanded = isControlled ? open : internalOpen;
     const texts = {
@@ -158,8 +166,15 @@ export default function Accordion({
                     aria-expanded={expanded}
                     aria-controls={contentId}
                     onClick={handleToggle}
+                    onPointerDown={handlePointerDown}
                 >
                     {header}
+                    {shouldRipple && (
+                        <span
+                            ref={rippleRef}
+                            className="ripple"
+                        />
+                    )}
                     <Icon
                         title={expanded ? texts.collapse : texts.expand}
                         desc={expanded ? texts.collapseDesc : texts.expandDesc}

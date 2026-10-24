@@ -2,13 +2,12 @@ import {
     type ChangeEvent,
     type InputHTMLAttributes,
     type MouseEvent,
-    type PointerEvent,
     type ReactNode,
     useId,
 } from "react";
 
 import "../button/button.css";
-import { applyRippleEffect } from "../utils/ripple";
+import { useRipple } from "../ripple/useRipple.hook";
 import "./radioButton.css";
 
 export interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -43,6 +42,11 @@ export default function RadioButton({
     const shouldRipple = ripple ?? variant !== "basic";
     const correctWidth = typeof width === "number" ? `${width}px` : width;
 
+    const { rippleRef, onPointerDown: handlePointerDown } =
+        useRipple<HTMLLabelElement>({
+            disabled: disabled || !shouldRipple,
+        });
+
     function handleDeselect(event: MouseEvent<HTMLInputElement>) {
         if (!deselect || !checked) return;
 
@@ -61,12 +65,6 @@ export default function RadioButton({
             onChange(syntheticEvent);
         }
     }
-
-    const handlePointerDown = (event: PointerEvent<HTMLLabelElement>): void => {
-        if (!disabled && shouldRipple) {
-            applyRippleEffect(event);
-        }
-    };
 
     return (
         <label
@@ -94,7 +92,12 @@ export default function RadioButton({
                 onChange={onChange}
                 onClick={handleDeselect}
             />
-            {shouldRipple && <span className="ripple" />}
+            {shouldRipple && (
+                <span
+                    ref={rippleRef}
+                    className="ripple"
+                />
+            )}
             {label || value}
         </label>
     );

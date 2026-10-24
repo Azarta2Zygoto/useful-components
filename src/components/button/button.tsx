@@ -1,13 +1,8 @@
 "use client";
 
-import type {
-    ButtonHTMLAttributes,
-    PointerEvent,
-    PropsWithChildren,
-    ReactNode,
-} from "react";
+import type { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from "react";
 
-import { applyRippleEffect } from "../utils/ripple";
+import { useRipple } from "../ripple/useRipple.hook";
 import "./button.css";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -34,20 +29,14 @@ export default function Button({
     ...props
 }: Readonly<PropsWithChildren<Props>>): ReactNode {
     const isDisabled = disabled || loading;
-
     const shouldRipple = ripple ?? variant !== "transparent";
-
     const correctWidth = typeof width === "number" ? `${width}px` : width;
 
-    const handlePointerDown = (
-        event: PointerEvent<HTMLButtonElement>,
-    ): void => {
-        if (!isDisabled && shouldRipple) {
-            applyRippleEffect(event);
-        }
-
-        onPointerDown?.(event);
-    };
+    const { rippleRef, onPointerDown: handlePointerDown } =
+        useRipple<HTMLButtonElement>({
+            disabled: isDisabled || !shouldRipple,
+            onPointerDown,
+        });
 
     return (
         <button
@@ -65,7 +54,12 @@ export default function Button({
                 ...(correctWidth !== undefined ? { width: correctWidth } : {}),
             }}
         >
-            {shouldRipple && <span className="ripple" />}
+            {shouldRipple && (
+                <span
+                    ref={rippleRef}
+                    className="ripple"
+                />
+            )}
             {children}
         </button>
     );

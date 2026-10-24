@@ -64,12 +64,12 @@
 }
 
 button[data-accordion-header] {
+    --color: var(--outlineE);
+    position: relative;
     cursor: pointer;
     outline: 2px solid transparent;
     outline-offset: 3px;
-    transition:
-        background-color 0.3s ease-in-out,
-        color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
 }
 button[data-accordion-header]:hover {
     color: var(--fg2);

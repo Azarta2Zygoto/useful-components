@@ -1,7 +1,5 @@
 [data-variant] {
     --color: var(--outlineE);
-    --x: 50%;
-    --y: 50%;
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -154,40 +152,4 @@
 
 [data-variant][data-loading="true"] {
     cursor: wait;
-}
-
-.ripple {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    border-radius: inherit;
-    pointer-events: none;
-}
-.ripple::before {
-    position: absolute;
-    top: var(--y);
-    left: var(--x);
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background-color: var(--color);
-    content: "";
-    opacity: 0;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-}
-[data-variant]:not(:disabled, [aria-disabled="true"]):active .ripple::before {
-    animation: ripple-animation 0.5s ease-out 50ms both;
-}
-@keyframes ripple-animation {
-    0% {
-        width: 0;
-        height: 0;
-        opacity: 0.35;
-    }
-    100% {
-        width: 250%;
-        height: 250%;
-        opacity: 0;
-    }
 }
