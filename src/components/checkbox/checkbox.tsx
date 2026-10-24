@@ -35,7 +35,7 @@ export default function Checkbox({
 }: Readonly<Props>): ReactNode {
     const generatedId = useId();
 
-    const idToUse = id ?? generatedId;
+    const correctId = id ?? generatedId;
     const renderedCheckmark =
         typeof checkmark === "function"
             ? (checkmark as (c: boolean) => ReactNode)(checked)
@@ -43,8 +43,8 @@ export default function Checkbox({
 
     return (
         <label
-            id={`${idToUse}-label`}
-            htmlFor={idToUse}
+            id={`${correctId}-label`}
+            htmlFor={correctId}
             data-side={hideLabel ? undefined : side}
             data-tooltip={tooltip}
             data-label={!hideLabel}
@@ -61,7 +61,7 @@ export default function Checkbox({
             <Required required={required} />
             <input
                 {...props}
-                id={idToUse}
+                id={correctId}
                 type="checkbox"
                 checked={checked}
                 disabled={disabled}
@@ -69,7 +69,7 @@ export default function Checkbox({
                 {...(hideLabel ? { "aria-label": label } : {})}
             />
             <span
-                id={`${idToUse}-checkmark`}
+                id={`${correctId}-checkmark`}
                 aria-hidden="true"
                 className={
                     renderedCheckmark ? "checkbox-custom" : "checkbox-checkmark"

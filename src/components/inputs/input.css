@@ -1,0 +1,275 @@
+.text-input-label {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+.text-input-label[data-side="left"] {
+    flex-direction: row;
+    align-items: center;
+}
+
+[data-input-variant] {
+    padding: 10px 14px;
+    border: 2px solid var(--add-light-color);
+    border-radius: 8px;
+    background-color: var(--bgE);
+    color: var(--fg);
+    font-size: 16px;
+    box-shadow: 0 2px 10px #1167b10f;
+    outline: 2px solid transparent;
+    outline-offset: 3px;
+    transition:
+        border-color 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out,
+        background-color 0.3s ease-in-out,
+        outline-color 0.3s ease-in-out;
+}
+[data-input-variant]:not(:disabled):hover {
+    border-color: var(--add-total-color);
+    background-color: var(--bgE-hover);
+    box-shadow: 0 0 0 3px #1167b136;
+}
+[data-input-variant]:not(:disabled):focus-visible {
+    background-color: var(--bgE-active);
+    border-color: var(--add-total-color);
+    box-shadow: 0 0 0 3px #1167b136;
+    outline-color: var(--add-total-color);
+}
+[data-input-variant]:disabled {
+    background-color: var(--bgE-disabled);
+    border-color: var(--bgE-disabled);
+    color: var(--textE);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+[data-input-variant]::placeholder {
+    color: var(--textE-disabled);
+    font-style: italic;
+}
+[data-input-variant]:not(:disabled)[data-state="invalid"],
+[data-input-variant]:not(:disabled, [data-state="default"]):invalid {
+    border-color: var(--borderE-danger);
+}
+
+[data-input-variant="standard"] {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid var(--add-light-color);
+    background-color: transparent;
+    outline: none;
+}
+
+[data-input-variant="standard"]:not(:disabled):hover {
+    background-color: transparent;
+    box-shadow: none;
+}
+[data-input-variant="standard"]:not(:disabled):focus-visible {
+    background-color: transparent;
+    box-shadow: 0 5px 10px 5px #1167b136;
+}
+[data-input-variant="standard"]:disabled {
+    color: var(--textE-disabled);
+    background-color: transparent;
+}
+[data-input-variant="standard"]:not(
+        :disabled,
+        :focus-visible
+    )[data-state="invalid"],
+[data-input-variant]:not(
+        :disabled,
+        [data-state="default"],
+        :focus-visible
+    ):invalid {
+    background-color: var(--invalid-bg-color);
+}
+
+.fli {
+    position: relative;
+    display: inline-block;
+}
+.fli > input {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* =====================================================================
+   Label (commun aux deux variantes) — position au repos
+   ===================================================================== */
+.fli > label {
+    position: absolute;
+    top: 50%;
+    left: 12px; /* 2px bordure + 14px padding - 4px de padding du label */
+    max-width: calc(100% - 24px);
+    padding: 0 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transform: translateY(-50%);
+    color: var(--textE-disabled);
+    font-size: 16px;
+    line-height: 1.2;
+    pointer-events: none;
+    transition:
+        top 0.2s ease-in-out,
+        left 0.2s ease-in-out,
+        transform 0.2s ease-in-out,
+        font-size 0.2s ease-in-out,
+        color 0.3s ease-in-out;
+}
+
+/* Le vrai placeholder n'apparaît qu'au focus (sinon il chevauche le label) */
+.fli > input::placeholder {
+    color: var(--textE-disabled);
+    font-style: italic;
+}
+.fli > input:not(:focus)::placeholder {
+    color: transparent;
+}
+
+/* Label remonté : champ focus ou rempli */
+.fli > input:focus ~ label,
+.fli > input:not(:placeholder-shown) ~ label {
+    font-size: 12px;
+    color: var(--fg);
+}
+.fli > input:focus ~ label {
+    color: var(--add-total-color);
+}
+.fli > input:disabled ~ label {
+    color: var(--textE-disabled);
+}
+.fli > input:not(:disabled)[data-state="invalid"] ~ label,
+.fli > input:not(:disabled, [data-state="default"]):invalid ~ label {
+    color: var(--borderE-danger);
+}
+
+/* =====================================================================
+   Variante "outlined" : input + fieldset/legend
+   ===================================================================== */
+
+/* L'input garde fond, ombre et padding ; sa bordure est transparente
+   (elle réserve juste les 2px) car c'est le fieldset qui la dessine. */
+.fli > input[data-input-variant="outlined"] {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--bgE);
+    color: var(--fg);
+    font-size: 16px;
+    box-shadow: 0 2px 10px #1167b10f;
+    outline: none;
+    transition:
+        box-shadow 0.3s ease-in-out,
+        background-color 0.3s ease-in-out;
+}
+.fli > input[data-input-variant="outlined"]:not(:disabled):hover {
+    background-color: var(--bgE-hover);
+    box-shadow: 0 0 0 3px #1167b136;
+}
+.fli > input[data-input-variant="outlined"]:not(:disabled):focus-visible {
+    background-color: var(--bgE-active);
+    box-shadow: 0 0 0 3px #1167b136;
+}
+.fli > input[data-input-variant="outlined"]:disabled {
+    background-color: var(--bgE-disabled);
+    color: var(--textE);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ---- Le fieldset : bordure uniquement ---- */
+.fli-notch {
+    position: absolute;
+    /* -5px + legend de 12px : la bordure de 2px se retrouve exactement
+       à 0–2px du haut de l'input, centrée sur la legend. */
+    top: -5px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-width: 0;
+    margin: 0;
+    padding: 0 8px; /* 2px bordure + 8px = le label flottant démarre à 10px */
+    overflow: hidden;
+    border: 2px solid var(--add-light-color);
+    border-radius: 8px;
+    pointer-events: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Legend : invisible, sa largeur découpe la bordure */
+.fli-notch > legend {
+    display: block;
+    float: none;
+    width: auto;
+    max-width: 0.01px; /* repos : aucune coupure */
+    height: 12px;
+    padding: 0;
+    overflow: hidden;
+    visibility: hidden;
+    white-space: nowrap;
+    font-size: 12px;
+    line-height: 12px;
+    transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1);
+}
+.fli-notch > legend > span {
+    display: inline-block;
+    padding: 0 4px; /* identique au padding du label */
+    opacity: 0;
+}
+
+/* Remontée : le label monte sur la bordure, la legend s'élargit */
+.fli > input[data-input-variant="outlined"]:focus ~ label,
+.fli > input[data-input-variant="outlined"]:not(:placeholder-shown) ~ label {
+    top: 1px; /* centre de la bordure haute (0–2px) */
+    left: 10px;
+}
+.fli > input[data-input-variant="outlined"]:focus ~ .fli-notch > legend,
+.fli
+    > input[data-input-variant="outlined"]:not(:placeholder-shown)
+    ~ .fli-notch
+    > legend {
+    max-width: 100%;
+    transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
+}
+
+/* ---- Couleurs de bordure selon l'état de l'input ---- */
+.fli > input[data-input-variant="outlined"]:not(:disabled):hover ~ .fli-notch,
+.fli
+    > input[data-input-variant="outlined"]:not(:disabled):focus-visible
+    ~ .fli-notch {
+    border-color: var(--add-total-color);
+}
+.fli > input[data-input-variant="outlined"]:disabled ~ .fli-notch {
+    border-color: var(--bgE-disabled);
+}
+.fli
+    > input[data-input-variant="outlined"]:not(:disabled)[data-state="invalid"]
+    ~ .fli-notch,
+.fli
+    > input[data-input-variant="outlined"]:not(
+        :disabled,
+        [data-state="default"]
+    ):invalid
+    ~ .fli-notch {
+    border-color: var(--borderE-danger);
+}
+
+/* =====================================================================
+   Variante "standard" : styles de l'input existants + label au-dessus
+   ===================================================================== */
+.fli[data-floating-variant="standard"] {
+    padding-top: 1rem;
+}
+.fli[data-floating-variant="standard"] > label {
+    top: calc(50% + 0.5rem);
+    left: 10px;
+    padding: 0;
+}
+.fli[data-floating-variant="standard"] > input:focus ~ label,
+.fli[data-floating-variant="standard"] > input:not(:placeholder-shown) ~ label {
+    top: 1rem;
+    left: 0;
+    transform: translateY(calc(-100% - 2px));
+}

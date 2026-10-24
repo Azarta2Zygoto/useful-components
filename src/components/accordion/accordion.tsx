@@ -63,7 +63,6 @@ export default function Accordion({
 
     const isControlled = open !== undefined;
     const [internalOpen, setInternalOpen] = useState(defaultOpen ?? false);
-    const [maxHeight, setMaxHeight] = useState<string>("0px");
 
     const expanded = isControlled ? open : internalOpen;
     const texts = {
@@ -74,12 +73,7 @@ export default function Accordion({
     useLayoutEffect(() => {
         const el = contentRef.current;
 
-        if (!el) {
-            setMaxHeight(
-                expanded ? (height != null ? `${height}px` : "none") : "0px",
-            );
-            return;
-        }
+        if (!el) return;
 
         let timeoutId: number | undefined;
         let raf1: number | undefined;
@@ -87,18 +81,17 @@ export default function Accordion({
 
         if (expanded) {
             const measured = height ?? el.scrollHeight;
-
-            setMaxHeight(`${measured}px`);
+            el.style.maxHeight = `${measured}px`;
 
             timeoutId = window.setTimeout(() => {
-                setMaxHeight("none");
+                el.style.maxHeight = "none";
             }, transitionMs);
         } else {
-            setMaxHeight(`${el.scrollHeight}px`);
+            el.style.maxHeight = `${el.scrollHeight}px`;
 
             raf1 = window.requestAnimationFrame(() => {
                 raf2 = window.requestAnimationFrame(() => {
-                    setMaxHeight("0px");
+                    el.style.maxHeight = "0px";
                 });
             });
         }
@@ -143,7 +136,6 @@ export default function Accordion({
             style={
                 {
                     "--transition-duration": `${transitionMs}ms`,
-                    maxHeight: maxHeight === "none" ? undefined : maxHeight,
                     ...style,
                 } as CSSProperties
             }
@@ -173,9 +165,6 @@ export default function Accordion({
                         desc={expanded ? texts.collapseDesc : texts.expandDesc}
                         name="caret-up-fill"
                         style={{
-                            transform: expanded
-                                ? "rotate(0deg)"
-                                : "rotate(180deg)",
                             transition: `transform ${transitionMs}ms ease`,
                         }}
                     />
@@ -189,7 +178,7 @@ export default function Accordion({
                 >
                     {header}
                     <Button
-                        data-tooltip={
+                        tooltip={
                             tooltip
                                 ? expanded
                                     ? texts.collapse
@@ -205,9 +194,6 @@ export default function Accordion({
                         <Icon
                             name="caret-up-fill"
                             style={{
-                                transform: expanded
-                                    ? "rotate(0deg)"
-                                    : "rotate(-180deg)",
                                 transition: `transform ${transitionMs}ms ease`,
                             }}
                         />

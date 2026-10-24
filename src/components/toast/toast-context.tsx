@@ -93,11 +93,7 @@ export default function ToastContextProvider({
             runtimes.current.delete(id);
         }
 
-        setToasts((current) =>
-            current.some((toast) => toast.id === id)
-                ? current.filter((toast) => toast.id !== id)
-                : current,
-        );
+        setToasts((current) => current.filter((toast) => toast.id !== id));
     }, []);
 
     const dismiss = useCallback(

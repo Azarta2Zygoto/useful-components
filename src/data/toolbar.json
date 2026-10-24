@@ -37,6 +37,10 @@
             "icon": "bi bi-piggy-bank-fill",
             "subpath": [
                 {
+                    "name": "correct",
+                    "icon": "bi bi-correct"
+                },
+                {
                     "name": "number",
                     "icon": "bi bi-123"
                 },

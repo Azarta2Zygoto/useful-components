@@ -15,6 +15,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     loading?: boolean;
     ripple?: boolean;
     pressed?: boolean;
+    tooltip?: string;
     width?: number | string;
 }
 
@@ -24,6 +25,7 @@ export default function Button({
     loading = false,
     pressed = false,
     disabled = false,
+    tooltip,
     ripple,
     width,
     style,
@@ -53,6 +55,7 @@ export default function Button({
             type={type}
             data-variant={variant}
             data-loading={loading || undefined}
+            data-tooltip={tooltip}
             disabled={isDisabled}
             aria-busy={loading || undefined}
             aria-pressed={pressed || undefined}

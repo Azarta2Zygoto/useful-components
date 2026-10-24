@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 
 import "./globals.css";
 
@@ -61,6 +62,12 @@ export default function RootLayout({
     return (
         <html lang="fr">
             <body>
+                {process.env.NODE_ENV === "development" && (
+                    <Script
+                        strategy="afterInteractive"
+                        src="https://unpkg.com/react-scan@latest/dist/auto.global.js"
+                    />
+                )}
                 <GlobalProvider>
                     <ComponentProvider>
                         <ToolbarWrapper />

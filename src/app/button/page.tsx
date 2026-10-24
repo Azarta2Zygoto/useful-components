@@ -4,7 +4,7 @@ import { type ReactNode, useState } from "react";
 
 import Button from "@/components/button/button";
 import Github from "@/components/icons/github";
-import { useTooltip } from "@/components/tooltip/useTooltip";
+import { useTooltip } from "@/components/tooltips/useTooltip.hook";
 
 export default function ButtonPage(): ReactNode {
     const tooltip = useTooltip({ content: "Button tooltip" });
@@ -105,9 +105,16 @@ export default function ButtonPage(): ReactNode {
             <h3>Buttons with tooltip</h3>
             <p>
                 You can easily add a tooltip to a button by using the useTooltip
-                hook. The tooltip will be shown on hover and focus.
+                hook. The tooltip will be shown on hover and focus. You can also
+                use the simple tooltip API made entirely in CSS.
             </p>
             <div className="inner-component">
+                <Button
+                    variant="primary"
+                    tooltip="This is a tooltip"
+                >
+                    Primary
+                </Button>
                 <Button
                     variant="primary"
                     {...tooltip}

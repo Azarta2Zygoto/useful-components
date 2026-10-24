@@ -3,24 +3,28 @@
 import { ReactNode } from "react";
 
 import Button from "@/components/button/button";
-import { useTooltip } from "@/components/tooltip/useTooltip";
+import { useTooltip } from "@/components/tooltips/useTooltip.hook";
 
 export default function TooltipPage(): ReactNode {
     const bottomTooltip = useTooltip({
         content: "Bottom tooltip",
-        placement: "b",
+        placement: "bottom",
     });
     const topTooltip = useTooltip({
         content: "Top tooltip",
-        placement: "t",
+        placement: "top",
     });
     const leftTooltip = useTooltip({
         content: "Left tooltip",
-        placement: "l",
+        placement: "left",
     });
     const rightTooltip = useTooltip({
         content: "Right tooltip",
-        placement: "r",
+        placement: "right",
+    });
+    const tooltip300 = useTooltip({
+        content: "300ms delay tooltip",
+        delay: 300,
     });
 
     return (
@@ -34,19 +38,19 @@ export default function TooltipPage(): ReactNode {
             </p>
             <h2>Basic tooltip</h2>
             <p>
-                You just need to put some texts into &quot;data-tooltip&quot;
-                and, most of the time, a tooltip entirely made with CSS appears
+                You just need to put some texts into &quot;tooltip&quot; and,
+                most of the time, a tooltip entirely made with CSS appears
             </p>
             <div className="inner-component">
                 <Button
                     variant="primary"
-                    data-tooltip="This is a tooltip"
+                    tooltip="This is a tooltip"
                 >
                     Primary
                 </Button>
                 <Button
                     variant="primary"
-                    data-tooltip="This is a tooltip"
+                    tooltip="This is a tooltip"
                     ripple={false}
                 >
                     Primary
@@ -85,6 +89,20 @@ export default function TooltipPage(): ReactNode {
                     {...rightTooltip}
                 >
                     Right
+                </Button>
+            </div>
+            <h3>Delay</h3>
+            <p>
+                You can also add a delay to the tooltip, so it will appear after
+                a certain amount of time. This can be useful to avoid showing
+                the tooltip too quickly and annoying the user.
+            </p>
+            <div className="inner-component">
+                <Button
+                    variant="primary"
+                    {...tooltip300}
+                >
+                    300ms delay
                 </Button>
             </div>
         </main>
