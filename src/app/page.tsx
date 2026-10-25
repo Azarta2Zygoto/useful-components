@@ -1,18 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
-import Combobox from "@/components/combobox/combobox";
-import MultipleMenuSelect from "@/components/multipleMenuSelect/multipleMenuSelect";
-import Table from "@/components/table/table";
+import Accordion from "@/components/ui/accordion/Accordion";
+import Checkbox from "@/components/ui/checkbox/Checkbox";
+import * as Input from "@/components/ui/input";
 
 export default function HomePage() {
-    const [selectedOption, setSelectedOption] = useState<string>("");
-    const [selectedOPtions, setSelectedOptions] = useState<string[]>([]);
-
-    function handleMultipleSelectChange(options: string[]) {
-        setSelectedOptions(options);
-    }
+    const [isSelected, setIsSelected] = useState<boolean>(false);
 
     return (
         <main>
@@ -31,69 +26,47 @@ export default function HomePage() {
             </p>
             <div
                 className="component-box"
-                style={{ width: "300px" }}
+                style={{ width: "300px", gap: "1rem" }}
             >
-                <h2>Combobox</h2>
-                <Combobox
-                    id={"example-combobox"}
-                    value={selectedOption}
-                    options={[
-                        "Banana",
-                        "Apple",
-                        "Orange",
-                        "Mango",
-                        "Pineapple",
-                        "Grapes",
-                        "Strawberry",
-                        "Blueberry",
-                        "Raspberry",
-                        "Blackberry",
-                    ]}
-                    placeholder="Select an option"
-                    floatingLabel
-                    onChange={(value) => setSelectedOption(value)}
-                    style={{ maxWidth: "300px", width: "100%" }}
+                <h2>Input</h2>
+                <Input.Text
+                    label="Text input"
+                    placeholder="Enter text"
+                />
+                <Input.Number
+                    label="Number input"
+                    variant="standard"
+                    placeholder="Enter a number"
+                />
+                <Input.Floating
+                    label="Text input with a floating label"
+                    placeholder="Enter text"
                 />
             </div>
             <div
                 className="component-box"
                 style={{ width: "300px" }}
             >
-                <h2>Multiple Menu Select</h2>
-                <MultipleMenuSelect
-                    id={"example-multiple-menu-select"}
-                    options={[
-                        "Banana",
-                        "Apple",
-                        "Orange",
-                        "Mango",
-                        "Pineapple",
-                        "Grapes",
-                        "Strawberry",
-                        "Blueberry",
-                        "Raspberry",
-                        "Blackberry",
-                    ]}
-                    selectedOptions={selectedOPtions}
-                    label="Select options"
-                    floatingLabel
-                    onSelect={handleMultipleSelectChange}
-                    style={{ width: "250px" }}
+                <h2>Checkbox</h2>
+                <Checkbox
+                    label="Checkbox"
+                    checked={isSelected}
+                    onChange={(e) => setIsSelected(e.target.checked)}
                 />
             </div>
             <div
                 className="component-box"
                 style={{ width: "300px" }}
             >
-                <h2>Table</h2>
-                <Table
-                    name="Example Table"
-                    data={[
-                        { Name: "John Doe", Age: 28, City: "New York" },
-                        { Name: "Jane Smith", Age: 34, City: "Los Angeles" },
-                        { Name: "Sam Johnson", Age: 45, City: "Chicago" },
-                    ]}
-                />
+                <h2>Accordion</h2>
+                <Accordion
+                    header="Accordion header"
+                    view="card"
+                    variant="primary"
+                >
+                    <p>This is the content of the accordion.</p>
+                    <p>You can put any JSX element here.</p>
+                </Accordion>
             </div>
         </main>
     );

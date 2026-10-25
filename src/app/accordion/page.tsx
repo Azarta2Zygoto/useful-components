@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import Accordion from "@/components/accordion/accordion";
-import Button from "@/components/button/button";
+import Accordion from "@/components/ui/accordion/Accordion";
+import Button from "@/components/ui/button/Button";
 
 export default function AccordionPage() {
     const [openSimple, setOpenSimple] = useState(false);

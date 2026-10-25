@@ -2,9 +2,9 @@
 
 import { type ReactNode, useState } from "react";
 
-import Button from "@/components/button/button";
-import Github from "@/components/icons/github";
-import { useTooltip } from "@/components/tooltips/useTooltip.hook";
+import Button from "@/components/ui/button/Button";
+import Github from "@/components/ui/icon/github";
+import { useTooltip } from "@/components/ui/tooltip/useTooltip.hook";
 
 export default function ButtonPage(): ReactNode {
     const tooltip = useTooltip({ content: "Button tooltip" });

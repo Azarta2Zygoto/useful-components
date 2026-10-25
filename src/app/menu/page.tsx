@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-import Menu from "@/components/menu/menu";
+import Menu from "../../../legacy/menu/menu";
 
 export default function MenuPage() {
     const parentRef = useRef<HTMLButtonElement>(null);

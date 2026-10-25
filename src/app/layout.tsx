@@ -3,10 +3,10 @@ import Script from "next/script";
 
 import "./globals.css";
 
-import ComponentProvider from "@/components/provider/component-provider";
-import { GlobalProvider } from "@/self/globalProvider";
-import Header from "@/self/header";
-import ToolbarWrapper from "@/self/subToolbar";
+import { GlobalProvider } from "@/components/GlobalProvider";
+import Header from "@/components/Header";
+import ToolbarWrapper from "@/components/ToolbarWrapper";
+import ComponentProvider from "@/components/ui/provider/ComponentProvider";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 

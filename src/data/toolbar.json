@@ -17,11 +17,11 @@
             "icon": "bi bi-check2-square"
         },
         {
-            "name": "Text Input",
+            "name": "Input text",
             "icon": "bi bi-alphabet"
         },
         {
-            "name": "Number Input",
+            "name": "input Number",
             "icon": "bi bi-123"
         },
         {
@@ -39,58 +39,6 @@
         {
             "name": "Tooltip",
             "icon": "bi bi-marker-tip"
-        },
-        {
-            "name": "Input",
-            "icon": "bi bi-piggy-bank-fill",
-            "subpath": [
-                {
-                    "name": "number",
-                    "icon": "bi bi-123"
-                },
-                {
-                    "name": "Multi Input",
-                    "icon": "bi bi-collection"
-                },
-                {
-                    "name": "Array Input",
-                    "icon": "bi bi-list-ol"
-                }
-            ]
-        },
-        {
-            "name": "Select Menu",
-            "icon": "bi bi-menu-button-wide-fill",
-            "subpath": [
-                {
-                    "name": "Multiple Select Menu",
-                    "icon": "bi bi-collection"
-                },
-                {
-                    "name": "special",
-                    "icon": "bi bi-bell"
-                }
-            ]
-        },
-        {
-            "name": "Alert Box",
-            "icon": "bi bi-exclamation-triangle-fill"
-        },
-        {
-            "name": "Table",
-            "icon": "bi bi-table"
-        },
-        {
-            "name": "Combobox",
-            "icon": "bi bi-list"
-        },
-        {
-            "name": "Toolbar",
-            "icon": "bi bi-layout-text-sidebar-reverse"
-        },
-        {
-            "name": "Little Components",
-            "icon": "bi bi-puzzle"
         }
     ]
 }

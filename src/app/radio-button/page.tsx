@@ -2,8 +2,8 @@
 
 import React, { Fragment, useState } from "react";
 
-import RadioGroup from "@/components/radioButton/radioGroup";
-import { WarningComponent } from "@/self/moreInfo";
+import { WarningComponent } from "@/components/WrapperComponent";
+import RadioGroup from "@/components/ui/radio-button/RadioGroup";
 
 const radioList = [
     null,

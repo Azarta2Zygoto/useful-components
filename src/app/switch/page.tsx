@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import Switch from "@/components/switch/switch";
-import { InfoComponent } from "@/self/moreInfo";
+import { InfoComponent } from "@/components/WrapperComponent";
+import Switch from "@/components/ui/switch/switch";
 
 const radioList = [
     true,

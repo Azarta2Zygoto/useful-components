@@ -2,8 +2,8 @@
 
 import { ReactNode } from "react";
 
-import Button from "@/components/button/button";
-import { useTooltip } from "@/components/tooltips/useTooltip.hook";
+import Button from "@/components/ui/button/Button";
+import { useTooltip } from "@/components/ui/tooltip/useTooltip.hook";
 
 export default function TooltipPage(): ReactNode {
     const bottomTooltip = useTooltip({

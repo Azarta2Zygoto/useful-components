@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import Checkbox from "@/components/checkbox/checkbox";
-import { WarningComponent } from "@/self/moreInfo";
+import { WarningComponent } from "@/components/WrapperComponent";
+import Checkbox from "@/components/ui/checkbox/Checkbox";
 
 const defaultChecked = [
     false,

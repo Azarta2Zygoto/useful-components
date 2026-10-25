@@ -2,7 +2,7 @@
 
 import React, { JSX } from "react";
 
-import Toolbar from "@/components/toolbar/toolbar";
+import Toolbar from "@/components/ui/toolbar/Toolbar";
 import toolbarJSON from "@/data/toolbar.json";
 
 export default function ToolbarPage(): JSX.Element {
