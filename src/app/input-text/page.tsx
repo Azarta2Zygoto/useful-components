@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import * as Input from "@/components/ui/input";
+import * as Input from "@ui/input";
 
 export default function InputPage() {
     const [value, setValue] = useState("");

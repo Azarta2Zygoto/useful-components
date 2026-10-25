@@ -2,8 +2,9 @@
 
 import type { ReactNode } from "react";
 
+import Toolbar from "@ui/toolbar/Toolbar";
+
 import { useGlobal } from "@/components/GlobalProvider";
-import Toolbar from "@/components/ui/toolbar/Toolbar";
 import toolbarJSON from "@/data/toolbar.json";
 
 export default function ToolbarWrapper(): ReactNode {

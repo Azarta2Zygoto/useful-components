@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "@/components/ui/button/Button";
-import { useToast } from "@/components/ui/toast/Toast.context";
+import Button from "@ui/button/Button";
+import { useToast } from "@ui/toast/Toast.context";
 
 export default function ToastPage() {
     const toast = useToast();

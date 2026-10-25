@@ -1,11 +1,9 @@
 "use client";
 
-import { ReactNode } from "react";
+import Button from "@ui/button/Button";
+import { useTooltip } from "@ui/tooltip/useTooltip.hook";
 
-import Button from "@/components/ui/button/Button";
-import { useTooltip } from "@/components/ui/tooltip/useTooltip.hook";
-
-export default function TooltipPage(): ReactNode {
+export default function TooltipPage() {
     const bottomTooltip = useTooltip({
         content: "Bottom tooltip",
         placement: "bottom",

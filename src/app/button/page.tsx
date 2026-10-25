@@ -1,12 +1,14 @@
 "use client";
 
-import { type ReactNode, useState } from "react";
+import { useState } from "react";
 
-import Button from "@/components/ui/button/Button";
-import Github from "@/components/ui/icon/github";
-import { useTooltip } from "@/components/ui/tooltip/useTooltip.hook";
+import Button from "@ui/button/Button";
+import Github from "@ui/icon/github";
+import { useTooltip } from "@ui/tooltip/useTooltip.hook";
 
-export default function ButtonPage(): ReactNode {
+import { WarningComponent } from "@/components/WrapperComponent";
+
+export default function ButtonPage() {
     const tooltip = useTooltip({ content: "Button tooltip" });
     const [isActives, setIsActives] = useState<boolean[]>([
         false,
@@ -196,12 +198,15 @@ export default function ButtonPage(): ReactNode {
                 Those buttons have two states : active or inactive. By default
                 they are inactive, so it is like a normal button. This is the
                 parent component that will manage the state of the button.
-                <br />
-                Attention: if you want a checkbox or a radio button, you should
-                use the checkbox or radio button component and not try to make a
-                button behave like a checkbox or a radio button. This is not the
-                purpose of this component.
             </p>
+            <WarningComponent>
+                <p>
+                    If you want a checkbox or a radio button, you should use the
+                    checkbox or radio button component and not try to make a
+                    button behave like a checkbox or a radio button. This is not
+                    the purpose of this component.
+                </p>
+            </WarningComponent>
             <div className="inner-component">
                 <Button
                     variant="primary"

@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 
+import ComponentProvider from "@ui/provider/ComponentProvider";
+
 import "./globals.css";
 
 import { GlobalProvider } from "@/components/GlobalProvider";
 import Header from "@/components/Header";
 import ToolbarWrapper from "@/components/ToolbarWrapper";
-import ComponentProvider from "@/components/ui/provider/ComponentProvider";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 

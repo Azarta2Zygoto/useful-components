@@ -1,6 +1,6 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
-import Icon from "@/components/ui/icon/icon";
+import Icon from "@ui/icon/icon";
 
 export function InfoComponent({
     children,

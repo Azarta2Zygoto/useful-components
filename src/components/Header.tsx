@@ -3,9 +3,9 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 
-import { useGlobal } from "./GlobalProvider";
+import Button from "@ui/button/Button";
 
-import Button from "@/components/ui/button/Button";
+import { useGlobal } from "./GlobalProvider";
 
 export default function Header(): ReactNode {
     const { openToolbar, setOpenToolbar, width } = useGlobal();

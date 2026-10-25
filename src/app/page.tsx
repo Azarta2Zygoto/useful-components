@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-import Accordion from "@/components/ui/accordion/Accordion";
-import Checkbox from "@/components/ui/checkbox/Checkbox";
-import * as Input from "@/components/ui/input";
+import Accordion from "@ui/accordion/Accordion";
+import Checkbox from "@ui/checkbox/Checkbox";
+import * as Input from "@ui/input";
 
 export default function HomePage() {
     const [isSelected, setIsSelected] = useState<boolean>(false);
