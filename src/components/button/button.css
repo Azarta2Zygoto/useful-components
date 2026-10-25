@@ -88,7 +88,8 @@
     background-color: var(--bgE-hover);
 }
 [data-variant="danger"]:not(:disabled, [aria-disabled="true"]):active,
-[data-variant="danger"]:not(:disabled, [aria-disabled="true"]):focus-visible {
+[data-variant="danger"]:not(:disabled, [aria-disabled="true"]):focus-visible,
+[data-variant="danger"]:not(:disabled, [aria-disabled="true"]):focus-within {
     background-color: var(--bgE-active);
     outline-color: var(--borderE-danger);
 }

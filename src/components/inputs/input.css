@@ -1,4 +1,5 @@
 .text-input-label {
+    position: relative;
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
@@ -43,6 +44,11 @@
     cursor: not-allowed;
     box-shadow: none;
 }
+[data-input-variant]:not(:disabled):read-only {
+    background-color: var(--bgE-disabled) !important;
+    color: var(--textE);
+    box-shadow: none;
+}
 [data-input-variant]::placeholder {
     color: var(--textE-disabled);
     font-style: italic;
@@ -53,7 +59,6 @@
 }
 
 [data-input-variant="standard"] {
-    padding: 8px 10px;
     border: none;
     border-radius: 0;
     border-bottom: 2px solid var(--add-light-color);
@@ -72,6 +77,10 @@
 [data-input-variant="standard"]:disabled {
     color: var(--textE-disabled);
     background-color: transparent;
+}
+[data-input-variant="standard"]:not(:disabled):read-only {
+    color: var(--textE-disabled);
+    background-color: transparent !important;
 }
 [data-input-variant="standard"]:not(
         :disabled,
@@ -263,4 +272,35 @@
     top: 1rem;
     left: 0;
     transform: translateY(calc(-100% - 2px));
+}
+
+input[type="number"][data-input-variant]::-webkit-inner-spin-button,
+input[type="number"][data-input-variant]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"][data-input-variant]::-webkit-textfield-decoration-container {
+    margin-right: 1rem;
+}
+.number-input-wrapper {
+    position: relative;
+}
+.number-input-wrapper button {
+    position: absolute;
+    right: 12px;
+    transform: translateY(-50%);
+    outline: none;
+    padding: 0;
+}
+
+.number-input-wrapper button:hover,
+.number-input-wrapper button:active,
+.number-input-wrapper button:focus-within {
+    color: var(--add-mid-color) !important;
+}
+.number-button-up {
+    top: 35%;
+}
+.number-button-down {
+    top: 65%;
 }

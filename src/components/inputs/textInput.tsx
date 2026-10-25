@@ -8,12 +8,17 @@ import {
 import Required from "../required/required";
 import "./input.css";
 
-type InputVariant = "standard" | "outlined";
+export type InputVariant = "standard" | "outlined";
+export type TextType = "text" | "password" | "email" | "search" | "tel" | "url";
 
-type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type">;
+type InputProps = Omit<
+    InputHTMLAttributes<HTMLInputElement>,
+    "type" | "value" | "defaultValue"
+>;
 
 export interface TextInputProps extends InputProps {
     value?: string;
+    defaultValue?: string;
     type?: "text" | "password" | "email" | "search" | "tel" | "url";
     side?: "left" | "top";
     label?: string;
@@ -40,8 +45,8 @@ export default function TextInput({
     ...props
 }: Readonly<TextInputProps>): ReactNode {
     const generatedId = useId();
-    const correctId = id || generatedId;
 
+    const correctId = id || generatedId;
     const correctWidth = typeof width === "number" ? `${width}px` : width;
 
     return (

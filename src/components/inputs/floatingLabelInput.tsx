@@ -1,8 +1,8 @@
 import { type ReactNode, useId } from "react";
 
 import Required from "../required/required";
+import type { TextInputProps } from "./TextInput";
 import "./input.css";
-import type { TextInputProps } from "./textInput";
 
 export default function FloatingLabelInput({
     id,

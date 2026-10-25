@@ -17,6 +17,14 @@
             "icon": "bi bi-check2-square"
         },
         {
+            "name": "Text Input",
+            "icon": "bi bi-alphabet"
+        },
+        {
+            "name": "Number Input",
+            "icon": "bi bi-123"
+        },
+        {
             "name": "Radio Button",
             "icon": "bi bi-ui-radios"
         },
@@ -36,10 +44,6 @@
             "name": "Input",
             "icon": "bi bi-piggy-bank-fill",
             "subpath": [
-                {
-                    "name": "correct",
-                    "icon": "bi bi-correct"
-                },
                 {
                     "name": "number",
                     "icon": "bi bi-123"
