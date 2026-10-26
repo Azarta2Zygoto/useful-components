@@ -5,7 +5,7 @@ import "./date-info.css";
 interface DateTooltipProps extends TimeHTMLAttributes<HTMLTimeElement> {
     date: Date;
     tooltip?: boolean;
-    language?: string;
+    locale?: string;
     displayFormat?: Intl.DateTimeFormatOptions;
     tooltipFormat?: Intl.DateTimeFormatOptions;
 }
@@ -13,7 +13,7 @@ interface DateTooltipProps extends TimeHTMLAttributes<HTMLTimeElement> {
 export default function DateTooltip({
     date,
     tooltip = true,
-    language = "fr-FR",
+    locale = "fr-FR",
     displayFormat,
     tooltipFormat,
     ...props
@@ -38,8 +38,8 @@ export default function DateTooltip({
         year: "numeric",
     };
 
-    const shortDate = date.toLocaleDateString(language, shortOptions);
-    const fullDate = date.toLocaleDateString(language, fullOptions);
+    const shortDate = date.toLocaleDateString(locale, shortOptions);
+    const fullDate = date.toLocaleDateString(locale, fullOptions);
 
     return (
         <time

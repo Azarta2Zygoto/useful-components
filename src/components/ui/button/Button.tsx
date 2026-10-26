@@ -5,7 +5,7 @@ import type { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from "react";
 import { useRipple } from "../ripple/useRipple.hook";
 import "./button.css";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: "primary" | "secondary" | "danger" | "transparent";
     loading?: boolean;
     ripple?: boolean;
@@ -27,7 +27,7 @@ export default function Button({
     onPointerDown,
     children,
     ...props
-}: Readonly<PropsWithChildren<Props>>): ReactNode {
+}: Readonly<PropsWithChildren<ButtonProps>>): ReactNode {
     const isDisabled = disabled || loading;
     const shouldRipple = ripple ?? variant !== "transparent";
     const correctWidth = typeof width === "number" ? `${width}px` : width;

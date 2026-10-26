@@ -17,16 +17,28 @@
             "icon": "bi bi-check2-square"
         },
         {
+            "name": "Date info",
+            "icon": "bi bi-calendar2-x-fill"
+        },
+        {
             "name": "Input text",
             "icon": "bi bi-alphabet"
         },
         {
-            "name": "input Number",
+            "name": "Input Number",
             "icon": "bi bi-123"
+        },
+        {
+            "name": "Menu Select",
+            "icon": "bi bi-menu-button"
         },
         {
             "name": "Radio Button",
             "icon": "bi bi-ui-radios"
+        },
+        {
+            "name": "Slider",
+            "icon": "bi bi-sliders"
         },
         {
             "name": "Switch",

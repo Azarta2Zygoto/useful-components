@@ -1,0 +1,87 @@
+.menu-select {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.menu-select[data-side="left"] {
+    flex-direction: row;
+    align-items: center;
+}
+
+.menu {
+    --x: 0;
+    --y: -0.25rem;
+    position-area: bottom span-right;
+    position-try-fallbacks: flip-block, flip-inline;
+    padding: 0.5rem;
+    min-width: calc(anchor-size(width) - 1rem);
+    max-height: min(20rem, 50vh);
+    margin: 0;
+    background-color: var(--bgE);
+    border: 1px solid var(--borderE);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    inset: auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    outline: none;
+
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(0.95);
+    transform-origin: top left;
+    pointer-events: none;
+    transition:
+        opacity 0.3s ease-in-out,
+        transform 0.3s ease-in-out,
+        display 0.3s allow-discrete,
+        overlay 0.3s allow-discrete;
+}
+
+.menu:popover-open {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+
+.menu li {
+    position: relative;
+    list-style: none;
+    padding: 0.5rem;
+    padding-left: 2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.menu li:hover {
+    background-color: var(--bgE-hover);
+}
+.menu li[data-active="true"] {
+    background-color: var(--bgE-active);
+}
+.menu li[aria-selected="true"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg) translateY(-100%);
+}
+
+@starting-style {
+    .menu-select .menu:popover-open {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(0.97);
+    }
+}
+
+@supports not (anchor-name: --x) {
+    .menu-select .menu {
+        position: fixed;
+        top: 30%;
+        left: 1rem;
+    }
+}
