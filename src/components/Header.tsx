@@ -7,6 +7,9 @@ import Button from "@ui/button/Button";
 
 import { useGlobal } from "./GlobalProvider";
 
+import { ASSETS } from "@/types/common.constant";
+import { buildAssetPath } from "@/utils/path.utils";
+
 export default function Header(): ReactNode {
     const { openToolbar, setOpenToolbar, width } = useGlobal();
 
@@ -24,7 +27,7 @@ export default function Header(): ReactNode {
                 </Button>
             )}
             <Image
-                src="/useful-components/logo-components-sombre.png"
+                src={buildAssetPath(ASSETS.LOGO.DARK)}
                 alt="Useful Components Logo"
                 width={40}
                 height={40}

@@ -1,4 +1,7 @@
 {
+    "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": "explicit"
+    },
     "editor.formatOnSave": true,
     "files.exclude": {
         "**/*.rpyc": true,

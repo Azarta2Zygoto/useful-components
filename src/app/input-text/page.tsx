@@ -24,9 +24,9 @@ export default function InputPage() {
             <h2>Variant</h2>
             <div className="inner-component">
                 <Input.Text
-                    label="Text input standard"
+                    label="Text input underline"
                     placeholder="Enter text"
-                    variant="standard"
+                    variant="underline"
                 />
             </div>
             <h2>Label position</h2>
@@ -34,23 +34,17 @@ export default function InputPage() {
                 <Input.Text
                     label="Text input left"
                     placeholder="Enter text"
-                    side="left"
+                    labelPosition="left"
                 />
             </div>
             <h2>Required</h2>
             <p>
                 When the element is invalid (required, size or pattern not
-                respected), a red mark is put. You can put the element in
-                default state not to use this feature. You can also put the
-                element in invalid state to force the red mark.
+                respected), a red mark is put. You can also put the element in
+                invalid state with aria-invalid=&quot;true&quot; to force the
+                red mark.
             </p>
             <div className="inner-component">
-                <Input.Text
-                    label="Text input required in default state"
-                    placeholder="Enter text"
-                    required
-                    state="default"
-                />
                 <Input.Text
                     label="Text input required error"
                     placeholder="Enter text"
@@ -62,8 +56,7 @@ export default function InputPage() {
                     label="Text input required"
                     placeholder="Enter text"
                     required
-                    variant="standard"
-                    state="invalid"
+                    variant="underline"
                 />
             </div>
             <h2>Disabled</h2>
@@ -75,23 +68,11 @@ export default function InputPage() {
                     value="Disabled"
                 />
                 <Input.Text
-                    label="Text input disabled standard"
+                    label="Text input disabled underline"
                     placeholder="Enter text"
                     disabled
-                    variant="standard"
+                    variant="underline"
                     value="Disabled"
-                />
-            </div>
-            <h2>Floating Label</h2>
-            <div className="inner-component">
-                <Input.Floating
-                    label="Floating label"
-                    placeholder="Enter text"
-                />
-                <Input.Floating
-                    label="Floating label input"
-                    placeholder="Enter text"
-                    variant="standard"
                 />
             </div>
             <h2>Textarea</h2>
@@ -116,12 +97,6 @@ export default function InputPage() {
                     label="Readonly textarea"
                     defaultValue="This is a readonly textarea"
                     readOnly
-                />
-                <Input.Floating
-                    label="Readonly input"
-                    defaultValue="This is a readonly input"
-                    readOnly
-                    variant="standard"
                 />
             </div>
         </main>

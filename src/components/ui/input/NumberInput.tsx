@@ -66,10 +66,8 @@ export default function NumberInput({
             if (direction === "up") input.stepUp();
             else input.stepDown();
         } catch {
-            return; // stepUp/stepDown lèvent une erreur si step="any"
+            return;
         }
-
-        // Déclenche le vrai onChange de React
         input.dispatchEvent(new Event("input", { bubbles: true }));
     };
 

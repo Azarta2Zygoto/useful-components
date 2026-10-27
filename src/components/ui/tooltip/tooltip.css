@@ -1,19 +1,19 @@
 [data-tooltip-layer] {
+    z-index: 9999;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9999;
     max-width: 10rem;
     padding: 0.25rem 0.5rem;
     background-color: var(--bgE);
     color: var(--fg);
-    border-radius: 0.25rem;
     font-size: 0.875rem;
     font-weight: normal;
     white-space: nowrap;
-    pointer-events: none;
+    border-radius: 0.25rem;
     box-shadow: 1px 1px 2px 3px rgba(0, 0, 0, 0.1);
     opacity: 0;
+    pointer-events: none;
     transition: opacity 300ms ease-in-out;
 }
 
@@ -21,14 +21,14 @@
     opacity: 1;
 }
 
-[data-tooltip] {
+[data-tooltip="true"] {
     position: relative;
 }
 
-[data-tooltip]::after {
-    content: attr(data-tooltip);
-    position: absolute;
+[data-tooltip="true"]::after {
+    content: attr(aria-describedby);
     z-index: 9999;
+    position: absolute;
     top: calc(100% + 0.5rem);
     left: 50%;
     transform: translate(-50%, 0);
@@ -36,14 +36,14 @@
     padding: 0.25rem 0.5rem;
     background-color: var(--bgE);
     color: var(--fg);
-    border-radius: 0.25rem;
     font-size: 0.875rem;
     font-weight: normal;
-    white-space: nowrap;
     text-overflow: ellipsis;
-    pointer-events: none;
+    white-space: nowrap;
+    border-radius: 0.25rem;
     box-shadow: 1px 1px 2px 3px rgba(0, 0, 0, 0.1);
     opacity: 0;
+    pointer-events: none;
     transition: opacity 150ms ease-in-out;
 }
 

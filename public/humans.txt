@@ -5,6 +5,6 @@ Contact: mailto:quentin.potiron@gmail.com
 Location: France
 
 /* SITE */
-Last update: 21/10/2025
+Last update: 2026-10-27
 Standards: HTML5, CSS3
-Components: React, Next.JS
+Components: React, Next.JS, npm

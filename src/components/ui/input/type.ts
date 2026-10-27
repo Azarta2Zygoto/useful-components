@@ -1,22 +1,31 @@
-import type { InputHTMLAttributes, LabelHTMLAttributes } from "react";
+import type { ComponentProps, LabelHTMLAttributes } from "react";
 
-export type InputVariant = "standard" | "outlined";
-export type TextType = "text" | "password" | "email" | "search" | "tel" | "url";
+export type InputVariant = "underline" | "outlined";
+export type TextInputType =
+    "text" | "password" | "email" | "search" | "tel" | "url";
+export type InputType =
+    | TextInputType
+    | "number"
+    | "date"
+    | "time"
+    | "datetime-local"
+    | "month"
+    | "week";
 
-type InputProps = Omit<
-    InputHTMLAttributes<HTMLInputElement>,
+export interface InputProps extends Omit<ComponentProps<"input">, "type"> {
+    type?: InputType;
+    tooltip?: boolean;
+    variant?: InputVariant;
+}
+
+export interface TextInputProps extends Omit<
+    InputProps,
     "type" | "value" | "defaultValue"
->;
-
-export interface TextInputProps extends InputProps {
+> {
+    type?: TextInputType;
     value?: string;
     defaultValue?: string;
-    type?: "text" | "password" | "email" | "search" | "tel" | "url";
-    side?: "left" | "top";
-    label?: string;
-    variant?: InputVariant;
-    tooltip?: string;
-    width?: number | string;
-    state?: "default" | "invalid";
+    label: string;
+    labelPosition?: "left" | "top";
     labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
 }

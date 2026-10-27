@@ -1,4 +1,4 @@
 .required {
-    color: var(--textE-danger);
     margin: 0;
+    color: var(--textE-danger);
 }

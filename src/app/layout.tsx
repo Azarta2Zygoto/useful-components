@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { PropsWithChildren } from "react";
 
 import ComponentProvider from "@ui/provider/ComponentProvider";
 
@@ -8,43 +9,71 @@ import "./globals.css";
 import { GlobalProvider } from "@/components/GlobalProvider";
 import Header from "@/components/Header";
 import ToolbarWrapper from "@/components/ToolbarWrapper";
+import { ASSETS } from "@/types/common.constant";
+import { buildAssetPath } from "@/utils/path.utils";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 
+const title = "Component Library";
+const description =
+    "A collection of reusable components for building user interfaces in react.";
+const ogImage = {
+    url: buildAssetPath(ASSETS.LOGO.DARK, "/"),
+    width: 64,
+    height: 64,
+    type: "image/png",
+    alt: `${title} logo`,
+};
+
 export const metadata: Metadata = {
     metadataBase: new URL(BASE),
-    title: "Component Library",
-    description:
-        "A collection of reusable components for building user interfaces in react.",
+    title: {
+        default: title,
+        template: `%s - ${title}`,
+    },
+    description: description,
     icons: {
-        icon: "/useful-components/logo-components-sombre.png",
-        shortcut: "/useful-components/logo-components-sombre.png",
-        apple: "/useful-components/logo-components-sombre.png",
-    },
-    openGraph: {
-        title: "Component Library",
-        description:
-            "A collection of reusable components for building user interfaces in react.",
-        url: "/",
-        images: "/logo-components-sombre.png",
-        type: "website",
-        siteName: "Useful Components",
-        locale: "fr_FR",
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Component Library",
-        description:
-            "A collection of reusable components for building user interfaces in react.",
-        images: "/logo-components-sombre.png",
+        icon: buildAssetPath(ASSETS.LOGO.DARK),
+        shortcut: buildAssetPath(ASSETS.LOGO.DARK),
+        apple: buildAssetPath(ASSETS.LOGO.DARK),
     },
     authors: [
         {
             name: "Quentin Potiron",
-            url: "useful-components/humans.txt",
+            url: "https://azarta2zygoto.github.io/profile",
         },
     ],
+    creator: "Quentin Potiron",
+    publisher: "Quentin Potiron",
+    category: "IT & Software",
+    generator: "Next.js",
+    openGraph: {
+        title: title,
+        description: description,
+        url: "/",
+        type: "website",
+        siteName: title,
+        images: ogImage,
+        locale: "en_US",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: title,
+        description: description,
+        images: ogImage,
+    },
     keywords: ["react", "components", "library", "ui", "user interface", "dev"],
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+        },
+    },
 };
 
 export const viewport: Viewport = {
@@ -55,11 +84,7 @@ export const viewport: Viewport = {
     colorScheme: "dark light",
 };
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     return (
         <html lang="fr">
             <body>

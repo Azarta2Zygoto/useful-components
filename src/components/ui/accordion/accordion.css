@@ -2,19 +2,18 @@
     --transition-duration: 0.3s;
     width: 100%;
     padding: 0 5px;
-    outline: 2px solid var(--add-total-color);
-    outline-offset: -2px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
+    outline: 2px solid var(--add-total-color);
+    outline-offset: -2px;
     overflow: hidden;
     transition:
         outline-color var(--transition-duration) ease-in-out,
         max-height var(--transition-duration) ease-in-out;
 }
 [data-accordion][data-expanded="false"] {
-    outline-color: transparent;
     max-height: 0;
+    outline-color: transparent;
 }
 
 [data-accordion][data-accordion-variant="secondary"] {
@@ -35,14 +34,13 @@
 [data-accordion-header] {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     padding: 10px;
-    border: 2px solid var(--border-color-special);
     background-color: transparent;
+    border: 2px solid var(--border-color-special);
     border-radius: 10px;
-    box-sizing: border-box;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 [data-accordion-header="secondary"] {
@@ -55,8 +53,8 @@
 }
 
 [data-accordion-header]:has(~ [data-expanded="true"]) {
-    border-radius: 10px 10px 0 0;
     border-bottom: none;
+    border-radius: 10px 10px 0 0;
 }
 [data-accordion="icon"][data-accordion-variant="primary"],
 [data-accordion="card"][data-accordion-variant="primary"] {
@@ -66,17 +64,17 @@
 button[data-accordion-header] {
     --color: var(--outlineE);
     position: relative;
-    cursor: pointer;
     outline: 2px solid transparent;
     outline-offset: 3px;
+    cursor: pointer;
     transition: color 0.3s ease-in-out;
 }
 button[data-accordion-header]:hover {
     color: var(--fg2);
 }
 button[data-accordion-header]:focus-visible {
-    outline-color: var(--outlineE);
     color: var(--fg2);
+    outline-color: var(--outlineE);
 }
 button[aria-expanded="true"] > svg {
     transform: rotate(180deg);

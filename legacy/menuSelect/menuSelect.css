@@ -6,44 +6,44 @@
     margin: 5px 10px;
 }
 .menu-select-button-outlined {
+    box-sizing: border-box;
     position: relative;
     display: inline-flex;
+    flex-wrap: wrap; /* Allow content to wrap */
     flex-direction: row;
     align-items: center;
+    gap: 2px;
     min-width: 100px;
-    min-height: 56px;
-    height: fit-content;
     width: fit-content;
     max-width: 100%;
-    font-size: 16px;
+    min-height: 56px;
+    height: fit-content;
     padding: 14px 25px 14px 10px;
-    box-sizing: border-box;
-    border: 2px solid var(--input-border-color);
     background-color: var(--input-bg-color);
     color: var(--fg);
-    cursor: pointer;
-    user-select: text;
-    overflow: hidden;
-    flex-wrap: wrap; /* Allow content to wrap */
-    gap: 2px;
+    font-size: 16px;
+    border: 2px solid var(--input-border-color);
+    box-shadow: 0 0 0 3px #1167b10f;
 
     outline: 1px solid transparent;
     outline-offset: -3px;
-    box-shadow: 0 0 0 3px #1167b10f;
+    cursor: pointer;
+    user-select: text;
+    overflow: hidden;
     transition:
         border-color 0.3s,
         box-shadow 0.3s,
         background-color 0.3s;
 }
 .menu-select-button-outlined:hover:not(:disabled) {
-    outline: 1px solid var(--input-focus-border-color);
     box-shadow: 0 0 0 3px #1167b136;
+    outline: 1px solid var(--input-focus-border-color);
 }
 .menu-select-button-outlined:focus {
     background-color: var(--input-focus-bg-color);
     border-color: var(--input-focus-border-color);
-    outline: 1px solid var(--input-focus-border-color);
     box-shadow: 0 0 0 3px #1167b136;
+    outline: 1px solid var(--input-focus-border-color);
 }
 .menu-select-button-outlined:focus ~ .menu-select-label.floating {
     color: var(--add-total-color);
@@ -65,30 +65,30 @@
     color: var(--invalid-border-color);
 }
 .menu-select-button-standard {
+    box-sizing: border-box;
     position: relative;
     display: inline-flex;
+    flex-wrap: wrap; /* Allow content to wrap */
     flex-direction: row;
     align-items: center;
+    gap: 2px;
     min-width: 100px;
-    min-height: 56px;
-    height: fit-content;
     width: fit-content;
     max-width: 100%;
-    font-size: 16px;
+    min-height: 56px;
+    height: fit-content;
     padding: 14px 25px 14px 10px;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 2px solid var(--selected-bg-color);
     background-color: transparent;
     color: var(--fg);
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid var(--selected-bg-color);
+    box-shadow: 0 2px 10px #1167b10f;
+
+    outline: none;
     cursor: pointer;
     user-select: text;
     overflow: hidden;
-    flex-wrap: wrap; /* Allow content to wrap */
-    gap: 2px;
-
-    outline: none;
-    box-shadow: 0 2px 10px #1167b10f;
     transition:
         border-color 0.3s,
         box-shadow 0.3s,
@@ -122,29 +122,29 @@
     color: var(--invalid-border-color);
 }
 .menu-select-button-compact {
+    box-sizing: border-box;
     position: relative;
     display: inline-flex;
+    flex-wrap: wrap; /* Allow content to wrap */
     flex-direction: row;
     align-items: center;
+    gap: 2px;
     min-width: 100px;
-    min-height: 30px;
-    height: fit-content;
     width: fit-content;
     max-width: 100%;
-    font-size: 16px;
+    min-height: 30px;
+    height: fit-content;
     padding: 2px 25px 2px 8px;
-    box-sizing: border-box;
-    border: none;
-    border: 1px solid var(--selected-bg-color);
     background-color: var(--bg);
     color: var(--fg);
+    font-size: 16px;
+    border: none;
+    border: 1px solid var(--selected-bg-color);
+
+    box-shadow: 0 2px 10px #1167b10f;
     cursor: pointer;
     user-select: text;
     overflow: hidden;
-    flex-wrap: wrap; /* Allow content to wrap */
-    gap: 2px;
-
-    box-shadow: 0 2px 10px #1167b10f;
     transition:
         border-color 0.3s,
         box-shadow 0.3s,
@@ -178,28 +178,28 @@
 }
 
 .menu-select-button-filled {
+    box-sizing: border-box;
     position: relative;
     display: inline-flex;
+    flex-wrap: wrap; /* Allow content to wrap */
     flex-direction: row;
     align-items: center;
+    gap: 2px;
     min-width: 100px;
-    min-height: 56px;
-    height: fit-content;
     width: fit-content;
     max-width: 100%;
-    font-size: 16px;
+    min-height: 56px;
+    height: fit-content;
     padding: 14px 25px 14px 10px;
-    box-sizing: border-box;
-    border: none;
     background-color: var(--input-bg-color);
     color: var(--fg);
+    font-size: 16px;
+    border: none;
+
+    box-shadow: 0 0 0 3px #1167b10f;
     cursor: pointer;
     user-select: text;
     overflow: hidden;
-    flex-wrap: wrap; /* Allow content to wrap */
-    gap: 2px;
-
-    box-shadow: 0 0 0 3px #1167b10f;
     transition:
         border-color 0.3s,
         box-shadow 0.3s,
@@ -234,24 +234,24 @@
 }
 
 .menu-select-button-invisible {
+    box-sizing: border-box;
     position: relative;
     display: inline-flex;
+    flex-wrap: wrap; /* Allow content to wrap */
     flex-direction: row;
     align-items: center;
-    height: fit-content;
+    gap: 2px;
     width: fit-content;
-    font-size: 16px;
-    padding: 0 25px 0 0;
+    height: fit-content;
     margin: 0;
-    box-sizing: border-box;
-    border: none;
+    padding: 0 25px 0 0;
     background-color: transparent;
     color: var(--fg);
+    font-size: 16px;
+    border: none;
     cursor: pointer;
     user-select: text;
     overflow: hidden;
-    flex-wrap: wrap; /* Allow content to wrap */
-    gap: 2px;
 
     transition:
         border-color 0.3s,
@@ -263,8 +263,8 @@
     box-shadow: 0 0 0 0 #1167b136;
 }
 .menu-select-button-filled:focus {
-    outline: 1px solid var(--input-focus-border-color);
     box-shadow: 0 0 0 3px #1167b136;
+    outline: 1px solid var(--input-focus-border-color);
 }
 .menu-select-button-filled:focus ~ .menu-select-label.floating {
     color: var(--add-total-color);
@@ -288,8 +288,8 @@
 
 .menu-select-icon {
     position: absolute;
-    right: 5px;
     top: 50%;
+    right: 5px;
     transform: translateY(-50%);
     transition: transform 0.15s ease-in-out;
 }
@@ -302,22 +302,22 @@
     position: absolute;
     top: calc(100%);
     left: 0;
+    transform: scaleX(0.8) translateX(-10%) scaleY(0.1) translateY(-500%);
     min-width: calc(100% - 25px);
     width: fit-content;
     max-width: calc(100vw - 25px);
     max-height: min(200px, calc(100svh - 20px));
-    padding: 3px 0;
     margin: 0;
+    padding: 3px 0;
+    background-color: var(--input-bg-color);
     list-style: none;
     border-radius: 5px;
-    background-color: var(--input-bg-color);
     box-shadow: 0 2px 8px #1167b10f;
-    overflow-y: auto;
-    transform: scaleX(0.8) translateX(-10%) scaleY(0.1) translateY(-500%);
-    transition: transform 0.3s ease-in-out;
 
     opacity: 0;
     visibility: hidden;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
 }
 .menu-select-list.open {
     transform: scaleX(1) scaleY(1);
@@ -333,11 +333,11 @@
 .menu-select-option {
     display: flex;
     align-items: center;
-    height: 32px;
     width: calc(100% - 30px);
+    height: 32px;
     padding: 0 15px;
-    cursor: pointer;
     color: var(--fg);
+    cursor: pointer;
     user-select: none;
 }
 .menu-select-option:not(.empty):hover {
@@ -359,27 +359,27 @@
 .menu-select-label.floating {
     z-index: 10;
     position: absolute;
+    display: inline-block;
     top: 4%;
     left: 10px;
     transform: translateY(-50%);
-    display: inline-block;
     width: fit-content; /* Let it size to content */
     max-width: calc(100% - 30px); /* Prevent overflow */
-    padding: 0 8px 0 2px;
     margin: 0;
+    padding: 0 8px 0 2px;
     font-size: 12px;
     font-style: normal;
-    pointer-events: none;
-    transition: all 0.15s ease-in-out;
     text-overflow: ellipsis;
-    overflow: hidden;
     white-space: nowrap;
+    pointer-events: none;
+    overflow: hidden;
+    transition: all 0.15s ease-in-out;
 }
 .menu-select-label.floating.void {
     top: 50%;
     left: 14px;
-    font-style: italic;
-    max-width: calc(100% - 40px);
     transform: translateY(-50%);
+    max-width: calc(100% - 40px);
+    font-style: italic;
     background-image: none;
 }

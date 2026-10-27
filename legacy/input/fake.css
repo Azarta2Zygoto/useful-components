@@ -1,8 +1,8 @@
 .flc {
+    box-sizing: border-box;
     position: relative;
     display: inline-block;
     margin: 8px 10px;
-    box-sizing: border-box;
 }
 .flc.compact {
     margin: 1px;
@@ -11,16 +11,16 @@
     margin: 0 !important;
 }
 .flf {
+    box-sizing: border-box;
     position: absolute;
-    pointer-events: none;
-    inset: 0;
     top: -8px;
     left: 0;
-    margin: 0;
-    padding: 0;
     width: 100%;
     height: calc(100% + 8px);
-    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    inset: 0;
 }
 
 .flc.outlined .flf {
@@ -34,12 +34,12 @@
 }
 .flc.outlined .fli {
     box-sizing: border-box;
-    border: none;
     padding: 10px 14px;
-    border-radius: 8px;
     background-color: var(--input-bg-color);
     color: var(--fg);
     font-size: 16px;
+    border: none;
+    border-radius: 8px;
     outline: 1px solid transparent;
     outline-offset: -3px;
     transition: background-color 0.3s;
@@ -69,8 +69,8 @@
 }
 .flc.outlined .fli::placeholder {
     color: var(--disabled-text-color);
-    opacity: 1;
     font-style: italic;
+    opacity: 1;
 }
 .flc.outlined .fli:invalid:not(:disabled),
 .flc.outlined .fli:invalid:not(:disabled) {
@@ -97,15 +97,15 @@ input:is(:-webkit-autofill, :autofill) + .flf .fll,
 
 .floating-label {
     position: absolute;
-    left: 14px;
     top: 50%;
-    color: var(--element-color);
+    left: 14px;
     transform: translateY(-50%) scale(1);
-    transform-origin: left center;
+    color: var(--element-color);
     font-size: 16px;
     font-style: italic;
     pointer-events: none;
     transition: all 0.2s ease;
+    transform-origin: left center;
 }
 input:is(:-webkit-autofill, :autofill) + .flf .floating-label,
 .fli:not(:placeholder-shown) + .flf .floating-label {
@@ -140,15 +140,15 @@ input:is(:-webkit-autofill, :autofill) + .flf .floating-label,
     padding-right: 40px; /* space for the icon */
 }
 .fake-arrow {
-    cursor: pointer;
     position: absolute;
-    right: 25px;
-    top: 50%;
-    transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
     color: #777;
+    cursor: pointer;
 }
 .array-input-container {
     display: inline-flex;
@@ -162,40 +162,40 @@ input:is(:-webkit-autofill, :autofill) + .flf .floating-label,
 }
 .validate-array-button-add,
 .validate-array-button-cancel {
-    cursor: pointer;
     position: absolute;
-    right: 25px;
     top: 50%;
+    right: 25px;
     transform: translateY(-50%);
+    cursor: pointer;
 }
 .validate-array-button-modify {
-    cursor: pointer;
     position: absolute;
-    right: 45px;
     top: 50%;
+    right: 45px;
     transform: translateY(-50%);
+    cursor: pointer;
 }
 .array-input-duplicate-icon,
 .array-input-maximum-icon {
-    user-select: none;
-    pointer-events: none;
     position: absolute;
-    right: 25px;
     top: 50%;
+    right: 25px;
     transform: translateY(-50%);
+    pointer-events: none;
+    user-select: none;
 }
 .array-input-boxes-container {
     display: inline-flex;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    flex-wrap: wrap;
     width: fit-content;
     margin: 5px;
     padding: 5px;
     border: solid 1px var(--fg);
-    box-shadow: 1px 1px 3px var(--fg);
     border-radius: 10px;
+    box-shadow: 1px 1px 3px var(--fg);
 }
 .array-input-boxes-container.full {
     border-color: var(--warning-border-color);
@@ -210,10 +210,10 @@ input:is(:-webkit-autofill, :autofill) + .flf .floating-label,
     box-shadow: none;
 }
 .multi-input-fieldset {
+    margin: 10px 0;
+    padding: 10px;
     border: 2px solid var(--fg);
     border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0;
 }
 .multi-input-fieldset legend {
     padding: 0 10px;
