@@ -21,6 +21,7 @@ interface Props extends SliderProps {
     width?: number | string;
     side?: "top" | "left";
     tick?: boolean;
+    unit?: string;
     tooltipThumb?: "hover" | "always" | "never";
 }
 
@@ -35,6 +36,7 @@ export default function Slider({
     side,
     width,
     tick = false,
+    unit,
     labelProps,
     tooltipThumb = "hover",
     onInput,
@@ -57,33 +59,41 @@ export default function Slider({
         const hi = Number(input.max || 100);
         const value = Number(input.valueAsNumber || 0);
         const ratio = hi === lo ? 0 : (value - lo) / (hi - lo);
+        if (unit) {
+            input.ariaValueText = `${String(value)}${unit}`;
+        }
         container.style.setProperty("--percent", String(ratio));
-        container.style.setProperty("--content", `"${String(value)}"`);
+        container.style.setProperty(
+            "--content",
+            `"${String(value)}${unit ?? ""}"`,
+        );
     };
 
-    useLayoutEffect(sync, [value, min, max]);
+    useLayoutEffect(sync, [value, min, max, unit]);
 
     const handleInput = (e: InputEvent<HTMLInputElement>) => {
         sync();
         onInput?.(e);
     };
 
+    const ariaValueText = unit
+        ? value === undefined
+            ? `${defaultValue}${unit}`
+            : `${value}${unit}`
+        : undefined;
+    const correctDefaultValue = value === undefined ? defaultValue : undefined;
+
     return (
-        <div
+        <label
+            {...labelProps}
+            htmlFor={correctId}
+            id={`${correctId}-label`}
             data-side={side}
-            className="slider-wrapper"
-            style={{ width: correctWidth }}
+            className={`slider-label${labelProps?.className ? ` ${labelProps.className}` : ""}`}
+            style={{ ...labelProps?.style, width: correctWidth }}
         >
-            {!hideLabel && (
-                <label
-                    {...labelProps}
-                    htmlFor={correctId}
-                    id={`${correctId}-label`}
-                >
-                    {label}
-                </label>
-            )}
-            <div
+            {!hideLabel && label}
+            <span
                 ref={containerRef}
                 className="slider-container"
             >
@@ -95,9 +105,8 @@ export default function Slider({
                     min={min}
                     max={max}
                     value={value}
-                    defaultValue={
-                        value === undefined ? defaultValue : undefined
-                    }
+                    defaultValue={correctDefaultValue}
+                    aria-valuetext={ariaValueText}
                     onInput={handleInput}
                     className="slider"
                     aria-label={hideLabel ? label : undefined}
@@ -111,7 +120,7 @@ export default function Slider({
                     data-thumb={tooltipThumb}
                     aria-hidden="true"
                 />
-            </div>
-        </div>
+            </span>
+        </label>
     );
 }

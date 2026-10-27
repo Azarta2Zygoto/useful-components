@@ -83,7 +83,7 @@ export default function Switch({
                         checked={checked}
                         disabled={disabled}
                         required={required}
-                        {...(hideLabel ? { "aria-label": label } : {})}
+                        aria-label={hideLabel ? label : undefined}
                     />
                     <span
                         aria-hidden="true"

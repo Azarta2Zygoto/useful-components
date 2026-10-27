@@ -72,6 +72,17 @@ export default function SliderPage() {
                     tooltipThumb="never"
                 />
             </div>
+            <h2>Slider unit</h2>
+            <p>You can put a unit to the slider.</p>
+            <div className="inner-component">
+                <Slider
+                    label="Slider thumb with thousands"
+                    min={0}
+                    max={100}
+                    defaultValue={50}
+                    unit="k"
+                />
+            </div>
         </main>
     );
 }
