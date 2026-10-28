@@ -9,14 +9,11 @@ export default function FloatingTextInput({
     id,
     type = "text",
     required,
-    side = "top",
     label,
     placeholder,
     autoComplete = "off",
     variant = "outlined",
-    state,
     width,
-    tooltip,
     labelProps,
     ...props
 }: Readonly<TextInputProps>): ReactNode {
@@ -28,15 +25,12 @@ export default function FloatingTextInput({
     return (
         <div
             data-floating-variant={variant}
-            data-side={label ? side : undefined}
             style={{ width: correctWidth }}
         >
             <input
                 {...props}
                 id={correctId}
                 type={type}
-                data-tooltip={tooltip}
-                data-state={state}
                 data-input-variant={variant}
                 required={required}
                 autoComplete={autoComplete}
