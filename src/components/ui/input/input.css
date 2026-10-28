@@ -1,282 +1,93 @@
 [data-input-variant] {
+    --_bg: var(--bgE);
+    --_bg-hover: var(--bgE-hover);
+    --_bg-active: var(--bgE-active);
+    --_bg-disabled: var(--bgE-disabled);
+    --_shadow: var(--shadowE);
+    --_shadow-hover: var(--shadowE-hollow);
+    --_shadow-active: var(--shadowE-hollow);
+
     max-width: 100%;
-    padding: 0.8rem 1rem;
-    background-color: var(--bgE);
+    height: 3rem;
+    padding: 0 1rem;
+    background-color: var(--_bg);
+    color: var(--textE);
     font-size: 1.2rem;
-    border: 2px solid var(--add-light-color);
-    border-radius: 8px;
-    box-shadow: 0 2px 10px #1167b10f;
+    border: 2px solid var(--borderE);
+    border-radius: 0.5rem;
     outline: 2px solid transparent;
     outline-offset: 3px;
+    box-shadow: var(--_shadow);
 }
-[data-input-variant]:not(:disabled):hover {
-    background-color: var(--bgE-hover);
-    border-color: var(--add-total-color);
-    box-shadow: 0 0 0 3px #1167b136;
+[data-input-variant]:where(:not([readonly])):hover {
+    background-color: var(--_bg-hover);
+    border-color: var(--outlineE);
+    box-shadow: var(--_shadow-hover);
 }
-[data-input-variant]:not(:disabled):focus-visible {
-    background-color: var(--bgE-active);
-    border-color: var(--add-total-color);
-    box-shadow: 0 0 0 3px #1167b136;
-    outline-color: var(--add-total-color);
+[data-input-variant]:focus-visible {
+    background-color: var(--_bg-active);
+    border-color: var(--outlineE);
+    outline-color: var(--outlineE);
+    box-shadow: var(--_shadow-active);
 }
 [data-input-variant]:disabled {
-    background-color: var(--bgE-disabled);
+    background-color: var(--_bg-disabled);
     color: var(--textE);
-    border-color: var(--bgE-disabled);
+    border-color: var(--borderE-disabled);
     box-shadow: none;
     cursor: not-allowed;
 }
-[data-input-variant]:not(:disabled):read-only {
-    background-color: var(--bgE-disabled) !important;
-    color: var(--textE);
-    box-shadow: none;
+[data-input-variant][readonly] {
+    border-style: dashed;
+    cursor: default;
 }
-[data-input-variant]::placeholder {
-    color: var(--textE-disabled);
-    font-style: italic;
+[data-input-variant]:enabled[aria-invalid="true"] {
+    background-color: var(--bgE-danger);
+    border-color: var(--borderE-danger);
 }
-[data-input-variant]:not(:disabled)[aria-invalid="true"],
-[data-input-variant]:not(:disabled):invalid {
+[data-input-variant]:enabled:user-invalid {
+    background-color: var(--bgE-danger);
     border-color: var(--borderE-danger);
 }
 
 [data-input-variant="underline"] {
-    background-color: transparent;
-    border: none;
-    border-bottom: 2px solid var(--add-light-color);
+    --_bg: transparent;
+    --_bg-hover: transparent;
+    --_bg-active: transparent;
+    --_bg-disabled: transparent;
+    --_shadow-hover: var(--shadowE);
+    --_shadow-active: 3px 3px 10px 5px var(--add-minor-color);
+
     border-radius: 0;
+    border-width: 0 0 2px;
     outline: none;
 }
 
-[data-input-variant="underline"]:not(:disabled):hover {
-    background-color: transparent;
-    box-shadow: none;
-}
-[data-input-variant="underline"]:not(:disabled):focus-visible {
-    background-color: transparent;
-    box-shadow: 0 5px 10px 5px #1167b136;
-}
-[data-input-variant="underline"]:disabled {
-    background-color: transparent;
-    color: var(--textE-disabled);
-}
-[data-input-variant="underline"]:not(:disabled):read-only {
-    background-color: transparent !important;
-    color: var(--textE-disabled);
-}
-[data-input-variant="underline"]:not(
-        :disabled,
-        :focus-visible
-    )[aria-invalid="true"],
-[data-input-variant]:not(:disabled, :focus-visible):invalid {
-    background-color: var(--invalid-bg-color);
-}
-
-[data-floating-variant] {
-    position: relative;
-    display: inline-block;
-}
-[data-floating-variant] > input {
-    box-sizing: border-box;
-    width: 100%;
-}
-
-/* =====================================================================
-   Label (commun aux deux variantes) — position au repos
-   ===================================================================== */
-[data-floating-variant] > label {
-    position: absolute;
-    top: 50%;
-    left: 12px; /* 2px bordure + 14px padding - 4px de padding du label */
-    transform: translateY(-50%);
-    max-width: calc(100% - 24px);
-    padding: 0 4px;
-    color: var(--textE-disabled);
-    font-size: 16px;
-    line-height: 1.2;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    pointer-events: none;
-    overflow: hidden;
-    transition:
-        top 0.2s ease-in-out,
-        left 0.2s ease-in-out,
-        transform 0.2s ease-in-out,
-        font-size 0.2s ease-in-out,
-        color 0.3s ease-in-out;
-}
-
-/* Le vrai placeholder n'apparaît qu'au focus (sinon il chevauche le label) */
-[data-floating-variant] > input::placeholder {
+[data-input-variant]::placeholder {
     color: var(--textE-disabled);
     font-style: italic;
-    transition: color 0.15s ease-in-out;
 }
-[data-floating-variant] > input:not(:focus)::placeholder {
-    color: transparent;
+[data-input-variant]:autofill {
+    caret-color: var(--textE);
+    -webkit-text-fill-color: var(--textE);
 }
-
-/* Label remonté : champ focus ou rempli */
-[data-floating-variant] > input:focus ~ label,
-[data-floating-variant] > input:not(:placeholder-shown) ~ label {
-    color: var(--fg);
-    font-size: 12px;
-}
-[data-floating-variant] > input:focus ~ label {
-    color: var(--add-total-color);
-}
-[data-floating-variant] > input:disabled ~ label {
-    color: var(--textE-disabled);
-}
-[data-floating-variant] > input:not(:disabled)[aria-invalid="true"] ~ label,
-[data-floating-variant] > input:not(:disabled):invalid ~ label {
-    color: var(--borderE-danger);
+[data-input-variant]:-webkit-autofill {
+    caret-color: var(--textE);
+    -webkit-text-fill-color: var(--textE);
 }
 
-/* =====================================================================
-   Variante "outlined" : input + fieldset/legend
-   ===================================================================== */
+textarea[data-input-variant] {
+    --pad-block: 0.75rem;
+    --extra: calc(2 * var(--pad-block) + 4px);
 
-/* L'input garde fond, ombre et padding ; sa bordure est transparente
-   (elle réserve juste les 2px) car c'est le fieldset qui la dessine. */
-[data-floating-variant] > input[data-input-variant="outlined"] {
-    border: none;
-    outline: none;
-}
-
-/* ---- Le fieldset : bordure uniquement ---- */
-[data-floating-variant] fieldset {
-    position: absolute;
-    /* -5px + legend de 12px : la bordure de 2px se retrouve exactement
-       à 0–2px du haut de l'input, centrée sur la legend. */
-    top: -5px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    min-width: 0;
-    margin: 0;
-    padding: 0 8px; /* 2px bordure + 8px = le label flottant démarre à 10px */
-    border: 2px solid var(--add-light-color);
-    border-radius: 8px;
-    pointer-events: none;
-    overflow: hidden;
-    transition: border-color 0.3s ease-in-out;
-}
-
-/* Legend : invisible, sa largeur découpe la bordure */
-[data-floating-variant] fieldset > legend {
-    display: block;
-    width: auto;
-    max-width: 0.01px; /* repos : aucune coupure */
-    height: 12px;
-    padding: 0;
-    font-size: 12px;
-    line-height: 12px;
-    white-space: nowrap;
-    visibility: hidden;
-    overflow: hidden;
-    transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1);
-    float: none;
-}
-[data-floating-variant] fieldset > legend > span {
-    display: inline-block;
-    padding: 0 4px; /* identique au padding du label */
-    opacity: 0;
-}
-
-/* Remontée : le label monte sur la bordure, la legend s'élargit */
-[data-floating-variant] > input[data-input-variant="outlined"]:focus ~ label,
-[data-floating-variant]
-    > input[data-input-variant="outlined"]:not(:placeholder-shown)
-    ~ label {
-    top: 1px; /* centre de la bordure haute (0–2px) */
-    left: 10px;
-}
-[data-floating-variant]
-    > input[data-input-variant="outlined"]:focus
-    ~ fieldset
-    > legend,
-[data-floating-variant]
-    > input[data-input-variant="outlined"]:not(:placeholder-shown)
-    ~ fieldset
-    > legend {
+    width: 30rem;
     max-width: 100%;
-    transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
-}
-
-/* ---- Couleurs de bordure selon l'état de l'input ---- */
-[data-floating-variant]
-    > input[data-input-variant="outlined"]:not(:disabled):hover
-    ~ fieldset,
-[data-floating-variant]
-    > input[data-input-variant="outlined"]:not(:disabled):focus-visible
-    ~ fieldset {
-    border-color: var(--add-total-color);
-}
-[data-floating-variant]
-    > input[data-input-variant="outlined"]:disabled
-    ~ fieldset {
-    border-color: var(--bgE-disabled);
-}
-[data-floating-variant]
-    > input[data-input-variant="outlined"]:not(:disabled)[aria-invalid="true"]
-    ~ fieldset,
-[data-floating-variant]
-    > input[data-input-variant="outlined"]:not(:disabled):invalid
-    ~ fieldset {
-    border-color: var(--borderE-danger);
-}
-
-/* =====================================================================
-   Variante "underline" : styles de l'input existants + label au-dessus
-   ===================================================================== */
-[data-floating-variant][data-floating-variant="underline"] {
-    padding-top: 1rem;
-}
-[data-floating-variant][data-floating-variant="underline"] > label {
-    top: calc(50% + 0.5rem);
-    left: 10px;
-    padding: 0;
-}
-[data-floating-variant][data-floating-variant="underline"]
-    > input:focus
-    ~ label,
-[data-floating-variant][data-floating-variant="underline"]
-    > input:not(:placeholder-shown)
-    ~ label {
-    top: 1rem;
-    left: 0;
-    transform: translateY(calc(-100% - 2px));
-}
-
-input[type="number"][data-input-variant]::-webkit-inner-spin-button,
-input[type="number"][data-input-variant]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-input[type="number"][data-input-variant]::-webkit-textfield-decoration-container {
-    margin-right: 1rem;
-}
-.number-input-wrapper {
-    position: relative;
-}
-.number-input-wrapper button {
-    position: absolute;
-    right: 12px;
-    transform: translateY(-50%);
-    padding: 0;
-    outline: none;
-}
-
-.number-input-wrapper button:hover,
-.number-input-wrapper button:active,
-.number-input-wrapper button:focus-within {
-    color: var(--add-mid-color) !important;
-}
-.number-button-up {
-    top: 35%;
-}
-.number-button-down {
-    top: 65%;
+    min-width: 0;
+    min-height: calc(var(--rows-min) * 1lh + var(--extra));
+    height: auto;
+    max-height: calc(var(--rows-max) * 1lh + var(--extra));
+    padding: var(--pad-block) 1rem;
+    field-sizing: content;
+    resize: vertical;
+    line-height: 1.5;
 }

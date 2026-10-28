@@ -16,14 +16,14 @@ export default function InputPage() {
                 indicator.
             </p>
             <div className="inner-component">
-                <Input.Text
+                <Input.TextInput
                     label="Text input"
                     placeholder="Enter text"
                 />
             </div>
             <h2>Variant</h2>
             <div className="inner-component">
-                <Input.Text
+                <Input.TextInput
                     label="Text input underline"
                     placeholder="Enter text"
                     variant="underline"
@@ -31,7 +31,7 @@ export default function InputPage() {
             </div>
             <h2>Label position</h2>
             <div className="inner-component">
-                <Input.Text
+                <Input.TextInput
                     label="Text input left"
                     placeholder="Enter text"
                     labelPosition="left"
@@ -45,14 +45,14 @@ export default function InputPage() {
                 red mark.
             </p>
             <div className="inner-component">
-                <Input.Text
+                <Input.TextInput
                     label="Text input required error"
                     placeholder="Enter text"
                     required
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                 />
-                <Input.Text
+                <Input.TextInput
                     label="Text input required"
                     placeholder="Enter text"
                     required
@@ -61,18 +61,33 @@ export default function InputPage() {
             </div>
             <h2>Disabled</h2>
             <div className="inner-component">
-                <Input.Text
+                <Input.TextInput
                     label="Text input disabled"
                     placeholder="Enter text"
                     disabled
                     value="Disabled"
                 />
-                <Input.Text
+                <Input.TextInput
                     label="Text input disabled underline"
                     placeholder="Enter text"
                     disabled
                     variant="underline"
                     value="Disabled"
+                />
+            </div>
+            <h2>Read only</h2>
+            <div className="inner-component">
+                <Input.TextInput
+                    label="Text input readonly"
+                    placeholder="Enter text"
+                    readOnly
+                    value="read"
+                />
+                <Input.TextInput
+                    label="Text input readOnly underline"
+                    placeholder="Enter text"
+                    readOnly
+                    variant="underline"
                 />
             </div>
             <h2>Textarea</h2>
@@ -81,7 +96,7 @@ export default function InputPage() {
                 inputs.
             </p>
             <div className="inner-component">
-                <Input.TextArea
+                <Input.TextAreaInput
                     label="Textarea"
                     placeholder="Enter text"
                 />
@@ -93,7 +108,7 @@ export default function InputPage() {
                 select the text
             </p>
             <div className="inner-component">
-                <Input.TextArea
+                <Input.TextAreaInput
                     label="Readonly textarea"
                     defaultValue="This is a readonly textarea"
                     readOnly

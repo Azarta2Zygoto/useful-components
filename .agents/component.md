@@ -467,6 +467,7 @@ longueur du rapport ou le nombre de défauts recensés.
 
 Pour faire l'audit, s'il n'y a pas d'informations inverses, partir du principe que :
 
-- Le framework est React 19.
+- Le framework est React 19 en TypeScript.
+- Les composants doivent être compatible pour une utilisation avec Next.js **ET** Vite.
 - La librairie a pour but d'utiliser des éléments JS, HTML et CSS qui sont baseline en 2024. Toutes utilisations d'éléments qui ne l'est pas doit être signaler en tant que point d'attention.
-- Il n'y a pas de tests, sauf pour les fichiers utils.
+- Il n'y a pas de tests par défaut, sauf pour les fichiers `.utils`.

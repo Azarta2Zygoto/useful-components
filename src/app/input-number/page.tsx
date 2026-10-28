@@ -1,6 +1,6 @@
 "use client";
 
-import NumberInput from "@ui/input/NumberInput";
+import NumberInput from "@/components/ui/input/number-input/NumberInput";
 
 export default function NumberInputPage() {
     return (

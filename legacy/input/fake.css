@@ -44,10 +44,10 @@
     outline-offset: -3px;
     transition: background-color 0.3s;
 }
-.flc.outlined .fli:hover:not(:disabled) + .flf {
+.flc.outlined .fli:hover:enabled + .flf {
     box-shadow: 0 0 0 3px #1167b136;
 }
-.flc.outlined .fli:hover:not(:disabled) {
+.flc.outlined .fli:hover:enabled {
     outline: 1px solid var(--input-focus-border-color);
 }
 .flc.outlined .fli:disabled + .flf {
@@ -72,12 +72,12 @@
     font-style: italic;
     opacity: 1;
 }
-.flc.outlined .fli:invalid:not(:disabled),
-.flc.outlined .fli:invalid:not(:disabled) {
+.flc.outlined .fli:invalid:enabled,
+.flc.outlined .fli:invalid:enabled {
     background-color: var(--invalid-bg-color);
 }
-.flc.outlined .fli:invalid:not(:disabled) + .flf,
-.flc.outlined .fli:invalid:not(:disabled) + .flf {
+.flc.outlined .fli:invalid:enabled + .flf,
+.flc.outlined .fli:invalid:enabled + .flf {
     border-color: var(--invalid-border-color);
 }
 

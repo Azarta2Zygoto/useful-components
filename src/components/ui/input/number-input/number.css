@@ -1,0 +1,30 @@
+input[type="number"][data-input-variant]::-webkit-inner-spin-button,
+input[type="number"][data-input-variant]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"][data-input-variant]::-webkit-textfield-decoration-container {
+    margin-right: 1rem;
+}
+.number-input-wrapper {
+    position: relative;
+}
+.number-input-wrapper button {
+    position: absolute;
+    right: 12px;
+    transform: translateY(-50%);
+    padding: 0;
+    outline: none;
+}
+
+.number-input-wrapper button:hover,
+.number-input-wrapper button:active,
+.number-input-wrapper button:focus-within {
+    color: var(--add-mid-color) !important;
+}
+.number-button-up {
+    top: 35%;
+}
+.number-button-down {
+    top: 65%;
+}

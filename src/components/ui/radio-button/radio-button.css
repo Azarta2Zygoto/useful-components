@@ -8,7 +8,7 @@
     clip: rect(0, 0, 0, 0);
 }
 
-input[type="radio"]:not(:disabled):hover {
+input[type="radio"]:enabled:hover {
     cursor: pointer;
 }
 
@@ -30,9 +30,9 @@ input[type="radio"]:disabled {
     text-align: left;
     border: none;
     border-radius: 8px;
-    box-shadow: none;
     outline: 2px solid transparent;
     outline-offset: 3px;
+    box-shadow: none;
     cursor: pointer;
     transition:
         color 0.3s ease-in-out,

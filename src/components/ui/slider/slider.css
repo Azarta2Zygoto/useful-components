@@ -96,13 +96,13 @@
         box-shadow 0.2s ease-in-out;
 }
 
-.slider:not(:disabled):active ~ [data-thumb],
-.slider:not(:disabled):focus-visible ~ [data-thumb] {
+.slider:enabled:active ~ [data-thumb],
+.slider:enabled:focus-visible ~ [data-thumb] {
     background-color: var(--add-total-color);
     box-shadow: 0 0 3px 8px var(--add-mid-color);
     scale: 1.1;
 }
-.slider:not(:disabled):hover ~ [data-thumb] {
+.slider:enabled:hover ~ [data-thumb] {
     background-color: var(--add-mid2-color);
     scale: 1.1;
 }
@@ -154,11 +154,11 @@
     opacity: 1;
 }
 
-.slider:not(:disabled):hover ~ [data-thumb="hover"]::before,
-.slider:not(:disabled):focus-visible ~ [data-thumb="hover"]::before,
-.slider:not(:disabled):focus-within ~ [data-thumb="hover"]::before,
-.slider:not(:disabled):hover ~ [data-thumb="hover"]::after,
-.slider:not(:disabled):focus-visible ~ [data-thumb="hover"]::after,
-.slider:not(:disabled):focus-within ~ [data-thumb="hover"]::after {
+.slider:enabled:hover ~ [data-thumb="hover"]::before,
+.slider:enabled:focus-visible ~ [data-thumb="hover"]::before,
+.slider:enabled:focus-within ~ [data-thumb="hover"]::before,
+.slider:enabled:hover ~ [data-thumb="hover"]::after,
+.slider:enabled:focus-visible ~ [data-thumb="hover"]::after,
+.slider:enabled:focus-within ~ [data-thumb="hover"]::after {
     opacity: 1;
 }

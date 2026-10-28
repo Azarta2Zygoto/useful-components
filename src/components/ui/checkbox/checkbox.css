@@ -50,9 +50,9 @@
     background-color: transparent;
     border: 2px solid var(--outlineE);
     border-radius: 5px;
-    box-shadow: var(--box-shadowE);
     outline: 2px solid transparent;
     outline-offset: 2px;
+    box-shadow: var(--box-shadowE);
     user-select: none;
     transition:
         background-color 0.3s ease,
@@ -102,8 +102,8 @@
 }
 .checkbox-label input[type="checkbox"]:focus-visible ~ .checkbox-checkmark,
 .checkbox-label input[type="checkbox"]:focus-visible ~ .checkbox-custom {
-    box-shadow: 0 0 3px 4px var(--add-minor-color);
     outline: 2px solid var(--outlineE);
+    box-shadow: 0 0 3px 4px var(--add-minor-color);
 }
 .checkbox-label:hover input[type="checkbox"] ~ .checkbox-checkmark,
 .checkbox-label:hover input[type="checkbox"] ~ .checkbox-custom {

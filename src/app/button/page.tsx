@@ -113,7 +113,8 @@ export default function ButtonPage() {
             <div className="inner-component">
                 <Button
                     variant="primary"
-                    tooltip="This is a tooltip"
+                    tooltip="true"
+                    aria-describedby="This is a tooltip"
                 >
                     Primary
                 </Button>

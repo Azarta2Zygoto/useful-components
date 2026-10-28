@@ -10,11 +10,12 @@ import {
     useRef,
 } from "react";
 
-import Button from "../button/Button";
-import Icon from "../icon/icon";
-import Required from "../required/required";
-import "./input.css";
-import { InputVariant } from "./type";
+import Button from "../../button/Button";
+import Icon from "../../icon/icon";
+import Required from "../../required/required";
+import "../input.css";
+import type { InputVariant } from "../input.type";
+import "./number.css";
 
 type InputProps = Omit<
     InputHTMLAttributes<HTMLInputElement>,

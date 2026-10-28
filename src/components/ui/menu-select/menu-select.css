@@ -19,8 +19,8 @@
     background-color: var(--bgE);
     border: 1px solid var(--borderE);
     border-radius: 8px;
-    box-shadow: 0 2px 10px var(--shadow-color);
     outline: none;
+    box-shadow: 0 2px 10px var(--shadow-color);
 
     opacity: 0;
     pointer-events: none;

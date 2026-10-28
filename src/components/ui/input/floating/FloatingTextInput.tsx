@@ -1,10 +1,11 @@
 import { type ReactNode, useId } from "react";
 
-import Required from "../required/required";
-import "./input.css";
-import { TextInputProps } from "./type";
+import Required from "../../required/required";
+import "../input.css";
+import type { TextInputProps } from "../input.type";
+import "./floating.css";
 
-export default function FloatingLabelInput({
+export default function FloatingTextInput({
     id,
     type = "text",
     required,

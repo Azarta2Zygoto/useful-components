@@ -1,19 +1,22 @@
-import type { ReactNode } from "react";
+import { type ReactNode, useId } from "react";
 
-import "../css/label.css";
-import Required from "../required/required";
-import "./input.css";
-import type { TextInputProps } from "./type";
+import "../../css/label.css";
+import Required from "../../required/required";
+import "../input.css";
+import type { TextInputProps } from "../input.type";
 
 export default function TextInput({
+    id,
     required,
-    tooltip,
     variant = "outlined",
     label,
     labelPosition = "top",
     labelProps,
     ...props
 }: Readonly<TextInputProps>): ReactNode {
+    const generatedId = useId();
+    const correctId = id ?? generatedId;
+
     return (
         <label
             {...labelProps}
@@ -25,8 +28,8 @@ export default function TextInput({
             </span>
             <input
                 {...props}
+                id={correctId}
                 required={required}
-                data-tooltip={tooltip ?? undefined}
                 data-input-variant={variant}
             />
         </label>

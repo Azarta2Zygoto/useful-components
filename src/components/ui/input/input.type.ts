@@ -1,4 +1,4 @@
-import type { ComponentProps, LabelHTMLAttributes } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 export type InputVariant = "underline" | "outlined";
 export type TextInputType =
@@ -14,8 +14,12 @@ export type InputType =
 
 export interface InputProps extends Omit<ComponentProps<"input">, "type"> {
     type?: InputType;
-    tooltip?: boolean;
     variant?: InputVariant;
+}
+
+export interface TextAreaProps extends ComponentProps<"textarea"> {
+    minRows?: number;
+    maxRows?: number;
 }
 
 export interface TextInputProps extends Omit<
@@ -25,7 +29,7 @@ export interface TextInputProps extends Omit<
     type?: TextInputType;
     value?: string;
     defaultValue?: string;
-    label: string;
+    label: ReactNode;
     labelPosition?: "left" | "top";
-    labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
+    labelProps?: ComponentProps<"label">;
 }

@@ -22,15 +22,23 @@
     --bgE-hover: #3f4347;
     --bgE-active: #464f58;
     --bgE-disabled: #646464;
+    --bgE-danger: #ff000010;
+
     --textE: #ededed;
     --textE-disabled: #aaa;
     --textE-danger: #ff8080;
+
     --borderE: var(--add-light-color);
+    --borderE-disabled: #646464;
     --borderE-danger: #f71f1f;
     --borderE-success: #00ff00;
+
     --outlineE: var(--add-total-color);
-    --invalid-bg-color: #ff000010;
-    --box-shadowE: 0 2px 8px #1167b10f;
+
+    --shadowE-c: #1167b10f;
+    --shadowE-hollow-c: #1167b136;
+    --shadowE: 0 2px 10px var(--shadowE-c);
+    --shadowE-hollow: 0 0 0 3px var(--shadowE-hollow-c);
 
     --element-color: #666c74;
     --box-color: #6c10aa;
@@ -54,7 +62,6 @@
     --selected-hover-bg-color: var(--add-mid-color);
     --selected-tabuled-bg-color: var(--add-hard-color);
     --selected-tabuled-hover-bg-color: var(--add-total-color);
-    --invalid-bg-color: #ff000010;
     --invalid-border-color: #ff0000;
     --warning-bg-color: #ffcc0010;
     --warning-border-color: #ffcc00;
@@ -67,13 +74,6 @@
     --bg2: #f5f5f5;
     --bg3: #f0f0f0;
     --fg: #1e1f20;
-
-    --add-nothing-color: #00aaff20;
-    --add-minor-color: #00aaff40;
-    --add-light-color: #00aaff80;
-    --add-mid-color: #00aaffb0;
-    --add-hard-color: #00aaffd0;
-    --add-total-color: #00aaff;
 
     --element-color: #666c74;
     --box-color: #6c10aa;
