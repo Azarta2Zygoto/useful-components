@@ -1,22 +1,11 @@
 "use client";
 
-import {
-    CSSProperties,
-    type ComponentProps,
-    type ReactNode,
-    useId,
-} from "react";
+import { type ReactNode, useId } from "react";
 
-import "../../css/label.css";
+import "../../global/label.css";
 import Required from "../../required/required";
-import "../input.css";
-import { TextAreaProps } from "../input.type";
-
-interface TextAreaInputProps extends TextAreaProps {
-    label: ReactNode;
-    labelPosition?: "left" | "top";
-    labelProps?: ComponentProps<"label">;
-}
+import TextArea from "../TextArea";
+import type { TextAreaInputProps } from "../input.type";
 
 export default function TextAreaInput({
     id,
@@ -24,9 +13,6 @@ export default function TextAreaInput({
     label,
     labelPosition = "top",
     labelProps,
-    style,
-    minRows = 3,
-    maxRows = 6,
     ...props
 }: Readonly<TextAreaInputProps>): ReactNode {
     const generatedId = useId();
@@ -42,18 +28,10 @@ export default function TextAreaInput({
                 {label}
                 <Required required={required} />
             </span>
-            <textarea
+            <TextArea
                 {...props}
                 id={correctId}
                 required={required}
-                data-input-variant="outlined"
-                style={
-                    {
-                        ...style,
-                        "--rows-min": minRows,
-                        "--rows-max": maxRows,
-                    } as CSSProperties
-                }
             />
         </label>
     );

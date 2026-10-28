@@ -3,28 +3,52 @@ input[type="number"][data-input-variant]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-input[type="number"][data-input-variant]::-webkit-textfield-decoration-container {
-    margin-right: 1rem;
+input[type="number"][data-input-variant] {
+    appearance: textfield;
+    padding-right: 2.5rem;
 }
 .number-input-wrapper {
     position: relative;
+    display: inline-flex;
+    width: fit-content;
 }
-.number-input-wrapper button {
+.number-input-wrapper .number-button {
     position: absolute;
-    right: 12px;
-    transform: translateY(-50%);
-    padding: 0;
+    display: flex;
+    right: 0.75rem;
+    padding: 0.25rem;
+    margin: 0;
     outline: none;
 }
 
-.number-input-wrapper button:hover,
-.number-input-wrapper button:active,
-.number-input-wrapper button:focus-within {
-    color: var(--add-mid-color) !important;
+.number-input-wrapper .number-button:hover {
+    color: var(--add-mid-color);
 }
-.number-button-up {
-    top: 35%;
+.number-input-wrapper .number-button:active {
+    color: var(--add-hard-color);
+    transform: scale(0.85);
 }
-.number-button-down {
-    top: 65%;
+.number-button.up {
+    top: 0.2rem;
+}
+.number-button.down {
+    bottom: 0.2rem;
+}
+
+.number-input-wrapper[data-at-max] .number-button.up,
+.number-input-wrapper[data-at-min] .number-button.down {
+    color: var(--textE-disabled);
+}
+.number-input-wrapper[data-at-max] .number-button.up:active,
+.number-input-wrapper[data-at-min] .number-button.down:active {
+    transform: none;
+}
+
+@media (hover: none) {
+    .number-input-wrapper .number-button {
+        display: none;
+    }
+    .number-input-wrapper input[type="number"] {
+        padding-right: 1rem;
+    }
 }

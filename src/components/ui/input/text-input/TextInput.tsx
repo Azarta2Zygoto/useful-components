@@ -1,17 +1,18 @@
 import { type ReactNode, useId } from "react";
 
-import "../../css/label.css";
+import "../../global/label.css";
 import Required from "../../required/required";
-import "../input.css";
+import Input from "../Input";
 import type { TextInputProps } from "../input.type";
 
 export default function TextInput({
     id,
     required,
-    variant = "outlined",
     label,
     labelPosition = "top",
     labelProps,
+    onChange,
+    onValue,
     ...props
 }: Readonly<TextInputProps>): ReactNode {
     const generatedId = useId();
@@ -26,11 +27,14 @@ export default function TextInput({
                 {label}
                 <Required required={required} />
             </span>
-            <input
+            <Input
                 {...props}
                 id={correctId}
                 required={required}
-                data-input-variant={variant}
+                onChange={(e) => {
+                    onChange?.(e);
+                    onValue?.(e.currentTarget.value);
+                }}
             />
         </label>
     );

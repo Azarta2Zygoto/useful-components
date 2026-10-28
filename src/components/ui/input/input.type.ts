@@ -1,4 +1,6 @@
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps } from "react";
+
+import { LabelLayoutProps } from "../global/types";
 
 export type InputVariant = "underline" | "outlined";
 export type TextInputType =
@@ -20,16 +22,25 @@ export interface InputProps extends Omit<ComponentProps<"input">, "type"> {
 export interface TextAreaProps extends ComponentProps<"textarea"> {
     minRows?: number;
     maxRows?: number;
+    onValue?: (value: string) => void;
 }
+export type TextAreaInputProps = TextAreaProps & LabelLayoutProps;
 
-export interface TextInputProps extends Omit<
-    InputProps,
-    "type" | "value" | "defaultValue"
-> {
+export interface TextInputProps
+    extends
+        Omit<InputProps, "type" | "value" | "defaultValue">,
+        LabelLayoutProps {
     type?: TextInputType;
     value?: string;
     defaultValue?: string;
-    label: ReactNode;
-    labelPosition?: "left" | "top";
-    labelProps?: ComponentProps<"label">;
+    onValue?: (value: string) => void;
+}
+
+export interface NumberInputProps extends Omit<
+    InputProps,
+    "type" | "value" | "defaultValue"
+> {
+    value?: number | null;
+    defaultValue?: number;
+    onValue?: (value: number | null) => void;
 }

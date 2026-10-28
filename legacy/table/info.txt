@@ -1,4 +1,0 @@
-paginated
-rowsPerPageOptions={[2, 5, 10]}
-defaultRowsPerPage={2}
-searchable

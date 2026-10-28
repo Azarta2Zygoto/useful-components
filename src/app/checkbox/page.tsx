@@ -30,8 +30,8 @@ export default function CheckboxPage() {
         });
     }
 
-    function handleHeart(checked: boolean) {
-        if (!checked) {
+    function handleHeart(check: boolean) {
+        if (!check) {
             return (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

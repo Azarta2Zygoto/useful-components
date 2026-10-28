@@ -57,15 +57,15 @@ export default function Slider({
 
         const lo = Number(input.min || 0);
         const hi = Number(input.max || 100);
-        const value = Number(input.valueAsNumber || 0);
-        const ratio = hi === lo ? 0 : (value - lo) / (hi - lo);
+        const numberValue = Number(input.valueAsNumber || 0);
+        const ratio = hi === lo ? 0 : (numberValue - lo) / (hi - lo);
         if (unit) {
-            input.ariaValueText = `${String(value)}${unit}`;
+            input.ariaValueText = `${String(numberValue)}${unit}`;
         }
         container.style.setProperty("--percent", String(ratio));
         container.style.setProperty(
             "--content",
-            `"${String(value)}${unit ?? ""}"`,
+            `"${String(numberValue)}${unit ?? ""}"`,
         );
     };
 
