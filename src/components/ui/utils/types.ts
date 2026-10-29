@@ -5,3 +5,8 @@ export interface LabelLayoutProps {
     labelPosition?: "left" | "top";
     labelProps?: ComponentProps<"label">;
 }
+
+export interface FieldProps {
+    error?: string;
+    errorProps?: ComponentProps<"p">;
+}

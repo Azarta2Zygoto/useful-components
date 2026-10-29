@@ -35,12 +35,13 @@ export default function HomePage() {
                 />
                 <Input.NumberInput
                     label="Number input"
-                    variant="underline"
+                    variant="underlined"
                     placeholder="Enter a number"
                 />
-                <Input.Floating
+                <Input.TextInput
                     label="Text input with a floating label"
                     placeholder="Enter text"
+                    floatingLabel
                 />
             </div>
             <div

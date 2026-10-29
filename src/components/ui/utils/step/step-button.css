@@ -1,0 +1,33 @@
+[data-has-steps] {
+    .step-button {
+        position: absolute;
+        display: flex;
+        right: 0.5rem;
+        margin: 0;
+        padding: 0.25rem;
+        outline: none;
+    }
+    .step-button:hover {
+        color: var(--add-mid-color);
+    }
+    .step-button:active {
+        transform: scale(0.85);
+        color: var(--add-hard-color);
+    }
+}
+
+.step-button.up {
+    top: 0.2rem;
+}
+.step-button.down {
+    bottom: 0.2rem;
+}
+
+[data-has-steps][data-at-max] .step-button.up,
+[data-has-steps][data-at-min] .step-button.down {
+    color: var(--textE-disabled);
+}
+[data-has-steps][data-at-max] .step-button.up:active,
+[data-has-steps][data-at-min] .step-button.down:active {
+    transform: none;
+}

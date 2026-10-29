@@ -29,7 +29,7 @@ h2 {
     font-size: clamp(16px, 3vw, 24px);
 }
 p {
-    margin: 3px 0;
+    margin: 0;
     font-size: clamp(12px, 2vw, 16px);
     line-height: 1.5em;
 }
@@ -37,12 +37,11 @@ p {
 .inner-component {
     position: relative;
     display: flex;
-    flex-wrap: wrap; /* allow children to wrap to next line */
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 16px;
-    width: calc(100% - 62px);
     margin: 5px 0 20px 0;
     padding: 30px 30px;
     background-color: #161a1f;
@@ -122,4 +121,11 @@ img {
     border-radius: 8px;
     user-select: none;
     -webkit-user-drag: none;
+}
+p code {
+    font-family: monospace;
+    font-size: 0.9em;
+    background-color: var(--hover-bg-color);
+    padding: 2px 4px;
+    border-radius: 4px;
 }

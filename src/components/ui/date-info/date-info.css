@@ -2,7 +2,7 @@ time[datetime] {
     position: relative;
     display: inline-block;
     line-height: 1;
-    text-decoration: underline dotted;
+    text-decoration: underlined dotted;
     cursor: help;
     vertical-align: middle;
 }

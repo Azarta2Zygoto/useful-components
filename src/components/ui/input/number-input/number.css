@@ -5,50 +5,15 @@ input[type="number"][data-input-variant]::-webkit-outer-spin-button {
 }
 input[type="number"][data-input-variant] {
     appearance: textfield;
-    padding-right: 2.5rem;
+    width: 100%;
 }
 .number-input-wrapper {
+    --top-pos: calc(50%);
+    --top-translate: translateY(calc(-200% - 2px));
     position: relative;
     display: inline-flex;
-    width: fit-content;
+    width: 100%;
 }
-.number-input-wrapper .number-button {
-    position: absolute;
-    display: flex;
-    right: 0.75rem;
-    padding: 0.25rem;
-    margin: 0;
-    outline: none;
-}
-
-.number-input-wrapper .number-button:hover {
-    color: var(--add-mid-color);
-}
-.number-input-wrapper .number-button:active {
-    color: var(--add-hard-color);
-    transform: scale(0.85);
-}
-.number-button.up {
-    top: 0.2rem;
-}
-.number-button.down {
-    bottom: 0.2rem;
-}
-
-.number-input-wrapper[data-at-max] .number-button.up,
-.number-input-wrapper[data-at-min] .number-button.down {
-    color: var(--textE-disabled);
-}
-.number-input-wrapper[data-at-max] .number-button.up:active,
-.number-input-wrapper[data-at-min] .number-button.down:active {
-    transform: none;
-}
-
-@media (hover: none) {
-    .number-input-wrapper .number-button {
-        display: none;
-    }
-    .number-input-wrapper input[type="number"] {
-        padding-right: 1rem;
-    }
+.number-input-wrapper[data-has-steps] input[type="number"] {
+    padding-right: 2rem;
 }

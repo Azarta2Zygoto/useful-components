@@ -1,6 +1,7 @@
 "use client";
 
 import {
+    PropsWithChildren,
     type ReactNode,
     useEffect,
     useImperativeHandle,
@@ -8,52 +9,21 @@ import {
     useRef,
 } from "react";
 
-import Icon from "../../icon/icon";
+import StepButton from "../../utils/step/StepButton";
 import Input from "../Input";
-import type { NumberInputProps } from "../input.type";
+import type { NumberProps } from "../input.type";
 import "./number.css";
-
-interface StepButtonProps {
-    direction: "up" | "down";
-    startStep: (direction: "up" | "down") => void;
-    stopStep: () => void;
-}
-function StepButton({
-    direction,
-    startStep,
-    stopStep,
-}: Readonly<StepButtonProps>): ReactNode {
-    return (
-        <span
-            aria-hidden="true"
-            className={`number-button ${direction}`}
-            onPointerDown={(e) => {
-                if (e.button !== 0) return;
-                e.currentTarget.setPointerCapture(e.pointerId);
-                startStep(direction);
-            }}
-            onPointerUp={stopStep}
-            onPointerCancel={stopStep}
-            onLostPointerCapture={stopStep}
-            onMouseDown={(e) => e.preventDefault()}
-            onClick={(e) => e.preventDefault()}
-        >
-            <Icon
-                name={`caret-${direction}-fill`}
-                size={14}
-            />
-        </span>
-    );
-}
 
 export default function Numbering({
     ref,
     value,
+    stepButton = true,
     defaultValue,
     onChange,
     onValue,
+    children,
     ...props
-}: Readonly<NumberInputProps>): ReactNode {
+}: Readonly<PropsWithChildren<NumberProps>>): ReactNode {
     const inputRef = useRef<HTMLInputElement>(null);
     const wrapperRef = useRef<HTMLSpanElement>(null);
     const repeatTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -148,10 +118,13 @@ export default function Numbering({
         return () => form.removeEventListener("reset", onReset);
     }, []);
 
+    const isStepButton = !isLocked && props.step !== "any" && stepButton;
+
     return (
         <span
             ref={wrapperRef}
             className="number-input-wrapper"
+            data-has-steps={isStepButton || undefined}
         >
             <Input
                 {...props}
@@ -166,7 +139,8 @@ export default function Numbering({
                     syncBounds();
                 }}
             />
-            {!isLocked && props.step !== "any" && (
+            {children}
+            {isStepButton && (
                 <>
                     <StepButton
                         direction="up"
