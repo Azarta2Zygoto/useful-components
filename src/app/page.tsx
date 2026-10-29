@@ -29,16 +29,16 @@ export default function HomePage() {
                 style={{ width: "300px", gap: "1rem" }}
             >
                 <h2>Input</h2>
-                <Input.TextInput
+                <Input.TextField
                     label="Text input"
                     placeholder="Enter text"
                 />
-                <Input.NumberInput
+                <Input.NumberField
                     label="Number input"
                     variant="underlined"
                     placeholder="Enter a number"
                 />
-                <Input.TextInput
+                <Input.TextField
                     label="Text input with a floating label"
                     placeholder="Enter text"
                     floatingLabel

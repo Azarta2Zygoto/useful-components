@@ -73,17 +73,18 @@
     }
 
     fieldset > legend {
+        float: none;
         display: block;
         width: auto;
         max-width: 0.01px;
         height: 0.75rem;
-        padding: 0;
         margin: 0;
+        padding: 0;
+        font-size: 0.75rem;
         white-space: nowrap;
         visibility: hidden;
         overflow: hidden;
         transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1);
-        float: none;
     }
     fieldset > legend > span {
         display: inline-block;
@@ -96,7 +97,7 @@
     input[data-input-variant="outlined"]:focus-visible:not([readonly]) ~ label,
     input[data-input-variant="outlined"]:not(:placeholder-shown) ~ label {
         top: 1px;
-        left: 0.5rem;
+        left: 0.75rem;
     }
 
     input[data-input-variant="outlined"]:focus-visible:not([readonly])

@@ -6,6 +6,7 @@
     --_shadow: var(--shadowE);
     --_shadow-hover: var(--shadowE-hollow);
     --_shadow-active: var(--shadowE-hollow);
+    --_outline-active: var(--outlineE);
 
     min-width: 0;
     max-width: 100%;
@@ -28,7 +29,7 @@
 [data-input-variant]:focus-visible {
     background-color: var(--_bg-active);
     border-color: var(--outlineE);
-    outline-color: var(--outlineE);
+    outline-color: var(--_outline-active);
     box-shadow: var(--_shadow-active);
 }
 [data-input-variant]:disabled {
@@ -58,10 +59,10 @@
     --_bg-disabled: transparent;
     --_shadow-hover: var(--shadowE);
     --_shadow-active: 3px 3px 10px 5px var(--add-minor-color);
+    --_outline-active: transparent;
 
     border-radius: 0;
     border-width: 0 0 2px;
-    outline: none;
 }
 
 [data-input-variant]::placeholder {
