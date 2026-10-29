@@ -33,6 +33,29 @@
 .field-container[data-floating-variant] > [data-field-error] {
     position: absolute;
 }
+.field-control {
+    position: relative;
+    display: grid;
+    min-width: 0;
+}
+[data-readonly-icon] {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    display: flex;
+    transform: translateY(-50%);
+    color: var(--textE);
+    pointer-events: none;
+}
+[data-floating-variant="underlined"] > [data-readonly-icon] {
+    top: var(--top-pos);
+}
+[data-input-variant]:has(+ [data-readonly-icon]) {
+    padding-right: 2.5rem;
+}
+textarea[data-input-variant] ~ [data-readonly-icon] {
+    top: 1.75rem;
+}
 
 @media (min-width: 640px) {
     [data-field-position="left"] {

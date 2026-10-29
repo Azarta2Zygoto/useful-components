@@ -2,6 +2,8 @@
 
 import { type ReactNode, useId } from "react";
 
+import IconCadenas from "../../assets/icons/cadenas.svg";
+import Icon from "../../icon/Svgr";
 import Required from "../../required/required";
 import "../../utils/field.css";
 import TextArea from "../TextArea";
@@ -31,13 +33,22 @@ export default function TextAreaField({
             className="field-container"
             data-field-position={labelPosition}
         >
-            <TextArea
-                {...props}
-                id={correctId}
-                required={required}
-                aria-invalid={error ? true : invalidProp}
-                aria-describedby={describedBy}
-            />
+            <span className="field-control">
+                <TextArea
+                    {...props}
+                    id={correctId}
+                    required={required}
+                    aria-invalid={error ? true : invalidProp}
+                    aria-describedby={describedBy}
+                />
+                {props.readOnly && (
+                    <Icon
+                        icon={IconCadenas}
+                        size={18}
+                        data-readonly-icon
+                    />
+                )}
+            </span>
             <label
                 {...labelProps}
                 htmlFor={correctId}

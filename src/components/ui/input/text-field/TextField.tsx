@@ -1,5 +1,7 @@
 import { type ReactNode, useId } from "react";
 
+import IconCadenas from "../../assets/icons/cadenas.svg";
+import Icon from "../../icon/Svgr";
 import Required from "../../required/required";
 import "../../utils/field.css";
 import "../../utils/floating.css";
@@ -29,24 +31,45 @@ export default function TextField({
             .filter(Boolean)
             .join(" ") || undefined;
 
+    const input = (
+        <Input
+            {...props}
+            id={correctId}
+            variant={variant}
+            placeholder={placeholder || " "}
+            aria-invalid={error ? true : invalidProp}
+            aria-describedby={describedBy}
+            onChange={(e) => {
+                onChange?.(e);
+                onValue?.(e.currentTarget.value);
+            }}
+        />
+    );
+    const lock = props.readOnly && (
+        <Icon
+            icon={IconCadenas}
+            size={18}
+            data-readonly-icon
+        />
+    );
+
     return (
         <div
             className="field-container"
             data-floating-variant={floatingLabel ? variant : undefined}
             data-field-position={floatingLabel ? undefined : labelPosition}
         >
-            <Input
-                {...props}
-                id={correctId}
-                variant={variant}
-                placeholder={placeholder || " "}
-                aria-invalid={error ? true : invalidProp}
-                aria-describedby={describedBy}
-                onChange={(e) => {
-                    onChange?.(e);
-                    onValue?.(e.currentTarget.value);
-                }}
-            />
+            {floatingLabel ? (
+                <>
+                    {input}
+                    {lock}
+                </>
+            ) : (
+                <span className="field-control">
+                    {input}
+                    {lock}
+                </span>
+            )}
             {variant === "outlined" && floatingLabel && (
                 <fieldset aria-hidden="true">
                     <legend>

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
-import Icon from "../../icon/icon";
+import CaretDown from "../../assets/icons/caret-down.svg";
+import CaretUp from "../../assets/icons/caret-up.svg";
 import "./step-button.css";
 
 interface StepButtonProps {
@@ -29,10 +30,7 @@ export default function StepButton({
             onMouseDown={(e) => e.preventDefault()}
             onClick={(e) => e.preventDefault()}
         >
-            <Icon
-                name={`caret-${direction}-fill`}
-                size={14}
-            />
+            {direction === "up" ? <CaretUp /> : <CaretDown />}
         </span>
     );
 }

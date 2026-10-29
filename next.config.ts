@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
     },
     basePath: '/useful-components', // Base path for the static export
     assetPrefix: '/useful-components/',
+    turbopack: {
+        rules: {
+            "*.svg": {
+                loaders: ["@svgr/webpack"],
+                as: "*.js",
+            },
+        },
+    },
 };
 
 export default nextConfig;
