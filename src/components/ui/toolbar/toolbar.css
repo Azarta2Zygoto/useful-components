@@ -1,197 +1,199 @@
-:root {
-    --toolbar-bg-color: #130808;
-    --toolbar-button-color: #150c35;
-    --toolbar-button-hover-color: #28187a;
-    --toolbar-button-active-color: #2609bb;
-    --light-background-color: #2f3236;
-}
+@layer components {
+    :root {
+        --toolbar-bg-color: #130808;
+        --toolbar-button-color: #150c35;
+        --toolbar-button-hover-color: #28187a;
+        --toolbar-button-active-color: #2609bb;
+        --light-background-color: #2f3236;
+    }
 
-nav {
-    display: flex;
-    flex-direction: column;
-    margin: 1rem 0;
-}
+    nav {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 0;
+    }
 
-.toolbar {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 50px;
-    height: 100%;
-    padding: 1rem 0;
-    background-color: var(--toolbar-bg-color);
-
-    opacity: 1;
-    visibility: visible;
-    overflow-x: hidden;
-    overflow-y: auto; /* Allow scrolling */
-    transition: all 0.3s ease;
-    overscroll-behavior: contain;
-}
-.toolbar a {
-    text-decoration: none;
-}
-
-.toolbar .active-button {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 35px;
-    max-width: 35px;
-    height: 35px;
-    padding: 0;
-    background-color: var(--toolbar-button-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-
-    cursor: pointer;
-    overflow: hidden;
-    transition:
-        background-color 0.3s ease,
-        min-width 0.3s ease;
-}
-.toolbar .active-button:hover {
-    background-color: var(--toolbar-button-hover-color);
-}
-.toolbar .active-button:active {
-    background-color: var(--toolbar-button-active-color);
-    outline: 2px solid var(--toolbar-button-active-color);
-}
-.toolbar .active-button:focus-visible {
-    outline: 2px solid var(--toolbar-button-active-color);
-}
-.toolbar .active-button i {
-    width: 20px;
-    height: 20px;
-    font-size: 20px;
-}
-
-.toolbar .link {
-    position: relative;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    min-width: 30px;
-    max-width: 30px;
-    height: 30px;
-    margin: 5px;
-    padding: 0;
-    background-color: var(--toolbar-button-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-
-    cursor: pointer;
-    transition:
-        background-color 0.3s ease,
-        min-width 0.3s ease;
-}
-.toolbar .link:hover {
-    background-color: var(--toolbar-button-hover-color);
-}
-.toolbar .link:active {
-    background-color: var(--toolbar-button-active-color);
-    outline: 2px solid var(--toolbar-button-active-color);
-}
-.toolbar .link.selected {
-    outline: 2px solid var(--toolbar-button-active-color);
-}
-.toolbar .link:focus-visible {
-    outline: 2px solid var(--toolbar-button-active-color);
-}
-
-.toolbar .link span {
-    width: calc(100% - 25px);
-    max-width: 0;
-    margin-left: 25px;
-    font-size: 16px;
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-    overflow: hidden;
-    transition: max-width 0.3s;
-}
-.toolbar .link i {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 16px;
-    font-size: 16px;
-
-    transition: left 0.3s ease;
-}
-
-.toolbar .link.mini {
-    min-width: 25px;
-    max-width: 25px;
-    height: 25px;
-}
-.toolbar .link.mini span {
-    max-width: 0;
-    font-size: 16px;
-}
-
-.toolbar.active {
-    min-width: 150px;
-}
-.toolbar.active .link {
-    min-width: 130px;
-}
-.toolbar.active .link .i {
-    left: 10%;
-}
-.toolbar.active .link span {
-    max-width: 120px;
-    transition: max-width 0.3s;
-}
-
-.toolbar .subpath {
-    width: 0px;
-    height: 0px;
-    margin: 0 0 0 10px;
-    padding: 0;
-    background-color: transparent;
-    list-style: none;
-    border-left: 2px solid var(--toolbar-button-active-color);
-    opacity: 0;
-    visibility: hidden;
-    overflow: visible;
-
-    transition:
-        height 0.3s ease,
-        opacity 0.3s ease,
-        width 0.3s ease;
-}
-.toolbar .subpath.active {
-    width: 80%;
-    opacity: 1;
-    visibility: visible;
-}
-.toolbar.active .subpath .link {
-    min-width: 118px;
-}
-@media (max-width: 600px) {
     .toolbar {
-        z-index: 100;
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translateX(-100%); /* Move off-screen */
-        min-width: 0;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 50px;
+        height: 100%;
+        padding: 1rem 0;
+        background-color: var(--toolbar-bg-color);
+
+        opacity: 1;
+        visibility: visible;
+        overflow-x: hidden;
+        overflow-y: auto; /* Allow scrolling */
+        transition: all 0.3s ease;
+        overscroll-behavior: contain;
+    }
+    .toolbar a {
+        text-decoration: none;
+    }
+
+    .toolbar .active-button {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 35px;
+        max-width: 35px;
+        height: 35px;
+        padding: 0;
+        background-color: var(--toolbar-button-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+
+        cursor: pointer;
+        overflow: hidden;
+        transition:
+            background-color 0.3s ease,
+            min-width 0.3s ease;
+    }
+    .toolbar .active-button:hover {
+        background-color: var(--toolbar-button-hover-color);
+    }
+    .toolbar .active-button:active {
+        background-color: var(--toolbar-button-active-color);
+        outline: 2px solid var(--toolbar-button-active-color);
+    }
+    .toolbar .active-button:focus-visible {
+        outline: 2px solid var(--toolbar-button-active-color);
+    }
+    .toolbar .active-button i {
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+    }
+
+    .toolbar .link {
+        position: relative;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        min-width: 30px;
+        max-width: 30px;
+        height: 30px;
+        margin: 5px;
+        padding: 0;
+        background-color: var(--toolbar-button-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+
+        cursor: pointer;
+        transition:
+            background-color 0.3s ease,
+            min-width 0.3s ease;
+    }
+    .toolbar .link:hover {
+        background-color: var(--toolbar-button-hover-color);
+    }
+    .toolbar .link:active {
+        background-color: var(--toolbar-button-active-color);
+        outline: 2px solid var(--toolbar-button-active-color);
+    }
+    .toolbar .link.selected {
+        outline: 2px solid var(--toolbar-button-active-color);
+    }
+    .toolbar .link:focus-visible {
+        outline: 2px solid var(--toolbar-button-active-color);
+    }
+
+    .toolbar .link span {
+        width: calc(100% - 25px);
         max-width: 0;
+        margin-left: 25px;
+        font-size: 16px;
+        text-overflow: ellipsis;
+
+        white-space: nowrap;
+        overflow: hidden;
+        transition: max-width 0.3s;
+    }
+    .toolbar .link i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 16px;
+        font-size: 16px;
+
+        transition: left 0.3s ease;
+    }
+
+    .toolbar .link.mini {
+        min-width: 25px;
+        max-width: 25px;
+        height: 25px;
+    }
+    .toolbar .link.mini span {
+        max-width: 0;
+        font-size: 16px;
+    }
+
+    .toolbar.active {
+        min-width: 150px;
+    }
+    .toolbar.active .link {
+        min-width: 130px;
+    }
+    .toolbar.active .link .i {
+        left: 10%;
+    }
+    .toolbar.active .link span {
+        max-width: 120px;
+        transition: max-width 0.3s;
+    }
+
+    .toolbar .subpath {
+        width: 0px;
+        height: 0px;
+        margin: 0 0 0 10px;
+        padding: 0;
+        background-color: transparent;
+        list-style: none;
+        border-left: 2px solid var(--toolbar-button-active-color);
         opacity: 0;
         visibility: hidden;
+        overflow: visible;
+
+        transition:
+            height 0.3s ease,
+            opacity 0.3s ease,
+            width 0.3s ease;
     }
-    .toolbar.active {
-        transform: translateX(0); /* Move back on-screen */
-        min-width: 150px;
-        max-width: 150px;
-        opacity: 0.9;
+    .toolbar .subpath.active {
+        width: 80%;
+        opacity: 1;
         visibility: visible;
+    }
+    .toolbar.active .subpath .link {
+        min-width: 118px;
+    }
+    @media (max-width: 600px) {
+        .toolbar {
+            z-index: 100;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateX(-100%); /* Move off-screen */
+            min-width: 0;
+            max-width: 0;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .toolbar.active {
+            transform: translateX(0); /* Move back on-screen */
+            min-width: 150px;
+            max-width: 150px;
+            opacity: 0.9;
+            visibility: visible;
+        }
     }
 }

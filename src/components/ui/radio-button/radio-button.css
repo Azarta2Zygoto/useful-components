@@ -1,86 +1,88 @@
-[data-variant]:not([data-variant="basic"]) input[type="radio"] {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    white-space: nowrap;
-    opacity: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-}
+@layer components {
+    [data-variant]:not([data-variant="basic"]) input[type="radio"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        white-space: nowrap;
+        opacity: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+    }
 
-input[type="radio"]:enabled:hover {
-    cursor: pointer;
-}
+    input[type="radio"]:enabled:hover {
+        cursor: pointer;
+    }
 
-input[type="radio"]:disabled {
-    cursor: not-allowed;
-}
-[data-variant="basic"] {
-    --color: var(--outlineE);
-    --x: 50%;
-    --y: 50%;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 0.25rem;
-    padding: 1rem;
-    background-color: inherit;
-    text-align: left;
-    border: none;
-    border-radius: 8px;
-    outline: 2px solid transparent;
-    outline-offset: 3px;
-    box-shadow: none;
-    cursor: pointer;
-    transition:
-        color 0.3s ease-in-out,
-        background-color 0.3s ease-in-out,
-        outline-color 0.3s ease-in-out;
-}
-[data-variant="basic"]:not(:disabled, [aria-disabled="true"]):hover {
-    background-color: inherit;
-}
-[data-variant="basic"]:not(:disabled, [aria-disabled="true"]):active,
-[data-variant="basic"]:not(:disabled, [aria-disabled="true"]):focus-visible,
-[data-variant="basic"]:not(:disabled, [aria-disabled="true"]):focus-within {
-    background-color: inherit;
-    outline-color: transparent;
-}
-[data-variant="basic"][aria-disabled="true"],
-[data-variant="basic"]:disabled {
-    background-color: inherit;
-    color: var(--textE-disabled);
-    border-color: transparent;
-    cursor: not-allowed;
-    opacity: 0.8;
-}
-[data-variant] > svg {
-    flex-shrink: 0;
-}
-[data-variant="basic"][aria-pressed="true"],
-[data-variant="basic"][data-checked="true"] {
-    background-color: inherit;
-    font-weight: bold;
-    outline-color: transparent;
-}
+    input[type="radio"]:disabled {
+        cursor: not-allowed;
+    }
+    [data-variant="basic"] {
+        --color: var(--outlineE);
+        --x: 50%;
+        --y: 50%;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin: 0.25rem;
+        padding: 1rem;
+        background-color: inherit;
+        text-align: left;
+        border: none;
+        border-radius: 8px;
+        outline: 2px solid transparent;
+        outline-offset: 3px;
+        box-shadow: none;
+        cursor: pointer;
+        transition:
+            color 0.3s ease-in-out,
+            background-color 0.3s ease-in-out,
+            outline-color 0.3s ease-in-out;
+    }
+    [data-variant="basic"]:not(:disabled, [aria-disabled="true"]):hover {
+        background-color: inherit;
+    }
+    [data-variant="basic"]:not(:disabled, [aria-disabled="true"]):active,
+    [data-variant="basic"]:not(:disabled, [aria-disabled="true"]):focus-visible,
+    [data-variant="basic"]:not(:disabled, [aria-disabled="true"]):focus-within {
+        background-color: inherit;
+        outline-color: transparent;
+    }
+    [data-variant="basic"][aria-disabled="true"],
+    [data-variant="basic"]:disabled {
+        background-color: inherit;
+        color: var(--textE-disabled);
+        border-color: transparent;
+        cursor: not-allowed;
+        opacity: 0.8;
+    }
+    [data-variant] > svg {
+        flex-shrink: 0;
+    }
+    [data-variant="basic"][aria-pressed="true"],
+    [data-variant="basic"][data-checked="true"] {
+        background-color: inherit;
+        font-weight: bold;
+        outline-color: transparent;
+    }
 
-.radio-group-container {
-    display: grid;
-    gap: 0.5rem;
-    border-radius: 8px;
-    transition: border-color 0.3s ease-in-out;
-}
-.radio-group-container legend {
-    transition: color 0.3s ease-in-out;
-}
-.radio-group-container[data-valid="false"] {
-    border-color: var(--borderE-danger);
-}
-.radio-group-container[data-valid="false"] legend {
-    color: var(--textE-danger);
-}
-.radio-group-container:disabled legend {
-    color: var(--textE-disabled);
+    .radio-group-container {
+        display: grid;
+        gap: 0.5rem;
+        border-radius: 8px;
+        transition: border-color 0.3s ease-in-out;
+    }
+    .radio-group-container legend {
+        transition: color 0.3s ease-in-out;
+    }
+    .radio-group-container[data-valid="false"] {
+        border-color: var(--borderE-danger);
+    }
+    .radio-group-container[data-valid="false"] legend {
+        color: var(--textE-danger);
+    }
+    .radio-group-container:disabled legend {
+        color: var(--textE-disabled);
+    }
 }

@@ -1,4 +1,6 @@
-.required {
-    margin: 0;
-    color: var(--textE-danger);
+@layer components {
+    .required {
+        margin: 0;
+        color: var(--textE-danger);
+    }
 }

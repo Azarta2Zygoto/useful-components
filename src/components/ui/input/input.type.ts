@@ -1,6 +1,11 @@
 import type { ComponentProps } from "react";
 
-import { FieldProps, LabelLayoutProps } from "../utils/types";
+import type {
+    AdornmentProps,
+    FieldProps,
+    LabelLayoutProps,
+    SizeableComponentProps,
+} from "../utils/types";
 
 export type InputVariant = "underlined" | "outlined";
 export type TextInputType =
@@ -14,12 +19,16 @@ export type InputType =
     | "month"
     | "week";
 
-export interface InputProps extends Omit<ComponentProps<"input">, "type"> {
+export interface InputProps
+    extends
+        Omit<ComponentProps<"input">, "type" | "size">,
+        SizeableComponentProps {
     type?: InputType;
     variant?: InputVariant;
 }
 
-export interface TextAreaProps extends ComponentProps<"textarea"> {
+export interface TextAreaProps
+    extends ComponentProps<"textarea">, SizeableComponentProps {
     minRows?: number;
     maxRows?: number;
     onValue?: (value: string) => void;
@@ -30,7 +39,8 @@ export interface TextFieldProps
     extends
         Omit<InputProps, "type" | "value" | "defaultValue">,
         LabelLayoutProps,
-        FieldProps {
+        FieldProps,
+        AdornmentProps {
     type?: TextInputType;
     floatingLabel?: boolean;
     value?: string;
@@ -44,11 +54,11 @@ export interface NumberProps extends Omit<
 > {
     value?: number | null;
     defaultValue?: number;
-    stepButton?: boolean;
+    hasStep?: boolean;
     onValue?: (value: number | null) => void;
 }
 
 export interface NumberFieldProps
-    extends NumberProps, LabelLayoutProps, FieldProps {
+    extends NumberProps, LabelLayoutProps, FieldProps, AdornmentProps {
     floatingLabel?: boolean;
 }

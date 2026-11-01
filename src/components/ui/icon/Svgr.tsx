@@ -1,21 +1,12 @@
-import type { ComponentType, ReactNode, SVGProps } from "react";
+import type { ReactNode } from "react";
 
-export type IconType = ComponentType<SVGProps<SVGSVGElement>>;
-
-export interface IconProps {
-    icon: IconType;
-    size?: number;
-    fill?: string;
-    ariaLabel?: string;
-    className?: string;
-}
+import type { IconProps } from "../utils/types";
 
 export default function Icon({
     icon: SvgIcon,
     ariaLabel,
-    fill,
-    size = 16,
-    className,
+    fill = "currentColor",
+    size = 18,
     ...props
 }: Readonly<IconProps>): ReactNode {
     return (
@@ -24,9 +15,9 @@ export default function Icon({
             width={size}
             height={size}
             fill={fill}
-            className={className}
+            role={ariaLabel ? "img" : undefined}
             aria-label={ariaLabel}
-            aria-hidden={ariaLabel ? undefined : "true"}
+            aria-hidden={ariaLabel ? undefined : true}
             focusable="false"
         />
     );

@@ -1,10 +1,12 @@
+"use client";
+
 import { type ReactNode, useId } from "react";
 
 import IconCadenas from "../../assets/icons/cadenas.svg";
 import Icon from "../../icon/Svgr";
+import { getIconElement } from "../../icon/utils";
 import Required from "../../required/required";
 import "../../utils/field.css";
-import "../../utils/floating.css";
 import Input from "../Input";
 import type { TextFieldProps } from "../input.type";
 
@@ -12,12 +14,16 @@ export default function TextField({
     id,
     variant = "outlined",
     error,
+    errorProps,
     placeholder,
     label,
     labelPosition = "top",
     labelProps,
-    errorProps,
     floatingLabel = false,
+    containerProps,
+    iconRight,
+    iconLeft,
+    size,
     "aria-describedby": describedByProp,
     "aria-invalid": invalidProp,
     onChange,
@@ -45,30 +51,46 @@ export default function TextField({
             }}
         />
     );
-    const lock = props.readOnly && (
+
+    const iconRightElement = getIconElement(iconRight, "right");
+    const iconLeftElement = getIconElement(iconLeft, "left");
+
+    const lock = props.readOnly && !iconRightElement && (
         <Icon
             icon={IconCadenas}
-            size={18}
-            data-readonly-icon
+            data-field-icon="right"
         />
     );
 
+    const fieldPosition = floatingLabel
+        ? undefined
+        : labelPosition === "top"
+          ? undefined
+          : labelPosition;
+
     return (
         <div
-            className="field-container"
-            data-floating-variant={floatingLabel ? variant : undefined}
-            data-field-position={floatingLabel ? undefined : labelPosition}
+            {...containerProps}
+            data-size={size === "md" ? undefined : size}
+            data-field={floatingLabel ? `floating-${variant}` : variant}
+            data-field-position={fieldPosition}
         >
             {floatingLabel ? (
                 <>
                     {input}
+                    {iconRightElement}
+                    {iconLeftElement}
                     {lock}
                 </>
-            ) : (
+            ) : lock || iconRightElement || iconLeftElement ? (
                 <span className="field-control">
                     {input}
+                    {iconRightElement}
+                    {iconLeftElement}
                     {lock}
                 </span>
+            ) : (
+                input
             )}
             {variant === "outlined" && floatingLabel && (
                 <fieldset aria-hidden="true">
@@ -88,10 +110,10 @@ export default function TextField({
                 <Required required={props.required} />
             </label>
             <p
+                aria-live="polite"
                 {...errorProps}
                 id={`${correctId}-error`}
                 data-field-error
-                aria-live="polite"
             >
                 {error}
             </p>

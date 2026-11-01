@@ -2,9 +2,11 @@
 
 import { type ReactNode, useId } from "react";
 
+import IconCadenas from "../../assets/icons/cadenas.svg";
+import Icon from "../../icon/Svgr";
+import { getIconElement } from "../../icon/utils";
 import Required from "../../required/required";
 import "../../utils/field.css";
-import "../../utils/floating.css";
 import type { NumberFieldProps } from "../input.type";
 import Numbering from "./Numbering";
 
@@ -12,12 +14,16 @@ export default function NumberField({
     id,
     variant = "outlined",
     error,
+    errorProps,
     placeholder,
     label,
     labelPosition = "top",
     labelProps,
-    errorProps,
     floatingLabel = false,
+    containerProps,
+    iconRight,
+    iconLeft,
+    size,
     "aria-describedby": describedByProp,
     "aria-invalid": invalidProp,
     ...props
@@ -39,11 +45,28 @@ export default function NumberField({
         </label>
     );
 
+    const iconRightElement = getIconElement(iconRight, "right");
+    const iconLeftElement = getIconElement(iconLeft, "left");
+
+    const lock = props.readOnly && !iconRightElement && (
+        <Icon
+            icon={IconCadenas}
+            data-field-icon="right"
+        />
+    );
+
+    const fieldPosition = floatingLabel
+        ? undefined
+        : labelPosition === "top"
+          ? undefined
+          : labelPosition;
+
     return (
         <div
-            className="field-container"
-            data-floating-variant={floatingLabel ? variant : undefined}
-            data-field-position={labelPosition}
+            {...containerProps}
+            data-size={size === "md" ? undefined : size}
+            data-field={floatingLabel ? `floating-${variant}` : variant}
+            data-field-position={fieldPosition}
         >
             <Numbering
                 {...props}
@@ -63,14 +86,17 @@ export default function NumberField({
                         </legend>
                     </fieldset>
                 )}
+                {iconRightElement}
+                {iconLeftElement}
+                {lock}
                 {floatingLabel && labelElement}
             </Numbering>
             {!floatingLabel && labelElement}
             <p
+                aria-live="polite"
                 {...errorProps}
                 id={`${correctId}-error`}
                 data-field-error
-                aria-live="polite"
             >
                 {error}
             </p>

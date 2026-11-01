@@ -1,87 +1,89 @@
-.switch-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    width: fit-content;
-    cursor: pointer;
-}
-.switch-container[data-side="left"] {
-    flex-direction: row-reverse;
-}
-.switch-container[data-side="right"] {
-    flex-direction: row;
-}
-.switch-container[data-side="top"] {
-    flex-direction: column-reverse;
-}
-.switch-wrapper {
-    box-sizing: border-box;
-    position: relative;
-    width: 30px;
-    height: 12px;
-    margin: 5px 10px;
-    background-color: var(--element-color);
-    border-radius: 12px;
-    user-select: none;
-    transition: background-color 0.3s ease-in-out;
-}
+@layer components {
+    .switch-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        width: fit-content;
+        cursor: pointer;
+    }
+    .switch-container[data-side="left"] {
+        flex-direction: row-reverse;
+    }
+    .switch-container[data-side="right"] {
+        flex-direction: row;
+    }
+    .switch-container[data-side="top"] {
+        flex-direction: column-reverse;
+    }
+    .switch-wrapper {
+        box-sizing: border-box;
+        position: relative;
+        width: 30px;
+        height: 12px;
+        margin: 5px 10px;
+        background-color: var(--element-color);
+        border-radius: 12px;
+        user-select: none;
+        transition: background-color 0.3s ease-in-out;
+    }
 
-.switch-wrapper input[type="checkbox"] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-}
-.switch-wrapper span {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    transition:
-        left 0.3s ease-in-out,
-        outline 0.3s ease-in-out,
-        background-color 0.3s ease-in-out;
-}
-.switch-container:not([aria-disabled="true"]):hover .switch-wrapper {
-    background-color: var(--add-light-color);
-}
+    .switch-wrapper input[type="checkbox"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+    }
+    .switch-wrapper span {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        transition:
+            left 0.3s ease-in-out,
+            outline 0.3s ease-in-out,
+            background-color 0.3s ease-in-out;
+    }
+    .switch-container:not([aria-disabled="true"]):hover .switch-wrapper {
+        background-color: var(--add-light-color);
+    }
 
-.switch-container:not([aria-disabled="true"]):hover .switch-wrapper span {
-    outline-color: var(--add-hard-color);
-}
-.switch-container:not([aria-disabled="true"]) .switch-wrapper:focus-within {
-    background-color: var(--add-mid-color);
-}
-.switch-container:not([aria-disabled="true"])
-    .switch-wrapper
-    input[type="checkbox"]:active
-    ~ span,
-.switch-container:not([aria-disabled="true"])
-    .switch-wrapper
-    input[type="checkbox"]:focus-visible
-    ~ span {
-    outline-color: var(--fg);
-}
-.switch-wrapper input[type="checkbox"]:checked ~ span {
-    left: 100%;
-}
-.switch-container[aria-disabled="true"] {
-    cursor: default;
-}
-.switch-container[aria-disabled="true"] .switch-wrapper {
-    background-color: var(--bgE-disabled);
-    cursor: not-allowed;
-}
-.switch-wrapper input[type="checkbox"]:disabled ~ span {
-    background-color: var(--bgE-disabled);
+    .switch-container:not([aria-disabled="true"]):hover .switch-wrapper span {
+        outline-color: var(--add-hard-color);
+    }
+    .switch-container:not([aria-disabled="true"]) .switch-wrapper:focus-within {
+        background-color: var(--add-mid-color);
+    }
+    .switch-container:not([aria-disabled="true"])
+        .switch-wrapper
+        input[type="checkbox"]:active
+        ~ span,
+    .switch-container:not([aria-disabled="true"])
+        .switch-wrapper
+        input[type="checkbox"]:focus-visible
+        ~ span {
+        outline-color: var(--fg);
+    }
+    .switch-wrapper input[type="checkbox"]:checked ~ span {
+        left: 100%;
+    }
+    .switch-container[aria-disabled="true"] {
+        cursor: default;
+    }
+    .switch-container[aria-disabled="true"] .switch-wrapper {
+        background-color: var(--bgE-disabled);
+        cursor: not-allowed;
+    }
+    .switch-wrapper input[type="checkbox"]:disabled ~ span {
+        background-color: var(--bgE-disabled);
+    }
 }

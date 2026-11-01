@@ -1,7 +1,7 @@
 "use client";
 
 import {
-    PropsWithChildren,
+    type PropsWithChildren,
     type ReactNode,
     createContext,
     useCallback,

@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 
+import Github from "@ui/assets/github.svg";
 import Button from "@ui/button/Button";
-import Github from "@ui/icon/github";
 import { useTooltip } from "@ui/tooltip/useTooltip.hook";
 
 import { WarningComponent } from "@/components/WrapperComponent";
+import Icon from "@/components/ui/icon/Svgr";
 
 export default function ButtonPage() {
     const tooltip = useTooltip({ content: "Button tooltip" });
@@ -44,6 +45,7 @@ export default function ButtonPage() {
                 <Button variant="primary">Primary</Button>
                 <Button variant="secondary">Secondary</Button>
                 <Button variant="danger">Danger</Button>
+                <Button variant="success">Success</Button>
                 <Button ripple={false}>Without ripple</Button>
                 <Button
                     width={300}
@@ -137,28 +139,28 @@ export default function ButtonPage() {
                     title="primary"
                     aria-label="GitHub primary"
                 >
-                    <Github></Github>
+                    <Icon icon={Github} />
                 </Button>
                 <Button
                     variant="secondary"
                     title="secondary"
                     aria-label="GitHub secondary"
                 >
-                    <Github></Github>
+                    <Icon icon={Github} />
                 </Button>
                 <Button
                     variant="danger"
                     title="danger"
                     aria-label="GitHub danger"
                 >
-                    <Github></Github>
+                    <Icon icon={Github} />
                 </Button>
                 <Button
                     variant="transparent"
                     title="transparent"
                     aria-label="GitHub transparent"
                 >
-                    <Github></Github>
+                    <Icon icon={Github} />
                 </Button>
                 <Button
                     variant="transparent"
@@ -166,28 +168,28 @@ export default function ButtonPage() {
                     aria-label="GitHub transparent with ripple"
                     ripple
                 >
-                    <Github></Github>
+                    <Icon icon={Github} />
                 </Button>
             </div>
             <h2>Buttons with icon</h2>
             <div className="inner-component">
                 <Button variant="primary">
-                    <Github></Github>
+                    <Icon icon={Github} />
                     Github primary
                 </Button>
                 <Button variant="secondary">
-                    <Github></Github>
+                    <Icon icon={Github} />
                     Github secondary
                 </Button>
                 <Button variant="danger">
                     Github danger
-                    <Github></Github>
+                    <Icon icon={Github} />
                 </Button>
                 <Button
                     variant="danger"
                     width={300}
                 >
-                    <Github></Github>
+                    <Icon icon={Github} />
                     C&apos;est un bouton vraiment très long avec un texte qui
                     dépasse la largeur du bouton et qui est très long pour voir
                     comment le bouton se comporte avec un texte très long et un

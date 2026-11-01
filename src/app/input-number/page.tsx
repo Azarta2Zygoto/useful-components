@@ -1,5 +1,7 @@
 "use client";
 
+import CaretDownIcon from "@ui/assets/icons/caret-down.svg";
+
 import NumberField from "@/components/ui/input/number-input/NumberField";
 
 export default function NumberInputPage() {
@@ -46,6 +48,7 @@ export default function NumberInputPage() {
                     readOnly
                     label="Number input read only"
                     placeholder="Enter a number"
+                    value={844968984992489489}
                 />
                 <NumberField
                     floatingLabel
@@ -57,6 +60,27 @@ export default function NumberInputPage() {
                     variant="underlined"
                     label="Number input read floating Label"
                     placeholder="Enter a number"
+                />
+                <NumberField
+                    floatingLabel
+                    label="Number input read floating Label"
+                    placeholder="Enter a number"
+                    size="sm"
+                />
+                <NumberField
+                    floatingLabel
+                    variant="underlined"
+                    label="Number input read floating Label"
+                    placeholder="Enter a number"
+                    size="lg"
+                />
+                <NumberField
+                    floatingLabel
+                    variant="underlined"
+                    label="Number input read floating Label, which is a very long label"
+                    placeholder="Enter a number"
+                    iconRight={CaretDownIcon}
+                    iconLeft={CaretDownIcon}
                 />
             </div>
         </main>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, JSX, useId } from "react";
+import React, { Fragment, type JSX, useId } from "react";
 
 export type iconTypes =
     | "envelope-fill"

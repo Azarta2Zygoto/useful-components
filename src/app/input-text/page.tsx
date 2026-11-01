@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import CaretDownIcon from "@ui/assets/icons/caret-down.svg";
 import * as Input from "@ui/input";
 
 import { InfoComponent } from "@/components/WrapperComponent";
@@ -54,6 +55,32 @@ export default function InputPage() {
                     variant="underlined"
                 />
             </div>
+            <h2>Size</h2>
+            <p>
+                There are three sizes: <code>small (sm)</code>,{" "}
+                <code>medium (md)</code> (the default) and{" "}
+                <code>large (lg)</code>. The size can be set on the input itself
+                or on the wrapper component. The wrapper component will override
+                the size of the input.
+            </p>
+            <div className="inner-component">
+                <Input.TextField
+                    label="Text input smalllkfjnearhfcnzer igaeniucfhaiufg eigf aiegrif"
+                    placeholder="Enter small text"
+                    size="sm"
+                />
+                <Input.TextField
+                    label="Text input medium (default)"
+                    placeholder="Enter text"
+                    size="md"
+                />
+                <Input.TextField
+                    label="Text input large"
+                    placeholder="Enter big text"
+                    size="lg"
+                    variant="underlined"
+                />
+            </div>
             <h2>Floating label</h2>
             <p>
                 For both variants, it is possible to have a floating label. The
@@ -64,8 +91,22 @@ export default function InputPage() {
                 <Input.TextField
                     label="Text input outlined (default)"
                     placeholder="Enter text"
-                    variant="outlined"
+                    variant="underlined"
                     floatingLabel
+                />
+                <Input.TextField
+                    label="Text input outlined (default)"
+                    placeholder="Enter text"
+                    variant="underlined"
+                    floatingLabel
+                    size="sm"
+                />
+                <Input.TextField
+                    label="Text input outlined (default)"
+                    placeholder="Enter text"
+                    variant="underlined"
+                    floatingLabel
+                    size="lg"
                 />
                 <Input.TextField
                     label="Text input underlined"
@@ -189,6 +230,83 @@ export default function InputPage() {
                     readOnly
                     floatingLabel
                     variant="underlined"
+                />
+            </div>
+            <h2>Icon Element</h2>
+            <p>
+                You can put an icon on the left or right of the input. The icon
+                can be a string (the name of the icon) or a React component.
+            </p>
+            <div className="inner-component">
+                <Input.TextField
+                    label="Readonly textarea"
+                    defaultValue="This is a readonly textarea"
+                    iconLeft={CaretDownIcon}
+                />
+                <Input.TextField
+                    label="Readonly textarea"
+                    defaultValue="This is a readonly textarea"
+                    iconLeft={CaretDownIcon}
+                    readOnly
+                />
+                <Input.TextField
+                    label="Readonly textarea"
+                    defaultValue="This is a readonly textarea"
+                    iconRight={CaretDownIcon}
+                />
+                <Input.TextField
+                    label="Readonly textarea"
+                    defaultValue="This is a readonly textarea"
+                    iconRight={CaretDownIcon}
+                    readOnly
+                />
+                <Input.TextField
+                    label="Readonly textarea"
+                    defaultValue="This is a readonly textarea"
+                    floatingLabel
+                    iconLeft={CaretDownIcon}
+                />
+                <Input.TextField
+                    label="Readonly textarea that is very very long"
+                    defaultValue="This is a readonly textarea that is very very long"
+                    floatingLabel
+                    iconLeft={CaretDownIcon}
+                    iconRight={CaretDownIcon}
+                />
+                <Input.TextField
+                    label="Readonly textarea"
+                    defaultValue="This is a readonly textarea"
+                    floatingLabel
+                    readOnly
+                    iconRight={CaretDownIcon}
+                />
+                <Input.TextField
+                    label="Readonly textarea very loooooong"
+                    defaultValue="This is a readonly textarea"
+                    floatingLabel
+                    variant="underlined"
+                    iconLeft={CaretDownIcon}
+                    iconRight={{
+                        icon: CaretDownIcon,
+                        size: 50,
+                    }}
+                />
+                <Input.TextField
+                    label="Readonly textarea"
+                    defaultValue="This is a readonly textarea"
+                    floatingLabel
+                    variant="underlined"
+                    iconRight={CaretDownIcon}
+                    size="sm"
+                />
+                <Input.TextField
+                    label="Readonly textarea"
+                    defaultValue="This is a readonly textarea"
+                    floatingLabel
+                    variant="underlined"
+                    readOnly
+                    iconRight={CaretDownIcon}
+                    size="lg"
                 />
             </div>
             <h2>Textarea</h2>

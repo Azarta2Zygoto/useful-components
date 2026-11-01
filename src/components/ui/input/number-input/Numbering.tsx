@@ -1,7 +1,7 @@
 "use client";
 
 import {
-    PropsWithChildren,
+    type PropsWithChildren,
     type ReactNode,
     useEffect,
     useImperativeHandle,
@@ -17,8 +17,9 @@ import "./number.css";
 export default function Numbering({
     ref,
     value,
-    stepButton = true,
+    hasStep = true,
     defaultValue,
+    size,
     onChange,
     onValue,
     children,
@@ -118,12 +119,13 @@ export default function Numbering({
         return () => form.removeEventListener("reset", onReset);
     }, []);
 
-    const isStepButton = !isLocked && props.step !== "any" && stepButton;
+    const isStepButton = !isLocked && props.step !== "any" && hasStep;
 
     return (
         <span
             ref={wrapperRef}
             className="number-input-wrapper"
+            data-size={size === "md" ? undefined : size}
             data-has-steps={isStepButton || undefined}
         >
             <Input

@@ -1,8 +1,10 @@
-time[datetime] {
-    position: relative;
-    display: inline-block;
-    line-height: 1;
-    text-decoration: underlined dotted;
-    cursor: help;
-    vertical-align: middle;
+@layer components {
+    time[datetime] {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1;
+        text-decoration: underlined dotted;
+        cursor: help;
+    }
 }

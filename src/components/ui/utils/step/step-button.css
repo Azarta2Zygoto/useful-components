@@ -1,33 +1,44 @@
-[data-has-steps] {
-    .step-button {
-        position: absolute;
-        display: flex;
-        right: 0.5rem;
-        margin: 0;
-        padding: 0.2rem;
-        outline: none;
+@layer components {
+    [data-has-steps] {
+        .step-button {
+            --_size: calc(var(--height) / 2 - 2px);
+            position: absolute;
+            display: flex;
+            right: calc(var(--padding) * 0.5);
+            width: var(--_size);
+            height: var(--_size);
+            margin: 0;
+            padding: calc(var(--_size) / 8);
+            outline: none;
+        }
+        .step-button:hover {
+            color: var(--add-mid-color);
+        }
+        .step-button:active {
+            transform: scale(0.85);
+            color: var(--add-hard-color);
+        }
+        .step-button > svg {
+            min-width: calc(var(--_size) * 7 / 8);
+            width: calc(var(--_size) * 7 / 8);
+            min-height: calc(var(--_size) * 7 / 8);
+            height: calc(var(--_size) * 7 / 8);
+        }
     }
-    .step-button:hover {
-        color: var(--add-mid-color);
-    }
-    .step-button:active {
-        transform: scale(0.85);
-        color: var(--add-hard-color);
-    }
-}
 
-.step-button.up {
-    top: 0.15rem;
-}
-.step-button.down {
-    bottom: 0.15rem;
-}
+    .step-button.up {
+        top: 0.15rem;
+    }
+    .step-button.down {
+        bottom: 0.15rem;
+    }
 
-[data-has-steps][data-at-max] .step-button.up,
-[data-has-steps][data-at-min] .step-button.down {
-    color: var(--textE-disabled);
-}
-[data-has-steps][data-at-max] .step-button.up:active,
-[data-has-steps][data-at-min] .step-button.down:active {
-    transform: none;
+    [data-has-steps][data-at-max] .step-button.up,
+    [data-has-steps][data-at-min] .step-button.down {
+        color: var(--textE-disabled);
+    }
+    [data-has-steps][data-at-max] .step-button.up:active,
+    [data-has-steps][data-at-min] .step-button.down:active {
+        transform: none;
+    }
 }

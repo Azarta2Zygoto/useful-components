@@ -6,7 +6,7 @@ import { useRipple } from "../ripple/useRipple.hook";
 import "./button.css";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: "primary" | "secondary" | "danger" | "transparent";
+    variant?: "primary" | "secondary" | "danger" | "transparent" | "success";
     loading?: boolean;
     ripple?: boolean;
     pressed?: boolean;

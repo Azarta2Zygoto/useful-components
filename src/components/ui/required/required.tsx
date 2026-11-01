@@ -1,12 +1,14 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import "./required.css";
 
-interface Props {
+interface RequiredProps {
     required?: boolean;
 }
 
-export default function Required({ required }: Readonly<Props>): ReactNode {
+export default function Required({
+    required,
+}: Readonly<RequiredProps>): ReactNode {
     if (!required) {
         return null;
     }

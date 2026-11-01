@@ -12,11 +12,13 @@ import type { TextAreaFieldProps } from "../input.type";
 export default function TextAreaField({
     id,
     required,
+    size,
     error,
     label,
     labelPosition = "top",
     labelProps,
     errorProps,
+    containerProps,
     "aria-describedby": describedByProp,
     "aria-invalid": invalidProp,
     ...props
@@ -28,27 +30,35 @@ export default function TextAreaField({
             .filter(Boolean)
             .join(" ") || undefined;
 
+    const textArea = (
+        <TextArea
+            {...props}
+            id={correctId}
+            required={required}
+            aria-invalid={error ? true : invalidProp}
+            aria-describedby={describedBy}
+        />
+    );
+
     return (
         <div
-            className="field-container"
+            {...containerProps}
+            data-field="outlined"
+            data-size={size === "md" ? undefined : size}
             data-field-position={labelPosition}
         >
-            <span className="field-control">
-                <TextArea
-                    {...props}
-                    id={correctId}
-                    required={required}
-                    aria-invalid={error ? true : invalidProp}
-                    aria-describedby={describedBy}
-                />
-                {props.readOnly && (
+            {props.readOnly ? (
+                <span className="field-control">
+                    {textArea}
                     <Icon
                         icon={IconCadenas}
                         size={18}
-                        data-readonly-icon
+                        data-field-icon="right"
                     />
-                )}
-            </span>
+                </span>
+            ) : (
+                textArea
+            )}
             <label
                 {...labelProps}
                 htmlFor={correctId}

@@ -1,16 +1,18 @@
-.ripple {
-    position: absolute;
-    border-radius: inherit;
-    pointer-events: none;
-    overflow: hidden;
-    inset: 0;
-}
+@layer components {
+    .ripple {
+        position: absolute;
+        border-radius: inherit;
+        pointer-events: none;
+        overflow: hidden;
+        inset: 0;
+    }
 
-.ripple-wave {
-    position: absolute;
-    background-color: var(--color);
-    border-radius: 50%;
-    opacity: 0;
-    pointer-events: none;
-    will-change: transform, opacity;
+    .ripple-wave {
+        position: absolute;
+        background-color: var(--ripple-color, var(--_outline-color));
+        border-radius: 50%;
+        opacity: 0;
+        pointer-events: none;
+        will-change: transform, opacity;
+    }
 }
