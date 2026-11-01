@@ -1,4 +1,4 @@
-import { Placement } from "./tooltip.store";
+import type { Placement } from "./tooltip.store";
 
 export function tooltipPlacement(
     element: DOMRect,

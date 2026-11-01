@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, ReactNode } from "react";
 
 import Required from "../required/required";
-import RadioButton, { RadioButtonProps } from "./RadioButton";
+import RadioButton, { type RadioButtonProps } from "./RadioButton";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
     name: string;

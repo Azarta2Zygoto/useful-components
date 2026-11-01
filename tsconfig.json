@@ -1,19 +1,23 @@
 {
     "compilerOptions": {
-        "target": "ES2017",
-        "lib": ["dom", "dom.iterable", "esnext"],
+        "target": "ES2021",
+        "lib": ["dom", "dom.iterable", "ES2022"],
         "allowJs": true,
         "skipLibCheck": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
         "strict": true,
         "noEmit": true,
         "esModuleInterop": true,
         "verbatimModuleSyntax": true,
+        "noImplicitReturns": true,
         "module": "esnext",
         "moduleResolution": "bundler",
         "resolveJsonModule": true,
         "isolatedModules": true,
         "jsx": "react-jsx",
         "incremental": true,
+        "types": [],
         "plugins": [
             {
                 "name": "next"

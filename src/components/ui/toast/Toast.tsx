@@ -1,5 +1,5 @@
 import {
-    CSSProperties,
+    type CSSProperties,
     type KeyboardEvent,
     type ReactNode,
     memo,
@@ -8,7 +8,7 @@ import {
 
 import Button from "../button/Button";
 import Icon from "../icon/icon";
-import { ToastItem } from "./Toast.context";
+import type { ToastItem } from "./Toast.context";
 
 interface ToastProps {
     toast: ToastItem;

@@ -1,5 +1,5 @@
 import {
-    CSSProperties,
+    type CSSProperties,
     type ComponentProps,
     type LabelHTMLAttributes,
     type ReactNode,

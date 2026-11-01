@@ -1,8 +1,8 @@
 "use client";
 
-import { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
-import ToastContextProvider, { ToastProviderProps } from "./Toast.context";
+import ToastContextProvider, { type ToastProviderProps } from "./Toast.context";
 
 export function ToastProvider({
     duration,

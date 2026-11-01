@@ -3,7 +3,7 @@
 import {
     type InputEvent,
     type InputHTMLAttributes,
-    LabelHTMLAttributes,
+    type LabelHTMLAttributes,
     type ReactNode,
     useId,
     useLayoutEffect,

@@ -1,7 +1,7 @@
 "use client";
 
 import {
-    CSSProperties,
+    type CSSProperties,
     type HTMLAttributes,
     type PropsWithChildren,
     type ReactNode,
