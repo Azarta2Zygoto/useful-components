@@ -32,6 +32,7 @@ export default function CodeView({
         <div className="code-view">
             {code && (
                 <Button
+                    className="code-view-button"
                     variant="transparent"
                     tooltip="View code"
                     pressed={isCodeVisible}
