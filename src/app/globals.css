@@ -27,6 +27,7 @@
         --bgE-danger-active: #ff808040;
         --bgE-success: #00ff0010;
         --bgE-success-active: #8bff8040;
+        --bgE-warning: #ffff0010;
 
         --textE: #ededed;
         --textE-disabled: #aaa;
@@ -36,6 +37,7 @@
         --borderE: var(--add-light-color);
         --borderE-disabled: #646464;
         --borderE-danger: #f71f1f;
+        --borderE-warning: #d97706;
         --borderE-success: #19c019;
         --outlineE: var(--add-total-color);
 
@@ -130,6 +132,18 @@
         display: flex;
         flex-direction: column;
         margin: 3rem 10%;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            scroll-behavior: auto !important;
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            transition-delay: 0ms !important;
+        }
     }
 }
 

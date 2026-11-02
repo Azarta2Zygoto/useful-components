@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 
 import type { AdornmentType } from "../utils/types";
 import { isIconType } from "../utils/utils";
-import Icon from "./Svgr";
+import Icon from "./Icon";
 
 export function getIconElement(
     icon: AdornmentType | undefined,

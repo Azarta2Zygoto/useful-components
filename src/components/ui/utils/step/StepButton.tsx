@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import CaretDown from "../../assets/icons/caret-down.svg";
 import CaretUp from "../../assets/icons/caret-up.svg";
-import Icon from "../../icon/Svgr";
+import Icon from "../../icon/Icon";
 import "./step-button.css";
 
 interface StepButtonProps {

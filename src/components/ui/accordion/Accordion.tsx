@@ -11,8 +11,9 @@ import {
     useState,
 } from "react";
 
+import CaretUpIcon from "../assets/icons/caret-up.svg";
 import Button from "../button/Button";
-import Icon from "../icon/icon";
+import Icon from "../icon/Icon";
 import { useRipple } from "../ripple/useRipple.hook";
 import "./accordion.css";
 
@@ -176,9 +177,7 @@ export default function Accordion({
                         />
                     )}
                     <Icon
-                        title={expanded ? texts.collapse : texts.expand}
-                        desc={expanded ? texts.collapseDesc : texts.expandDesc}
-                        name="caret-up-fill"
+                        icon={CaretUpIcon}
                         style={{
                             transition: `transform ${transitionMs}ms ease`,
                         }}
@@ -207,7 +206,7 @@ export default function Accordion({
                         onClick={handleToggle}
                     >
                         <Icon
-                            name="caret-up-fill"
+                            icon={CaretUpIcon}
                             style={{
                                 transition: `transform ${transitionMs}ms ease`,
                             }}

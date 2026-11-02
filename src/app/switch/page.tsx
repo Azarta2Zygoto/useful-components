@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Switch from "@ui/switch/switch";
 
-import { InfoComponent } from "@/components/WrapperComponent";
+import InfoFrame from "@/components/frames/InfoFrame";
 
 const radioList = [
     true,
@@ -116,12 +116,12 @@ export default function SwitchPage() {
                     required
                 />
             </div>
-            <InfoComponent>
+            <InfoFrame>
                 <p>
                     The main difference with just a red/green switch is the
                     label width the red &nbsp;<b style={{ color: "red" }}>*</b>
                 </p>
-            </InfoComponent>
+            </InfoFrame>
             <h2>Colors</h2>
             <p>
                 You can change the color of the switch when it is on or off. You

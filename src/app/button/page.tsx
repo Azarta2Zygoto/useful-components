@@ -6,7 +6,7 @@ import Github from "@ui/assets/github.svg";
 import Button from "@ui/button/Button";
 import { useTooltip } from "@ui/tooltip/useTooltip.hook";
 
-import { WarningComponent } from "@/components/WrapperComponent";
+import WarningFrame from "@/components/frames/WarningFrame";
 import Icon from "@/components/ui/icon/Svgr";
 
 export default function ButtonPage() {
@@ -202,14 +202,14 @@ export default function ButtonPage() {
                 they are inactive, so it is like a normal button. This is the
                 parent component that will manage the state of the button.
             </p>
-            <WarningComponent>
+            <WarningFrame>
                 <p>
                     If you want a checkbox or a radio button, you should use the
                     checkbox or radio button component and not try to make a
                     button behave like a checkbox or a radio button. This is not
                     the purpose of this component.
                 </p>
-            </WarningComponent>
+            </WarningFrame>
             <div className="inner-component">
                 <Button
                     variant="primary"

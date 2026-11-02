@@ -7,7 +7,8 @@ import {
 } from "react";
 
 import Button from "../button/Button";
-import Icon from "../icon/icon";
+import Icon from "../icon/Icon";
+import ErrorIcon from "../icon/icons/error.svg";
 import type { ToastItem } from "./Toast.context";
 
 interface ToastProps {
@@ -87,7 +88,7 @@ const Toast = memo(function ToastView({
                 aria-label={label}
                 onClick={() => onDismiss(toast.id)}
             >
-                <Icon name="x-circle-fill" />
+                <Icon icon={ErrorIcon} />
             </Button>
         </div>
     );

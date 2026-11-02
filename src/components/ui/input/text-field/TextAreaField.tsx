@@ -3,7 +3,7 @@
 import { type ReactNode, useId } from "react";
 
 import IconCadenas from "../../assets/icons/cadenas.svg";
-import Icon from "../../icon/Svgr";
+import Icon from "../../icon/Icon";
 import Required from "../../required/required";
 import "../../utils/field.css";
 import TextArea from "../TextArea";

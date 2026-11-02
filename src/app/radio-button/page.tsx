@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 
 import RadioGroup from "@ui/radio-button/RadioGroup";
 
-import { WarningComponent } from "@/components/WrapperComponent";
+import WarningFrame from "@/components/frames/WarningFrame";
 
 const radioList = [
     null,
@@ -155,12 +155,12 @@ export default function RadioButtonPage() {
                     style={{ width: "100px" }}
                 />
             </div>
-            <WarningComponent>
+            <WarningFrame>
                 <p>
                     If the width of the screen is too low, there isn&apos;t any
                     automatic change to not overflow from the screen.
                 </p>
-            </WarningComponent>
+            </WarningFrame>
             <h2>Disabled</h2>
             <p>You can disable the entire radio group or specific elements.</p>
             <div className="inner-component">

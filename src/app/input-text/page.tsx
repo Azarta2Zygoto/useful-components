@@ -5,7 +5,7 @@ import { useState } from "react";
 import CaretDownIcon from "@ui/assets/icons/caret-down.svg";
 import * as Input from "@ui/input";
 
-import { InfoComponent } from "@/components/WrapperComponent";
+import InfoFrame from "@/components/frames/InfoFrame";
 
 export default function InputPage() {
     const [value, setValue] = useState("");
@@ -22,12 +22,12 @@ export default function InputPage() {
                 around the base components that adds a label, error message, and
                 other features.
             </p>
-            <InfoComponent>
+            <InfoFrame>
                 <p>
                     The element has no React internal state. You can use the{" "}
                     <code>onValue</code> API to directly get the string value.
                 </p>
-            </InfoComponent>
+            </InfoFrame>
             <div className="inner-component">
                 <Input.Input
                     type="text"

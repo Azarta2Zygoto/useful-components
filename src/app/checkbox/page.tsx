@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Checkbox from "@ui/checkbox/Checkbox";
 
-import { WarningComponent } from "@/components/WrapperComponent";
+import WarningFrame from "@/components/frames/WarningFrame";
 
 const defaultChecked = [
     false,
@@ -139,13 +139,13 @@ export default function CheckboxPage() {
                     onChange={() => handleCheckboxChange(6)}
                 />
             </div>
-            <WarningComponent>
+            <WarningFrame>
                 <p>
                     When using a checkbox without label, it is important for
                     accessibility to use the tooltip or put our own label
                     outside of the component.
                 </p>
-            </WarningComponent>
+            </WarningFrame>
             <h2>Different shape</h2>
             <p>
                 You can use your own checkmark with the checkmark property. It
