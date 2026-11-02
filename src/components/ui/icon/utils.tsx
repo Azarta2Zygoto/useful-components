@@ -21,10 +21,7 @@ export function getIconElement(
 
     return (
         <Icon
-            icon={icon.icon}
-            fill={icon.fill}
-            ariaLabel={icon.ariaLabel}
-            className={icon.className}
+            {...icon}
             data-field-icon={position}
             style={
                 icon.size
