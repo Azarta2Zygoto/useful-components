@@ -5,13 +5,15 @@ import { useState } from "react";
 import CaretDownIcon from "@ui/assets/icons/caret-down.svg";
 import * as Input from "@ui/input";
 
+import CodeView from "@/components/CodeView";
+import Title from "@/components/Title";
 import InfoFrame from "@/components/frames/InfoFrame";
 
 export default function InputPage() {
     const [value, setValue] = useState("");
     return (
         <main>
-            <h1>Text Input</h1>
+            <Title level={1}>Text Input</Title>
             <p>
                 There are two important components for text input: the base one
                 and the complete. The base one is the <code>Input.Input</code>{" "}
@@ -28,7 +30,16 @@ export default function InputPage() {
                     <code>onValue</code> API to directly get the string value.
                 </p>
             </InfoFrame>
-            <div className="inner-component">
+            <CodeView
+                code={`<Input.Input
+    type="text"
+    placeholder="Basic input without label"
+/>
+<Input.TextField
+    label="A complete text input"
+    placeholder="You can write here"
+/>`}
+            >
                 <Input.Input
                     type="text"
                     placeholder="Basic input without label"
@@ -37,13 +48,13 @@ export default function InputPage() {
                     label="A complete text input"
                     placeholder="You can write here"
                 />
-            </div>
-            <h2>Variant</h2>
+            </CodeView>
+            <Title level={2}>Variant</Title>
             <p>
                 There is two main variants: <code>outlined</code> (the default)
                 and <code>underlined</code>.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Input.TextField
                     label="Text input outlined (default)"
                     placeholder="Enter text"
@@ -55,7 +66,7 @@ export default function InputPage() {
                     variant="underlined"
                 />
             </div>
-            <h2>Size</h2>
+            <Title level={2}>Size</Title>
             <p>
                 There are three sizes: <code>small (sm)</code>,{" "}
                 <code>medium (md)</code> (the default) and{" "}
@@ -63,7 +74,7 @@ export default function InputPage() {
                 or on the wrapper component. The wrapper component will override
                 the size of the input.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Input.TextField
                     label="Text input smalllkfjnearhfcnzer igaeniucfhaiufg eigf aiegrif"
                     placeholder="Enter small text"
@@ -81,13 +92,13 @@ export default function InputPage() {
                     variant="underlined"
                 />
             </div>
-            <h2>Floating label</h2>
+            <Title level={2}>Floating label</Title>
             <p>
                 For both variants, it is possible to have a floating label. The
                 label will be displayed inside the input when it is empty and
                 will move to the top when the input is focused or has a value.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Input.TextField
                     label="Text input outlined (default)"
                     placeholder="Enter text"
@@ -115,19 +126,19 @@ export default function InputPage() {
                     floatingLabel
                 />
             </div>
-            <h2>Label position</h2>
+            <Title level={2}>Label position</Title>
             <p>
                 The label can be positioned on the top (default) or left of the
                 input. That is useless in floating label mode.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Input.TextField
                     label="Text input left"
                     placeholder="Enter text"
                     labelPosition="left"
                 />
             </div>
-            <h2>Required</h2>
+            <Title level={2}>Required</Title>
             <p>
                 When the element is invalid (required, size or pattern not
                 respected), a red mark is put. You can also put the element in
@@ -135,7 +146,7 @@ export default function InputPage() {
                 force the red mark. A one line space is let freee to show an
                 error message.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Input.TextField
                     label="Text input required with error"
                     placeholder="Enter text"
@@ -173,8 +184,8 @@ export default function InputPage() {
                     variant="underlined"
                 />
             </div>
-            <h2>Disabled</h2>
-            <div className="inner-component">
+            <Title level={2}>Disabled</Title>
+            <div className="code-view">
                 <Input.TextField
                     label="Text input disabled"
                     placeholder="Enter text"
@@ -189,8 +200,8 @@ export default function InputPage() {
                     value="Disabled"
                 />
             </div>
-            <h2>Read only</h2>
-            <div className="inner-component">
+            <Title level={2}>Read Only</Title>
+            <div className="code-view">
                 <Input.TextField
                     label="Text input readonly"
                     placeholder="Enter text"
@@ -232,12 +243,12 @@ export default function InputPage() {
                     variant="underlined"
                 />
             </div>
-            <h2>Icon Element</h2>
+            <Title level={2}>Adornment</Title>
             <p>
                 You can put an icon on the left or right of the input. The icon
                 can be a string (the name of the icon) or a React component.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Input.TextField
                     label="Readonly textarea"
                     defaultValue="This is a readonly textarea"
@@ -309,24 +320,24 @@ export default function InputPage() {
                     size="lg"
                 />
             </div>
-            <h2>Textarea</h2>
+            <Title level={1}>TextArea</Title>
             <p>
                 Except the type, the API for textArea is the same than for the
                 inputs.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Input.TextAreaField
                     label="Textarea"
                     placeholder="Enter text"
                 />
             </div>
-            <h2>Readonly</h2>
+            <Title level={2}>Read Only</Title>
             <p>
                 As normal inputs, the readonly attribute is supported. It is not
                 possible to edit the value of the input, but it is possible to
                 select the text
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Input.TextAreaField
                     label="Readonly textarea"
                     defaultValue="This is a readonly textarea"

@@ -7,7 +7,7 @@ import Button from "@ui/button/Button";
 import { useTooltip } from "@ui/tooltip/useTooltip.hook";
 
 import WarningFrame from "@/components/frames/WarningFrame";
-import Icon from "@/components/ui/icon/Svgr";
+import Icon from "@/components/ui/icon/Icon";
 
 export default function ButtonPage() {
     const tooltip = useTooltip({ content: "Button tooltip" });
@@ -41,7 +41,7 @@ export default function ButtonPage() {
                 you want to override the default ones.
             </p>
             <h2>Basic Buttons</h2>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button variant="primary">Primary</Button>
                 <Button variant="secondary">Secondary</Button>
                 <Button variant="danger">Danger</Button>
@@ -60,7 +60,7 @@ export default function ButtonPage() {
                 </Button>
             </div>
             <h3>Disabled Buttons</h3>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button
                     variant="primary"
                     disabled
@@ -86,7 +86,7 @@ export default function ButtonPage() {
                 action. The button will be disabled and a loading indicator will
                 be shown on hover.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button
                     variant="primary"
                     loading
@@ -112,7 +112,7 @@ export default function ButtonPage() {
                 hook. The tooltip will be shown on hover and focus. You can also
                 use the simple tooltip API made entirely in CSS.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button
                     variant="primary"
                     tooltip="true"
@@ -133,7 +133,7 @@ export default function ButtonPage() {
                 You don&apos;t need to put an aria-label on the icon but on the
                 button !
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button
                     variant="primary"
                     title="primary"
@@ -172,7 +172,7 @@ export default function ButtonPage() {
                 </Button>
             </div>
             <h2>Buttons with icon</h2>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button variant="primary">
                     <Icon icon={Github} />
                     Github primary
@@ -210,7 +210,7 @@ export default function ButtonPage() {
                     the purpose of this component.
                 </p>
             </WarningFrame>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button
                     variant="primary"
                     pressed={isActives[0]}

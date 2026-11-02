@@ -25,7 +25,7 @@ export default function MenuSelectPage() {
                 an option from a list.
             </p>
             <h2>Basic Menu Select</h2>
-            <div className="inner-component">
+            <div className="code-view">
                 <MenuSelect
                     label="Basic Menu Select"
                     options={options}
@@ -37,7 +37,7 @@ export default function MenuSelectPage() {
                 />
             </div>
             <h2>Left side label</h2>
-            <div className="inner-component">
+            <div className="code-view">
                 <MenuSelect
                     label="Basic Menu Select"
                     side="left"

@@ -62,7 +62,7 @@ export default function ToastPage() {
                 user hover or the focus is in the toast, than the toast will not
                 disappear.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button onClick={handleClickSuccess}>Success</Button>
                 <Button onClick={handleClickError}>Error</Button>
                 <Button onClick={handleClickInfo}>Info</Button>
@@ -70,14 +70,14 @@ export default function ToastPage() {
             </div>
             <h2>Control time</h2>
             <p>You can control the time the toast last. It can last forever!</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button onClick={handleClickSuccess1000}>1 seconde</Button>
                 <Button onClick={handleClickError5000}>5 secondes</Button>
                 <Button onClick={handleClickInfo0}>Forever</Button>
             </div>
             <h2>Allow JSX props</h2>
             <p>You can put whatever you want in the toast</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button onClick={handleClickButton}>A button in a toast</Button>
             </div>
             <h2>Other global props</h2>

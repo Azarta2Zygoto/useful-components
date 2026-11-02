@@ -1,6 +1,7 @@
 @layer vendor, components, application;
 
 @import url("./index.css") layer(application);
+@import url("./prism.css") layer(vendor);
 @import "bootstrap-icons/font/bootstrap-icons.css" layer(vendor);
 
 @layer components {
@@ -128,11 +129,6 @@
         color: var(--fg);
         overflow: hidden;
     }
-    main {
-        display: flex;
-        flex-direction: column;
-        margin: 3rem 10%;
-    }
 
     @media (prefers-reduced-motion: reduce) {
         *,
@@ -163,6 +159,11 @@
     gap: 20px;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10%;
+}
 @media (max-width: 600px) {
     main {
         width: 90%;

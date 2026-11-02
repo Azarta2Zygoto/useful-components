@@ -32,9 +32,16 @@ export default function Header(): ReactNode {
                 width={40}
                 height={40}
             />
-            <h1 style={{ color: "white", margin: "10px 0" }}>
+            <p
+                style={{
+                    fontSize: "clamp(2rem, 4vw, 2.5rem)",
+                    fontWeight: "bold",
+                    margin: 0,
+                    padding: 0,
+                }}
+            >
                 Component Library
-            </h1>
+            </p>
             <span></span>
         </header>
     );

@@ -71,7 +71,7 @@ export default function CheckboxPage() {
 
             <h2>Basic checkbox</h2>
             <p>By default, the checkbox is at the left side.</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Checkbox
                     label="Left Checkbox"
                     checked={checked[1]}
@@ -88,7 +88,7 @@ export default function CheckboxPage() {
             <p>
                 You can set a checkbox as required with the required property.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Checkbox
                     label="Required Checkbox"
                     required
@@ -98,7 +98,7 @@ export default function CheckboxPage() {
             </div>
             <h2>Disabled</h2>
             <p>You can disable a checkbox with the disabled property.</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Checkbox
                     id="checkbox-example-disabled"
                     label="Disabled Checkbox"
@@ -122,7 +122,7 @@ export default function CheckboxPage() {
                 the user understand what the checkbox is for.
             </p>
 
-            <div className="inner-component">
+            <div className="code-view">
                 <Checkbox
                     id="checkbox-example-without-label"
                     label="Without label Checkbox"
@@ -153,7 +153,7 @@ export default function CheckboxPage() {
                 as a parameter and returns a React node.
             </p>
 
-            <div className="inner-component">
+            <div className="code-view">
                 <Checkbox
                     id="checkbox-example-heart"
                     label="Heart Checkbox"

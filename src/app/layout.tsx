@@ -9,7 +9,7 @@ import "./globals.css";
 import { GlobalProvider } from "@/components/GlobalProvider";
 import Header from "@/components/Header";
 import ToolbarWrapper from "@/components/ToolbarWrapper";
-import { ASSETS } from "@/types/common.constant";
+import { APP_CONFIG, ASSETS } from "@/types/common.constant";
 import { buildAssetPath } from "@/utils/path.utils";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
@@ -94,6 +94,10 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
                         src="https://unpkg.com/react-scan@latest/dist/auto.global.js"
                     />
                 )}
+                <Script
+                    strategy="afterInteractive"
+                    src={`${APP_CONFIG.basePath}/js/prism.min.js`}
+                />
                 <GlobalProvider>
                     <ComponentProvider>
                         <ToolbarWrapper />

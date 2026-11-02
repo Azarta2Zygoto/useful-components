@@ -17,7 +17,7 @@ export default function AccordionPage() {
             <h2>Basic Accordion</h2>
             <p>The most basic accordion is control outside of the component</p>
             <div
-                className="inner-component"
+                className="code-view"
                 style={{
                     display: "flex",
                     flexDirection: "column",
@@ -42,7 +42,7 @@ export default function AccordionPage() {
             </div>
             <h2>Other variant</h2>
             <p>There is another variant of the accordion with less style.</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button
                     onClick={() => setOpenSimple2(!openSimple2)}
                     width={150}
@@ -69,7 +69,7 @@ export default function AccordionPage() {
             </div>
             <h2>Icon accordion</h2>
             <p>The accordion can also be controlled by itself.</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Accordion
                     header="Icon View Accordion"
                     view="icon"
@@ -108,7 +108,7 @@ export default function AccordionPage() {
                 The accordion can also have a card view. You can click wherever
                 on the card, it will open the accordion.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Accordion
                     header="Card View Accordion"
                     view="card"

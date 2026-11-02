@@ -42,7 +42,7 @@ export default function SwitchPage() {
 
             <h2>Basic switch</h2>
             <div
-                className="inner-component"
+                className="code-view"
                 style={{
                     display: "flex",
                     flexDirection: "column",
@@ -76,7 +76,7 @@ export default function SwitchPage() {
 
             <h2>Switch with labels</h2>
             <p>This type of switch informs which value is currently put.</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Switch
                     label="Enable feature left"
                     checked={selectedValue[4]}
@@ -87,7 +87,7 @@ export default function SwitchPage() {
 
             <h2>Disabled option</h2>
             <p>As input or checkbox, a switch can be disabled.</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Switch
                     label="Disabled switch on"
                     checked
@@ -107,7 +107,7 @@ export default function SwitchPage() {
                 terms and conditions of use of your website.
             </p>
 
-            <div className="inner-component">
+            <div className="code-view">
                 <Switch
                     id="switch-required"
                     label="Required switch"
@@ -129,7 +129,7 @@ export default function SwitchPage() {
                 switch depending on the state.
             </p>
 
-            <div className="inner-component">
+            <div className="code-view">
                 <Switch
                     id="switch-colors"
                     checked={selectedValue[6]}
@@ -143,7 +143,7 @@ export default function SwitchPage() {
                 You can add a tooltip to the switch, it will display the state
                 of the switch or a custom text when hovering the switch.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Switch
                     label="Switch with tooltip"
                     checked={selectedValue[7]}
@@ -168,7 +168,7 @@ export default function SwitchPage() {
                 accessibility. It is recommended to use the tooltip property to
                 help the user understand what the switch is for.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Switch
                     label="Switch without label"
                     hideLabel

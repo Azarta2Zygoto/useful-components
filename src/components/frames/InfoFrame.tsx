@@ -1,7 +1,7 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
 import InfoIcon from "@ui/assets/icons/info.svg";
-import Icon from "@ui/icon/Svgr";
+import Icon from "@ui/icon/Icon";
 
 export default function InfoFrame({
     children,

@@ -39,7 +39,7 @@ export default function TooltipPage() {
                 You just need to put some texts into &quot;tooltip&quot; and,
                 most of the time, a tooltip entirely made with CSS appears
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button
                     variant="primary"
                     tooltip="This is a tooltip"
@@ -63,7 +63,7 @@ export default function TooltipPage() {
                 You can use the &quot;useTooltip&quot; hook to create a tooltip
                 with more control over its behavior and appearance.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button
                     variant="primary"
                     {...bottomTooltip}
@@ -95,7 +95,7 @@ export default function TooltipPage() {
                 a certain amount of time. This can be useful to avoid showing
                 the tooltip too quickly and annoying the user.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Button
                     variant="primary"
                     {...tooltip300}

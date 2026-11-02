@@ -6,9 +6,9 @@ import {
     useRef,
 } from "react";
 
+import ErrorIcon from "../assets/icons/error.svg";
 import Button from "../button/Button";
 import Icon from "../icon/Icon";
-import ErrorIcon from "../icon/icons/error.svg";
 import type { ToastItem } from "./Toast.context";
 
 interface ToastProps {

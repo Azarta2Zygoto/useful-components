@@ -89,7 +89,7 @@ export default function RadioButtonPage() {
             </p>
 
             <h2>Basic radio button</h2>
-            <div className="inner-component">
+            <div className="code-view">
                 <RadioGroup
                     name="radio-group-3-primary"
                     label="Choose an option - primary"
@@ -126,7 +126,7 @@ export default function RadioButtonPage() {
                 You can control the number of item per line with the columns
                 property
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <RadioGroup
                     name="radio-group-5-1"
                     label="One per lines"
@@ -163,7 +163,7 @@ export default function RadioButtonPage() {
             </WarningFrame>
             <h2>Disabled</h2>
             <p>You can disable the entire radio group or specific elements.</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <RadioGroup
                     name="radio-group-disabled"
                     label="Disabled options"
@@ -187,7 +187,7 @@ export default function RadioButtonPage() {
             </div>
             <h2>Required</h2>
             <p>You can ask the user to select one option.</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <RadioGroup
                     name="radio-group-required"
                     label="You must choose an option"
@@ -204,7 +204,7 @@ export default function RadioButtonPage() {
                 You can allow the user to deselect an option by clicking on it
                 again.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <RadioGroup
                     name="radio-group-deselect"
                     label="Choose an option and deselect if needed"
@@ -225,7 +225,7 @@ export default function RadioButtonPage() {
                 That is not regular label but can be React node !
             </p>
 
-            <div className="inner-component">
+            <div className="code-view">
                 <RadioGroup
                     name="radio-group-tooltip"
                     label="Choose an option"
@@ -243,7 +243,7 @@ export default function RadioButtonPage() {
                 value of the radio button when hovering it.
             </p>
 
-            <div className="inner-component">
+            <div className="code-view">
                 <RadioGroup
                     name="radio-group-tooltip"
                     label="Choose an option"

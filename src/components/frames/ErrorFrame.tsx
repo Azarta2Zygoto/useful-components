@@ -1,7 +1,7 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
 import ErrorIcon from "@ui/assets/icons/error.svg";
-import Icon from "@ui/icon/Svgr";
+import Icon from "@ui/icon/Icon";
 
 export default function ErrorFrame({
     children,

@@ -9,7 +9,7 @@ export default function SliderPage() {
                 value from a range.
             </p>
             <h2>Basic Slider</h2>
-            <div className="inner-component">
+            <div className="code-view">
                 <Slider
                     label="Basic Slider"
                     min={0}
@@ -18,7 +18,7 @@ export default function SliderPage() {
                 />
             </div>
             <h2>Slider with Step</h2>
-            <div className="inner-component">
+            <div className="code-view">
                 <Slider
                     label="Slider with Step"
                     min={0}
@@ -36,7 +36,7 @@ export default function SliderPage() {
                 />
             </div>
             <h2>Slider disabled</h2>
-            <div className="inner-component">
+            <div className="code-view">
                 <Slider
                     label="Slider disabled"
                     min={0}
@@ -50,7 +50,7 @@ export default function SliderPage() {
                 You can control when the thumb tooltip appears : always, hover
                 or never
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Slider
                     label="Slider thumb always"
                     min={0}
@@ -74,7 +74,7 @@ export default function SliderPage() {
             </div>
             <h2>Slider unit</h2>
             <p>You can put a unit to the slider.</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Slider
                     label="Slider thumb with thousands"
                     min={0}

@@ -14,7 +14,7 @@ export default function NumberInputPage() {
                 tooltip, and a side element. It also allows you to hide the
                 label and add a required indicator.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <NumberField
                     step={0.1}
                     max={100}
@@ -33,7 +33,7 @@ export default function NumberInputPage() {
             </div>
             <h2>Other input props</h2>
             <p>As the text input, the number inupt has the same state.</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <NumberField
                     required
                     label="Number input required"

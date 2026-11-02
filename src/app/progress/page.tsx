@@ -43,7 +43,7 @@ export default function ProgressPage() {
                 progress of a task.
             </p>
             <h2>Basic Progress</h2>
-            <div className="inner-component">
+            <div className="code-view">
                 <Progress
                     label="Basic Progress"
                     max={100}
@@ -51,7 +51,7 @@ export default function ProgressPage() {
                 />
             </div>
             <h2>Progress with hidden label</h2>
-            <div className="inner-component">
+            <div className="code-view">
                 <Progress
                     label="Progress with hidden label"
                     value={50}
@@ -61,7 +61,7 @@ export default function ProgressPage() {
             </div>
             <h2>Progress with dots</h2>
             <p>You can add an event on the progress wherever you want</p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Progress
                     label="Progress with dots"
                     value={75}
@@ -75,7 +75,7 @@ export default function ProgressPage() {
                 If you have N tasks for the progress, you can put N labels that
                 will be display.
             </p>
-            <div className="inner-component">
+            <div className="code-view">
                 <Progress
                     label="Progress with dots"
                     value={1}

@@ -19,22 +19,36 @@ header {
     background: #3e026a;
     border-bottom: 1px solid var(--border-color);
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    scroll-margin-top: 5rem;
+}
 h1 {
-    margin: 20px 0;
-    font-size: clamp(24px, 4vw, 32px);
-    text-align: center;
+    --size: clamp(1.8rem, 3vw, 2.5rem);
+    margin: 1.5rem 0 0.5rem 0;
+    font-size: var(--size);
 }
 h2 {
-    margin: 10px 0;
-    font-size: clamp(16px, 3vw, 24px);
+    --size: clamp(1.6rem, 2.5vw, 2rem);
+    margin: 1.1rem 0 0.5rem 0;
+    font-size: var(--size);
+}
+h3 {
+    --size: clamp(1.4rem, 2vw, 1.8rem);
+    margin: 0.85rem 0 0.5rem 0;
+    font-size: var(--size);
 }
 p {
     margin: 0;
-    font-size: clamp(12px, 2vw, 16px);
+    font-size: var(--font-size);
     line-height: 1.5em;
 }
 
-.inner-component {
+.code-view {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -46,11 +60,20 @@ p {
     padding: 2rem;
     background-color: #161a1f;
     border: 1px solid var(--fg);
-    border-radius: 2rem;
+    border-radius: 1rem;
     box-shadow: 1px 1px 3px var(--fg);
     transition:
         border-color 0.3s ease-in-out,
         box-shadow 0.3s ease-in-out;
+}
+.code-view > button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+.code-view > pre {
+    width: 100%;
+    border-radius: 0.5rem;
 }
 
 button.button-header {
@@ -107,4 +130,27 @@ p code {
 .frame.error {
     --bg-color: var(--bgE-danger);
     --border-color: var(--borderE-danger);
+}
+
+.anchor {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+.anchor > button {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--size);
+    padding: 0 0.25rem;
+    background-color: transparent;
+    border: none;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+}
+.anchor:hover > button,
+.anchor:focus-within > button {
+    opacity: 1;
 }

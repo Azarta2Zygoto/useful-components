@@ -4,4 +4,6 @@ src/dictionaries/*.d.json.ts
 *.yaml
 *.yml
 *.hbs
+*.min.js
+*.min.css
 CHANGELOG.md
