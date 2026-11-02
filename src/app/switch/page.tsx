@@ -24,7 +24,6 @@ export default function SwitchPage() {
     const [selectedValue, setSelectedValue] = useState<boolean[]>(radioList);
 
     const handleChange = (value: boolean, index: number) => {
-        console.log("Switch changed:", value, index);
         setSelectedValue((prev) => {
             const newValue = [...prev];
             newValue[index] = value;

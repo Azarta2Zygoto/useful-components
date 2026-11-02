@@ -23,7 +23,6 @@ export default function CodeView({
 
     useEffect(() => {
         if (isCodeVisible && codeRef.current) {
-            console.log("Highlighting code...", window.Prism);
             window.Prism?.highlightElement(codeRef.current);
         }
     }, [isCodeVisible]);

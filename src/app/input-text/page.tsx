@@ -6,13 +6,14 @@ import CaretDownIcon from "@ui/assets/icons/caret-down.svg";
 import * as Input from "@ui/input";
 
 import CodeView from "@/components/CodeView";
+import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import InfoFrame from "@/components/frames/InfoFrame";
 
 export default function InputPage() {
     const [value, setValue] = useState("");
     return (
-        <main>
+        <PageScroll>
             <Title level={1}>Text Input</Title>
             <p>
                 There are two important components for text input: the base one
@@ -344,6 +345,6 @@ export default function InputPage() {
                     readOnly
                 />
             </div>
-        </main>
+        </PageScroll>
     );
 }

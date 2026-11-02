@@ -32,7 +32,6 @@ export default function MenuSelectPage() {
                     selected={selectedOption ?? undefined}
                     onSelect={(option) => {
                         setSelectedOption(option);
-                        console.log("Selected option:", option);
                     }}
                 />
             </div>
@@ -46,7 +45,6 @@ export default function MenuSelectPage() {
                     selected={selectedOption ?? undefined}
                     onSelect={(option) => {
                         setSelectedOption(option);
-                        console.log("Selected option:", option);
                     }}
                 />
             </div>
