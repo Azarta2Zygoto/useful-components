@@ -36,6 +36,7 @@ export default function Header(): ReactNode {
                 style={{
                     fontSize: "clamp(2rem, 4vw, 2.5rem)",
                     fontWeight: "bold",
+                    color: "white",
                     margin: 0,
                     padding: 0,
                 }}

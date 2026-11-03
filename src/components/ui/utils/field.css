@@ -23,6 +23,7 @@
             overflow-wrap: anywhere;
         }
     }
+
     [data-field^="floating-"] {
         --label-size-active: 0.75rem;
         position: relative;

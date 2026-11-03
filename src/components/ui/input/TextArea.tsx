@@ -15,7 +15,7 @@ export default function TextArea({
     return (
         <textarea
             {...props}
-            data-size={size === "md" ? undefined : size}
+            data-uc-size={size === "md" ? undefined : size}
             data-input-variant="outlined"
             onChange={(e) => {
                 onChange?.(e);

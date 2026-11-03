@@ -21,6 +21,12 @@
         outline: 2px solid transparent;
         outline-offset: 3px;
         box-shadow: var(--_shadow);
+        transition:
+            background-color 0.3s ease-in-out,
+            color 0.3s ease-in-out,
+            border-color 0.3s ease-in-out,
+            box-shadow 0.3s ease-in-out,
+            outline-color 0.3s ease-in-out;
     }
     [data-input-variant]:where(:not([readonly])):hover {
         background-color: var(--_bg-hover);

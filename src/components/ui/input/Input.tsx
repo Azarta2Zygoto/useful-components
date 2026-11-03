@@ -11,7 +11,7 @@ export default function Input({
     return (
         <input
             {...props}
-            data-size={size === "md" ? undefined : size}
+            data-uc-size={size === "md" ? undefined : size}
             data-input-variant={variant}
         />
     );

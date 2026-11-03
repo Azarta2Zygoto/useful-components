@@ -44,7 +44,7 @@ export default function TextAreaField({
         <div
             {...containerProps}
             data-field="outlined"
-            data-size={size === "md" ? undefined : size}
+            data-uc-size={size === "md" ? undefined : size}
             data-field-position={labelPosition}
         >
             {props.readOnly ? (

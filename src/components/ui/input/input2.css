@@ -1,0 +1,177 @@
+@layer components {
+    [data-uc-input-wrapper] {
+        --bg: var(--bgE);
+        --bg-hover: var(--bgE-hover);
+        --bg-active: var(--bgE-active);
+        --bg-disabled: var(--bgE-disabled);
+        --text: var(--textE);
+        --text-disabled: var(--textE);
+        --text-placeholder: var(--textE-disabled);
+        --border: var(--borderE);
+        --border-hover: var(--outlineE);
+        --border-active: var(--outlineE);
+        --border-disabled: var(--borderE-disabled);
+        --shadow: var(--shadowE);
+        --shadow-hover: var(--shadowE-hollow);
+        --shadow-active: var(--shadowE-hollow);
+        --outline: transparent;
+        --outline-active: var(--outlineE);
+
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        max-width: 100%;
+        background-color: var(--bg);
+        color: var(--text);
+        border: 2px solid var(--border);
+        border-radius: 0.5rem;
+        outline: 2px solid var(--outline);
+        outline-offset: 3px;
+        box-shadow: var(--shadow);
+        transition:
+            background-color 0.3s ease-in-out,
+            color 0.3s ease-in-out,
+            border-color 0.3s ease-in-out,
+            box-shadow 0.3s ease-in-out,
+            outline-color 0.3s ease-in-out;
+
+        & > input {
+            min-width: 0;
+            width: 100%;
+            max-width: 100%;
+            height: var(--height);
+            padding: 0 var(--padding);
+            background-color: transparent;
+            color: inherit;
+            font-size: var(--font-size);
+            line-height: 1.5;
+            border: none;
+            border-radius: inherit;
+            outline: none;
+            cursor: inherit;
+        }
+
+        & > textarea {
+            --pad-block: calc(var(--padding) * 0.75);
+            --extra: calc(2 * var(--pad-block) + 4px);
+            min-width: 0;
+            max-width: 100%;
+            min-height: calc(var(--rows-min) * 1lh + var(--extra));
+            height: auto;
+            max-height: calc(var(--rows-max) * 1lh + var(--extra));
+            padding: var(--pad-block) var(--padding);
+            background-color: transparent;
+            color: inherit;
+            font-size: var(--font-size);
+            line-height: 1.5;
+            border: none;
+            border-radius: 0.5rem;
+            outline: none;
+            cursor: inherit;
+            field-sizing: content;
+            resize: vertical;
+        }
+
+        & > input::placeholder,
+        & > textarea::placeholder {
+            color: var(--text-placeholder);
+            font-style: italic;
+            transition: color 0.15s ease-in-out;
+        }
+        & > input:autofill,
+        & > textarea:autofill {
+            caret-color: var(--text);
+            -webkit-text-fill-color: var(--text);
+        }
+        & > input:-webkit-autofill,
+        & > textarea:-webkit-autofill {
+            caret-color: var(--text);
+            -webkit-text-fill-color: var(--text);
+        }
+    }
+    [data-uc-input-wrapper]:has(> [data-uc-adornment="left"]) {
+        & input,
+        & textarea {
+            padding-left: 0;
+        }
+    }
+    [data-uc-input-wrapper]:has(> [data-uc-adornment="right"]) {
+        & input,
+        & textarea {
+            padding-right: 0;
+        }
+    }
+    [data-uc-input-wrapper]:is(:hover, :has(> :hover)) {
+        background-color: var(--bg-hover);
+        border-color: var(--border-hover);
+        box-shadow: var(--shadow-hover);
+    }
+    [data-uc-input-wrapper]:has(> [readonly]) {
+        background-color: var(--bg);
+        border-color: var(--border);
+        border-style: dashed;
+        box-shadow: var(--shadow);
+        cursor: default;
+    }
+    [data-uc-input-wrapper]:focus-within {
+        background-color: var(--bg-active);
+        border-color: var(--border-active);
+        outline-color: var(--outline-active);
+        box-shadow: var(--shadow-active);
+    }
+    [data-uc-input-wrapper]:has(> :disabled) {
+        background-color: var(--bg-disabled);
+        color: var(--text-disabled);
+        border-color: var(--border-disabled);
+        box-shadow: none;
+        cursor: not-allowed;
+    }
+    [data-uc-input-wrapper]:has(
+        > :enabled[aria-invalid="true"],
+        > :enabled:user-invalid
+    ) {
+        --bg: var(--bgE-danger);
+        --bg-hover: var(--bgE-danger-active);
+        --bg-active: var(--bgE-danger-active);
+        --border: var(--borderE-danger);
+        --border-hover: var(--borderE-danger-active);
+        --border-active: var(--borderE-danger-active);
+    }
+
+    [data-uc-input-wrapper="underlined"] {
+        --bg: var(--add-nothing-color);
+        --bg-hover: var(--add-nothing-color);
+        --bg-active: var(--add-nothing-color);
+        --bg-disabled: transparent;
+        --shadow-hover: var(--shadowE);
+        --shadow-active: 3px 3px 10px 5px var(--add-minor-color);
+        --outline-active: transparent;
+
+        border-radius: 0;
+        border-width: 0 0 2px;
+    }
+
+    @media (forced-colors: active) {
+        [data-uc-input-wrapper] {
+            outline: none;
+            transition: none;
+        }
+        [data-uc-input-wrapper]:is(:hover, :has(> :hover)) {
+            border-color: Highlight;
+        }
+        [data-uc-input-wrapper]:has(> [readonly]) {
+            border-color: var(--border);
+        }
+        [data-uc-input-wrapper]:focus-within {
+            border-color: Highlight;
+            outline: 2px solid Highlight;
+            outline-offset: 3px;
+            outline-color: Highlight;
+        }
+        [data-uc-input-wrapper]:has(> :disabled) {
+            color: GrayText;
+            border-color: GrayText;
+        }
+    }
+}

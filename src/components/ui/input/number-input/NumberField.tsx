@@ -64,7 +64,7 @@ export default function NumberField({
     return (
         <div
             {...containerProps}
-            data-size={size === "md" ? undefined : size}
+            data-uc-size={size === "md" ? undefined : size}
             data-field={floatingLabel ? `floating-${variant}` : variant}
             data-field-position={fieldPosition}
         >

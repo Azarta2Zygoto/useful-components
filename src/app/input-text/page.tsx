@@ -9,6 +9,7 @@ import CodeView from "@/components/CodeView";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import InfoFrame from "@/components/frames/InfoFrame";
+import InputReworked from "@/components/ui/input/InputReworked";
 
 export default function InputPage() {
     const [value, setValue] = useState("");
@@ -48,6 +49,73 @@ export default function InputPage() {
                 <Input.TextField
                     label="A complete text input"
                     placeholder="You can write here"
+                />
+                <InputReworked
+                    label="A complete text input"
+                    type="text"
+                    placeholder="You can write here"
+                    disabled
+                />
+                <InputReworked
+                    label="A complete text input"
+                    type="text"
+                    placeholder="You can write here"
+                    readOnly
+                />
+                <InputReworked
+                    label="A complete text input"
+                    type="text"
+                    placeholder="You can write here"
+                    error="This is an error message that is very long and will be truncated"
+                />
+                <InputReworked
+                    label="A complete text input"
+                    type="text"
+                    placeholder="You can write here"
+                    variant="underlined"
+                    readOnly
+                />
+                <InputReworked
+                    label="A complete text input"
+                    type="text"
+                    placeholder="You can write here"
+                    variant="underlined"
+                    labelPosition="left"
+                    error="This is an error message that is very long and will be truncated"
+                    containerProps={{ style: { width: "500px" } }}
+                />
+                <InputReworked
+                    label="A complete text input"
+                    placeholder="You can write here"
+                    floatingLabel
+                />
+                <InputReworked
+                    label="A complete text input"
+                    placeholder="You can write here"
+                    variant="underlined"
+                    floatingLabel
+                />
+                <InputReworked
+                    label="A complete text input"
+                    placeholder="You can write here"
+                    variant="underlined"
+                    floatingLabel
+                    readOnly
+                />
+                <InputReworked
+                    label="A complete text input"
+                    placeholder="You can write here"
+                    variant="underlined"
+                    iconLeft={CaretDownIcon}
+                    iconRight={CaretDownIcon}
+                />
+                <InputReworked
+                    label="A complete text input"
+                    placeholder="You can write here"
+                    variant="underlined"
+                    iconLeft={CaretDownIcon}
+                    iconRight={CaretDownIcon}
+                    size="lg"
                 />
             </CodeView>
             <Title level={2}>Variant</Title>

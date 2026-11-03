@@ -125,7 +125,7 @@ export default function Numbering({
         <span
             ref={wrapperRef}
             className="number-input-wrapper"
-            data-size={size === "md" ? undefined : size}
+            data-uc-size={size === "md" ? undefined : size}
             data-has-steps={isStepButton || undefined}
         >
             <Input

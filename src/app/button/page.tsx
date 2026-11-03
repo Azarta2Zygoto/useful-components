@@ -6,6 +6,8 @@ import Github from "@ui/assets/github.svg";
 import Button from "@ui/button/Button";
 import { useTooltip } from "@ui/tooltip/useTooltip.hook";
 
+import PageScroll from "@/components/PageScroll";
+import Title from "@/components/Title";
 import WarningFrame from "@/components/frames/WarningFrame";
 import Icon from "@/components/ui/icon/Icon";
 
@@ -27,8 +29,8 @@ export default function ButtonPage() {
     };
 
     return (
-        <main>
-            <h1>Button</h1>
+        <PageScroll>
+            <Title level={1}>Button</Title>
             <p>
                 A button is a clickable element that allows the user to perform
                 an action. It can be used to submit forms, trigger events, or
@@ -36,11 +38,51 @@ export default function ButtonPage() {
                 and states, such as primary, secondary, danger, disabled, and
                 loading.
                 <br />
-                All accessibility attributes and visibility are automatically
-                added to the button element. You can add your own attributes if
-                you want to override the default ones.
+                The component forwards native button attributes and adds state
+                attributes such as <code>aria-busy</code> and{" "}
+                <code>aria-pressed</code>. Add an accessible name with visible
+                text or <code>aria-label</code>, especially for icon-only
+                buttons.
             </p>
-            <h2>Basic Buttons</h2>
+            <Title level={2}>API</Title>
+            <p>
+                <code>Button</code> extends the native{" "}
+                <code>ButtonHTMLAttributes&lt;HTMLButtonElement&gt;</code>{" "}
+                properties.
+            </p>
+            <ul>
+                <li>
+                    <code>variant</code>: <code>primary</code>,{" "}
+                    <code>secondary</code> (default), <code>danger</code>,{" "}
+                    <code>transparent</code> or <code>success</code>.
+                </li>
+                <li>
+                    <code>loading</code>: disables the button and sets{" "}
+                    <code>aria-busy=&quot;true&quot;</code>.
+                </li>
+                <li>
+                    <code>ripple</code>: enables or disables the ripple effect.
+                    It is enabled by default except for the{" "}
+                    <code>transparent</code> variant.
+                </li>
+                <li>
+                    <code>pressed</code>: exposes the active state through{" "}
+                    <code>aria-pressed</code>.
+                </li>
+                <li>
+                    <code>tooltip</code>: set to <code>&quot;true&quot;</code>{" "}
+                    to enable the CSS tooltip. Its text comes from the{" "}
+                    <code>aria-label</code>.
+                </li>
+                <li>
+                    <code>width</code>: a number in pixels or any valid CSS
+                    width value.
+                </li>
+                <li>
+                    <code>type</code>: defaults to <code>button</code>.
+                </li>
+            </ul>
+            <Title level={2}>Basic Buttons</Title>
             <div className="code-view">
                 <Button variant="primary">Primary</Button>
                 <Button variant="secondary">Secondary</Button>
@@ -59,7 +101,7 @@ export default function ButtonPage() {
                     behaves with a very long text.
                 </Button>
             </div>
-            <h3>Disabled Buttons</h3>
+            <Title level={3}>Disabled Buttons</Title>
             <div className="code-view">
                 <Button
                     variant="primary"
@@ -80,11 +122,12 @@ export default function ButtonPage() {
                     Danger
                 </Button>
             </div>
-            <h3>Loading Buttons</h3>
+            <Title level={3}>Loading Buttons</Title>
             <p>
                 This is useful when you are waiting before being able to do an
-                action. The button will be disabled and a loading indicator will
-                be shown on hover.
+                action. The button becomes disabled, sets{" "}
+                <code>aria-busy=&quot;true&quot;</code>, and uses the loading
+                cursor.
             </p>
             <div className="code-view">
                 <Button
@@ -106,7 +149,7 @@ export default function ButtonPage() {
                     Danger
                 </Button>
             </div>
-            <h3>Buttons with tooltip</h3>
+            <Title level={3}>Buttons with tooltip</Title>
             <p>
                 You can easily add a tooltip to a button by using the useTooltip
                 hook. The tooltip will be shown on hover and focus. You can also
@@ -115,8 +158,8 @@ export default function ButtonPage() {
             <div className="code-view">
                 <Button
                     variant="primary"
-                    tooltip="true"
-                    aria-describedby="This is a tooltip"
+                    tooltip="This is a CSS tooltip"
+                    aria-label="Primary button"
                 >
                     Primary
                 </Button>
@@ -127,7 +170,7 @@ export default function ButtonPage() {
                     Primary
                 </Button>
             </div>
-            <h2>Icon Buttons</h2>
+            <Title level={2}>Icon Buttons</Title>
             <p>
                 An icon button is just the use of a button with an icon with it.
                 You don&apos;t need to put an aria-label on the icon but on the
@@ -171,7 +214,7 @@ export default function ButtonPage() {
                     <Icon icon={Github} />
                 </Button>
             </div>
-            <h2>Buttons with icon</h2>
+            <Title level={2}>Buttons with icon</Title>
             <div className="code-view">
                 <Button variant="primary">
                     <Icon icon={Github} />
@@ -196,7 +239,7 @@ export default function ButtonPage() {
                     icône à côté.
                 </Button>
             </div>
-            <h2>Buttons pressed</h2>
+            <Title level={2}>Buttons pressed</Title>
             <p>
                 Those buttons have two states : active or inactive. By default
                 they are inactive, so it is like a normal button. This is the
@@ -243,6 +286,6 @@ export default function ButtonPage() {
                         : "Transparent inactive"}
                 </Button>
             </div>
-        </main>
+        </PageScroll>
     );
 }

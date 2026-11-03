@@ -6,11 +6,14 @@
 
 @layer components {
     :root {
-        --bg: #1e1f20;
-        --bg2: #2f3236;
-        --bg3: #2c3136;
-        --fg: #ededed;
-        --fg2: #b0b8c1;
+        color-scheme: light dark;
+
+        --bg-1: light-dark(#fff, #161a1f);
+        --bg: light-dark(#ededed, #1e1f20);
+        --bg2: light-dark(#f5f5f5, #2f3236);
+        --bg3: light-dark(#f0f0f0, #2c3136);
+        --fg: light-dark(#1e1f20, #ededed);
+        --fg2: light-dark(#2f3236, #b0b8c1);
 
         --add-nothing-color: #00aaff20;
         --add-minor-color: #00aaff40;
@@ -20,26 +23,28 @@
         --add-hard-color: #00aaffd0;
         --add-total-color: #00aaff;
 
-        --bgE: #2f3236;
-        --bgE-hover: #3f4347;
-        --bgE-active: #464f58;
-        --bgE-disabled: #646464;
+        --bgE: light-dark(#deeaf7, #2f3236);
+        --bgE-hover: light-dark(#d3e2f3, #3f4347);
+        --bgE-active: light-dark(#cadef5, #464f58);
+        --bgE-disabled: light-dark(#999, #646464);
         --bgE-danger: #ff000010;
-        --bgE-danger-active: #ff808040;
+        --bgE-danger-active: #ff000035;
         --bgE-success: #00ff0010;
         --bgE-success-active: #8bff8040;
         --bgE-warning: #ffff0010;
 
-        --textE: #ededed;
-        --textE-disabled: #aaa;
+        --textE: light-dark(#1e1f20, #ededed);
+        --textE-disabled: light-dark(#444, #aaa);
         --textE-success: #80ff86;
         --textE-danger: #ff8080;
 
         --borderE: var(--add-light-color);
-        --borderE-disabled: #646464;
-        --borderE-danger: #f71f1f;
+        --borderE-disabled: light-dark(#999, #646464);
+        --borderE-danger: #a00000;
+        --borderE-danger-active: #f71f1f;
         --borderE-warning: #d97706;
         --borderE-success: #19c019;
+
         --outlineE: var(--add-total-color);
 
         --shadowE-c: #1167b10f;
@@ -72,16 +77,10 @@
     }
 
     :root[data-theme="light"] {
-        --bg: #ededed;
-        --bg2: #f5f5f5;
-        --bg3: #f0f0f0;
-        --fg: #1e1f20;
+        color-scheme: light;
     }
-
-    @media (pointer: coarse) {
-        :root {
-            --ui-scale: 1.125;
-        }
+    :root[data-theme="dark"] {
+        color-scheme: dark;
     }
 
     ::-webkit-scrollbar {
@@ -97,13 +96,13 @@
         border-radius: 0.25rem;
     }
 
-    [data-size="sm"] {
+    [data-uc-size="sm"] {
         --height: var(--height-sm);
         --font-size: var(--font-size-sm);
         --padding: var(--padding-sm);
         --icon-size: var(--icon-size-sm);
     }
-    [data-size="lg"] {
+    [data-uc-size="lg"] {
         --height: var(--height-lg);
         --font-size: var(--font-size-lg);
         --padding: var(--padding-lg);

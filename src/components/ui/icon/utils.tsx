@@ -14,7 +14,7 @@ export function getIconElement(
         return (
             <Icon
                 icon={icon}
-                data-field-icon={position}
+                data-uc-adornment={position}
             />
         );
     }
@@ -22,7 +22,7 @@ export function getIconElement(
     return (
         <Icon
             {...icon}
-            data-field-icon={position}
+            data-uc-adornment={position}
             style={
                 icon.size
                     ? ({ "--icon-width": `${icon.size}px` } as CSSProperties)
