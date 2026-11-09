@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 
-import type { AdornmentType } from "../utils/types";
+import type { AdornmentType } from "../types";
 import { isIconType } from "../utils/utils";
 import Icon from "./Icon";
 

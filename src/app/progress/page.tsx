@@ -66,7 +66,6 @@ export default function ProgressPage() {
                     label="Progress with dots"
                     value={75}
                     max={100}
-                    width="100%"
                     dots={dots}
                 />
             </div>
@@ -80,7 +79,7 @@ export default function ProgressPage() {
                     label="Progress with dots"
                     value={1}
                     max={2}
-                    width="100%"
+                    height="10px"
                     labels={["apple", "tomato", "ketchup"]}
                 />
             </div>

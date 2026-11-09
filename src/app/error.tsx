@@ -119,7 +119,7 @@ export default function ErrorPage({ error, reset }: ErrorProps): ReactNode {
             >
                 <Button
                     className="button"
-                    width={175}
+                    style={{ width: 175 }}
                     onClick={() => reset()}
                 >
                     Retry

@@ -63,7 +63,6 @@ export default function HomePage() {
                 <Accordion
                     header="Accordion header"
                     view="card"
-                    variant="primary"
                 >
                     <p>This is the content of the accordion.</p>
                     <p>You can put any JSX element here.</p>

@@ -1,12 +1,6 @@
 "use client";
 
-import {
-    type CSSProperties,
-    type ComponentProps,
-    type ReactNode,
-    useId,
-    useState,
-} from "react";
+import { type CSSProperties, type ReactNode, useId, useState } from "react";
 
 import CaretUpIcon from "../assets/icons/caret-up.svg";
 import Button from "../button/Button";
@@ -14,48 +8,12 @@ import Icon from "../icon/Icon";
 import { useRipple } from "../ripple/useRipple.hook";
 import { useTooltip } from "../tooltip/useTooltip.hook";
 import "./accordion.css";
-
-interface AccordionTextProps {
-    collapse?: string;
-    expand?: string;
-}
+import type { AccordionProps, AccordionTextProps } from "./accordion.type";
 
 const defaultText: Required<AccordionTextProps> = {
     collapse: "Collapse",
     expand: "Expand",
 };
-
-export type AccordionView = "none" | "icon" | "card";
-export type AccordionInnerVariant = "around" | "left" | "none";
-
-interface AccordionCoreProps {
-    open?: boolean;
-    defaultOpen?: boolean;
-    variant?: AccordionInnerVariant;
-    transitionMs?: number;
-    onToggleChange?: (open: boolean) => void;
-}
-
-interface AccordionNoneProps extends ComponentProps<"div">, AccordionCoreProps {
-    view?: "none";
-    header?: never;
-    tooltip?: never;
-    ripple?: never;
-    text?: never;
-    containerProps?: never;
-}
-
-interface AccordionVariantProps
-    extends ComponentProps<"div">, AccordionCoreProps {
-    header?: ReactNode;
-    tooltip?: boolean;
-    ripple?: boolean;
-    view: Exclude<AccordionView, "none">;
-    text?: AccordionTextProps;
-    containerProps?: ComponentProps<"div">;
-}
-
-export type AccordionProps = AccordionNoneProps | AccordionVariantProps;
 
 export default function Accordion({
     id,
@@ -73,7 +31,7 @@ export default function Accordion({
     "aria-describedby": describedByProp,
     onToggleChange,
     ...props
-}: Readonly<AccordionProps>): ReactNode {
+}: AccordionProps): ReactNode {
     const generatedId = useId();
     const correctId = id ?? generatedId;
     const describedBy =
@@ -97,7 +55,11 @@ export default function Accordion({
     };
 
     const tooltipInfo = useTooltip({
-        content: expanded ? texts.collapse : texts.expand,
+        content: tooltip
+            ? expanded
+                ? texts.collapse
+                : texts.expand
+            : undefined,
         delay: 300,
     });
 
@@ -158,7 +120,7 @@ export default function Accordion({
                     aria-controls={correctId}
                     onClick={handleToggle}
                     onPointerDown={handlePointerDown}
-                    {...(tooltip ? tooltipInfo : {})}
+                    {...tooltipInfo}
                 >
                     {header}
                     {shouldRipple && (
@@ -184,7 +146,7 @@ export default function Accordion({
                         aria-controls={correctId}
                         aria-expanded={expanded}
                         onClick={handleToggle}
-                        {...(tooltip ? tooltipInfo : {})}
+                        {...tooltipInfo}
                     >
                         <Icon icon={CaretUpIcon} />
                     </Button>

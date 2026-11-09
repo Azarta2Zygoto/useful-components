@@ -41,7 +41,6 @@ export default function MenuSelectPage() {
                     label="Basic Menu Select"
                     side="left"
                     options={options}
-                    width={150}
                     selected={selectedOption ?? undefined}
                     onSelect={(option) => {
                         setSelectedOption(option);

@@ -7,13 +7,13 @@
         width: fit-content;
         cursor: pointer;
     }
-    .switch-container[data-side="left"] {
+    .switch-container[data-uc-side="left"] {
         flex-direction: row-reverse;
     }
-    .switch-container[data-side="right"] {
+    .switch-container[data-uc-side="right"] {
         flex-direction: row;
     }
-    .switch-container[data-side="top"] {
+    .switch-container[data-uc-side="top"] {
         flex-direction: column-reverse;
     }
     .switch-wrapper {

@@ -1,107 +1,69 @@
-import {
-    type CSSProperties,
-    type ComponentProps,
-    type LabelHTMLAttributes,
-    type ReactNode,
-    useId,
-} from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 import "./progress.css";
-
-interface ProgressDot {
-    value: number;
-    label?: ReactNode;
-}
-
-interface ProgressProps extends ComponentProps<"progress"> {
-    label: string;
-    value: number;
-    max: number;
-    dots?: ProgressDot[];
-    labels?: ReactNode[];
-    dotsHeight?: number | string;
-    width?: number | string;
-    hideLabel?: boolean;
-    labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
-}
+import type { ProgressProps } from "./progress.type";
 
 export default function Progress({
-    id,
     label,
+    value,
+    max = 100,
+    height = "7px",
     hideLabel = false,
     labelProps,
     dots,
     labels,
-    dotsHeight,
-    value,
-    width,
-    max = 100,
+    dotsProps,
     ...props
-}: Readonly<ProgressProps>): ReactNode {
-    const generatedId = useId();
-    const correctId = id || generatedId;
-    const correctWidth = typeof width === "number" ? `${width}px` : width;
-    const correctHeight =
-        typeof dotsHeight === "number" ? `${dotsHeight}px` : dotsHeight;
-
+}: ProgressProps): ReactNode {
     return (
         <label
             {...labelProps}
-            htmlFor={correctId}
-            id={`${correctId}-label`}
-            className={`progress-label${labelProps?.className ? ` ${labelProps.className}` : ""}`}
+            data-uc-progress
             aria-label={hideLabel ? label : undefined}
-            style={{
-                ...labelProps?.style,
-                width: correctWidth,
-            }}
+            style={
+                {
+                    ...labelProps?.style,
+                    "--height": height,
+                } as CSSProperties
+            }
         >
             {!hideLabel && label}
-            {dots && (
+            {(dots || labels) && (
                 <div
-                    className="progress-dots"
-                    style={{
-                        height: correctHeight,
-                    }}
+                    {...dotsProps}
+                    className={`progress-dots${dotsProps?.className ? ` ${dotsProps.className}` : ""}`}
                 >
-                    {dots.map((element) => (
-                        <span
-                            key={element.value}
-                            style={
-                                {
-                                    "--value": `${(element.value / max) * 100}%`,
-                                } as CSSProperties
-                            }
-                        >
-                            {element.label}
-                        </span>
-                    ))}
-                </div>
-            )}
-            {labels && (
-                <div
-                    className="progress-dots"
-                    style={{
-                        height: correctHeight,
-                    }}
-                >
-                    {labels.map((element, index) => (
-                        <span
-                            key={index}
-                            style={
-                                {
-                                    "--value": `${(index / (labels.length - 1)) * 100}%`,
-                                } as CSSProperties
-                            }
-                        >
-                            {element}
-                        </span>
-                    ))}
+                    {dots &&
+                        dots.map((element) => (
+                            <span
+                                {...element.props}
+                                key={element.value}
+                                style={
+                                    {
+                                        "--value": `${(element.value / max) * 100}%`,
+                                    } as CSSProperties
+                                }
+                            >
+                                {element.label}
+                            </span>
+                        ))}
+                    {labels &&
+                        labels.map((element, index) => (
+                            <span
+                                key={index}
+                                style={
+                                    {
+                                        "--value": `${(index / (labels.length - 1)) * 100}%`,
+                                    } as CSSProperties
+                                }
+                            >
+                                {element}
+                            </span>
+                        ))}
                 </div>
             )}
             <progress
                 {...props}
-                id={correctId}
                 value={value}
                 max={max}
                 style={

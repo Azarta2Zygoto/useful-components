@@ -33,10 +33,10 @@ export default function CodeView({
                 <Button
                     className="code-view-button"
                     variant="transparent"
-                    tooltip="View code"
+                    tooltip={true}
                     pressed={isCodeVisible}
                     onClick={() => setIsCodeVisible(!isCodeVisible)}
-                    aria-label="code"
+                    aria-label="View code"
                 >
                     &#60;&#62;
                 </Button>

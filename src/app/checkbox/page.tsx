@@ -21,12 +21,23 @@ const defaultChecked = [
 ];
 export default function CheckboxPage() {
     const [checked, setChecked] = useState<boolean[]>(defaultChecked);
+    const [items, setItems] = useState([false, false, false]);
+    const all = items.every(Boolean);
+    const some = items.some(Boolean);
 
     function handleCheckboxChange(index: number) {
         setChecked((prev) => {
             const newChecked = [...prev];
             newChecked[index] = !newChecked[index];
             return newChecked;
+        });
+    }
+
+    function handleItemsChange(index: number) {
+        setItems((prev) => {
+            const newItems = [...prev];
+            newItems[index] = !newItems[index];
+            return newItems;
         });
     }
 
@@ -72,16 +83,60 @@ export default function CheckboxPage() {
             <h2>Basic checkbox</h2>
             <p>By default, the checkbox is at the left side.</p>
             <div className="code-view">
+                <Checkbox label="Uncontrolled Checkbox" />
                 <Checkbox
                     label="Left Checkbox"
                     checked={checked[1]}
                     onChange={() => handleCheckboxChange(1)}
                 />
                 <Checkbox
+                    label="Left Checkbox"
+                    checked={checked[1]}
+                    size="sm"
+                    onChange={() => handleCheckboxChange(1)}
+                />
+                <Checkbox
+                    label="Left Checkbox"
+                    checked={checked[1]}
+                    size="lg"
+                    onChange={() => handleCheckboxChange(1)}
+                />
+                <Checkbox
                     label="Right Checkbox"
                     checked={checked[0]}
-                    side="right"
+                    position="right"
                     onChange={() => handleCheckboxChange(0)}
+                />
+            </div>
+            <h2>Indeterminate checkbox</h2>
+            <p>
+                You can set a checkbox as indeterminate with the indeterminate
+                property. It is usually used to indicate that some, but not all,
+                of the sub-checkboxes are checked.
+            </p>
+            <div className="code-view">
+                <Checkbox
+                    label="Tout sélectionner"
+                    checked={all}
+                    indeterminate={some && !all}
+                    onChange={(e) =>
+                        setItems(items.map(() => e.target.checked))
+                    }
+                />
+                <Checkbox
+                    label="Pizza"
+                    checked={items[0]}
+                    onChange={() => handleItemsChange(0)}
+                />
+                <Checkbox
+                    label="Burger"
+                    checked={items[1]}
+                    onChange={() => handleItemsChange(1)}
+                />
+                <Checkbox
+                    label="French fries"
+                    checked={items[2]}
+                    onChange={() => handleItemsChange(2)}
                 />
             </div>
             <h2>Required</h2>
@@ -154,6 +209,11 @@ export default function CheckboxPage() {
             </p>
 
             <div className="code-view">
+                <Checkbox
+                    id="checkbox-example-heart"
+                    label="Heart Checkbox"
+                    checkmark={handleHeart}
+                />
                 <Checkbox
                     id="checkbox-example-heart"
                     label="Heart Checkbox"

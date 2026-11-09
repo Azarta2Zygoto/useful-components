@@ -25,12 +25,14 @@ export function useTooltip({
 }: UseTooltipOptions) {
     const id = useId();
     const contentRef = useRef(content);
+    const enabled = Boolean(content);
 
     useLayoutEffect(() => {
         contentRef.current = content;
-    });
+    }, [content]);
 
     return useMemo(() => {
+        if (!enabled) return {};
         const open = (
             event: MouseEvent<HTMLElement> | FocusEvent<HTMLElement>,
             openDelay: number,
@@ -55,5 +57,5 @@ export function useTooltip({
             onBlur: hide,
             "aria-describedby": id,
         };
-    }, [id, placement, delay]);
+    }, [id, placement, delay, enabled]);
 }

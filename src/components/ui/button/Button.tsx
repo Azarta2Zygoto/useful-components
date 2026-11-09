@@ -1,20 +1,10 @@
 "use client";
 
-import type { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { useRipple } from "../ripple/useRipple.hook";
 import "./button.css";
-
-export type ButtonVariant =
-    "primary" | "secondary" | "danger" | "transparent" | "success";
-
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: ButtonVariant;
-    loading?: boolean;
-    ripple?: boolean;
-    pressed?: boolean;
-    tooltip?: boolean;
-}
+import type { ButtonProps } from "./button.type";
 
 export default function Button({
     type = "button",
@@ -27,7 +17,7 @@ export default function Button({
     onPointerDown,
     children,
     ...props
-}: Readonly<PropsWithChildren<ButtonProps>>): ReactNode {
+}: ButtonProps): ReactNode {
     const isDisabled = disabled || loading;
     const shouldRipple = ripple ?? variant !== "transparent";
 

@@ -12,8 +12,8 @@ import {
     useState,
 } from "react";
 
-import type { ButtonProps } from "../button/Button";
 import Button from "../button/Button";
+import type { ButtonProps } from "../button/button.type";
 import "./menu-select.css";
 
 interface MenuSelectTextProps {
@@ -195,7 +195,7 @@ export default function MenuSelect({
 
     return (
         <div
-            data-side={side}
+            data-uc-side={side}
             className="menu-select"
         >
             {label && (

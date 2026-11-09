@@ -19,7 +19,7 @@ export default function Header(): ReactNode {
                 <Button
                     className="button-header"
                     variant="transparent"
-                    tooltip={openToolbar ? "Close" : "Open"}
+                    tooltip={true}
                     onClick={() => setOpenToolbar(!openToolbar)}
                     aria-label={openToolbar ? "Close" : "Open"}
                 >

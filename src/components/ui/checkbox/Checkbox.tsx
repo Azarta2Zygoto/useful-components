@@ -1,81 +1,112 @@
+"use client";
+
 import {
-    type CSSProperties,
-    type InputHTMLAttributes,
+    type ChangeEvent,
     type ReactNode,
-    useId,
+    useImperativeHandle,
+    useLayoutEffect,
+    useRef,
+    useState,
 } from "react";
 
 import Required from "../required/required";
+import { useTooltip } from "../tooltip/useTooltip.hook";
 import "./checkbox.css";
+import type { CheckboxProps } from "./checkbox.type";
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-    label: string;
-    checked: boolean;
-    side?: "left" | "right";
-    sideOffset?: number;
-    hideLabel?: boolean;
-    tooltip?: string;
-    checkmark?: ReactNode | ((checked: boolean) => ReactNode);
+function chain<E>(...f: Array<((e: E) => void) | undefined>) {
+    return (e: E) => f.forEach((fn) => fn?.(e));
 }
 
 export default function Checkbox({
-    id,
+    ref,
     label,
     checked,
-    side = "left",
-    sideOffset = 35,
+    defaultChecked,
+    indeterminate = false,
+    position = "left",
+    size,
     hideLabel,
-    disabled,
     required,
     tooltip,
     checkmark,
-    className,
-    style,
+    containerProps,
+    onChange,
+    onValue,
     ...props
-}: Readonly<Props>): ReactNode {
-    const generatedId = useId();
+}: CheckboxProps): ReactNode {
+    const inputRef = useRef<HTMLInputElement>(null);
+    const [innerChecked, setInnerChecked] = useState(defaultChecked ?? false);
+    const isControlled = checked !== undefined;
+    const currentChecked = checked ?? innerChecked;
 
-    const correctId = id ?? generatedId;
-    const renderedCheckmark =
+    useImperativeHandle(ref, () => inputRef.current!, []);
+
+    useLayoutEffect(() => {
+        if (inputRef.current) inputRef.current.indeterminate = indeterminate;
+    });
+
+    const check =
         typeof checkmark === "function"
-            ? (checkmark as (c: boolean) => ReactNode)(checked)
+            ? checkmark(currentChecked, indeterminate)
             : checkmark;
+
+    const { "aria-describedby": tooltipDescribedBy, ...handlers } = useTooltip({
+        content: tooltip,
+        delay: 300,
+    });
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (!isControlled) {
+            setInnerChecked(e.target.checked);
+        }
+        e.target.indeterminate = indeterminate;
+        onChange?.(e);
+        onValue?.(e.target.checked);
+    };
 
     return (
         <label
-            id={`${correctId}-label`}
-            htmlFor={correctId}
-            data-side={hideLabel ? undefined : side}
-            data-uc-tooltip={tooltip}
-            data-label={!hideLabel}
-            aria-disabled={disabled}
-            className={`checkbox-label${className ? ` ${className}` : ""}`}
-            style={
-                {
-                    ...style,
-                    "--offset": `${sideOffset}px`,
-                } as CSSProperties
-            }
+            {...containerProps}
+            data-uc-size={size}
+            data-uc-checkbox={`${position}-${hideLabel ? "none" : "label"}`}
+            onMouseEnter={chain(
+                containerProps?.onMouseEnter,
+                handlers.onMouseEnter,
+            )}
+            onMouseLeave={chain(
+                containerProps?.onMouseLeave,
+                handlers.onMouseLeave,
+            )}
+            onFocus={chain(containerProps?.onFocus, handlers.onFocus)}
+            onBlur={chain(containerProps?.onBlur, handlers.onBlur)}
         >
-            {hideLabel ? null : label}
-            <Required required={required} />
+            {hideLabel ? null : (
+                <>
+                    {label}
+                    <Required required={required} />
+                </>
+            )}
             <input
                 {...props}
-                id={correctId}
+                ref={inputRef}
                 type="checkbox"
                 checked={checked}
-                disabled={disabled}
+                defaultChecked={defaultChecked}
                 required={required}
-                {...(hideLabel ? { "aria-label": label } : {})}
+                aria-label={hideLabel ? label : undefined}
+                aria-describedby={
+                    [props["aria-describedby"], tooltipDescribedBy]
+                        .filter(Boolean)
+                        .join(" ") || undefined
+                }
+                onChange={handleChange}
             />
             <span
-                id={`${correctId}-checkmark`}
                 aria-hidden="true"
-                className={
-                    renderedCheckmark ? "checkbox-custom" : "checkbox-checkmark"
-                }
+                className={`uc-checkbox${check ? " custom" : " checkmark"}`}
             >
-                {renderedCheckmark ?? null}
+                {check ?? null}
             </span>
         </label>
     );

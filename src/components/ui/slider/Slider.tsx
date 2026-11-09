@@ -88,7 +88,7 @@ export default function Slider({
             {...labelProps}
             htmlFor={correctId}
             id={`${correctId}-label`}
-            data-side={side}
+            data-uc-side={side}
             className={`slider-label${labelProps?.className ? ` ${labelProps.className}` : ""}`}
             style={{ ...labelProps?.style, width: correctWidth }}
         >

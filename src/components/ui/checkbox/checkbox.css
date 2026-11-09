@@ -1,132 +1,161 @@
 @layer components {
-    .checkbox-label {
-        --offset: 35px;
+    [data-uc-checkbox] {
+        --offset: calc(var(--icon-size) * 1.8);
+        --size: calc(var(--icon-size) * 1.15);
+
         position: relative;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         width: fit-content;
-        min-height: 25px;
-        margin: 5px 10px;
+        min-height: var(--size);
+        margin: calc(var(--padding) / 3) calc(var(--padding) / 2);
         padding-right: 0;
         padding-left: var(--offset);
+        font-size: var(--font-size);
         cursor: pointer;
-        user-select: auto;
     }
-    .checkbox-label[data-side="right"] {
+    [data-uc-checkbox^="right"] {
         padding-right: var(--offset);
         padding-left: 0;
     }
-    .checkbox-label[data-side="right"] .checkbox-checkmark,
-    .checkbox-label[data-side="right"] .checkbox-custom {
-        right: 0;
-        left: auto;
-    }
-
-    .checkbox-label[data-label="false"] {
-        width: 25px;
-        height: 25px;
+    [data-uc-checkbox$="none"] {
+        width: var(--size);
+        height: var(--size);
         padding-right: 0;
         padding-left: 0;
     }
 
-    .checkbox-label input[type="checkbox"] {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 0;
-        margin: 0;
-        padding: 0;
-        opacity: 0;
-    }
-    .checkbox-label .checkbox-checkmark {
-        position: absolute;
-        top: 50%;
-        right: auto;
-        left: 0;
-        transform: translateY(-50%);
-        width: 20px;
-        height: 20px;
-        background-color: transparent;
-        border: 2px solid var(--outlineE);
-        border-radius: 5px;
-        outline: 2px solid transparent;
-        outline-offset: 2px;
-        box-shadow: var(--box-shadowE);
-        user-select: none;
-        transition:
-            background-color 0.3s ease,
-            box-shadow 0.3s ease,
-            outline 0.3s ease;
-    }
-    .checkbox-label .checkbox-custom {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        top: 50%;
-        right: auto;
-        left: 0;
-        transform: translateY(-50%);
-        margin: 0;
-        padding: 0;
-        border-radius: 5px;
-        outline: 2px solid transparent;
-        outline-offset: 2px;
-        transition:
-            background-color 0.3s ease,
-            box-shadow 0.3s ease,
-            outline 0.3s ease;
-    }
-    .checkbox-label .checkbox-checkmark::after {
-        content: "";
-        position: absolute;
-        display: none;
-        top: 2px;
-        left: 6px;
-        transform: rotate(45deg);
-        width: 6px;
-        height: 12px;
-        border: solid white;
-        border-width: 0 3px 3px 0;
+    [data-uc-checkbox] {
+        & > input[type="checkbox"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+        }
+
+        & > .uc-checkbox {
+            --bg: transparent;
+            --bg-disabled: var(--bgE-disabled);
+            --border: var(--borderE);
+            --border-hover: var(--outlineE);
+            --border-active: var(--outlineE);
+            --border-disabled: var(--bgE-disabled);
+            --shadow: var(--shadowE);
+            --shadow-hover: var(--shadowE-hollow);
+
+            position: absolute;
+            display: flex;
+            align-items: center;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: var(--size);
+            height: var(--size);
+            border-radius: calc(var(--size) / 4);
+            outline: 2px solid transparent;
+            outline-offset: 3px;
+            user-select: none;
+            transition:
+                background-color 0.3s ease-in-out,
+                border-color 0.3s ease-in-out,
+                box-shadow 0.3s ease-in-out,
+                outline-color 0.3s ease-in-out;
+        }
+
+        & > .uc-checkbox.checkmark {
+            background-color: var(--bg);
+            border: 3px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        & > input[type="checkbox"]:checked ~ .uc-checkbox.checkmark::after {
+            content: "";
+            position: absolute;
+            display: block;
+            top: 0;
+            left: calc(var(--size) / 5);
+            transform: rotate(45deg);
+            width: calc(var(--size) / 3);
+            height: calc(var(--size) / 2);
+            border: solid white;
+            border-width: 0 calc(var(--size) / 8) calc(var(--size) / 8) 0;
+        }
+        &
+            > input[type="checkbox"]:indeterminate
+            ~ .uc-checkbox.checkmark::after {
+            content: "";
+            position: absolute;
+            display: block;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(var(--size) / 2);
+            height: 0;
+            border: solid white;
+            border-width: 0 0 calc(var(--size) / 6) 0;
+        }
+
+        &
+            > input[type="checkbox"]:not(:disabled, :checked):required
+            ~ .uc-checkbox.checkmark {
+            --border: var(--borderE-danger);
+            --border-hover: var(--borderE-danger-active);
+            --border-active: var(--borderE-danger-active);
+        }
+        &
+            > input[type="checkbox"]:enabled:is(:checked, :indeterminate)
+            ~ .uc-checkbox.checkmark {
+            --bg: var(--outlineE);
+            --border: var(--outlineE);
+        }
+        & > input[type="checkbox"]:hover ~ .uc-checkbox {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-hover);
+        }
+        & > input[type="checkbox"]:focus-visible ~ .uc-checkbox {
+            border-color: var(--border-active);
+            outline: 2px solid var(--outlineE);
+            box-shadow: 0 0 3px 4px var(--add-minor-color);
+        }
+        & > input[type="checkbox"]:disabled ~ .uc-checkbox {
+            border-color: var(--border-disabled);
+            box-shadow: none;
+        }
+        &
+            > input[type="checkbox"]:is(:checked, :indeterminate):disabled
+            ~ .uc-checkbox.checkmark {
+            background-color: var(--bg-disabled);
+        }
+        & > input[type="checkbox"]:disabled ~ .uc-checkbox.custom > svg {
+            fill: var(--bgE-disabled);
+        }
     }
 
-    .checkbox-label input[type="checkbox"]:required ~ .checkbox-checkmark {
-        border-color: var(--borderE-danger);
+    [data-uc-checkbox^="right"] > .uc-checkbox {
+        right: 0;
+        left: auto;
     }
-    .checkbox-label input[type="checkbox"]:checked ~ .checkbox-checkmark {
-        background-color: var(--outlineE);
-        border-color: var(--outlineE);
-    }
-    .checkbox-label
-        input[type="checkbox"]:checked
-        ~ .checkbox-checkmark::after {
-        display: block;
-    }
-    .checkbox-label input[type="checkbox"]:focus-visible ~ .checkbox-checkmark,
-    .checkbox-label input[type="checkbox"]:focus-visible ~ .checkbox-custom {
-        outline: 2px solid var(--outlineE);
-        box-shadow: 0 0 3px 4px var(--add-minor-color);
-    }
-    .checkbox-label:hover input[type="checkbox"] ~ .checkbox-checkmark,
-    .checkbox-label:hover input[type="checkbox"] ~ .checkbox-custom {
-        box-shadow: 0 0 3px 4px var(--add-minor-color);
-    }
-
-    .checkbox-label input[type="checkbox"]:disabled ~ .checkbox-checkmark,
-    .checkbox-label input[type="checkbox"]:disabled ~ .checkbox-custom {
-        border-color: var(--bgE-disabled);
-        box-shadow: none;
-    }
-    .checkbox-label
-        input[type="checkbox"]:checked:disabled
-        ~ .checkbox-checkmark {
-        background-color: var(--bgE-disabled);
-    }
-    .checkbox-label input[type="checkbox"]:disabled ~ .checkbox-custom > svg {
-        fill: var(--bgE-disabled);
-    }
-    .checkbox-label[aria-disabled="true"] {
+    [data-uc-checkbox]:has(> input[type="checkbox"]:disabled) {
         cursor: not-allowed;
+    }
+
+    @media (forced-colors: active) {
+        [data-uc-checkbox] {
+            & > .uc-checkbox {
+                --border-hover: Highlight !important;
+                --border-active: Highlight !important;
+                --border-disabled: GrayText !important;
+                outline: none;
+                transition: none;
+            }
+
+            & > input[type="checkbox"]:focus-visible ~ .uc-checkbox {
+                outline: 2px solid Highlight !important;
+            }
+        }
     }
 }

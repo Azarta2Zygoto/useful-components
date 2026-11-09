@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 
-import type { IconProps } from "../utils/types";
+import type { IconProps } from "../types";
 
 export default function Icon({
     icon: SvgIcon,
-    ariaLabel,
     fill = "currentColor",
     size = 18,
+    "aria-label": ariaLabel,
     ...props
 }: Readonly<IconProps>): ReactNode {
     return (

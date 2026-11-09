@@ -5,7 +5,7 @@ import type {
     FieldProps,
     LabelLayoutProps,
     SizeableComponentProps,
-} from "../utils/types";
+} from "../types";
 
 export type InputVariant = "underlined" | "outlined";
 export type TextInputType =

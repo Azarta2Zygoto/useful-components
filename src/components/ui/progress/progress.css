@@ -1,66 +1,66 @@
 @layer components {
-    .progress-label {
+    [data-uc-progress] {
         --gap: 0.5rem;
+
         display: flex;
         flex-direction: column;
         gap: var(--gap);
         width: 100%;
         pointer-events: none;
-    }
-    .progress-label[data-side="left"] {
-        flex-direction: row;
-        align-items: center;
-    }
 
-    progress {
-        --percent: 0;
-        position: relative;
-        width: 100%;
-    }
+        & > progress {
+            --percent: 0;
 
-    .progress-label progress::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        width: 100%;
-        height: 7px;
-        background: linear-gradient(
-            to right,
-            var(--add-total-color) calc(var(--percent) * 100%),
-            var(--fg2) 0
-        );
-        border: 1px solid var(--bgE);
-        border-radius: 999px;
-    }
+            position: relative;
+            height: var(--height);
+            width: 100%;
+        }
 
-    .progress-dots {
-        --value: 0%;
-        position: relative;
-        height: 20px;
-    }
+        & > progress::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+            height: var(--height);
+            background: linear-gradient(
+                to right,
+                var(--add-total-color) calc(var(--percent) * 100%),
+                var(--fg2) 0
+            );
+            border: 1px solid var(--bgE);
+            border-radius: 999px;
+        }
 
-    .progress-dots > span {
-        z-index: 2;
-        position: absolute;
-        bottom: 0;
-        left: var(--value);
-        transform: translateX(-50%);
-    }
+        & > div {
+            --value: 0%;
 
-    .progress-dots > span::before {
-        --size: 15px;
-        content: "";
-        z-index: 2;
-        position: absolute;
-        bottom: calc(-1px - var(--size) / 2 - var(--gap));
-        left: 50%;
-        transform: translateX(-50%) translateY(50%);
-        width: var(--size);
-        height: var(--size);
-        background-color: var(--add-total-color);
-        border: 1px solid var(--bgE);
-        border-radius: 100%;
+            position: relative;
+            height: calc(var(--font-size) * 1.25);
+        }
+        & > div > span {
+            z-index: 2;
+            position: absolute;
+            bottom: 0;
+            left: var(--value);
+            transform: translateX(-50%);
+        }
+        & > div > span::before {
+            --size: calc(var(--height) * 2);
+
+            content: "";
+            z-index: 2;
+            position: absolute;
+            bottom: calc(var(--height) * -0.5 - var(--gap));
+            left: 50%;
+            transform: translateX(-50%) translateY(50%);
+            width: var(--size);
+            height: var(--size);
+            font-size: var(--font-size);
+            background-color: var(--add-total-color);
+            border: 1px solid var(--bgE);
+            border-radius: 100%;
+        }
     }
 }

@@ -1,14 +1,7 @@
-import type { ReactNode, TimeHTMLAttributes } from "react";
+import type { ReactNode } from "react";
 
 import "./date-info.css";
-
-interface DateTooltipProps extends TimeHTMLAttributes<HTMLTimeElement> {
-    date: Date;
-    tooltip?: boolean;
-    locale?: string;
-    displayFormat?: Intl.DateTimeFormatOptions;
-    tooltipFormat?: Intl.DateTimeFormatOptions;
-}
+import type { DateTooltipProps } from "./date-info.type";
 
 export default function DateTooltip({
     date,
@@ -45,7 +38,7 @@ export default function DateTooltip({
         <time
             {...props}
             dateTime={date.toISOString()}
-            data-uc-tooltip={tooltip ? fullDate : undefined}
+            data-uc-tooltip={tooltip ?? undefined}
             aria-label={fullDate}
         >
             {shortDate}

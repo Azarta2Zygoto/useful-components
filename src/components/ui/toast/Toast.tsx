@@ -83,7 +83,7 @@ const Toast = memo(function ToastView({
         >
             {toast.message}
             <Button
-                tooltip={hasTooltip ? label : undefined}
+                tooltip={hasTooltip}
                 variant="transparent"
                 aria-label={label}
                 onClick={() => onDismiss(toast.id)}
