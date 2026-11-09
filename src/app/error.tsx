@@ -127,7 +127,7 @@ export default function ErrorPage({ error, reset }: ErrorProps): ReactNode {
                 <Link
                     href="/"
                     style={{ width: 175 }}
-                    data-variant="standard"
+                    data-uc-variant="standard"
                 >
                     Back to Home
                 </Link>

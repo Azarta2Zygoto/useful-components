@@ -17,6 +17,9 @@
         --outline: transparent;
         --outline-active: var(--outlineE);
 
+        --padding-right: var(--padding);
+        --padding-left: var(--padding);
+
         position: relative;
         display: flex;
         align-items: center;
@@ -41,7 +44,7 @@
             width: 100%;
             max-width: 100%;
             height: var(--height);
-            padding: 0 var(--padding);
+            padding: 0 var(--padding-left) 0 var(--padding-right);
             background-color: transparent;
             color: inherit;
             font-size: var(--font-size);
@@ -91,16 +94,10 @@
         }
     }
     [data-uc-input-wrapper]:has(> [data-uc-adornment="left"]) {
-        & input,
-        & textarea {
-            padding-left: 0;
-        }
+        --padding-right: 0;
     }
     [data-uc-input-wrapper]:has(> [data-uc-adornment="right"]) {
-        & input,
-        & textarea {
-            padding-right: 0;
-        }
+        --padding-left: 0;
     }
     [data-uc-input-wrapper]:is(:hover, :has(> :hover)) {
         background-color: var(--bg-hover);
@@ -138,6 +135,16 @@
         --border-hover: var(--borderE-danger-active);
         --border-active: var(--borderE-danger-active);
     }
+    [data-uc-input-wrapper]:has(
+        > :enabled:not([aria-invalid="true"]):user-valid
+    ) {
+        --bg: var(--bgE-success);
+        --bg-hover: var(--bgE-success-active);
+        --bg-active: var(--bgE-success-active);
+        --border: var(--borderE-success);
+        --border-hover: var(--borderE-success-active);
+        --border-active: var(--borderE-success-active);
+    }
 
     [data-uc-input-wrapper="underlined"] {
         --bg: var(--add-nothing-color);
@@ -154,24 +161,15 @@
 
     @media (forced-colors: active) {
         [data-uc-input-wrapper] {
+            --text-disabled: GrayText !important;
+            --border-hover: Highlight !important;
+            --border-active: Highlight !important;
+            --border-disabled: GrayText !important;
             outline: none;
             transition: none;
         }
-        [data-uc-input-wrapper]:is(:hover, :has(> :hover)) {
-            border-color: Highlight;
-        }
-        [data-uc-input-wrapper]:has(> [readonly]) {
-            border-color: var(--border);
-        }
         [data-uc-input-wrapper]:focus-within {
-            border-color: Highlight;
-            outline: 2px solid Highlight;
-            outline-offset: 3px;
-            outline-color: Highlight;
-        }
-        [data-uc-input-wrapper]:has(> :disabled) {
-            color: GrayText;
-            border-color: GrayText;
+            outline: 2px solid Highlight !important;
         }
     }
 }

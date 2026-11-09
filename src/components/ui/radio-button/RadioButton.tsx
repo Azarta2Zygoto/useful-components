@@ -70,9 +70,9 @@ export default function RadioButton({
         <label
             id={`${generatedId}-label`}
             htmlFor={generatedId}
-            data-variant={variant}
-            data-tooltip={tooltip === true ? value : tooltip}
-            data-checked={checked}
+            data-uc-variant={variant}
+            data-uc-tooltip={tooltip === true ? value : tooltip}
+            data-uc-pressed={checked}
             aria-disabled={disabled}
             className={className}
             onPointerDown={handlePointerDown}
@@ -95,7 +95,7 @@ export default function RadioButton({
             {shouldRipple && (
                 <span
                     ref={rippleRef}
-                    className="ripple"
+                    data-uc-ripple
                 />
             )}
             {label || value}

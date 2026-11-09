@@ -85,7 +85,7 @@
             min-width: 0;
             margin: 0;
             padding: 0 var(--padding);
-            border: 2px solid var(--add-light-color);
+            border: 2px solid var(--border);
             border-radius: 0.5rem;
             pointer-events: none;
             overflow: hidden;
@@ -133,18 +133,14 @@
             transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
         }
 
-        input:enabled:hover ~ fieldset,
+        input:enabled:hover ~ fieldset {
+            border-color: var(--border-hover);
+        }
         input:enabled:focus-visible ~ fieldset {
-            border-color: var(--add-total-color);
+            border-color: var(--border-active);
         }
-
         input:disabled ~ fieldset {
-            border-color: var(--bgE-disabled);
-        }
-
-        input:enabled[aria-invalid="true"] ~ fieldset,
-        input:enabled:user-invalid ~ fieldset {
-            border-color: var(--borderE-danger);
+            border-color: var(--border-disabled);
         }
     }
 
@@ -161,19 +157,8 @@
     }
     @media (forced-colors: active) {
         [data-uc-field^="floating-"] {
-            transition: none;
-
-            input:enabled:hover ~ fieldset,
-            input:enabled:focus-visible ~ fieldset {
-                border-color: Highlight;
+            & fieldset {
                 transition: none;
-            }
-            input:disabled ~ fieldset {
-                border-color: GrayText;
-                transition: none;
-            }
-            input:disabled ~ label {
-                color: GrayText;
             }
         }
     }

@@ -46,7 +46,7 @@ export default function Checkbox({
             id={`${correctId}-label`}
             htmlFor={correctId}
             data-side={hideLabel ? undefined : side}
-            data-tooltip={tooltip}
+            data-uc-tooltip={tooltip}
             data-label={!hideLabel}
             aria-disabled={disabled}
             className={`checkbox-label${className ? ` ${className}` : ""}`}

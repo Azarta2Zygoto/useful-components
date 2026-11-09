@@ -42,18 +42,20 @@ export default function TooltipPage() {
             <div className="code-view">
                 <Button
                     variant="primary"
-                    tooltip="This is a tooltip"
+                    tooltip={true}
+                    aria-label="This is a tooltip"
                 >
                     Primary
                 </Button>
                 <Button
                     variant="primary"
-                    tooltip="This is a tooltip"
+                    tooltip={true}
+                    aria-label="This is a tooltip"
                     ripple={false}
                 >
                     Primary
                 </Button>
-                <p data-tooltip="This is a tooltip">Element</p>
+                <p data-uc-tooltip="This is a tooltip">Element</p>
             </div>
             <h2>More develop tooltip</h2>
             <p>

@@ -1,5 +1,5 @@
 @layer components {
-    [data-variant]:not([data-variant="basic"]) input[type="radio"] {
+    [data-uc-variant]:not([data-uc-variant="basic"]) input[type="radio"] {
         position: absolute;
         width: 1px;
         height: 1px;
@@ -16,7 +16,7 @@
     input[type="radio"]:disabled {
         cursor: not-allowed;
     }
-    [data-variant="basic"] {
+    [data-uc-variant="basic"] {
         --color: var(--outlineE);
         --x: 50%;
         --y: 50%;
@@ -40,28 +40,34 @@
             background-color 0.3s ease-in-out,
             outline-color 0.3s ease-in-out;
     }
-    [data-variant="basic"]:not(:disabled, [aria-disabled="true"]):hover {
+    [data-uc-variant="basic"]:not(:disabled, [aria-disabled="true"]):hover {
         background-color: inherit;
     }
-    [data-variant="basic"]:not(:disabled, [aria-disabled="true"]):active,
-    [data-variant="basic"]:not(:disabled, [aria-disabled="true"]):focus-visible,
-    [data-variant="basic"]:not(:disabled, [aria-disabled="true"]):focus-within {
+    [data-uc-variant="basic"]:not(:disabled, [aria-disabled="true"]):active,
+    [data-uc-variant="basic"]:not(
+            :disabled,
+            [aria-disabled="true"]
+        ):focus-visible,
+    [data-uc-variant="basic"]:not(
+            :disabled,
+            [aria-disabled="true"]
+        ):focus-within {
         background-color: inherit;
         outline-color: transparent;
     }
-    [data-variant="basic"][aria-disabled="true"],
-    [data-variant="basic"]:disabled {
+    [data-uc-variant="basic"][aria-disabled="true"],
+    [data-uc-variant="basic"]:disabled {
         background-color: inherit;
         color: var(--textE-disabled);
         border-color: transparent;
         cursor: not-allowed;
         opacity: 0.8;
     }
-    [data-variant] > svg {
+    [data-uc-variant] > svg {
         flex-shrink: 0;
     }
-    [data-variant="basic"][aria-pressed="true"],
-    [data-variant="basic"][data-checked="true"] {
+    [data-uc-variant="basic"][aria-pressed="true"],
+    [data-uc-variant="basic"][data-uc-pressed="true"] {
         background-color: inherit;
         font-weight: bold;
         outline-color: transparent;

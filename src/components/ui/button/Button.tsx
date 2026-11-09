@@ -5,13 +5,15 @@ import type { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from "react";
 import { useRipple } from "../ripple/useRipple.hook";
 import "./button.css";
 
+export type ButtonVariant =
+    "primary" | "secondary" | "danger" | "transparent" | "success";
+
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: "primary" | "secondary" | "danger" | "transparent" | "success";
+    variant?: ButtonVariant;
     loading?: boolean;
     ripple?: boolean;
     pressed?: boolean;
-    tooltip?: string;
-    width?: number | string;
+    tooltip?: boolean;
 }
 
 export default function Button({
@@ -22,15 +24,12 @@ export default function Button({
     disabled = false,
     tooltip,
     ripple,
-    width,
-    style,
     onPointerDown,
     children,
     ...props
 }: Readonly<PropsWithChildren<ButtonProps>>): ReactNode {
     const isDisabled = disabled || loading;
     const shouldRipple = ripple ?? variant !== "transparent";
-    const correctWidth = typeof width === "number" ? `${width}px` : width;
 
     const { rippleRef, onPointerDown: handlePointerDown } =
         useRipple<HTMLButtonElement>({
@@ -42,22 +41,18 @@ export default function Button({
         <button
             {...props}
             type={type}
-            data-variant={variant}
-            data-loading={loading || undefined}
-            data-tooltip={tooltip}
+            data-uc-variant={variant}
+            data-uc-loading={loading || undefined}
+            data-uc-tooltip={tooltip}
             disabled={isDisabled}
             aria-busy={loading || undefined}
             aria-pressed={pressed || undefined}
             onPointerDown={handlePointerDown}
-            style={{
-                ...style,
-                ...(correctWidth !== undefined ? { width: correctWidth } : {}),
-            }}
         >
             {shouldRipple && (
                 <span
                     ref={rippleRef}
-                    className="ripple"
+                    data-uc-ripple
                 />
             )}
             {children}

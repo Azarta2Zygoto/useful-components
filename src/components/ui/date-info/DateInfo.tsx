@@ -45,7 +45,7 @@ export default function DateTooltip({
         <time
             {...props}
             dateTime={date.toISOString()}
-            data-tooltip={tooltip ? fullDate : undefined}
+            data-uc-tooltip={tooltip ? fullDate : undefined}
             aria-label={fullDate}
         >
             {shortDate}

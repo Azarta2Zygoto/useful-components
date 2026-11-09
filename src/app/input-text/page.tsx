@@ -105,7 +105,8 @@ export default function InputPage() {
                 <InputReworked
                     label="A complete text input"
                     placeholder="You can write here"
-                    variant="underlined"
+                    floatingLabel
+                    error="This is an error message that is very long and will be truncated"
                     iconLeft={CaretDownIcon}
                     iconRight={CaretDownIcon}
                 />

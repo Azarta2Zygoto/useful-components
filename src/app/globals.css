@@ -30,7 +30,7 @@
         --bgE-danger: #ff000010;
         --bgE-danger-active: #ff000035;
         --bgE-success: #00ff0010;
-        --bgE-success-active: #8bff8040;
+        --bgE-success-active: #8bff8020;
         --bgE-warning: #ffff0010;
 
         --textE: light-dark(#1e1f20, #ededed);
@@ -43,7 +43,8 @@
         --borderE-danger: #a00000;
         --borderE-danger-active: #f71f1f;
         --borderE-warning: #d97706;
-        --borderE-success: #19c019;
+        --borderE-success: #138313;
+        --borderE-success-active: #19c019;
 
         --outlineE: var(--add-total-color);
 

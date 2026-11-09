@@ -1,5 +1,5 @@
 @layer components {
-    .ripple {
+    [data-uc-ripple] {
         position: absolute;
         border-radius: inherit;
         pointer-events: none;
@@ -7,9 +7,9 @@
         inset: 0;
     }
 
-    .ripple-wave {
+    [data-uc-ripple] > span {
         position: absolute;
-        background-color: var(--ripple-color, var(--_outline-color));
+        background-color: var(--ripple-color);
         border-radius: 50%;
         opacity: 0;
         pointer-events: none;

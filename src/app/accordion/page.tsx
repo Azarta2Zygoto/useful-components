@@ -24,44 +24,32 @@ export default function AccordionPage() {
                     gap: "1rem",
                 }}
             >
-                <Button
-                    onClick={() => setOpenSimple(!openSimple)}
-                    width={150}
-                >
+                <Button onClick={() => setOpenSimple(!openSimple)}>
                     {openSimple ? "Close Accordion" : "Open Accordion"}
                 </Button>
-                <Accordion
-                    open={openSimple}
-                    variant="primary"
-                >
-                    <div style={{ padding: "1rem" }}>
-                        <p>This is the content of the accordion.</p>
-                        <p>You can put any JSX element here.</p>
-                    </div>
+                <Accordion open={openSimple}>
+                    <p>This is the content of the accordion.</p>
+                    <p>You can put any JSX element here.</p>
                 </Accordion>
             </div>
             <h2>Other variant</h2>
             <p>There is another variant of the accordion with less style.</p>
             <div className="code-view">
-                <Button
-                    onClick={() => setOpenSimple2(!openSimple2)}
-                    width={150}
-                >
+                <Button onClick={() => setOpenSimple2(!openSimple2)}>
                     {openSimple2 ? "Close Accordion" : "Open Accordion"}
                 </Button>
                 <Accordion
                     title="Simple Accordion variant"
-                    variant="secondary"
+                    variant="left"
                     open={openSimple2}
-                    height={80}
                 >
                     <p>This is the content of the accordion.</p>
                     <p>You can put any JSX element here.</p>
                 </Accordion>
                 <Accordion
                     title="Simple Accordion variant"
+                    variant="none"
                     open={openSimple2}
-                    height={80}
                 >
                     <p>This is the content of the accordion.</p>
                     <p>You can put any JSX element here.</p>
@@ -73,12 +61,9 @@ export default function AccordionPage() {
                 <Accordion
                     header="Icon View Accordion"
                     view="icon"
-                    variant="primary"
                 >
-                    <div style={{ padding: "1rem" }}>
-                        <p>This is an accordion with icon view.</p>
-                        <p>Click the icon to toggle.</p>
-                    </div>
+                    <p>This is an accordion with icon view.</p>
+                    <p>Click the icon to toggle.</p>
                 </Accordion>
                 <Accordion
                     header={
@@ -86,6 +71,7 @@ export default function AccordionPage() {
                             Icon View Accordion with another variant
                         </span>
                     }
+                    variant="left"
                     view="icon"
                 >
                     <div>
@@ -112,20 +98,28 @@ export default function AccordionPage() {
                 <Accordion
                     header="Card View Accordion"
                     view="card"
-                    variant="primary"
                 >
-                    <div>
-                        <p>This is an accordion with card view.</p>
-                    </div>
+                    <p>This is an accordion with card view.</p>
                 </Accordion>
                 <Accordion
                     header="Card View Accordion"
                     view="card"
+                    variant="none"
                 >
-                    <div>
-                        <p>This is another accordion with card view.</p>
-                        <p>It has a different style.</p>
-                    </div>
+                    <p>This is another accordion with card view.</p>
+                    <p>It has a different style.</p>
+                </Accordion>
+                <Accordion
+                    header="Accordion on an accordion"
+                    view="card"
+                    variant="none"
+                >
+                    <Accordion
+                        header="Card View Accordion"
+                        view="card"
+                    >
+                        <p>This is an accordion with card view.</p>
+                    </Accordion>
                 </Accordion>
             </div>
         </main>

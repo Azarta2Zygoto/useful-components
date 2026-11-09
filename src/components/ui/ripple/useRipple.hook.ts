@@ -38,7 +38,6 @@ export function useRipple<T extends HTMLElement = HTMLElement>({
                 );
 
                 const wave = document.createElement("span");
-                wave.className = "ripple-wave";
                 wave.style.left = `${x}px`;
                 wave.style.top = `${y}px`;
                 wave.style.width = `${radius * 2}px`;

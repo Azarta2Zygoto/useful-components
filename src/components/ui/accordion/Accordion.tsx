@@ -2,12 +2,9 @@
 
 import {
     type CSSProperties,
-    type HTMLAttributes,
-    type PropsWithChildren,
+    type ComponentProps,
     type ReactNode,
     useId,
-    useLayoutEffect,
-    useRef,
     useState,
 } from "react";
 
@@ -15,58 +12,78 @@ import CaretUpIcon from "../assets/icons/caret-up.svg";
 import Button from "../button/Button";
 import Icon from "../icon/Icon";
 import { useRipple } from "../ripple/useRipple.hook";
+import { useTooltip } from "../tooltip/useTooltip.hook";
 import "./accordion.css";
 
 interface AccordionTextProps {
     collapse?: string;
     expand?: string;
-    collapseDesc?: string;
-    expandDesc?: string;
 }
 
 const defaultText: Required<AccordionTextProps> = {
     collapse: "Collapse",
     expand: "Expand",
-    collapseDesc: "Collapse the content of the accordion",
-    expandDesc: "Expand the content of the accordion",
 };
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
-    header?: ReactNode;
+export type AccordionView = "none" | "icon" | "card";
+export type AccordionInnerVariant = "around" | "left" | "none";
+
+interface AccordionCoreProps {
     open?: boolean;
     defaultOpen?: boolean;
-    height?: number;
-    tooltip?: boolean;
-    ripple?: boolean;
-    view?: "simple" | "icon" | "card";
-    variant?: "primary" | "secondary" | "transparent";
+    variant?: AccordionInnerVariant;
     transitionMs?: number;
-    text?: AccordionTextProps;
     onToggleChange?: (open: boolean) => void;
 }
 
+interface AccordionNoneProps extends ComponentProps<"div">, AccordionCoreProps {
+    view?: "none";
+    header?: never;
+    tooltip?: never;
+    ripple?: never;
+    text?: never;
+    containerProps?: never;
+}
+
+interface AccordionVariantProps
+    extends ComponentProps<"div">, AccordionCoreProps {
+    header?: ReactNode;
+    tooltip?: boolean;
+    ripple?: boolean;
+    view: Exclude<AccordionView, "none">;
+    text?: AccordionTextProps;
+    containerProps?: ComponentProps<"div">;
+}
+
+export type AccordionProps = AccordionNoneProps | AccordionVariantProps;
+
 export default function Accordion({
+    id,
     header,
     open,
     defaultOpen,
-    height,
     tooltip = true,
     ripple,
-    view = "simple",
-    variant = "transparent",
+    view = "none",
+    variant = "around",
     transitionMs = 300,
     text,
-    style,
     children,
+    containerProps,
+    "aria-describedby": describedByProp,
     onToggleChange,
     ...props
-}: Readonly<PropsWithChildren<Props>>): ReactNode {
-    const contentId = useId();
-    const headerId = useId();
-    const contentRef = useRef<HTMLDivElement | null>(null);
+}: Readonly<AccordionProps>): ReactNode {
+    const generatedId = useId();
+    const correctId = id ?? generatedId;
+    const describedBy =
+        [describedByProp, view === "none" ? undefined : `${correctId}-header`]
+            .filter(Boolean)
+            .join(" ") || undefined;
 
     const isControlled = open !== undefined;
-    const shouldRipple = ripple ?? variant === "primary";
+    const shouldRipple =
+        view !== "card" ? false : (ripple ?? variant === "around");
     const [internalOpen, setInternalOpen] = useState(defaultOpen ?? false);
     const { rippleRef, onPointerDown: handlePointerDown } =
         useRipple<HTMLButtonElement>({
@@ -79,46 +96,10 @@ export default function Accordion({
         ...text,
     };
 
-    useLayoutEffect(() => {
-        const el = contentRef.current;
-
-        if (!el) return;
-
-        let timeoutId: number | undefined;
-        let raf1: number | undefined;
-        let raf2: number | undefined;
-
-        if (expanded) {
-            const measured = height ?? el.scrollHeight;
-            el.style.maxHeight = `${measured}px`;
-
-            timeoutId = window.setTimeout(() => {
-                el.style.maxHeight = "none";
-            }, transitionMs);
-        } else {
-            el.style.maxHeight = `${el.scrollHeight}px`;
-
-            raf1 = window.requestAnimationFrame(() => {
-                raf2 = window.requestAnimationFrame(() => {
-                    el.style.maxHeight = "0px";
-                });
-            });
-        }
-
-        return () => {
-            if (timeoutId !== undefined) {
-                window.clearTimeout(timeoutId);
-            }
-
-            if (raf1 !== undefined) {
-                window.cancelAnimationFrame(raf1);
-            }
-
-            if (raf2 !== undefined) {
-                window.cancelAnimationFrame(raf2);
-            }
-        };
-    }, [expanded, height, transitionMs]);
+    const tooltipInfo = useTooltip({
+        content: expanded ? texts.collapse : texts.expand,
+        delay: 300,
+    });
 
     const handleToggle = () => {
         const next = !expanded;
@@ -132,85 +113,80 @@ export default function Accordion({
 
     const child = (
         <div
-            {...props}
-            ref={contentRef}
-            id={contentId}
-            data-expanded={expanded}
-            data-accordion={view}
-            data-accordion-variant={variant}
-            role="region"
-            aria-labelledby={view !== "simple" ? headerId : undefined}
-            aria-hidden={!expanded}
-            inert={!expanded}
+            data-uc-expanded={expanded}
+            className="uc-accordion-content"
             style={
                 {
                     "--transition-duration": `${transitionMs}ms`,
-                    ...style,
                 } as CSSProperties
             }
         >
-            {children}
+            <div
+                {...props}
+                id={correctId}
+                role="region"
+                data-uc-accordion={variant}
+                aria-describedby={describedBy}
+                inert={!expanded}
+            >
+                {children}
+            </div>
         </div>
     );
 
-    if (view === "simple") {
+    if (view === "none") {
         return child;
     }
 
     return (
-        <div className="accordion-wrapper">
+        <div
+            {...containerProps}
+            style={
+                {
+                    "--transition-duration": `${transitionMs}ms`,
+                    ...containerProps?.style,
+                } as CSSProperties
+            }
+        >
             {view === "card" && (
-                <button
-                    type="button"
-                    id={headerId}
-                    data-accordion-header={variant}
+                <Button
+                    id={`${correctId}-header`}
+                    variant="transparent"
+                    data-uc-accordion-header={variant}
+                    data-uc-accordion-toggle
                     aria-expanded={expanded}
-                    aria-controls={contentId}
+                    aria-controls={correctId}
                     onClick={handleToggle}
                     onPointerDown={handlePointerDown}
+                    {...(tooltip ? tooltipInfo : {})}
                 >
                     {header}
                     {shouldRipple && (
                         <span
                             ref={rippleRef}
-                            className="ripple"
+                            data-uc-ripple
                         />
                     )}
-                    <Icon
-                        icon={CaretUpIcon}
-                        style={{
-                            transition: `transform ${transitionMs}ms ease`,
-                        }}
-                    />
-                </button>
+                    <Icon icon={CaretUpIcon} />
+                </Button>
             )}
 
             {view === "icon" && (
                 <div
-                    id={headerId}
-                    data-accordion-header={variant}
+                    data-uc-accordion-header={variant}
+                    id={`${correctId}-header`}
                 >
                     {header}
                     <Button
-                        tooltip={
-                            tooltip
-                                ? expanded
-                                    ? texts.collapse
-                                    : texts.expand
-                                : undefined
-                        }
                         variant="transparent"
+                        data-uc-accordion-toggle
                         aria-label={expanded ? texts.collapse : texts.expand}
-                        aria-controls={contentId}
+                        aria-controls={correctId}
                         aria-expanded={expanded}
                         onClick={handleToggle}
+                        {...(tooltip ? tooltipInfo : {})}
                     >
-                        <Icon
-                            icon={CaretUpIcon}
-                            style={{
-                                transition: `transform ${transitionMs}ms ease`,
-                            }}
-                        />
+                        <Icon icon={CaretUpIcon} />
                     </Button>
                 </div>
             )}

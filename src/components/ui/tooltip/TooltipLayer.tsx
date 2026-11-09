@@ -61,7 +61,7 @@ export default function TooltipLayer() {
             ref={ref}
             id={ownerId ?? undefined}
             role="tooltip"
-            data-tooltip-layer
+            data-uc-tooltip-layer
             data-visible={visible}
             data-placement={placement}
         >

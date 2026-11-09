@@ -1,14 +1,14 @@
 @layer components {
-    [data-tooltip-layer] {
+    [data-uc-tooltip-layer] {
         z-index: 9999;
         position: fixed;
         top: 0;
         left: 0;
-        max-width: 10rem;
+        max-width: 15rem;
         padding: 0.25rem 0.5rem;
         background-color: var(--bgE);
         color: var(--fg);
-        font-size: 0.875rem;
+        font-size: var(--font-size-md);
         font-weight: normal;
         white-space: nowrap;
         border-radius: 0.25rem;
@@ -17,14 +17,14 @@
         pointer-events: none;
         transition: opacity 300ms ease-in-out;
     }
-    [data-tooltip-layer][data-visible="true"] {
+    [data-uc-tooltip-layer][data-visible="true"] {
         opacity: 1;
     }
 
-    [data-tooltip="true"] {
+    [data-uc-tooltip="true"] {
         position: relative;
     }
-    [data-tooltip="true"]::after {
+    [data-uc-tooltip="true"]::after {
         content: attr(aria-label);
         z-index: 9999;
         position: absolute;
@@ -35,7 +35,7 @@
         padding: 0.25rem 0.5rem;
         background-color: var(--bgE);
         color: var(--fg);
-        font-size: 0.875rem;
+        font-size: var(--font-size-md);
         font-weight: normal;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -45,9 +45,9 @@
         pointer-events: none;
         transition: opacity 150ms ease-in-out;
     }
-    [data-tooltip]:hover::after,
-    [data-tooltip]:focus-visible::after,
-    [data-tooltip]:focus-within::after {
+    [data-uc-tooltip]:hover::after,
+    [data-uc-tooltip]:focus-visible::after,
+    [data-uc-tooltip]:focus-within::after {
         opacity: 1;
     }
 }

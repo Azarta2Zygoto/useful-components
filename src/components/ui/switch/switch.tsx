@@ -64,7 +64,7 @@ export default function Switch({
                 id={`${idToUse}-label`}
                 htmlFor={idToUse}
                 data-side={side}
-                data-tooltip={tooltipText}
+                data-uc-tooltip={tooltipText}
                 aria-disabled={disabled}
                 className={`switch-container${className ? ` ${className}` : ""}`}
                 style={style}

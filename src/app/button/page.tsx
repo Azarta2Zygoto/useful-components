@@ -89,13 +89,8 @@ export default function ButtonPage() {
                 <Button variant="danger">Danger</Button>
                 <Button variant="success">Success</Button>
                 <Button ripple={false}>Without ripple</Button>
-                <Button
-                    width={300}
-                    variant="primary"
-                >
-                    Primary in a long button
-                </Button>
-                <Button width={300}>
+                <Button variant="primary">Primary in a long button</Button>
+                <Button>
                     This is a very long button with a text that exceeds the
                     width of the button and is very long to see how the button
                     behaves with a very long text.
@@ -158,8 +153,8 @@ export default function ButtonPage() {
             <div className="code-view">
                 <Button
                     variant="primary"
-                    tooltip="This is a CSS tooltip"
-                    aria-label="Primary button"
+                    tooltip={true}
+                    aria-label="CSS Tooltip on primary button"
                 >
                     Primary
                 </Button>
@@ -228,10 +223,7 @@ export default function ButtonPage() {
                     Github danger
                     <Icon icon={Github} />
                 </Button>
-                <Button
-                    variant="danger"
-                    width={300}
-                >
+                <Button variant="danger">
                     <Icon icon={Github} />
                     C&apos;est un bouton vraiment très long avec un texte qui
                     dépasse la largeur du bouton et qui est très long pour voir
@@ -258,7 +250,7 @@ export default function ButtonPage() {
                     variant="primary"
                     pressed={isActives[0]}
                     onClick={() => handleButtonClick(0)}
-                    data-tooltip="This is a primary button that can be pressed"
+                    data-uc-tooltip="This is a primary button that can be pressed"
                 >
                     {isActives[0] ? "Primary active" : "Primary inactive"}
                 </Button>

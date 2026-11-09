@@ -119,7 +119,7 @@ export default function Toolbar({
                     className="active-button"
                     type="button"
                     onClick={handleToolbarActivation}
-                    data-tooltip={
+                    data-uc-tooltip={
                         internIsActive
                             ? text?.fermer || "close"
                             : text?.ouvrir || "open"
@@ -141,7 +141,7 @@ export default function Toolbar({
                     return (
                         <Fragment key={index}>
                             <Link
-                                data-tooltip={
+                                data-uc-tooltip={
                                     displayDifferentName
                                         ? displayDifferentName(name)
                                         : name
@@ -257,7 +257,7 @@ export default function Toolbar({
                                                             }}
                                                         >
                                                             <Link
-                                                                data-tooltip={
+                                                                data-uc-tooltip={
                                                                     displayDifferentName
                                                                         ? displayDifferentName(
                                                                               subItem.name,

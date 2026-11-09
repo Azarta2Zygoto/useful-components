@@ -1,130 +1,181 @@
 @layer components {
-    [data-variant] {
-        --_bg-color: var(--add-light-color);
-        --_bg-color-hover: var(--add-mid-color);
-        --_bg-color-active: var(--add-hard-color);
-        --_bg-color-pressed: var(--add-hard-color);
-        --_bg-color-disabled: var(--bgE-disabled);
-        --_bg-color-pressed-active: var(--add-mid2-color);
-        --_border-color: transparent;
-        --_outline-color: var(--outlineE);
-        --_text-color: var(--textE);
-        --_text-color-hover: var(--textE);
-        --_text-color-active: var(--textE);
-        --_box-shadow: var(--shadowE);
+    [data-uc-variant] {
+        --bg: var(--add-light-color);
+        --bg-hover: var(--add-mid-color);
+        --bg-active: var(--add-hard-color);
+        --bg-disabled: var(--bgE-disabled);
+        --text: var(--textE);
+        --text-hover: var(--textE);
+        --text-active: var(--textE);
+        --text-disabled: var(--textE-disabled);
+        --border: transparent;
+        --border-hover: transparent;
+        --border-active: transparent;
+        --border-disabled: transparent;
+        --outline: transparent;
+        --outline-active: var(--outlineE);
+        --box-shadow: var(--shadowE);
+        --ripple-color: var(--add-total-color);
 
         position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
+        min-width: 0;
         min-height: var(--height);
         margin: calc(var(--padding) / 2);
         padding: calc(var(--padding) / 2) var(--padding);
-        background-color: var(--_bg-color);
-        color: var(--_text-color);
+        background-color: var(--bg);
+        color: var(--text);
         font-size: var(--font-size);
         text-align: left;
-        border: 1px solid var(--_border-color);
+        border: 2px solid var(--border);
         border-radius: 0.5rem;
-        outline: 2px solid transparent;
+        outline: 2px solid var(--outline);
         outline-offset: 3px;
-        box-shadow: var(--_box-shadow);
+        box-shadow: var(--box-shadow);
         cursor: pointer;
         transition:
             color 0.3s ease-in-out,
             background-color 0.3s ease-in-out,
+            border-color 0.3s ease-in-out,
+            box-shadow 0.3s ease-in-out,
             outline-color 0.3s ease-in-out;
     }
-    [data-variant]:not(:disabled, [aria-disabled="true"]):hover {
-        background-color: var(--_bg-color-hover);
-        color: var(--_text-color-hover);
+    [data-uc-variant]:not(:disabled, [aria-disabled="true"]):hover {
+        background-color: var(--bg-hover);
+        border-color: var(--border-hover);
+        color: var(--text-hover);
     }
-    [data-variant]:not(:disabled, [aria-disabled="true"]):active,
-    [data-variant]:not(:disabled, [aria-disabled="true"]):focus-visible,
-    [data-variant]:not(:disabled, [aria-disabled="true"]):focus-within {
-        background-color: var(--_bg-color-active);
-        color: var(--_text-color-active);
-        outline-color: var(--_outline-color);
+    [data-uc-variant]:not(:disabled, [aria-disabled="true"]):active,
+    [data-uc-variant]:not(:disabled, [aria-disabled="true"]):focus-within {
+        background-color: var(--bg-active);
+        color: var(--text-active);
+        border-color: var(--border-active);
+        outline-color: var(--outline-active);
     }
-    [data-variant][aria-disabled="true"],
-    [data-variant]:disabled {
-        background-color: var(--_bg-color-disabled);
-        color: var(--textE-disabled);
-        border-color: var(--bgE-disabled);
+    [data-uc-variant][aria-disabled="true"],
+    [data-uc-variant]:disabled {
+        background-color: var(--bg-disabled);
+        color: var(--text-disabled);
+        border-color: var(--bg-disabled);
         cursor: not-allowed;
         opacity: 0.8;
     }
-    [data-variant] > svg {
+    [data-uc-variant] > svg {
         flex-shrink: 0;
     }
-    [data-variant][aria-pressed="true"],
-    [data-variant][data-checked="true"] {
-        background-color: var(--_bg-color-pressed);
+    [data-uc-variant][aria-pressed="true"],
+    [data-uc-variant][data-uc-pressed="true"] {
+        --bg: var(--add-hard-color);
+        --bg-hover: var(--add-mid2-color);
+        --bg-active: var(--add-mid2-color);
+        --outline: var(--outline-active);
         font-weight: bold;
-        outline-color: var(--_outline-color);
-    }
-    [data-variant][aria-pressed="true"]:hover,
-    [data-variant][aria-pressed="true"]:focus-visible,
-    [data-variant][aria-pressed="true"]:focus-within,
-    [data-variant][data-checked="true"]:hover,
-    [data-variant][data-checked="true"]:focus-visible,
-    [data-variant][data-checked="true"]:focus-within {
-        background-color: var(--_bg-color-pressed-active);
     }
 
-    [data-variant="secondary"] {
-        --_bg-color: var(--bgE);
-        --_bg-color-hover: var(--bgE-hover);
-        --_bg-color-active: var(--bgE-active);
-        --_bg-color-pressed: var(--add-minor-color);
-        --_bg-color-pressed-active: var(--add-light-color);
-        --_border-color: var(--borderE);
+    [data-uc-variant="secondary"] {
+        --bg: var(--bgE);
+        --bg-hover: var(--bgE-hover);
+        --bg-active: var(--bgE-active);
+        --border: var(--borderE);
+        --border-hover: var(--borderE);
+        --border-active: var(--borderE);
+    }
+    [data-uc-variant="secondary"][aria-pressed="true"],
+    [data-uc-variant="secondary"][data-uc-pressed="true"] {
+        --bg: var(--add-minor-color);
+        --bg-hover: var(--add-light-color);
+        --bg-active: var(--add-light-color);
+        --outline: transparent;
     }
 
-    [data-variant="danger"] {
-        --_bg-color: var(--bgE);
-        --_bg-color-hover: var(--bgE-hover);
-        --_bg-color-active: var(--bgE-active);
-        --_bg-color-pressed: var(--bgE-danger-active);
-        --_bg-color-pressed-active: var(--bgE-danger-active);
-        --_border-color: var(--borderE-danger);
-        --_outline-color: var(--borderE-danger);
-        --_text-color: var(--textE-danger);
-        --_text-color-hover: var(--textE-danger);
-        --_text-color-active: var(--textE-danger);
+    [data-uc-variant="danger"] {
+        --bg: var(--bgE);
+        --bg-hover: var(--bgE-hover);
+        --bg-active: var(--bgE-active);
+        --border: var(--borderE-danger);
+        --border-hover: var(--borderE-danger);
+        --border-active: var(--borderE-danger-active);
+        --outline-active: var(--borderE-danger);
+        --text: var(--textE-danger);
+        --text-hover: var(--textE-danger);
+        --text-active: var(--textE-danger);
+        --ripple-color: var(--borderE-danger);
+    }
+    [data-uc-variant="danger"][aria-pressed="true"],
+    [data-uc-variant="danger"][data-uc-pressed="true"] {
+        --bg: var(--bgE-danger);
+        --bg-hover: var(--bgE-danger-active);
+        --bg-active: var(--bgE-danger-active);
+        --border-active: var(--borderE-danger-active);
+        --outline: transparent;
     }
 
-    [data-variant="success"] {
-        --_bg-color: var(--bgE);
-        --_bg-color-hover: var(--bgE-hover);
-        --_bg-color-active: var(--bgE-active);
-        --_bg-color-pressed: var(--bgE-success-active);
-        --_bg-color-pressed-active: var(--bgE-success-active);
-        --_border-color: var(--borderE-success);
-        --_outline-color: var(--borderE-success);
-        --_text-color: var(--textE-success);
-        --_text-color-hover: var(--textE-success);
-        --_text-color-active: var(--textE-success);
+    [data-uc-variant="success"] {
+        --bg: var(--bgE);
+        --bg-hover: var(--bgE-hover);
+        --bg-active: var(--bgE-active);
+        --border: var(--borderE-success);
+        --border-hover: var(--borderE-success);
+        --border-active: var(--borderE-success-active);
+        --outline-active: var(--borderE-success);
+        --text: var(--textE-success);
+        --text-hover: var(--textE-success);
+        --text-active: var(--textE-success);
+        --ripple-color: var(--borderE-success);
+    }
+    [data-uc-variant="success"][aria-pressed="true"],
+    [data-uc-variant="success"][data-uc-pressed="true"] {
+        --bg: var(--bgE-success-active);
+        --bg-hover: var(--bgE-success-active);
+        --bg-active: var(--bgE-success-active);
     }
 
-    [data-variant="transparent"] {
-        --_bg-color: transparent;
-        --_bg-color-hover: transparent;
-        --_bg-color-active: transparent;
-        --_box-shadow: none;
-        --_text-color-hover: var(--fg2);
-        --_text-color-active: var(--fg2);
-        --_bg-color-pressed: var(--add-light-color);
-        --_bg-color-disabled: transparent;
-        --_bg-color-pressed-active: var(--add-mid-color);
+    [data-uc-variant="transparent"] {
+        --bg: transparent;
+        --bg-hover: transparent;
+        --bg-active: transparent;
+        --box-shadow: none;
+        --text-hover: var(--fg2);
+        --text-active: var(--fg2);
+        --bg-disabled: transparent;
+
         min-height: 0;
-
         margin: 0;
         padding: calc(var(--padding) / 2);
     }
+    [data-uc-variant="transparent"][aria-pressed="true"],
+    [data-uc-variant="transparent"][data-uc-pressed="true"] {
+        --bg: transparent;
+        --bg-hover: transparent;
+        --bg-active: transparent;
+        --border: var(--borderE);
+        --border-hover: var(--borderE);
+        --border-active: var(--borderE);
+        --outline: transparent;
+    }
 
-    [data-variant][data-loading="true"] {
+    [data-uc-variant][data-uc-loading="true"] {
         cursor: wait;
+    }
+
+    @media (forced-colors: active) {
+        [data-uc-variant] {
+            --border-hover: Highlight !important;
+            --border-active: Highlight !important;
+            border-width: 3px;
+            outline: none;
+            transition: none;
+        }
+        [data-uc-variant]:focus-within,
+        [data-uc-variant]:active {
+            outline: 2px solid Highlight !important;
+        }
+        [data-uc-variant][aria-pressed="true"],
+        [data-uc-variant][data-uc-pressed="true"] {
+            border-style: double;
+        }
     }
 }
