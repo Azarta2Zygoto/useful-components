@@ -1,0 +1,32 @@
+{
+    "description": "<code>DateTooltip</code> extends the native<code>TimeHTMLAttributes&lt;HTMLTimeElement&gt;</code>properties.",
+    "elements": [
+        {
+            "name": "date",
+            "description": "The date to display."
+        },
+        {
+            "name": "locale",
+            "description": "The locale to use for formatting the date. Defaults to <code>en-US</code>."
+        },
+        {
+            "name": "displayFormat",
+            "description": "The format to use for displaying the date. Defaults to <code>dd/mm/yyyy</code>."
+        },
+        {
+            "name": "tooltipFormat",
+            "description": "The format to use for displaying the tooltip. Defaults to <code>{weekday: \"long\", day: \"numeric\", month: \"long\", year: \"numeric\"}</code>."
+        },
+        {
+            "name": "timeZone",
+            "description": "The time zone to use for formatting the date. Defaults to the user's local time zone."
+        },
+        {
+            "name": "fallback",
+            "description": "The fallback content to display if the date is invalid."
+        }
+    ],
+    "accessibility": {
+        "general": "No accessibility is needed for this component."
+    }
+}

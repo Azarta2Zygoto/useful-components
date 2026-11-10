@@ -2,44 +2,42 @@ import type { ReactNode } from "react";
 
 import "./date-info.css";
 import type { DateTooltipProps } from "./date-info.type";
+import {
+    DEFAULT_DISPLAY_FORMAT,
+    DEFAULT_TOOLTIP_FORMAT,
+    getFormatter,
+    toValidDate,
+} from "./date-info.utils";
 
 export default function DateTooltip({
     date,
-    tooltip = true,
     locale = "fr-FR",
-    displayFormat,
-    tooltipFormat,
+    fallback = null,
+    timeZone,
+    displayFormat = DEFAULT_DISPLAY_FORMAT,
+    tooltipFormat = DEFAULT_TOOLTIP_FORMAT,
     ...props
 }: DateTooltipProps): ReactNode {
-    const isValidDate = date instanceof Date && !isNaN(date.getTime());
+    const value = toValidDate(date);
+    if (!value) return fallback;
 
-    if (!isValidDate) {
-        console.warn("Invalid date provided to DateTooltip");
-        return <span className="date-tooltip-error">Invalid date</span>;
-    }
-
-    const shortOptions = displayFormat || {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-    };
-
-    const fullOptions = tooltipFormat || {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-    };
-
-    const shortDate = date.toLocaleDateString(locale, shortOptions);
-    const fullDate = date.toLocaleDateString(locale, fullOptions);
+    const shortDate = getFormatter(locale, {
+        ...displayFormat,
+        timeZone,
+    }).format(value);
+    const fullDate = getFormatter(locale, {
+        ...tooltipFormat,
+        timeZone,
+    }).format(value);
 
     return (
         <time
+            tabIndex={0}
             {...props}
-            dateTime={date.toISOString()}
-            data-uc-tooltip={tooltip ?? undefined}
-            aria-label={fullDate}
+            lang={locale}
+            dateTime={value.toISOString()}
+            data-uc-date=""
+            data-uc-tooltip={fullDate}
         >
             {shortDate}
         </time>

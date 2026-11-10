@@ -1,5 +1,5 @@
 {
-    "description": "<code>Button</code> extends the native<code>ButtonHTMLAttributes&lt;HTMLButtonElement&gt;</code>properties",
+    "description": "<code>Button</code> extends the native<code>ButtonHTMLAttributes&lt;HTMLButtonElement&gt;</code>properties.",
     "elements": [
         {
             "name": "type",
