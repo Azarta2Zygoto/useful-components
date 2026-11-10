@@ -1,0 +1,61 @@
+{
+    "description": "<code>Accordion</code> extends the native <code>HTMLAttributes&lt;HTMLDivElement&gt;</code> properties for its content region.",
+    "elements": [
+        {
+            "name": "open",
+            "description": "Controls whether the accordion is expanded. When omitted, the accordion manages its own state."
+        },
+        {
+            "name": "defaultOpen",
+            "description": "Sets the initial expanded state for an uncontrolled accordion. Defaults to <code>false</code>."
+        },
+        {
+            "name": "onToggleChange",
+            "description": "Called with the next expanded state when the accordion is toggled."
+        },
+        {
+            "name": "view",
+            "description": "Selects the header view: <code>none</code> (default), <code>icon</code>, or <code>card</code>. The <code>icon</code> and <code>card</code> views provide their own toggle button."
+        },
+        {
+            "name": "header",
+            "description": "Content displayed in the header for the <code>icon</code> and <code>card</code> views."
+        },
+        {
+            "name": "variant",
+            "description": "Changes the accordion styling. Available values are <code>around</code> (default), <code>left</code>, and <code>none</code>."
+        },
+        {
+            "name": "tooltip",
+            "description": "Enables or disables the expand/collapse tooltip on the built-in toggle. Defaults to <code>true</code>."
+        },
+        {
+            "name": "ripple",
+            "description": "Enables or disables the ripple effect on the <code>card</code> view. It defaults to enabled for the <code>around</code> variant and disabled otherwise."
+        },
+        {
+            "name": "text",
+            "description": "Customizes the accessible and tooltip labels with <code>expand</code> and <code>collapse</code> strings."
+        },
+        {
+            "name": "transitionMs",
+            "description": "Sets the expand/collapse transition duration in milliseconds. Defaults to <code>300</code>."
+        },
+        {
+            "name": "containerProps",
+            "description": "Native <code>HTMLAttributes&lt;HTMLDivElement&gt;</code> applied to the outer wrapper of the <code>icon</code> and <code>card</code> views."
+        },
+        {
+            "name": "children",
+            "description": "Content rendered inside the accordion."
+        }
+    ],
+    "accessibility": {
+        "general": "The <code>icon</code> and <code>card</code> views use a native button with <code>aria-expanded</code> and <code>aria-controls</code> to expose the accordion state and relationship.",
+        "elements": [
+            "Provide a meaningful <code>header</code> when using the <code>icon</code> or <code>card</code> view.",
+            "The content is rendered as a <code>region</code> and becomes <code>inert</code> while collapsed, preventing keyboard interaction with hidden content.",
+            "For the <code>icon</code> view, the built-in toggle receives an accessible expand/collapse label. Customize it with the <code>text</code> prop when needed."
+        ]
+    }
+}

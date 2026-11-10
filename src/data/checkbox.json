@@ -1,0 +1,65 @@
+{
+    "description": "<code>Checkbox</code> extends the native <code>HTMLInputElement</code> checkbox properties and renders the input inside a label container.",
+    "elements": [
+        {
+            "name": "label",
+            "description": "The accessible label text for the checkbox."
+        },
+        {
+            "name": "checked",
+            "description": "Controls the checked state. Use with <code>onChange</code> or <code>onValue</code> for a controlled checkbox."
+        },
+        {
+            "name": "defaultChecked",
+            "description": "Sets the initial checked state for an uncontrolled checkbox."
+        },
+        {
+            "name": "onValue",
+            "description": "Called with the next checked state when the checkbox changes."
+        },
+        {
+            "name": "indeterminate",
+            "description": "Displays the native indeterminate state, commonly used when only some items in a group are selected."
+        },
+        {
+            "name": "position",
+            "description": "Places the checkmark on the <code>left</code> (default) or <code>right</code> of the label."
+        },
+        {
+            "name": "size",
+            "description": "Sets the checkbox size. Available values are <code>sm</code>, <code>md</code>, and <code>lg</code>."
+        },
+        {
+            "name": "required",
+            "description": "Marks the native checkbox as required."
+        },
+        {
+            "name": "disabled",
+            "description": "Disables the native checkbox and prevents interaction."
+        },
+        {
+            "name": "hideLabel",
+            "description": "Hides the visible label while keeping it as the input's accessible name."
+        },
+        {
+            "name": "tooltip",
+            "description": "Adds tooltip content and associates it with the input through <code>aria-describedby</code>."
+        },
+        {
+            "name": "checkmark",
+            "description": "Replaces the default checkmark with a React node or a function receiving <code>checked</code> and <code>indeterminate</code>."
+        },
+        {
+            "name": "containerProps",
+            "description": "Passes native label attributes and handlers to the outer container."
+        }
+    ],
+    "accessibility": {
+        "general": "The component uses a native <code>input type=\"checkbox\"</code> inside a <code>label</code>, preserving native keyboard, form, checked, required, disabled, and indeterminate semantics.",
+        "elements": [
+            "Always provide a meaningful <code>label</code>. When <code>hideLabel</code> is enabled, the label is exposed through <code>aria-label</code>.",
+            "Tooltip content is connected to the input with <code>aria-describedby</code>; use it as supplemental guidance rather than the only accessible name.",
+            "The visual checkmark is marked <code>aria-hidden=\"true\"</code>; the native input remains the source of the checkbox state."
+        ]
+    }
+}

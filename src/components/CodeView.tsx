@@ -1,6 +1,7 @@
 "use client";
 
 import {
+    type ComponentProps,
     type PropsWithChildren,
     type ReactNode,
     useEffect,
@@ -10,13 +11,14 @@ import {
 
 import Button from "./ui/button/Button";
 
-interface Props {
+interface Props extends ComponentProps<"div"> {
     code?: string;
 }
 
 export default function CodeView({
     code,
     children,
+    ...props
 }: Readonly<PropsWithChildren<Props>>): ReactNode {
     const codeRef = useRef<HTMLElement>(null);
     const [isCodeVisible, setIsCodeVisible] = useState(false);
@@ -28,7 +30,10 @@ export default function CodeView({
     }, [isCodeVisible]);
 
     return (
-        <div className="code-view">
+        <div
+            {...props}
+            className={`code-view ${props.className ?? ""}`}
+        >
             {code && (
                 <Button
                     className="code-view-button"

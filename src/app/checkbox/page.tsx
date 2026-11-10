@@ -4,248 +4,178 @@ import { useState } from "react";
 
 import Checkbox from "@ui/checkbox/Checkbox";
 
-import WarningFrame from "@/components/frames/WarningFrame";
+import CodeView from "@/components/CodeView";
+import ComponentAccessibility from "@/components/ComponentAccessibility";
+import ComponentApi from "@/components/ComponentApi";
+import PageScroll from "@/components/PageScroll";
+import Title from "@/components/Title";
+import checkboxApi from "@/data/checkbox.json";
 
-const defaultChecked = [
-    false,
-    false,
-    false,
-    false,
-    true,
-    false,
-    false,
-    false,
-    false,
-    false,
-    true,
-];
 export default function CheckboxPage() {
-    const [checked, setChecked] = useState<boolean[]>(defaultChecked);
-    const [items, setItems] = useState([false, false, false]);
-    const all = items.every(Boolean);
-    const some = items.some(Boolean);
+    const [checked, setChecked] = useState(false);
+    const [items, setItems] = useState([true, false, false]);
+    const allChecked = items.every(Boolean);
+    const someChecked = items.some(Boolean);
 
-    function handleCheckboxChange(index: number) {
-        setChecked((prev) => {
-            const newChecked = [...prev];
-            newChecked[index] = !newChecked[index];
-            return newChecked;
-        });
-    }
+    const handleHeart = (isChecked: boolean) => (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="red"
+            viewBox="0 0 16 16"
+        >
+            <path
+                fillRule={isChecked ? "evenodd" : undefined}
+                d={
+                    isChecked
+                        ? "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
+                        : "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"
+                }
+            />
+        </svg>
+    );
 
-    function handleItemsChange(index: number) {
-        setItems((prev) => {
-            const newItems = [...prev];
-            newItems[index] = !newItems[index];
-            return newItems;
-        });
-    }
-
-    function handleHeart(check: boolean) {
-        if (!check) {
-            return (
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="red"
-                    viewBox="0 0 16 16"
-                >
-                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                </svg>
-            );
-        } else {
-            return (
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="red"
-                    viewBox="0 0 16 16"
-                >
-                    <path
-                        fillRule="evenodd"
-                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
-                    />
-                </svg>
-            );
-        }
-    }
+    const toggleItem = (index: number) => {
+        setItems((previous) =>
+            previous.map((item, itemIndex) =>
+                itemIndex === index ? !item : item,
+            ),
+        );
+    };
 
     return (
-        <main>
-            <h1>Checkbox</h1>
+        <PageScroll>
+            <Title level={1}>Checkbox</Title>
             <p>
-                A checkbox allows the user to agree or disagree/allow or
-                disallow some information.
+                A checkbox lets users select or clear an option. It supports
+                native checkbox attributes as well as controlled, uncontrolled,
+                indeterminate, and custom-checkmark states.
             </p>
 
-            <h2>Basic checkbox</h2>
-            <p>By default, the checkbox is at the left side.</p>
-            <div className="code-view">
-                <Checkbox label="Uncontrolled Checkbox" />
-                <Checkbox
-                    label="Left Checkbox"
-                    checked={checked[1]}
-                    onChange={() => handleCheckboxChange(1)}
-                />
-                <Checkbox
-                    label="Left Checkbox"
-                    checked={checked[1]}
-                    size="sm"
-                    onChange={() => handleCheckboxChange(1)}
-                />
-                <Checkbox
-                    label="Left Checkbox"
-                    checked={checked[1]}
-                    size="lg"
-                    onChange={() => handleCheckboxChange(1)}
-                />
-                <Checkbox
-                    label="Right Checkbox"
-                    checked={checked[0]}
-                    position="right"
-                    onChange={() => handleCheckboxChange(0)}
-                />
-            </div>
-            <h2>Indeterminate checkbox</h2>
+            <Title level={2}>Basic checkbox</Title>
             <p>
-                You can set a checkbox as indeterminate with the indeterminate
-                property. It is usually used to indicate that some, but not all,
-                of the sub-checkboxes are checked.
+                Provide a required <code>label</code>. Use <code>checked</code>{" "}
+                with <code>onChange</code> for a controlled checkbox, or{" "}
+                <code>defaultChecked</code> for an uncontrolled checkbox.
             </p>
-            <div className="code-view">
+            <CodeView
+                code={`<Checkbox
+    label="Accept the terms"
+    checked={checked}
+    onChange={(event) => setChecked(event.target.checked)}
+/>`}
+            >
                 <Checkbox
-                    label="Tout sélectionner"
-                    checked={all}
-                    indeterminate={some && !all}
-                    onChange={(e) =>
-                        setItems(items.map(() => e.target.checked))
+                    label="Accept the terms"
+                    checked={checked}
+                    onChange={(event) => setChecked(event.target.checked)}
+                />
+            </CodeView>
+
+            <Title level={2}>Indeterminate checkbox</Title>
+            <p>
+                Use <code>indeterminate</code> when a parent option represents a
+                partially selected group.
+            </p>
+            <CodeView
+                code={`<Checkbox
+    label="Select all"
+    checked={allChecked}
+    indeterminate={someChecked && !allChecked}
+    onChange={(event) =>
+        setItems(items.map(() => event.target.checked))
+    }
+/>
+<Checkbox
+    label="First item"
+    checked={items[0]}
+    onChange={() => toggleItem(0)}
+/>`}
+            >
+                <Checkbox
+                    label="Select all"
+                    checked={allChecked}
+                    indeterminate={someChecked && !allChecked}
+                    onChange={(event) =>
+                        setItems(items.map(() => event.target.checked))
                     }
                 />
                 <Checkbox
-                    label="Pizza"
+                    label="First item"
                     checked={items[0]}
-                    onChange={() => handleItemsChange(0)}
+                    onChange={() => toggleItem(0)}
                 />
                 <Checkbox
-                    label="Burger"
+                    label="Second item"
                     checked={items[1]}
-                    onChange={() => handleItemsChange(1)}
+                    onChange={() => toggleItem(1)}
                 />
                 <Checkbox
-                    label="French fries"
+                    label="Third item"
                     checked={items[2]}
-                    onChange={() => handleItemsChange(2)}
+                    onChange={() => toggleItem(2)}
                 />
-            </div>
-            <h2>Required</h2>
+            </CodeView>
+
+            <Title level={2}>Options</Title>
             <p>
-                You can set a checkbox as required with the required property.
+                The checkbox can be positioned on the right, resized, marked as
+                required, disabled, or displayed without its visible label.
             </p>
-            <div className="code-view">
+            <CodeView
+                code={`<Checkbox
+    label="Required option"
+    position="right"
+    size="lg"
+    required
+/>
+<Checkbox
+    label="Disabled option"
+    disabled
+/>
+<Checkbox
+    label="Hidden visual label"
+    hideLabel
+    tooltip="This option has a hidden visual label"
+/>`}
+            >
                 <Checkbox
-                    label="Required Checkbox"
+                    label="Required option"
+                    position="right"
+                    size="lg"
                     required
-                    checked={checked[2]}
-                    onChange={() => handleCheckboxChange(2)}
                 />
-            </div>
-            <h2>Disabled</h2>
-            <p>You can disable a checkbox with the disabled property.</p>
-            <div className="code-view">
                 <Checkbox
-                    id="checkbox-example-disabled"
-                    label="Disabled Checkbox"
+                    label="Disabled option"
                     disabled
-                    checked={checked[3]}
-                    onChange={() => handleCheckboxChange(3)}
                 />
                 <Checkbox
-                    id="checkbox-example-disabled-checked"
-                    label="Disabled Checked Checkbox"
-                    disabled
-                    checked={checked[4]}
-                    tooltip="This checkbox is disabled and checked"
-                    onChange={() => handleCheckboxChange(4)}
-                />
-            </div>
-            <h2>Without label</h2>
-            <p>
-                You can hide the label of the checkbox with the hideLabel
-                property. It is recommended to use the tooltip property to help
-                the user understand what the checkbox is for.
-            </p>
-
-            <div className="code-view">
-                <Checkbox
-                    id="checkbox-example-without-label"
-                    label="Without label Checkbox"
-                    checked={checked[5]}
+                    label="Hidden visual label"
                     hideLabel
-                    onChange={() => handleCheckboxChange(5)}
+                    tooltip="This option has a hidden visual label"
                 />
-                <Checkbox
-                    id="checkbox-example-without-label-tooltip"
-                    label="Without label Checkbox"
-                    checked={checked[6]}
-                    hideLabel
-                    tooltip="This checkbox has no label"
-                    onChange={() => handleCheckboxChange(6)}
-                />
-            </div>
-            <WarningFrame>
-                <p>
-                    When using a checkbox without label, it is important for
-                    accessibility to use the tooltip or put our own label
-                    outside of the component.
-                </p>
-            </WarningFrame>
-            <h2>Different shape</h2>
-            <p>
-                You can use your own checkmark with the checkmark property. It
-                can be a React node or a function that takes the checked state
-                as a parameter and returns a React node.
-            </p>
+            </CodeView>
 
-            <div className="code-view">
+            <Title level={2}>Custom checkmark</Title>
+            <p>
+                Pass a React node or a function receiving the checked and
+                indeterminate states through <code>checkmark</code>.
+            </p>
+            <CodeView
+                code={`<Checkbox
+    label="Favorite"
+    checkmark={handleHeart}
+/>`}
+            >
                 <Checkbox
-                    id="checkbox-example-heart"
-                    label="Heart Checkbox"
+                    label="Favorite"
                     checkmark={handleHeart}
                 />
-                <Checkbox
-                    id="checkbox-example-heart"
-                    label="Heart Checkbox"
-                    checked={checked[7]}
-                    checkmark={handleHeart(checked[7])}
-                    onChange={() => handleCheckboxChange(7)}
-                />
-                <Checkbox
-                    id="checkbox-example-heart-disabled"
-                    label="Heart Checkbox disabled"
-                    disabled
-                    checked={checked[9]}
-                    checkmark={handleHeart(checked[9])}
-                    onChange={() => handleCheckboxChange(9)}
-                />
-                <Checkbox
-                    id="checkbox-example-heart-disabled-true"
-                    label="Heart Checkbox disabled true"
-                    disabled
-                    checked={checked[10]}
-                    checkmark={handleHeart(checked[10])}
-                    onChange={() => handleCheckboxChange(10)}
-                />
-                <Checkbox
-                    id="checkbox-example-heart-required"
-                    label="Heart Checkbox required"
-                    required
-                    checked={checked[8]}
-                    checkmark={handleHeart(checked[8])}
-                    onChange={() => handleCheckboxChange(8)}
-                />
-            </div>
-        </main>
+            </CodeView>
+
+            <ComponentApi elements={checkboxApi} />
+            <ComponentAccessibility elements={checkboxApi.accessibility} />
+        </PageScroll>
     );
 }
