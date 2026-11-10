@@ -9,21 +9,21 @@ import type { ButtonProps } from "./button.type";
 export default function Button({
     type = "button",
     variant = "secondary",
-    loading = false,
-    pressed = false,
+    size,
+    loading,
+    pressed,
     disabled = false,
-    tooltip,
     ripple,
     onPointerDown,
     children,
     ...props
 }: ButtonProps): ReactNode {
     const isDisabled = disabled || loading;
-    const shouldRipple = ripple ?? variant !== "transparent";
+    const hasRipple = !isDisabled && (ripple ?? variant !== "transparent");
 
-    const { rippleRef, onPointerDown: handlePointerDown } =
+    const { rippleProps, onPointerDown: handlePointerDown } =
         useRipple<HTMLButtonElement>({
-            disabled: isDisabled || !shouldRipple,
+            disabled: !hasRipple,
             onPointerDown,
         });
 
@@ -31,20 +31,29 @@ export default function Button({
         <button
             {...props}
             type={type}
+            data-uc-size={size}
             data-uc-variant={variant}
-            data-uc-loading={loading || undefined}
-            data-uc-tooltip={tooltip}
-            disabled={isDisabled}
+            disabled={disabled}
+            aria-disabled={loading || undefined}
             aria-busy={loading || undefined}
-            aria-pressed={pressed || undefined}
+            aria-pressed={pressed}
+            onClick={
+                loading
+                    ? (e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                      }
+                    : props.onClick
+            }
             onPointerDown={handlePointerDown}
         >
-            {shouldRipple && (
+            {loading && (
                 <span
-                    ref={rippleRef}
-                    data-uc-ripple
+                    data-uc-loading
+                    aria-hidden="true"
                 />
             )}
+            {hasRipple && <span {...rippleProps} />}
             {children}
         </button>
     );

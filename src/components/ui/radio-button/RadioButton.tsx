@@ -1,25 +1,9 @@
-import {
-    type ChangeEvent,
-    type InputHTMLAttributes,
-    type MouseEvent,
-    type ReactNode,
-    useId,
-} from "react";
+import type { ChangeEvent, MouseEvent, ReactNode } from "react";
 
 import "../button/button.css";
 import { useRipple } from "../ripple/useRipple.hook";
 import "./radio-button.css";
-
-export interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
-    name: string;
-    value: string;
-    label?: ReactNode;
-    deselect?: boolean;
-    tooltip?: boolean | string;
-    ripple?: boolean;
-    variant?: "primary" | "secondary" | "basic";
-    width?: number | string;
-}
+import type { RadioButtonProps } from "./radio-button.type";
 
 export default function RadioButton({
     name,
@@ -31,23 +15,21 @@ export default function RadioButton({
     ripple,
     variant = "secondary",
     disabled,
-    width,
-    className,
     style,
+    isIcon = true,
+    className,
+    containerProps,
     onChange,
     ...props
-}: Readonly<RadioButtonProps>): ReactNode {
-    const generatedId = useId();
+}: RadioButtonProps): ReactNode {
+    const hasRipple = !disabled && (ripple ?? variant !== "transparent");
 
-    const shouldRipple = ripple ?? variant !== "basic";
-    const correctWidth = typeof width === "number" ? `${width}px` : width;
-
-    const { rippleRef, onPointerDown: handlePointerDown } =
+    const { rippleProps, onPointerDown: handlePointerDown } =
         useRipple<HTMLLabelElement>({
-            disabled: disabled || !shouldRipple,
+            disabled: !hasRipple,
         });
 
-    function handleDeselect(event: MouseEvent<HTMLInputElement>) {
+    const handleDeselect = (event: MouseEvent<HTMLInputElement>) => {
         if (!deselect || !checked) return;
 
         if (onChange) {
@@ -64,27 +46,20 @@ export default function RadioButton({
 
             onChange(syntheticEvent);
         }
-    }
+    };
 
     return (
         <label
-            id={`${generatedId}-label`}
-            htmlFor={generatedId}
+            {...containerProps}
+            style={style}
+            className={className}
             data-uc-variant={variant}
             data-uc-tooltip={tooltip === true ? value : tooltip}
-            data-uc-pressed={checked}
-            aria-disabled={disabled}
-            className={className}
             onPointerDown={handlePointerDown}
-            style={{
-                ...style,
-                ...(correctWidth !== undefined ? { width: correctWidth } : {}),
-            }}
         >
             <input
                 {...props}
                 type="radio"
-                id={generatedId}
                 name={name}
                 value={value}
                 checked={checked}
@@ -92,12 +67,8 @@ export default function RadioButton({
                 onChange={onChange}
                 onClick={handleDeselect}
             />
-            {shouldRipple && (
-                <span
-                    ref={rippleRef}
-                    data-uc-ripple
-                />
-            )}
+            {isIcon && <span data-radio-indicator=""></span>}
+            {hasRipple && <span {...rippleProps} />}
             {label || value}
         </label>
     );

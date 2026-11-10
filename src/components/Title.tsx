@@ -8,7 +8,7 @@ interface Props {
 export default function Title({
     level,
     children,
-}: Readonly<PropsWithChildren<Props>>): ReactNode {
+}: PropsWithChildren<Props>): ReactNode {
     const ref = useRef<HTMLHeadingElement>(null);
     const Tag = `h${level}` as HeadingTag;
     const id = children?.toString().toLowerCase().replace(/\s+/g, "-") ?? "";
@@ -38,12 +38,11 @@ export default function Title({
         >
             <button
                 type="button"
-                aria-label={`Anchor link for ${children}`}
                 onClick={handleAnchorClick}
             >
-                #
+                {children}
+                <span>#</span>
             </button>
-            {children}
         </Tag>
     );
 }

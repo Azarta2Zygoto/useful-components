@@ -12,8 +12,8 @@
             --percent: 0;
 
             position: relative;
-            height: var(--height);
             width: 100%;
+            height: var(--height);
         }
 
         & > progress::after {
@@ -57,8 +57,8 @@
             transform: translateX(-50%) translateY(50%);
             width: var(--size);
             height: var(--size);
-            font-size: var(--font-size);
             background-color: var(--add-total-color);
+            font-size: var(--font-size);
             border: 1px solid var(--bgE);
             border-radius: 100%;
         }

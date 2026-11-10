@@ -1,20 +1,8 @@
-import type { InputHTMLAttributes, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import Required from "../required/required";
-import RadioButton, { type RadioButtonProps } from "./RadioButton";
-
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-    name: string;
-    elements: Omit<RadioButtonProps, "name" | "checked" | "id">[];
-    label: string;
-    selectedValue: string | null;
-    ripple?: boolean;
-    deselect?: boolean;
-    tooltip?: boolean;
-    variant?: "primary" | "secondary" | "basic";
-    columns?: number;
-    width?: number | string;
-}
+import RadioButton from "./RadioButton";
+import type { RadioGroupProps } from "./radio-button.type";
 
 export default function RadioGroup({
     name,
@@ -23,20 +11,21 @@ export default function RadioGroup({
     disabled,
     label,
     columns = 1,
+    size,
     required,
     ...props
-}: Readonly<Props>): ReactNode {
+}: RadioGroupProps): ReactNode {
     const validity = required
         ? selectedValue !== null
             ? "true"
             : "false"
-        : undefined;
+        : "";
 
     return (
         <fieldset
-            data-valid={validity}
+            data-uc-size={size}
+            data-uc-radio-group={validity}
             disabled={disabled}
-            className="radio-group-container"
             style={{
                 gridTemplateColumns: `repeat(${columns}, 1fr)`,
             }}

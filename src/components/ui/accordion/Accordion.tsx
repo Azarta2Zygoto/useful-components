@@ -40,12 +40,12 @@ export default function Accordion({
             .join(" ") || undefined;
 
     const isControlled = open !== undefined;
-    const shouldRipple =
+    const hasRipple =
         view !== "card" ? false : (ripple ?? variant === "around");
     const [internalOpen, setInternalOpen] = useState(defaultOpen ?? false);
-    const { rippleRef, onPointerDown: handlePointerDown } =
+    const { rippleProps, onPointerDown: handlePointerDown } =
         useRipple<HTMLButtonElement>({
-            disabled: !shouldRipple,
+            disabled: !hasRipple,
         });
 
     const expanded = isControlled ? open : internalOpen;
@@ -123,12 +123,7 @@ export default function Accordion({
                     {...tooltipInfo}
                 >
                     {header}
-                    {shouldRipple && (
-                        <span
-                            ref={rippleRef}
-                            data-uc-ripple
-                        />
-                    )}
+                    {hasRipple && <span {...rippleProps} />}
                     <Icon icon={CaretUpIcon} />
                 </Button>
             )}

@@ -5,14 +5,19 @@
         pointer-events: none;
         overflow: hidden;
         inset: 0;
+        & > span {
+            position: absolute;
+            background-color: var(--ripple-color);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
     }
 
-    [data-uc-ripple] > span {
-        position: absolute;
-        background-color: var(--ripple-color);
-        border-radius: 50%;
-        opacity: 0;
-        pointer-events: none;
-        will-change: transform, opacity;
+    @media (prefers-reduced-motion: reduce) {
+        [data-uc-ripple] {
+            display: none;
+        }
     }
 }

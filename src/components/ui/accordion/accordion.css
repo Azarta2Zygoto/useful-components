@@ -9,15 +9,15 @@
     }
     .uc-accordion-content[data-uc-expanded="false"] > [data-uc-accordion] {
         padding: 0 var(--accordion-padding);
-        box-shadow: none;
         outline-color: transparent;
+        box-shadow: none;
     }
 
     [data-uc-accordion] {
         --accordion-padding: calc(var(--padding) / 4);
+        width: 100%;
 
         min-height: 0;
-        width: 100%;
         padding: var(--accordion-padding);
         border-radius: 0.5rem;
         box-shadow: var(--shadowE);
@@ -34,10 +34,10 @@
     }
     [data-uc-accordion="around"] {
         --accordion-padding: var(--padding);
+        border-radius: 0.5rem;
 
         outline: 2px solid var(--add-total-color);
         outline-offset: -2px;
-        border-radius: 0.5rem;
     }
 
     [data-uc-accordion-toggle] {
@@ -63,8 +63,8 @@
         border: 2px solid var(--add-total-color);
     }
     [data-uc-accordion-header="around"]:has(~ [data-uc-expanded="true"]) {
-        border-radius: 0.5rem 0.5rem 0 0;
         border-bottom: transparent;
+        border-radius: 0.5rem 0.5rem 0 0;
     }
     [data-uc-accordion-header="around"]
         ~ [data-uc-expanded]
@@ -76,11 +76,11 @@
         --border-hover: var(--add-total-color);
     }
     [data-uc-accordion-toggle] > svg {
-        padding: calc(var(--padding) / 4);
         width: calc(var(--icon-size) + var(--padding) / 2);
         height: calc(var(--icon-size) + var(--padding) / 2);
-        border-radius: 0.25rem;
+        padding: calc(var(--padding) / 4);
         border: 2px solid transparent;
+        border-radius: 0.25rem;
         transition:
             transform var(--transition-duration) ease-in-out,
             border-color var(--transition-duration) ease-in-out;

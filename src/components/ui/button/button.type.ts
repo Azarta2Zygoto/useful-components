@@ -1,12 +1,17 @@
 import type { ComponentProps } from "react";
 
+import type { SizeableComponentProps } from "../types";
+
 export type ButtonVariant =
     "primary" | "secondary" | "danger" | "transparent" | "success";
 
-export interface ButtonProps extends ComponentProps<"button"> {
+type Button = Omit<
+    ComponentProps<"button">,
+    "aria-disabled" | "aria-busy" | "aria-pressed"
+>;
+export interface ButtonProps extends Button, SizeableComponentProps {
     variant?: ButtonVariant;
     loading?: boolean;
     ripple?: boolean;
     pressed?: boolean;
-    tooltip?: boolean;
 }

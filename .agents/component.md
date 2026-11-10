@@ -144,6 +144,7 @@ Rechercher notamment :
 - Les styles fragiles ou contradictoires.
 - Les problèmes d'intégration et de réutilisation.
 - Les absences de tests pour les comportements critiques.
+- Les éléments inutiles (règles CSS, branche JS jamais atteint, fonctionnalité d'une grande complexité qui peut être simplifiée...).
 
 Ne pas assimiler automatiquement une préférence de style de programmation
 à un défaut technique.

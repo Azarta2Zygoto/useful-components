@@ -1,94 +1,106 @@
 @layer components {
-    [data-uc-variant]:not([data-uc-variant="basic"]) input[type="radio"] {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        white-space: nowrap;
-        opacity: 0;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
+    [data-uc-variant] {
+        &:has(> [data-radio-indicator]) {
+            justify-content: flex-start;
+        }
+        & > input[type="radio"] {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+        }
+        & > input[type="radio"]:hover {
+            cursor: pointer;
+        }
+        & > input[type="radio"]:disabled {
+            cursor: not-allowed;
+        }
+
+        & > [data-radio-indicator] {
+            flex-shrink: 0;
+            position: relative;
+            width: calc(var(--icon-size) * 0.8);
+            height: calc(var(--icon-size) * 0.8);
+            border: 2px solid var(--icon);
+            border-radius: 50%;
+            outline: 2px solid transparent;
+            outline-offset: 3px;
+            transition:
+                outline-color 0.3s ease-in-out,
+                border-color 0.3s ease-in-out,
+                background-color 0.3s ease-in-out;
+
+            &::after {
+                content: "";
+                position: absolute;
+                transform: scale(0);
+                background: var(--icon);
+                border-radius: 50%;
+                transition: transform 0.3s ease-in-out;
+                inset: 3px;
+            }
+        }
+        & > input[type="radio"]:checked + [data-radio-indicator] {
+            border-color: var(--icon);
+            &::after {
+                transform: scale(1);
+            }
+        }
+        & > input[type="radio"]:focus-visible + [data-radio-indicator] {
+            outline-color: var(--icon);
+        }
+        & > input[type="radio"]:disabled + [data-radio-indicator] {
+            border-color: var(--textE-disabled);
+            opacity: 0.5;
+        }
     }
 
-    input[type="radio"]:enabled:hover {
-        cursor: pointer;
-    }
-
-    input[type="radio"]:disabled {
-        cursor: not-allowed;
-    }
-    [data-uc-variant="basic"] {
-        --color: var(--outlineE);
-        --x: 50%;
-        --y: 50%;
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        margin: 0.25rem;
-        padding: 1rem;
-        background-color: inherit;
-        text-align: left;
-        border: none;
-        border-radius: 8px;
-        outline: 2px solid transparent;
-        outline-offset: 3px;
-        box-shadow: none;
-        cursor: pointer;
-        transition:
-            color 0.3s ease-in-out,
-            background-color 0.3s ease-in-out,
-            outline-color 0.3s ease-in-out;
-    }
-    [data-uc-variant="basic"]:not(:disabled, [aria-disabled="true"]):hover {
-        background-color: inherit;
-    }
-    [data-uc-variant="basic"]:not(:disabled, [aria-disabled="true"]):active,
-    [data-uc-variant="basic"]:not(
-            :disabled,
-            [aria-disabled="true"]
-        ):focus-visible,
-    [data-uc-variant="basic"]:not(
-            :disabled,
-            [aria-disabled="true"]
-        ):focus-within {
-        background-color: inherit;
-        outline-color: transparent;
-    }
-    [data-uc-variant="basic"][aria-disabled="true"],
-    [data-uc-variant="basic"]:disabled {
-        background-color: inherit;
-        color: var(--textE-disabled);
-        border-color: transparent;
-        cursor: not-allowed;
-        opacity: 0.8;
-    }
-    [data-uc-variant] > svg {
-        flex-shrink: 0;
-    }
-    [data-uc-variant="basic"][aria-pressed="true"],
-    [data-uc-variant="basic"][data-uc-pressed="true"] {
-        background-color: inherit;
-        font-weight: bold;
-        outline-color: transparent;
-    }
-
-    .radio-group-container {
+    [data-uc-radio-group] {
+        --border-disabled: var(--borderE-disabled);
+        --text-disabled: var(--textE-disabled);
         display: grid;
         gap: 0.5rem;
-        border-radius: 8px;
+        border-radius: 0.5rem;
         transition: border-color 0.3s ease-in-out;
+
+        & > legend {
+            transition: color 0.3s ease-in-out;
+        }
     }
-    .radio-group-container legend {
-        transition: color 0.3s ease-in-out;
-    }
-    .radio-group-container[data-valid="false"] {
+    [data-uc-radio-group="false"] {
         border-color: var(--borderE-danger);
+
+        & > legend {
+            color: var(--textE-danger);
+        }
     }
-    .radio-group-container[data-valid="false"] legend {
-        color: var(--textE-danger);
+    [data-uc-radio-group]:disabled {
+        border-color: var(--border-disabled);
+
+        & > legend {
+            color: var(--text-disabled);
+        }
     }
-    .radio-group-container:disabled legend {
-        color: var(--textE-disabled);
+
+    @media (forced-colors: active) {
+        [data-uc-radio-group] {
+            --border-disabled: GrayText;
+            --text-disabled: GrayText;
+        }
+        [data-uc-variant] {
+            & > [data-radio-indicator] {
+                outline: none;
+                transition: none;
+            }
+
+            & > input[type="radio"]:checked + [data-radio-indicator] {
+                border-color: Highlight;
+                &::after {
+                    background-color: Highlight;
+                }
+            }
+        }
     }
 }

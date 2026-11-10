@@ -1,0 +1,37 @@
+{
+    "description": "<code>Button</code> extends the native<code>ButtonHTMLAttributes&lt;HTMLButtonElement&gt;</code>properties",
+    "elements": [
+        {
+            "name": "type",
+            "description": "Defaults to <code>button</code>."
+        },
+        {
+            "name": "variant",
+            "description": "Available values: <code>primary</code>, <code>secondary</code> (default), <code>danger</code>, <code>success</code> or <code>transparent</code>."
+        },
+        {
+            "name": "loading",
+            "description": "Disables the button and sets <code>aria-busy=\"true\"</code>."
+        },
+        {
+            "name": "ripple",
+            "description": "Enables or disables the ripple effect. It is enabled by default, except for the <code>transparent</code> variant."
+        },
+        {
+            "name": "pressed",
+            "description": "Exposes the active state through <code>aria-pressed</code>."
+        },
+        {
+            "name": "size",
+            "description": "Available values: <code>sm</code>, <code>md</code> (default) or <code>lg</code>."
+        }
+    ],
+    "accessibility": {
+        "general": "The <code>Button</code> component is accessible by default. It uses the native <code>button</code> element, which is focusable and supports keyboard interactions.",
+        "elements": [
+            "If you don't put text in the button, you should add an <code>aria-label</code> to describe the button's action.",
+            "When the <code>loading</code> prop is set to <code>true</code>, the button is disabled and <code>aria-busy=\"true\"</code> is added.",
+            "When the <code>pressed</code> prop is set to <code>true</code>, <code>aria-pressed=\"true\"</code> is added to the button."
+        ]
+    }
+}

@@ -1,33 +1,38 @@
 "use client";
 
 import { useCallback, useRef } from "react";
-import type { PointerEvent, RefObject } from "react";
+import type { PointerEvent } from "react";
 
 import "./ripple.css";
-
-interface Options<T extends HTMLElement> {
-    disabled?: boolean;
-    duration?: number;
-    onPointerDown?: (event: PointerEvent<T>) => void;
-}
-
-interface UseRippleReturn<T extends HTMLElement> {
-    rippleRef: RefObject<HTMLSpanElement | null>;
-    onPointerDown: (event: PointerEvent<T>) => void;
-}
+import type {
+    RippleOptions,
+    RippleProps,
+    UseRippleReturn,
+} from "./ripple.type";
+import { prefersReducedMotion } from "./ripple.utils";
 
 export function useRipple<T extends HTMLElement = HTMLElement>({
     disabled = false,
     duration = 400,
     onPointerDown,
-}: Options<T> = {}): UseRippleReturn<T> {
+}: RippleOptions<T>): UseRippleReturn<T> {
     const rippleRef = useRef<HTMLSpanElement>(null);
+    const rippleProps: RippleProps = {
+        ref: rippleRef,
+        "data-uc-ripple": "",
+        "aria-hidden": "true",
+    };
 
     const handlePointerDown = useCallback(
         (event: PointerEvent<T>): void => {
             const container = rippleRef.current;
 
-            if (container && !disabled && event.button === 0) {
+            if (
+                container &&
+                !disabled &&
+                event.button === 0 &&
+                !prefersReducedMotion()
+            ) {
                 const rect = container.getBoundingClientRect();
                 const x = event.clientX - rect.left;
                 const y = event.clientY - rect.top;
@@ -52,7 +57,7 @@ export function useRipple<T extends HTMLElement = HTMLElement>({
                             opacity: 0.5,
                         },
                         {
-                            transform: "translate(-50%, -50%) scale(1)",
+                            transform: "translate(-50%, -50%) scale(1.5)",
                             opacity: 0,
                         },
                     ],
@@ -69,5 +74,5 @@ export function useRipple<T extends HTMLElement = HTMLElement>({
         [disabled, duration, onPointerDown],
     );
 
-    return { rippleRef, onPointerDown: handlePointerDown };
+    return { rippleProps, onPointerDown: handlePointerDown };
 }

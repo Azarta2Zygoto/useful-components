@@ -60,8 +60,8 @@
         --font-size-lg: calc(1.125rem * var(--ui-scale));
 
         --height-sm: calc(2rem * var(--ui-scale));
-        --height-md: calc(2.75rem * var(--ui-scale));
-        --height-lg: calc(3.5rem * var(--ui-scale));
+        --height-md: calc(2.625rem * var(--ui-scale));
+        --height-lg: calc(3.25rem * var(--ui-scale));
 
         --padding-sm: calc(0.5rem * var(--ui-scale));
         --padding-md: calc(0.875rem * var(--ui-scale));
@@ -140,33 +140,5 @@
             transition-duration: 0.01ms !important;
             transition-delay: 0ms !important;
         }
-    }
-}
-
-.colonne {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-.ligne {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    margin: 0 10%;
-}
-@media (max-width: 600px) {
-    main {
-        width: 90%;
-        padding: 2% 5% 5% 5%;
     }
 }

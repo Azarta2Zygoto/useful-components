@@ -1,10 +1,18 @@
 "use client";
 
-import { type PropsWithChildren, type ReactNode, useEffect } from "react";
+import {
+    type PropsWithChildren,
+    type ReactNode,
+    useEffect,
+    useRef,
+} from "react";
+
+import TableOfContents from "./table/TableOfContent";
 
 export default function PageScroll({
     children,
 }: Readonly<PropsWithChildren>): ReactNode {
+    const mainRef = useRef<HTMLElement>(null);
     useEffect(() => {
         const scrollToHash = () => {
             const id = window.location.hash.slice(1);
@@ -24,5 +32,10 @@ export default function PageScroll({
         return () => window.removeEventListener("hashchange", scrollToHash);
     }, []);
 
-    return <main>{children}</main>;
+    return (
+        <main ref={mainRef}>
+            {children}
+            <TableOfContents sharedRef={mainRef} />
+        </main>
+    );
 }

@@ -15,6 +15,7 @@
         --outline: transparent;
         --outline-active: var(--outlineE);
         --box-shadow: var(--shadowE);
+        --icon: var(--textE);
         --ripple-color: var(--add-total-color);
 
         position: relative;
@@ -43,31 +44,33 @@
             box-shadow 0.3s ease-in-out,
             outline-color 0.3s ease-in-out;
     }
-    [data-uc-variant]:not(:disabled, [aria-disabled="true"]):hover {
+    [data-uc-variant]:hover {
         background-color: var(--bg-hover);
-        border-color: var(--border-hover);
         color: var(--text-hover);
+        border-color: var(--border-hover);
     }
-    [data-uc-variant]:not(:disabled, [aria-disabled="true"]):active,
-    [data-uc-variant]:not(:disabled, [aria-disabled="true"]):focus-within {
+    [data-uc-variant]:focus-visible,
+    [data-uc-variant]:focus-within {
         background-color: var(--bg-active);
         color: var(--text-active);
         border-color: var(--border-active);
         outline-color: var(--outline-active);
     }
+    [data-uc-variant]:disabled,
+    [data-uc-variant]:has(> input:disabled) {
+        outline-color: transparent;
+    }
+    [data-uc-variant]:disabled,
     [data-uc-variant][aria-disabled="true"],
-    [data-uc-variant]:disabled {
+    [data-uc-variant]:has(> input:disabled) {
         background-color: var(--bg-disabled);
         color: var(--text-disabled);
         border-color: var(--bg-disabled);
         cursor: not-allowed;
         opacity: 0.8;
     }
-    [data-uc-variant] > svg {
-        flex-shrink: 0;
-    }
     [data-uc-variant][aria-pressed="true"],
-    [data-uc-variant][data-uc-pressed="true"] {
+    [data-uc-variant]:has(> input:checked) {
         --bg: var(--add-hard-color);
         --bg-hover: var(--add-mid2-color);
         --bg-active: var(--add-mid2-color);
@@ -82,15 +85,15 @@
         --border: var(--borderE);
         --border-hover: var(--borderE);
         --border-active: var(--borderE);
+        --icon: var(--add-total-color);
+        &[aria-pressed="true"],
+        &:has(> input:checked) {
+            --bg: var(--add-minor-color);
+            --bg-hover: var(--add-light-color);
+            --bg-active: var(--add-light-color);
+            --outline: transparent;
+        }
     }
-    [data-uc-variant="secondary"][aria-pressed="true"],
-    [data-uc-variant="secondary"][data-uc-pressed="true"] {
-        --bg: var(--add-minor-color);
-        --bg-hover: var(--add-light-color);
-        --bg-active: var(--add-light-color);
-        --outline: transparent;
-    }
-
     [data-uc-variant="danger"] {
         --bg: var(--bgE);
         --bg-hover: var(--bgE-hover);
@@ -102,17 +105,17 @@
         --text: var(--textE-danger);
         --text-hover: var(--textE-danger);
         --text-active: var(--textE-danger);
+        --icon: var(--add-total-color);
         --ripple-color: var(--borderE-danger);
+        &[aria-pressed="true"],
+        &:has(> input:checked) {
+            --bg: var(--bgE-danger);
+            --bg-hover: var(--bgE-danger-active);
+            --bg-active: var(--bgE-danger-active);
+            --border-active: var(--borderE-danger-active);
+            --outline: transparent;
+        }
     }
-    [data-uc-variant="danger"][aria-pressed="true"],
-    [data-uc-variant="danger"][data-uc-pressed="true"] {
-        --bg: var(--bgE-danger);
-        --bg-hover: var(--bgE-danger-active);
-        --bg-active: var(--bgE-danger-active);
-        --border-active: var(--borderE-danger-active);
-        --outline: transparent;
-    }
-
     [data-uc-variant="success"] {
         --bg: var(--bgE);
         --bg-hover: var(--bgE-hover);
@@ -124,15 +127,17 @@
         --text: var(--textE-success);
         --text-hover: var(--textE-success);
         --text-active: var(--textE-success);
+        --icon: var(--add-total-color);
         --ripple-color: var(--borderE-success);
+        &[aria-pressed="true"],
+        &:has(> input:checked) {
+            --bg: var(--bgE-success-active);
+            --bg-hover: var(--bgE-success-active);
+            --bg-active: var(--bgE-success-active);
+            --border-active: var(--borderE-success-active);
+            --outline: transparent;
+        }
     }
-    [data-uc-variant="success"][aria-pressed="true"],
-    [data-uc-variant="success"][data-uc-pressed="true"] {
-        --bg: var(--bgE-success-active);
-        --bg-hover: var(--bgE-success-active);
-        --bg-active: var(--bgE-success-active);
-    }
-
     [data-uc-variant="transparent"] {
         --bg: transparent;
         --bg-hover: transparent;
@@ -141,40 +146,67 @@
         --text-hover: var(--fg2);
         --text-active: var(--fg2);
         --bg-disabled: transparent;
-
+        --icon: var(--add-total-color);
         min-height: 0;
         margin: 0;
         padding: calc(var(--padding) / 2);
-    }
-    [data-uc-variant="transparent"][aria-pressed="true"],
-    [data-uc-variant="transparent"][data-uc-pressed="true"] {
-        --bg: transparent;
-        --bg-hover: transparent;
-        --bg-active: transparent;
-        --border: var(--borderE);
-        --border-hover: var(--borderE);
-        --border-active: var(--borderE);
-        --outline: transparent;
+        &[aria-pressed="true"],
+        &:has(> input:checked) {
+            --bg: transparent;
+            --bg-hover: transparent;
+            --bg-active: transparent;
+            --border: var(--borderE);
+            --border-hover: var(--borderE);
+            --border-active: var(--borderE);
+            --outline: transparent;
+        }
     }
 
-    [data-uc-variant][data-uc-loading="true"] {
+    [data-uc-variant][aria-busy="true"] {
+        --outline-disabled: var(--outlineE);
         cursor: wait;
+    }
+    [data-uc-variant] > svg {
+        flex-shrink: 0;
+    }
+    [data-uc-variant] > [data-uc-loading] {
+        flex-shrink: 0;
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        border: 2px solid var(--add-total-color);
+        border-right-color: transparent;
+        border-radius: 50%;
+        animation: uc-spin 0.6s linear infinite;
+    }
+
+    @keyframes uc-spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        [data-uc-variant] > [data-uc-loading] {
+            animation-duration: 1.5s !important;
+        }
     }
 
     @media (forced-colors: active) {
         [data-uc-variant] {
             --border-hover: Highlight !important;
             --border-active: Highlight !important;
+            --text-disabled: GrayText !important;
             border-width: 3px;
             outline: none;
             transition: none;
         }
-        [data-uc-variant]:focus-within,
-        [data-uc-variant]:active {
+        [data-uc-variant]:focus-visible,
+        [data-uc-variant]:focus-within {
             outline: 2px solid Highlight !important;
         }
         [data-uc-variant][aria-pressed="true"],
-        [data-uc-variant][data-uc-pressed="true"] {
+        [data-uc-variant]:has(> input:checked) {
             border-style: double;
         }
     }

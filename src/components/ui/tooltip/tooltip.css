@@ -21,11 +21,11 @@
         opacity: 1;
     }
 
-    [data-uc-tooltip="true"] {
+    [data-uc-tooltip] {
         position: relative;
     }
-    [data-uc-tooltip="true"]::after {
-        content: attr(aria-label);
+    [data-uc-tooltip]::after {
+        content: attr(data-uc-tooltip);
         z-index: 9999;
         position: absolute;
         top: calc(100% + 0.5rem);

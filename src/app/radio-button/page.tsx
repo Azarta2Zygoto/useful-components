@@ -61,10 +61,29 @@ export default function RadioButtonPage() {
                         verticalAlign: "middle",
                     }}
                 />
-                &nbsp;
                 <span style={{ textTransform: "capitalize" }}>
                     {value.value}
                 </span>
+            </Fragment>
+        ),
+    }));
+
+    const options5ITooltip = options5.map((value) => ({
+        value: value.value,
+        name: value.name,
+        ["aria-label"]: value.value,
+        label: (
+            <Fragment key={value.value}>
+                {/* eslint-disable-next-line @next/next/no-img-element*/}
+                <img
+                    src={`/useful-components/icon/${value.value}-icon.svg`}
+                    alt={value.value}
+                    style={{
+                        width: "20px",
+                        height: "20px",
+                        verticalAlign: "middle",
+                    }}
+                />
             </Fragment>
         ),
     }));
@@ -98,7 +117,18 @@ export default function RadioButtonPage() {
                     selectedValue={selectedValue[0]}
                     onChange={(e) => handleChange(e, 0)}
                     columns={2}
-                    width={100}
+                    size="lg"
+                />
+                <RadioGroup
+                    name="radio-group-3-primary"
+                    label="Choose an option - primary"
+                    variant="primary"
+                    elements={options3}
+                    selectedValue={selectedValue[0]}
+                    onChange={(e) => handleChange(e, 0)}
+                    columns={2}
+                    size="lg"
+                    isIcon={false}
                 />
                 <RadioGroup
                     name="radio-group-3-secondary"
@@ -113,7 +143,7 @@ export default function RadioButtonPage() {
                 <RadioGroup
                     name="radio-group-3-basic"
                     label="Choose an option - basic"
-                    variant="basic"
+                    variant="transparent"
                     elements={options3}
                     selectedValue={selectedValue[3]}
                     onChange={(e) => handleChange(e, 3)}
@@ -181,7 +211,7 @@ export default function RadioButtonPage() {
                     selectedValue={selectedValue[4]}
                     onChange={(e) => handleChange(e, 4)}
                     columns={2}
-                    variant="basic"
+                    variant="transparent"
                     style={{ width: "100px" }}
                 />
             </div>
@@ -234,7 +264,6 @@ export default function RadioButtonPage() {
                     onChange={(e) => handleChange(e, 7)}
                     columns={2}
                     deselect
-                    style={{ width: "100px" }}
                 />
             </div>
             <h2>Tooltip</h2>
@@ -247,13 +276,12 @@ export default function RadioButtonPage() {
                 <RadioGroup
                     name="radio-group-tooltip"
                     label="Choose an option"
-                    elements={options5Images}
+                    elements={options5ITooltip}
                     selectedValue={selectedValue[7]}
                     onChange={(e) => handleChange(e, 7)}
                     columns={2}
                     deselect
                     tooltip
-                    style={{ width: "100px" }}
                 />
             </div>
         </main>
