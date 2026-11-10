@@ -21,6 +21,10 @@
             "icon": "bi bi-calendar2-x-fill"
         },
         {
+            "name": "Icon",
+            "icon": "bi bi-app"
+        },
+        {
             "name": "Input text",
             "icon": "bi bi-alphabet"
         },

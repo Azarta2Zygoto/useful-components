@@ -37,10 +37,11 @@ export type TextAreaFieldProps = TextAreaProps & LabelLayoutProps & FieldProps;
 
 export interface TextFieldProps
     extends
-        Omit<InputProps, "type" | "value" | "defaultValue">,
+        InputProps,
         LabelLayoutProps,
         FieldProps,
-        AdornmentProps {
+        AdornmentProps,
+        SizeableComponentProps {
     type?: TextInputType;
     floatingLabel?: boolean;
     value?: string;
@@ -59,6 +60,11 @@ export interface NumberProps extends Omit<
 }
 
 export interface NumberFieldProps
-    extends NumberProps, LabelLayoutProps, FieldProps, AdornmentProps {
+    extends
+        NumberProps,
+        LabelLayoutProps,
+        FieldProps,
+        AdornmentProps,
+        SizeableComponentProps {
     floatingLabel?: boolean;
 }

@@ -1,0 +1,62 @@
+{
+    "description": "<code>Input</code> renders a labeled native <code>input</code> and extends its standard input properties with field layout, validation, and adornment options.",
+    "elements": [
+        {
+            "name": "label",
+            "description": "The label associated with the native input."
+        },
+        {
+            "name": "type",
+            "description": "The native input type. Supported values include <code>text</code>, <code>password</code>, <code>email</code>, <code>search</code>, <code>tel</code>, and <code>url</code>."
+        },
+        {
+            "name": "value / defaultValue",
+            "description": "Controls the input value or sets its initial value. Use <code>value</code> for a controlled input and <code>defaultValue</code> for an uncontrolled input."
+        },
+        {
+            "name": "onValue",
+            "description": "Receives the current string value whenever the input changes."
+        },
+        {
+            "name": "variant",
+            "description": "Sets the visual style to <code>outlined</code> (default) or <code>underlined</code>."
+        },
+        {
+            "name": "size",
+            "description": "Sets the field size to <code>sm</code>, <code>md</code> (default), or <code>lg</code>."
+        },
+        {
+            "name": "floatingLabel",
+            "description": "Places the label inside the field until it is focused or contains a value."
+        },
+        {
+            "name": "labelPosition",
+            "description": "Places a non-floating label at the <code>top</code> (default) or <code>left</code> of the input."
+        },
+        {
+            "name": "error",
+            "description": "Displays an error message, sets <code>aria-invalid</code>, and associates the message with the input through <code>aria-describedby</code>."
+        },
+        {
+            "name": "iconLeft / iconRight",
+            "description": "Adds an SVG component or icon configuration as a left or right adornment."
+        },
+        {
+            "name": "containerProps",
+            "description": "Passes native <code>div</code> properties to the field container."
+        },
+        {
+            "name": "Native input properties",
+            "description": "Native properties such as <code>placeholder</code>, <code>required</code>, <code>disabled</code>, <code>readOnly</code>, <code>pattern</code>, and <code>minLength</code> are forwarded to the input."
+        }
+    ],
+    "accessibility": {
+        "general": "The component uses a native input and associates it with the supplied label using <code>for</code>/<code>id</code>. It preserves native keyboard, form, and validation behavior.",
+        "elements": [
+            "Always provide a meaningful <code>label</code>; it is required by the component and remains available to assistive technologies.",
+            "Error messages are announced politely with <code>aria-live=\"polite\"</code> and linked to the input with <code>aria-describedby</code>.",
+            "Use <code>aria-invalid</code> when an input is invalid without an <code>error</code> message, or use <code>error</code> when feedback should be displayed.",
+            "The read-only state adds a visual lock icon, but the native <code>readOnly</code> property remains the source of the input behavior."
+        ]
+    }
+}

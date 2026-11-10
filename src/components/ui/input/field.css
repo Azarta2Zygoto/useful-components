@@ -166,9 +166,12 @@
     @media (min-width: 640px) {
         [data-uc-field-position="left"] {
             grid-template-columns: auto 1fr;
-        }
-        [data-uc-field-position="left"] > [data-uc-field-error] {
-            grid-column: 2;
+            & > label {
+                padding-right: calc(var(--padding) * 2);
+            }
+            & > [data-uc-field-error] {
+                grid-column: 2;
+            }
         }
     }
 }

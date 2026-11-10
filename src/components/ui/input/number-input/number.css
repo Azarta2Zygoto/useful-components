@@ -1,29 +1,17 @@
 @layer components {
-    input[type="number"][data-input-variant]::-webkit-inner-spin-button,
-    input[type="number"][data-input-variant]::-webkit-outer-spin-button {
+    [data-uc-input-wrapper] > input[type="number"]::-webkit-inner-spin-button,
+    [data-uc-input-wrapper] > input[type="number"]::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
-    input[type="number"][data-input-variant] {
+    [data-uc-input-wrapper] > input[type="number"] {
         appearance: textfield;
         width: 100%;
     }
-    .number-input-wrapper {
-        --top-pos: calc(50%);
-        --top-translate: translateY(calc(-200% - 2px));
-        position: relative;
-        display: inline-flex;
-        min-width: 0;
-        width: 100%;
-    }
-    .number-input-wrapper[data-has-steps] input[type="number"],
-    .number-input-wrapper[data-has-steps] label {
-        padding-right: calc(var(--padding) + var(--height) / 2 - 2px);
-    }
-
-    [data-has-steps] input[type="number"]:has(~ [data-field-icon="right"]) {
-        padding-right: calc(
-            var(--padding) + var(--icon-size) + var(--height) / 2 - 2px
-        );
+    [data-uc-input-wrapper] > [data-uc-steps] {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-right: calc(var(--padding) * 0.5);
     }
 }

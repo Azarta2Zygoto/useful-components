@@ -17,8 +17,7 @@ export default function StepButton({
     stopStep,
 }: Readonly<StepButtonProps>): ReactNode {
     return (
-        <span
-            aria-hidden="true"
+        <Icon
             className={`step-button ${direction}`}
             onPointerDown={(e) => {
                 if (e.button !== 0) return;
@@ -30,8 +29,7 @@ export default function StepButton({
             onLostPointerCapture={stopStep}
             onMouseDown={(e) => e.preventDefault()}
             onClick={(e) => e.preventDefault()}
-        >
-            <Icon icon={direction === "up" ? CaretUp : CaretDown} />
-        </span>
+            icon={direction === "up" ? CaretUp : CaretDown}
+        />
     );
 }

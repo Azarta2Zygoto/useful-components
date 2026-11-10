@@ -1,88 +1,132 @@
-import { Fragment } from "react";
+"use client";
 
+import CodeView from "@/components/CodeView";
+import ComponentAccessibility from "@/components/ComponentAccessibility";
+import ComponentApi from "@/components/ComponentApi";
+import PageScroll from "@/components/PageScroll";
+import Title from "@/components/Title";
 import Progress from "@/components/ui/progress/Progress";
+import progressApi from "@/data/progress.json";
 
 export default function ProgressPage() {
-    const dots = [
-        {
-            value: 10,
-        },
-        {
-            value: 25,
-            label: "Hello",
-        },
-        {
-            value: 75,
-            label: (
-                <span>
-                    <Fragment>
-                        {/* eslint-disable-next-line @next/next/no-img-element*/}
-                        <img
-                            src={`/useful-components/icon/banana-icon.svg`}
-                            alt="banana"
-                            style={{
-                                width: "20px",
-                                height: "20px",
-                                verticalAlign: "middle",
-                            }}
-                        />
-                        &nbsp;
-                        <span style={{ textTransform: "capitalize" }}>
-                            banana
-                        </span>
-                    </Fragment>
-                </span>
-            ),
-        },
-    ];
     return (
-        <main>
-            <h1>Progress Page</h1>
+        <PageScroll>
+            <Title level={1}>Progress</Title>
             <p>
-                This is a simple progress component. You can use it to show the
-                progress of a task.
+                <code>Progress</code> shows the completion state of a task using
+                the native <code>progress</code> element. It can also display
+                labels or marked points along the progress bar.
             </p>
-            <h2>Basic Progress</h2>
-            <div className="code-view">
+
+            <Title level={2}>Basic progress</Title>
+            <p>
+                Provide a required <code>label</code>, the current{" "}
+                <code>value</code>, and optionally a <code>max</code> value. The
+                default maximum is <code>100</code>.
+            </p>
+            <CodeView
+                code={`<Progress
+    label="Uploading files"
+    value={65}
+    max={100}
+/>`}
+            >
                 <Progress
-                    label="Basic Progress"
+                    label="Uploading files"
+                    value={65}
                     max={100}
-                    value={50}
                 />
-            </div>
-            <h2>Progress with hidden label</h2>
-            <div className="code-view">
+            </CodeView>
+
+            <Title level={2}>Hidden label</Title>
+            <p>
+                Set <code>hideLabel</code> when the visible label is not needed.
+                The label remains available to assistive technologies through{" "}
+                <code>aria-label</code>.
+            </p>
+            <CodeView
+                code={`<Progress
+    label="Installing updates"
+    value={40}
+    hideLabel
+/>`}
+            >
                 <Progress
-                    label="Progress with hidden label"
-                    value={50}
-                    max={100}
+                    label="Installing updates"
+                    value={40}
                     hideLabel
                 />
-            </div>
-            <h2>Progress with dots</h2>
-            <p>You can add an event on the progress wherever you want</p>
-            <div className="code-view">
+            </CodeView>
+
+            <Title level={2}>Key points</Title>
+            <p>
+                Use <code>dots</code> to mark events at specific numeric
+                positions. Each dot can contain text or any React node.
+            </p>
+            <CodeView
+                code={`<Progress
+    label="Project progress"
+    value={75}
+    max={100}
+    dots={[
+        { value: 25, label: "Planning" },
+        { value: 75, label: "Review" },
+    ]}
+/>`}
+            >
                 <Progress
-                    label="Progress with dots"
+                    label="Project progress"
                     value={75}
                     max={100}
-                    dots={dots}
+                    dots={[
+                        { value: 25, label: "Planning" },
+                        { value: 75, label: "Review" },
+                    ]}
                 />
-            </div>
-            <h2>Progress with key points</h2>
+            </CodeView>
+
+            <Title level={2}>Progress labels</Title>
             <p>
-                If you have N tasks for the progress, you can put N labels that
-                will be display.
+                Use <code>labels</code> for evenly distributed labels. The
+                labels are placed from the start to the end of the progress bar
+                in array order.
             </p>
-            <div className="code-view">
+            <CodeView
+                code={`<Progress
+    label="Checkout steps"
+    value={2}
+    max={3}
+    labels={["Cart", "Shipping", "Payment"]}
+/>`}
+            >
                 <Progress
-                    label="Progress with dots"
-                    value={1}
-                    max={2}
-                    height="10px"
-                    labels={["apple", "tomato", "ketchup"]}
+                    label="Checkout steps"
+                    value={2}
+                    max={3}
+                    labels={["Cart", "Shipping", "Payment"]}
                 />
-            </div>
-        </main>
+            </CodeView>
+
+            <Title level={2}>Custom height</Title>
+            <p>
+                Customize the progress bar height with the <code>height</code>{" "}
+                prop. It accepts a CSS length.
+            </p>
+            <CodeView
+                code={`<Progress
+    label="Processing"
+    value={50}
+    height="12px"
+/>`}
+            >
+                <Progress
+                    label="Processing"
+                    value={50}
+                    height="12px"
+                />
+            </CodeView>
+            <ComponentApi elements={progressApi} />
+            <ComponentAccessibility elements={progressApi.accessibility} />
+        </PageScroll>
     );
 }

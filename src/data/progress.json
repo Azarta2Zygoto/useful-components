@@ -1,0 +1,53 @@
+{
+    "description": "<code>Progress</code> extends the native <code>HTMLProgressElement</code> properties and wraps the progress bar in a labeled container.",
+    "elements": [
+        {
+            "name": "label",
+            "description": "The accessible label for the progress indicator. This prop is required."
+        },
+        {
+            "name": "value",
+            "description": "The current progress value."
+        },
+        {
+            "name": "max",
+            "description": "The maximum progress value. Defaults to <code>100</code>."
+        },
+        {
+            "name": "height",
+            "description": "Sets the progress bar height using a CSS length. Defaults to <code>7px</code>."
+        },
+        {
+            "name": "hideLabel",
+            "description": "Hides the visible label while keeping it available through <code>aria-label</code>."
+        },
+        {
+            "name": "dots",
+            "description": "Adds marked points at numeric positions. Each item accepts a required <code>value</code>, an optional React <code>label</code>, and optional span properties through <code>props</code>."
+        },
+        {
+            "name": "labels",
+            "description": "Adds evenly distributed React labels from the start to the end of the progress bar. Use either <code>labels</code> or <code>dots</code>, not both."
+        },
+        {
+            "name": "labelProps",
+            "description": "Passes native label properties to the outer container."
+        },
+        {
+            "name": "dotsProps",
+            "description": "Passes native div properties to the container holding dots or labels."
+        },
+        {
+            "name": "Native progress properties",
+            "description": "Other native progress properties such as <code>id</code>, <code>className</code>, and <code>aria-*</code> attributes are forwarded to the progress element."
+        }
+    ],
+    "accessibility": {
+        "general": "The component uses a native <code>progress</code> element and requires a label. Native progress semantics expose the current value and maximum to assistive technologies.",
+        "elements": [
+            "Provide a meaningful <code>label</code>. When <code>hideLabel</code> is enabled, the label is exposed on the outer container through <code>aria-label</code>.",
+            "Use <code>dots</code> or <code>labels</code> to provide contextual milestones, but do not rely on their visual position as the only way to communicate progress.",
+            "Keep the numeric <code>value</code> within the intended range defined by <code>max</code> so the native progress state remains accurate."
+        ]
+    }
+}

@@ -5,10 +5,10 @@ import Icon from "../icon/Icon";
 import { getIconElement } from "../icon/utils";
 import Required from "../required/required";
 import "./field.css";
-import "./input2.css";
+import "./input.css";
 import type { TextFieldProps } from "./input.type";
 
-export default function Input({
+export default function InputField({
     id,
     variant = "outlined",
     error,
@@ -27,7 +27,7 @@ export default function Input({
     onChange,
     onValue,
     ...props
-}: Readonly<TextFieldProps>): ReactNode {
+}: TextFieldProps): ReactNode {
     const generatedId = useId();
     const correctId = id ?? generatedId;
     const describedBy =
@@ -58,7 +58,7 @@ export default function Input({
     return (
         <div
             {...containerProps}
-            data-uc-size={size === "md" ? undefined : size}
+            data-uc-size={size}
             data-uc-field={floatingLabel ? `floating-${variant}` : variant}
             data-uc-field-position={fieldPosition}
         >
@@ -66,6 +66,7 @@ export default function Input({
             <div data-uc-input-wrapper={variant}>
                 {iconLeftElement}
                 <input
+                    {...props}
                     id={correctId}
                     placeholder={placeholder || " "}
                     aria-invalid={error ? true : invalidProp}
@@ -74,7 +75,6 @@ export default function Input({
                         onChange?.(e);
                         onValue?.(e.currentTarget.value);
                     }}
-                    {...props}
                 />
                 {floatingLabel && labelElement}
                 {isFieldSet && (

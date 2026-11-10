@@ -1,15 +1,22 @@
 @layer components {
-    [data-has-steps] {
+    [data-uc-steps] {
         .step-button {
             --_size: calc(var(--height) / 2 - 2px);
-            position: absolute;
             display: flex;
-            right: calc(var(--padding) * 0.5);
+            min-width: var(--_size);
             width: var(--_size);
+            min-height: var(--_size);
             height: var(--_size);
             margin: 0;
             padding: calc(var(--_size) / 8);
             outline: none;
+            pointer-events: auto;
+            transition:
+                color 0.15s ease,
+                transform 0.15s ease;
+        }
+        .step-button * {
+            pointer-events: none;
         }
         .step-button:hover {
             color: var(--add-mid-color);
@@ -18,27 +25,11 @@
             transform: scale(0.85);
             color: var(--add-hard-color);
         }
-        .step-button > svg {
-            min-width: calc(var(--_size) * 7 / 8);
-            width: calc(var(--_size) * 7 / 8);
-            min-height: calc(var(--_size) * 7 / 8);
-            height: calc(var(--_size) * 7 / 8);
-        }
     }
 
-    .step-button.up {
-        top: 0.15rem;
-    }
-    .step-button.down {
-        bottom: 0.15rem;
-    }
-
-    [data-has-steps][data-at-max] .step-button.up,
-    [data-has-steps][data-at-min] .step-button.down {
+    [data-uc-max] .step-button.up,
+    [data-uc-min] .step-button.down {
         color: var(--textE-disabled);
-    }
-    [data-has-steps][data-at-max] .step-button.up:active,
-    [data-has-steps][data-at-min] .step-button.down:active {
         transform: none;
     }
 }

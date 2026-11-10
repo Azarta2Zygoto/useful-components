@@ -1,0 +1,33 @@
+{
+    "description": "<code>Icon</code> renders a supplied SVG component and extends native SVG properties, except for <code>width</code>, <code>height</code>, and <code>fill</code>, which are controlled by dedicated props.",
+    "elements": [
+        {
+            "name": "icon",
+            "description": "The SVG component to render."
+        },
+        {
+            "name": "size",
+            "description": "Sets both the rendered width and height in pixels. Defaults to <code>18</code>."
+        },
+        {
+            "name": "fill",
+            "description": "Sets the SVG fill color. Defaults to <code>currentColor</code>."
+        },
+        {
+            "name": "aria-label",
+            "description": "Provides an accessible name for a meaningful icon. When present, the icon receives <code>role=\"img\"</code>."
+        },
+        {
+            "name": "SVG properties",
+            "description": "Other native SVG properties such as <code>className</code>, <code>style</code>, and <code>data-*</code> attributes are forwarded to the SVG."
+        }
+    ],
+    "accessibility": {
+        "general": "Icons are hidden from assistive technologies by default with <code>aria-hidden=\"true\"</code>. When an icon conveys meaning on its own, provide an <code>aria-label</code> so it is exposed as an image with an accessible name.",
+        "elements": [
+            "Keep the default decorative behavior when visible text or the surrounding control already provides the icon's meaning.",
+            "For an icon-only control, label the surrounding button or link; the icon itself can remain decorative.",
+            "The component sets <code>focusable=\"false\"</code> so the SVG does not become an unwanted keyboard focus target."
+        ]
+    }
+}

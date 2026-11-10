@@ -4,7 +4,8 @@ import { useState } from "react";
 
 import Accordion from "@ui/accordion/Accordion";
 import Checkbox from "@ui/checkbox/Checkbox";
-import * as Input from "@ui/input";
+
+import Input from "@/components/ui/input/InputField";
 
 export default function HomePage() {
     const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -24,42 +25,24 @@ export default function HomePage() {
                 However there is no plain to make them public as they are
                 clearly not professionaly made.
             </p>
-            <div
-                className="component-box"
-                style={{ width: "300px", gap: "1rem" }}
-            >
-                <h2>Input</h2>
-                <Input.TextField
+            <h2>Input</h2>
+            <div className="code-view">
+                <Input
                     label="Text input"
-                    placeholder="Enter text"
-                />
-                <Input.NumberField
-                    label="Number input"
-                    variant="underlined"
-                    placeholder="Enter a number"
-                />
-                <Input.TextField
-                    label="Text input with a floating label"
                     placeholder="Enter text"
                     floatingLabel
                 />
             </div>
-            <div
-                className="component-box"
-                style={{ width: "300px" }}
-            >
-                <h2>Checkbox</h2>
+            <h2>Checkbox</h2>
+            <div className="code-view">
                 <Checkbox
                     label="Checkbox"
                     checked={isSelected}
                     onChange={(e) => setIsSelected(e.target.checked)}
                 />
             </div>
-            <div
-                className="component-box"
-                style={{ width: "300px" }}
-            >
-                <h2>Accordion</h2>
+            <h2>Accordion</h2>
+            <div className="code-view">
                 <Accordion
                     header="Accordion header"
                     view="card"

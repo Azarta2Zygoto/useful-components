@@ -1,0 +1,70 @@
+{
+    "description": "<code>NumberField</code> renders a labeled native <code>input type=\"number\"</code> and extends its standard number-input properties with step controls, field layout, validation, and adornments.",
+    "elements": [
+        {
+            "name": "label",
+            "description": "The label associated with the native number input."
+        },
+        {
+            "name": "value / defaultValue",
+            "description": "Controls the numeric value or sets its initial value. <code>value</code> accepts a number or <code>null</code>."
+        },
+        {
+            "name": "onValue",
+            "description": "Receives the parsed number whenever the field changes, or <code>null</code> when the input is empty."
+        },
+        {
+            "name": "hasStep",
+            "description": "Shows the increment and decrement controls when <code>true</code>. Defaults to <code>true</code>. Controls are hidden when the field is disabled, read-only, or has <code>step=\"any\"</code>."
+        },
+        {
+            "name": "step",
+            "description": "Sets the native stepping interval and controls the amount changed by the increment and decrement controls."
+        },
+        {
+            "name": "min / max",
+            "description": "Sets native numeric bounds. The step controls stop when the next step would exceed these bounds."
+        },
+        {
+            "name": "variant",
+            "description": "Sets the visual style to <code>outlined</code> (default) or <code>underlined</code>."
+        },
+        {
+            "name": "size",
+            "description": "Sets the field size to <code>sm</code>, <code>md</code> (default), or <code>lg</code>."
+        },
+        {
+            "name": "floatingLabel",
+            "description": "Places the label inside the field until it is focused or contains a value."
+        },
+        {
+            "name": "labelPosition",
+            "description": "Places a non-floating label at the <code>top</code> (default) or <code>left</code> of the input."
+        },
+        {
+            "name": "error",
+            "description": "Displays an error message, sets <code>aria-invalid</code>, and associates the message with the input through <code>aria-describedby</code>."
+        },
+        {
+            "name": "iconLeft / iconRight",
+            "description": "Adds an SVG component or icon configuration as a left or right adornment."
+        },
+        {
+            "name": "containerProps",
+            "description": "Passes native <code>div</code> properties to the field container."
+        },
+        {
+            "name": "Native number-input properties",
+            "description": "Properties such as <code>required</code>, <code>disabled</code>, <code>readOnly</code>, <code>placeholder</code>, and <code>step</code> are forwarded to the native input."
+        }
+    ],
+    "accessibility": {
+        "general": "The component uses a native number input and associates it with the supplied label using <code>for</code>/<code>id</code>. Native keyboard, form, and validation behavior is preserved.",
+        "elements": [
+            "Always provide a meaningful <code>label</code>; it is required by the component and remains available to assistive technologies.",
+            "Error messages are announced politely with <code>aria-live=\"polite\"</code> and linked to the input with <code>aria-describedby</code>.",
+            "Use <code>aria-invalid</code> when the input is invalid without a visible <code>error</code> message, or use <code>error</code> when feedback should be displayed.",
+            "The increment and decrement controls are an additional pointer interaction; the native number input remains available for keyboard and assistive-technology interaction."
+        ]
+    }
+}
