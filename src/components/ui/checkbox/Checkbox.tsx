@@ -9,7 +9,7 @@ import {
     useState,
 } from "react";
 
-import Required from "../required/required";
+import Required from "../required/Required";
 import { useTooltip } from "../tooltip/useTooltip.hook";
 import "./checkbox.css";
 import type { CheckboxProps } from "./checkbox.type";

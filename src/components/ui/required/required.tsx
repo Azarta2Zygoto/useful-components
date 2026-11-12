@@ -1,21 +1,16 @@
 import type { ReactNode } from "react";
 
 import "./required.css";
+import type { RequiredProps } from "./required.type";
 
-interface RequiredProps {
-    required?: boolean;
-}
-
-export default function Required({
-    required,
-}: Readonly<RequiredProps>): ReactNode {
+export default function Required({ required }: RequiredProps): ReactNode {
     if (!required) {
         return null;
     }
 
     return (
         <span
-            className="required"
+            className="uc-required"
             aria-hidden="true"
         >
             &nbsp;*

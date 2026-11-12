@@ -25,16 +25,13 @@ export default function Progress({
             style={
                 {
                     ...labelProps?.style,
-                    "--height": height,
+                    "--track-height": height,
                 } as CSSProperties
             }
         >
             {!hideLabel && label}
             {(dots || labels) && (
-                <div
-                    {...dotsProps}
-                    className={`progress-dots${dotsProps?.className ? ` ${dotsProps.className}` : ""}`}
-                >
+                <div {...dotsProps}>
                     {dots &&
                         dots.map((element) => (
                             <span

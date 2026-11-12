@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from "react";
 
 import type { ContainerProps, SizeableComponentProps } from "../types";
 
-type Checkbox = Omit<
+type CheckboxType = Omit<
     ComponentProps<"input">,
     | "size"
     | "type"
@@ -26,7 +26,7 @@ type Checkbox = Omit<
     | "src"
 >;
 
-export interface CheckboxProps extends Checkbox, SizeableComponentProps {
+export interface CheckboxProps extends CheckboxType, SizeableComponentProps {
     label: string;
     checked?: boolean;
     defaultChecked?: boolean;

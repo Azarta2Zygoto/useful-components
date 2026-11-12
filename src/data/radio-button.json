@@ -1,5 +1,5 @@
 {
-    "description": "<code>RadioGroup</code> renders a labeled <code>fieldset</code> containing native radio inputs. It extends native radio input properties with group layout and visual options.",
+    "description": "<code>RadioGroup</code> renders a labeled <code>fieldset</code> containing native radio inputs. It supports controlled and uncontrolled selection, group layout, visual options, validation feedback, and native radio input properties.",
     "elements": [
         {
             "name": "name",
@@ -14,12 +14,20 @@
             "description": "The available options. Each option requires a string <code>value</code> and can provide a React <code>label</code>, native input properties, and an individual <code>disabled</code> state."
         },
         {
-            "name": "selectedValue",
-            "description": "The currently selected option value, or <code>null</code> when no option is selected."
+            "name": "value",
+            "description": "Controls the selected option value. Use <code>null</code> when no option is selected. Omit it to use the uncontrolled mode."
+        },
+        {
+            "name": "defaultValue",
+            "description": "Sets the initially selected option value in uncontrolled mode."
         },
         {
             "name": "onChange",
-            "description": "Receives the native change event when an option changes. With <code>deselect</code>, the event can expose a null value when the selected option is cleared."
+            "description": "Receives the native change event when an option changes."
+        },
+        {
+            "name": "onValue",
+            "description": "Receives the selected option value directly. It receives <code>null</code> when <code>deselect</code> clears the selection."
         },
         {
             "name": "variant",
@@ -35,7 +43,7 @@
         },
         {
             "name": "required",
-            "description": "Requires a selection and applies the group invalid styling while <code>selectedValue</code> is <code>null</code>."
+            "description": "Marks every native radio input as required so the browser requires a selection."
         },
         {
             "name": "disabled",
@@ -47,7 +55,7 @@
         },
         {
             "name": "tooltip",
-            "description": "Displays each option's value as tooltip content on hover."
+            "description": "Displays tooltip content for an individual option on hover. Set it in the corresponding element definition."
         },
         {
             "name": "isIcon",
@@ -56,14 +64,31 @@
         {
             "name": "ripple",
             "description": "Enables or disables ripple feedback on the options. It is enabled by default except for the <code>transparent</code> variant."
+        },
+        {
+            "name": "error",
+            "description": "Displays an error message below the group, sets <code>aria-invalid</code>, and associates the message through <code>aria-describedby</code>."
+        },
+        {
+            "name": "errorProps",
+            "description": "Passes native paragraph properties to the error message element."
+        },
+        {
+            "name": "containerProps",
+            "description": "Passes native fieldset properties to the group container."
+        },
+        {
+            "name": "Native radio properties",
+            "description": "Native input properties such as <code>required</code>, <code>disabled</code>, <code>autoFocus</code>, and event handlers are forwarded to the radio inputs or group."
         }
     ],
     "accessibility": {
-        "general": "The component uses a native <code>fieldset</code>, <code>legend</code>, and radio inputs, preserving native keyboard navigation, group semantics, form behavior, and required validation.",
+        "general": "The component uses a native <code>fieldset</code>, <code>legend</code>, and radio inputs, preserving native keyboard navigation, group semantics, form behavior, and required validation. Error messages are announced politely and linked to the group.",
         "elements": [
             "Provide a meaningful <code>label</code> so the group has an accessible legend.",
             "Use a unique <code>name</code> for each independent radio group so browsers and assistive technologies treat the options as one choice set.",
-            "Keep meaningful text in each option's <code>label</code>. If a visual-only label is used, provide an accessible name through the option's native input properties.",
+            "Keep meaningful text in each option's <code>label</code> so every native radio has an accessible name.",
+            "Error content is associated with the group through <code>aria-describedby</code> and announced with <code>aria-live=\"polite\"</code>.",
             "Do not rely on color, ripple, tooltips, or the custom indicator alone to communicate the selected state; the native radio input remains the semantic source."
         ]
     }

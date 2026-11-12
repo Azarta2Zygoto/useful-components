@@ -1,3 +1,5 @@
+"use client";
+
 import type { ChangeEvent, MouseEvent, ReactNode } from "react";
 
 import "../button/button.css";
@@ -20,6 +22,7 @@ export default function RadioButton({
     className,
     containerProps,
     onChange,
+    onClick,
     ...props
 }: RadioButtonProps): ReactNode {
     const hasRipple = !disabled && (ripple ?? variant !== "transparent");
@@ -29,7 +32,8 @@ export default function RadioButton({
             disabled: !hasRipple,
         });
 
-    const handleDeselect = (event: MouseEvent<HTMLInputElement>) => {
+    const handleDeselect = (e: MouseEvent<HTMLInputElement>) => {
+        onClick?.(e);
         if (!deselect || !checked) return;
 
         if (onChange) {
@@ -39,7 +43,7 @@ export default function RadioButton({
                     value: null,
                     checked: false,
                 },
-                currentTarget: event.currentTarget,
+                currentTarget: e.currentTarget,
                 preventDefault: () => {},
                 stopPropagation: () => {},
             } as unknown as ChangeEvent<HTMLInputElement>;
@@ -54,7 +58,7 @@ export default function RadioButton({
             style={style}
             className={className}
             data-uc-variant={variant}
-            data-uc-tooltip={tooltip === true ? value : tooltip}
+            data-uc-tooltip={tooltip}
             onPointerDown={handlePointerDown}
         >
             <input
@@ -69,7 +73,7 @@ export default function RadioButton({
             />
             {isIcon && <span data-radio-indicator=""></span>}
             {hasRipple && <span {...rippleProps} />}
-            {label || value}
+            {label ?? value}
         </label>
     );
 }

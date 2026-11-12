@@ -9,13 +9,7 @@
             height: 1px;
             opacity: 0;
             overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-        }
-        & > input[type="radio"]:hover {
-            cursor: pointer;
-        }
-        & > input[type="radio"]:disabled {
-            cursor: not-allowed;
+            clip-path: rect(0, 0, 0, 0);
         }
 
         & > [data-radio-indicator] {
@@ -27,10 +21,7 @@
             border-radius: 50%;
             outline: 2px solid transparent;
             outline-offset: 3px;
-            transition:
-                outline-color 0.3s ease-in-out,
-                border-color 0.3s ease-in-out,
-                background-color 0.3s ease-in-out;
+            transition: outline-color 0.3s ease-in-out;
 
             &::after {
                 content: "";
@@ -43,7 +34,6 @@
             }
         }
         & > input[type="radio"]:checked + [data-radio-indicator] {
-            border-color: var(--icon);
             &::after {
                 transform: scale(1);
             }
@@ -60,13 +50,22 @@
     [data-uc-radio-group] {
         --border-disabled: var(--borderE-disabled);
         --text-disabled: var(--textE-disabled);
-        display: grid;
-        gap: 0.5rem;
         border-radius: 0.5rem;
         transition: border-color 0.3s ease-in-out;
 
         & > legend {
             transition: color 0.3s ease-in-out;
+        }
+        & > div {
+            --uc-gap: 0.5rem;
+            --uc-col-min: 8rem;
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: repeat(var(--uc-columns, 1), minmax(0, 1fr));
+
+            & > [data-uc-variant] {
+                overflow-wrap: anywhere;
+            }
         }
     }
     [data-uc-radio-group="false"] {

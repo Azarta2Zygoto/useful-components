@@ -1,63 +1,51 @@
 "use client";
 
 import {
+    type CSSProperties,
     type InputEvent,
-    type InputHTMLAttributes,
-    type LabelHTMLAttributes,
     type ReactNode,
-    useId,
+    useEffect,
+    useImperativeHandle,
     useLayoutEffect,
     useRef,
 } from "react";
 
+import type { SliderProps } from "./slide.type";
 import "./slider.css";
 
-type SliderProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type">;
-
-interface Props extends SliderProps {
-    label: string;
-    hideLabel?: boolean;
-    labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
-    width?: number | string;
-    side?: "top" | "left";
-    tick?: boolean;
-    unit?: string;
-    tooltipThumb?: "hover" | "always" | "never";
-}
-
 export default function Slider({
-    id,
+    ref,
     min = 0,
     max = 100,
     value,
     defaultValue = 0,
     label,
     hideLabel = false,
-    side,
-    width,
+    size,
+    position = "top",
+    height = "7px",
     tick = false,
     unit,
     labelProps,
     tooltipThumb = "hover",
+    "aria-valuetext": ariaValueText,
     onInput,
+    onValue,
     ...props
-}: Readonly<Props>): ReactNode {
-    const generatedId = useId();
-    const correctId = id || generatedId;
-
-    const correctWidth = typeof width === "number" ? `${width}px` : width;
-
+}: SliderProps): ReactNode {
     const containerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+
+    useImperativeHandle(ref, () => inputRef.current!, []);
 
     const sync = () => {
         const input = inputRef.current;
         const container = containerRef.current;
         if (!input || !container) return;
 
-        const lo = Number(input.min || 0);
+        const lo = Number(input.min);
         const hi = Number(input.max || 100);
-        const numberValue = Number(input.valueAsNumber || 0);
+        const numberValue = Number(input.valueAsNumber);
         const ratio = hi === lo ? 0 : (numberValue - lo) / (hi - lo);
         if (unit) {
             input.ariaValueText = `${String(numberValue)}${unit}`;
@@ -71,53 +59,76 @@ export default function Slider({
 
     useLayoutEffect(sync, [value, min, max, unit]);
 
+    useEffect(() => {
+        const form = inputRef.current?.form;
+        if (!form) return;
+        const onReset = () => setTimeout(sync, 0);
+        form.addEventListener("reset", onReset);
+        return () => form.removeEventListener("reset", onReset);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const handleInput = (e: InputEvent<HTMLInputElement>) => {
         sync();
         onInput?.(e);
+        onValue?.(e.currentTarget.valueAsNumber);
     };
 
-    const ariaValueText = unit
-        ? value === undefined
-            ? `${defaultValue}${unit}`
-            : `${value}${unit}`
-        : undefined;
-    const correctDefaultValue = value === undefined ? defaultValue : undefined;
+    const ariaText =
+        ariaValueText ??
+        (unit
+            ? value === undefined
+                ? `${defaultValue}${unit}`
+                : `${value}${unit}`
+            : undefined);
+    const isControlled = value !== undefined;
+    const current = isControlled ? Number(value) : Number(defaultValue);
+
+    const lo = Number(min);
+    const hi = Number(max);
+    const step = Number(props.step ?? 1);
+    const ratio =
+        hi === lo ? 0 : Math.min(1, Math.max(0, (current - lo) / (hi - lo)));
+    const steps = Math.max(1, Math.round((hi - lo) / step));
+    const text = `${current}${unit ?? ""}`;
 
     return (
         <label
             {...labelProps}
-            htmlFor={correctId}
-            id={`${correctId}-label`}
-            data-uc-side={side}
-            className={`slider-label${labelProps?.className ? ` ${labelProps.className}` : ""}`}
-            style={{ ...labelProps?.style, width: correctWidth }}
+            data-uc-slider={position}
+            data-uc-size={size}
         >
             {!hideLabel && label}
             <span
                 ref={containerRef}
-                className="slider-container"
+                className="uc-slider-container"
+                style={
+                    {
+                        "--percent": ratio,
+                        "--content": `"${text}"`,
+                        "--steps": steps,
+                        "--track-height": height,
+                    } as CSSProperties
+                }
             >
                 <input
                     {...props}
-                    id={correctId}
                     ref={inputRef}
                     type="range"
                     min={min}
                     max={max}
                     value={value}
-                    defaultValue={correctDefaultValue}
-                    aria-valuetext={ariaValueText}
+                    defaultValue={defaultValue}
+                    aria-valuetext={ariaText}
+                    aria-label={hideLabel ? label : props["aria-label"]}
                     onInput={handleInput}
-                    className="slider"
-                    aria-label={hideLabel ? label : undefined}
                 />
                 <span
-                    data-tick={tick ?? undefined}
-                    className="slider-track"
+                    data-uc-track={tick}
                     aria-hidden="true"
                 />
                 <span
-                    data-thumb={tooltipThumb}
+                    data-uc-thumb={tooltipThumb}
                     aria-hidden="true"
                 />
             </span>

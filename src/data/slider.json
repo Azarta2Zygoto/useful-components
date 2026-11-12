@@ -1,0 +1,74 @@
+{
+    "description": "<code>Slider</code> extends native range input properties and renders a labeled range control with optional value tooltips and tick marks.",
+    "elements": [
+        {
+            "name": "label",
+            "description": "The accessible label for the slider. This prop is required."
+        },
+        {
+            "name": "value / defaultValue",
+            "description": "Controls the current value or sets the initial value. Use <code>value</code> with <code>onValue</code> for a controlled slider."
+        },
+        {
+            "name": "onValue",
+            "description": "Called with the current numeric value whenever the slider changes."
+        },
+        {
+            "name": "min / max",
+            "description": "Set the minimum and maximum values of the range. Defaults are <code>0</code> and <code>100</code>."
+        },
+        {
+            "name": "step",
+            "description": "Sets the interval between selectable values and determines the spacing of tick marks when <code>tick</code> is enabled."
+        },
+        {
+            "name": "unit",
+            "description": "Appends a unit to the displayed thumb value and to the generated accessible value text."
+        },
+        {
+            "name": "tooltipThumb",
+            "description": "Controls the thumb value tooltip: <code>hover</code> (default), <code>always</code>, or <code>never</code>."
+        },
+        {
+            "name": "tick",
+            "description": "Displays tick marks based on the range and step."
+        },
+        {
+            "name": "hideLabel",
+            "description": "Hides the visible label while keeping it available through <code>aria-label</code>."
+        },
+        {
+            "name": "position",
+            "description": "Places the label at the <code>top</code> (default) or <code>left</code> of the slider."
+        },
+        {
+            "name": "size",
+            "description": "Sets the shared component size to <code>sm</code>, <code>md</code>, or <code>lg</code>."
+        },
+        {
+            "name": "height",
+            "description": "Sets the track height using a CSS length. Defaults to <code>7px</code>."
+        },
+        {
+            "name": "aria-valuetext",
+            "description": "Overrides the generated accessible value text. When <code>unit</code> is provided and this prop is omitted, the unit is appended automatically."
+        },
+        {
+            "name": "labelProps",
+            "description": "Passes native label properties to the outer container."
+        },
+        {
+            "name": "Native range properties",
+            "description": "Native range input properties such as <code>disabled</code>, <code>required</code>, <code>name</code>, and <code>id</code> are forwarded to the input."
+        }
+    ],
+    "accessibility": {
+        "general": "The component uses a native <code>input type=\"range\"</code> and associates it with the supplied label. Native keyboard interaction, range semantics, and form behavior are preserved.",
+        "elements": [
+            "Always provide a meaningful <code>label</code>. When <code>hideLabel</code> is enabled, the label is exposed through <code>aria-label</code>.",
+            "Use <code>aria-valuetext</code> when the numeric value needs a more descriptive spoken representation. The <code>unit</code> prop provides a simple automatic alternative.",
+            "The visual thumb tooltip and tick marks are supplementary; the native range input remains the semantic and keyboard-operable control.",
+            "The component sets <code>aria-valuetext</code> only when a unit is provided or an explicit value text is supplied."
+        ]
+    }
+}

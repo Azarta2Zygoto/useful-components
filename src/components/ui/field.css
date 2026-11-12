@@ -18,14 +18,15 @@
             padding: calc(var(--padding) / 2);
             font-size: calc(var(--font-size) * 1.1);
         }
-        & > [data-uc-field-error] {
-            min-height: var(--font-size);
-            max-height: var(--font-size);
-            color: var(--textE-danger);
-            font-size: calc(var(--font-size) * 0.75);
-            line-height: 1.2;
-            overflow-wrap: anywhere;
-        }
+    }
+
+    [data-uc-field-error] {
+        min-height: var(--font-size);
+        max-height: var(--font-size);
+        color: var(--textE-danger);
+        font-size: calc(var(--font-size) * 0.75);
+        line-height: 1.2;
+        overflow-wrap: anywhere;
     }
 
     [data-uc-field^="floating-"] {

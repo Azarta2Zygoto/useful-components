@@ -5,7 +5,7 @@ import {
     useId,
 } from "react";
 
-import Required from "../required/required";
+import Required from "../required/Required";
 import "./switch.css";
 
 interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {

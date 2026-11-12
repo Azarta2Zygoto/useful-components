@@ -13,7 +13,7 @@
 
             position: relative;
             width: 100%;
-            height: var(--height);
+            height: var(--track-height);
         }
 
         & > progress::after {
@@ -23,7 +23,7 @@
             left: 0;
             transform: translateY(-50%);
             width: 100%;
-            height: var(--height);
+            height: var(--track-height);
             background: linear-gradient(
                 to right,
                 var(--add-total-color) calc(var(--percent) * 100%),
@@ -47,12 +47,12 @@
             transform: translateX(-50%);
         }
         & > div > span::before {
-            --size: calc(var(--height) * 2);
+            --size: calc(var(--track-height) * 2);
 
             content: "";
             z-index: 2;
             position: absolute;
-            bottom: calc(var(--height) * -0.5 - var(--gap));
+            bottom: calc(var(--track-height) * -0.5 - var(--gap));
             left: 50%;
             transform: translateX(-50%) translateY(50%);
             width: var(--size);
@@ -61,6 +61,14 @@
             font-size: var(--font-size);
             border: 1px solid var(--bgE);
             border-radius: 100%;
+        }
+    }
+
+    @media (forced-colors: active) {
+        [data-uc-progress] {
+            & > progress::after {
+                display: none;
+            }
         }
     }
 }

@@ -11,7 +11,6 @@
         --border: transparent;
         --border-hover: transparent;
         --border-active: transparent;
-        --border-disabled: transparent;
         --outline: transparent;
         --outline-active: var(--outlineE);
         --box-shadow: var(--shadowE);
@@ -163,7 +162,6 @@
     }
 
     [data-uc-variant][aria-busy="true"] {
-        --outline-disabled: var(--outlineE);
         cursor: wait;
     }
     [data-uc-variant] > svg {

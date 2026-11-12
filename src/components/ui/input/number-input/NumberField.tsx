@@ -10,11 +10,11 @@ import {
 } from "react";
 
 import CadenasIcon from "../../assets/icons/cadenas.svg";
+import "../../field.css";
 import Icon from "../../icon/Icon";
 import { getIconElement } from "../../icon/utils";
-import Required from "../../required/required";
+import Required from "../../required/Required";
 import StepButton from "../../utils/step/StepButton";
-import "../field.css";
 import "../input.css";
 import type { NumberFieldProps } from "../input.type";
 import "./number.css";

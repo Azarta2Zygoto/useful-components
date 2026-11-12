@@ -7,11 +7,15 @@ import type {
     SVGProps,
 } from "react";
 
-export type IconType = ComponentType<SVGProps<SVGSVGElement>>;
-export type ContainerProps<
+type IntrinsicElements =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any> = "div",
-> = Omit<ComponentProps<T>, "children">;
+    keyof JSX.IntrinsicElements | JSXElementConstructor<any>;
+
+export type IconType = ComponentType<SVGProps<SVGSVGElement>>;
+export type ContainerProps<T extends IntrinsicElements = "div"> = Omit<
+    ComponentProps<T>,
+    "children"
+>;
 
 export interface IconProps extends Omit<
     SVGProps<SVGSVGElement>,
@@ -28,8 +32,8 @@ export interface LabelLayoutProps {
     labelProps?: ContainerProps<"label">;
 }
 
-export interface FieldProps {
-    containerProps?: ContainerProps;
+export interface FieldProps<T extends IntrinsicElements = "div"> {
+    containerProps?: ContainerProps<T>;
     error?: string;
     errorProps?: ComponentProps<"p">;
 }

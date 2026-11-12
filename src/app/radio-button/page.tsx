@@ -11,9 +11,9 @@ import RadioGroup from "@/components/ui/radio-button/RadioGroup";
 import radioButtonApi from "@/data/radio-button.json";
 
 const options = [
-    { value: "banana", label: "Banana" },
-    { value: "apple", label: "Apple" },
-    { value: "orange", label: "Orange" },
+    { value: "banana", label: "Banana", tooltip: "A yellow fruit" },
+    { value: "apple", label: "Apple", tooltip: "A red or green fruit" },
+    { value: "orange", label: "Orange", tooltip: "A citrus fruit" },
 ];
 
 export default function RadioButtonPage() {
@@ -26,15 +26,16 @@ export default function RadioButtonPage() {
             <p>
                 <code>RadioGroup</code> renders a group of native radio inputs
                 where users can select one option. It adds a legend, layout
-                controls, visual variants, and optional selection behavior.
+                controls, visual variants, validation feedback, and optional
+                selection behavior.
             </p>
 
             <Title level={2}>Basic radio group</Title>
             <p>
                 A group requires a unique <code>name</code>, a descriptive{" "}
                 <code>label</code>, and an <code>elements</code> array. Use{" "}
-                <code>selectedValue</code> and <code>onChange</code> to control
-                the selected option.
+                <code>value</code> and <code>onChange</code> to control the
+                selected option.
             </p>
             <CodeView
                 code={`const options = [
@@ -47,7 +48,7 @@ export default function RadioButtonPage() {
     name="fruit"
     label="Choose a fruit"
     elements={options}
-    selectedValue={selectedValue}
+    value={selectedValue}
     onChange={(event) => setSelectedValue(event.target.value)}
 />`}
             >
@@ -55,7 +56,7 @@ export default function RadioButtonPage() {
                     name="fruit"
                     label="Choose a fruit"
                     elements={options}
-                    selectedValue={selectedValue}
+                    value={selectedValue}
                     onChange={(event) => setSelectedValue(event.target.value)}
                 />
             </CodeView>
@@ -76,7 +77,7 @@ export default function RadioButtonPage() {
     size="lg"
     columns={2}
     elements={options}
-    selectedValue={selectedValue}
+    value={selectedValue}
     onChange={(event) => setSelectedValue(event.target.value)}
 />`}
             >
@@ -87,16 +88,20 @@ export default function RadioButtonPage() {
                     size="lg"
                     columns={2}
                     elements={options}
-                    selectedValue={selectedValue}
+                    value={selectedValue}
                     onChange={(event) => setSelectedValue(event.target.value)}
                 />
             </CodeView>
 
-            <Title level={2}>Required and disabled options</Title>
+            <Title level={2}>
+                Uncontrolled, required, and disabled options
+            </Title>
             <p>
-                Set <code>required</code> to require a selection. Disable the
-                whole group with <code>disabled</code>, or disable individual
-                options by adding <code>disabled: true</code> to an element.
+                Use <code>defaultValue</code> when the group should manage its
+                own selection. Set <code>required</code> to require a selection.
+                Disable the whole group with <code>disabled</code>, or disable
+                individual options by adding <code>disabled: true</code> to an
+                element.
             </p>
             <CodeView
                 code={`const optionsWithDisabled = [
@@ -108,8 +113,7 @@ export default function RadioButtonPage() {
     name="delivery"
     label="Delivery method"
     elements={optionsWithDisabled}
-    selectedValue={selectedValue}
-    onChange={(event) => setSelectedValue(event.target.value)}
+    defaultValue="standard"
     required
 />`}
             >
@@ -118,14 +122,13 @@ export default function RadioButtonPage() {
                     label="Delivery method"
                     elements={[
                         { value: "standard", label: "Standard" },
+                        { value: "large", label: "Large" },
                         {
                             value: "express",
                             label: "Express",
                             disabled: true,
                         },
                     ]}
-                    selectedValue={selectedValue}
-                    onChange={(event) => setSelectedValue(event.target.value)}
                     required
                 />
             </CodeView>
@@ -133,9 +136,10 @@ export default function RadioButtonPage() {
             <Title level={2}>Deselect and labels</Title>
             <p>
                 Set <code>deselect</code> to allow users to clear the selected
-                option by clicking it again. Each element can use a React node
-                as its <code>label</code>; otherwise its <code>value</code> is
-                displayed.
+                option by clicking it again. Use <code>onValue</code> to receive
+                the selected string or <code>null</code> directly. Each element
+                can use a React node as its <code>label</code>; otherwise its{" "}
+                <code>value</code> is displayed.
             </p>
             <CodeView
                 code={`<RadioGroup
@@ -145,10 +149,8 @@ export default function RadioButtonPage() {
         { value: "one", label: <strong>Choice one</strong> },
         { value: "two", label: "Choice two" },
     ]}
-    selectedValue={selectedValue}
-    onChange={(event) =>
-        setSelectedValue(event.target.value || null)
-    }
+    value={deselectValue}
+    onValue={setDeselectValue}
     deselect
 />`}
             >
@@ -162,39 +164,41 @@ export default function RadioButtonPage() {
                         },
                         { value: "two", label: "Choice two" },
                     ]}
-                    selectedValue={deselectValue}
-                    onChange={(event) =>
-                        setDeselectValue(event.target.value || null)
-                    }
+                    value={deselectValue}
+                    onValue={setDeselectValue}
                     deselect
                 />
             </CodeView>
 
-            <Title level={2}>Tooltips and visual indicators</Title>
+            <Title level={2}>Validation, tooltips, and visual indicators</Title>
             <p>
-                Tooltips can expose each option&apos;s value on hover with{" "}
-                <code>tooltip</code>. The radio indicator is enabled by default;
-                set <code>isIcon={"{false}"}</code> to render the options
-                without it. Ripple feedback is enabled by default except for the
-                transparent variant.
+                Set <code>error</code> to display validation feedback and mark
+                the group invalid. Tooltips are configured on individual
+                elements. The radio indicator is enabled by default; set{" "}
+                <code>isIcon={"{false}"}</code> to render the options without
+                it. Ripple feedback is enabled by default except for the{" "}
+                <code>transparent</code> variant.
             </p>
             <CodeView
                 code={`<RadioGroup
     name="tooltip-options"
     label="Choose an option"
-    elements={options}
-    selectedValue={selectedValue}
+    elements={[
+        { value: "banana", label: "Banana", tooltip: "A yellow fruit" },
+        { value: "apple", label: "Apple", tooltip: "A red or green fruit" },
+    ]}
+    value={selectedValue}
     onChange={(event) => setSelectedValue(event.target.value)}
-    tooltip
+    error={!selectedValue ? "Choose an option" : undefined}
 />`}
             >
                 <RadioGroup
                     name="tooltip-options"
                     label="Choose an option"
                     elements={options}
-                    selectedValue={selectedValue}
+                    value={selectedValue}
                     onChange={(event) => setSelectedValue(event.target.value)}
-                    tooltip
+                    error={!selectedValue ? "Choose an option" : undefined}
                 />
             </CodeView>
 

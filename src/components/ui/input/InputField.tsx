@@ -1,10 +1,10 @@
 import { type ReactNode, useId } from "react";
 
 import CadenasIcon from "../assets/icons/cadenas.svg";
+import "../field.css";
 import Icon from "../icon/Icon";
 import { getIconElement } from "../icon/utils";
-import Required from "../required/required";
-import "./field.css";
+import Required from "../required/Required";
 import "./input.css";
 import type { TextFieldProps } from "./input.type";
 
