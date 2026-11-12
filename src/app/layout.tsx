@@ -2,13 +2,13 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import type { PropsWithChildren } from "react";
 
-import ComponentProvider from "@ui/provider/ComponentProvider";
-
 import "./globals.css";
+import "./layers.css";
 
 import { GlobalProvider } from "@/components/GlobalProvider";
 import Header from "@/components/Header";
 import ToolbarWrapper from "@/components/ToolbarWrapper";
+import ComponentProvider from "@/components/ui/provider/Component.provider";
 import { APP_CONFIG, ASSETS } from "@/types/common.constant";
 import { buildAssetPath } from "@/utils/path.utils";
 

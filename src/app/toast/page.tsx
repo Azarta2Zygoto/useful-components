@@ -1,93 +1,181 @@
 "use client";
 
+import { useState } from "react";
+
 import Button from "@ui/button/Button";
 import { useToast } from "@ui/toast/Toast.context";
 
+import CodeView from "@/components/CodeView";
+import ComponentAccessibility from "@/components/ComponentAccessibility";
+import ComponentApi from "@/components/ComponentApi";
+import PageScroll from "@/components/PageScroll";
+import Title from "@/components/Title";
+import toastApi from "@/data/toast.json";
+
 export default function ToastPage() {
     const toast = useToast();
+    const [dismissibleId, setDismissibleId] = useState<number | null>(null);
 
-    const handleClickSuccess = () => {
-        toast.success("This is a success toast!");
-    };
+    return (
+        <PageScroll>
+            <Title level={1}>Toast</Title>
+            <p>
+                A toast displays a temporary message without interrupting the
+                current page. Toasts pause while hovered or focused and can
+                contain any React node.
+            </p>
 
-    const handleClickError = () => {
-        toast.error("This is an error toast!");
-    };
+            <Title level={2}>Toast types</Title>
+            <p>
+                Use the matching method on <code>useToast</code> to communicate
+                success, errors, information, or warnings.
+            </p>
+            <CodeView
+                code={`const toast = useToast();
 
-    const handleClickInfo = () => {
-        toast.info("This is an info toast!");
-    };
-
-    const handleClickWarning = () => {
-        toast.warning("This is a warning toast!");
-    };
-
-    const handleClickSuccess1000 = () => {
-        toast.success("This is a success toast of 1000ms!", { duration: 1000 });
-    };
-
-    const handleClickError5000 = () => {
-        toast.error("This is an error toast of 5000ms!", { duration: 5000 });
-    };
-
-    const handleClickInfo0 = () => {
-        toast.info("This is an info toast that will remain forever!", {
-            duration: 0,
-        });
-    };
-
-    const handleClickButton = () => {
-        toast.info(
-            <>
-                <span>More toast</span>
-                <Button
-                    variant="danger"
-                    onClick={() => {
-                        toast.success("This is a success toast!");
-                    }}
-                >
+toast.success("Changes saved");
+toast.error("Unable to save changes");
+toast.info("A new version is available");
+toast.warning("Your session will expire soon");`}
+                style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "1rem",
+                }}
+            >
+                <Button onClick={() => toast.success("Changes saved")}>
                     Success
                 </Button>
-            </>,
-            {
-                duration: 0,
-            },
-        );
-    };
-    return (
-        <main>
-            <h1>Toast</h1>
+                <Button onClick={() => toast.error("Unable to save changes")}>
+                    Error
+                </Button>
+                <Button onClick={() => toast.info("A new version is available")}>
+                    Info
+                </Button>
+                <Button
+                    onClick={() => toast.warning("Your session will expire soon")}
+                >
+                    Warning
+                </Button>
+            </CodeView>
+
+            <Title level={2}>Toast options</Title>
             <p>
-                A toast allows the user to send a message to the user. If the
-                user hover or the focus is in the toast, than the toast will not
-                disappear.
+                Pass options as the second argument to customize the duration,
+                exit animation, tooltip, size, labels, or close callback. A
+                duration of <code>0</code> keeps the toast visible until it is
+                dismissed.
             </p>
-            <div className="code-view">
-                <Button onClick={handleClickSuccess}>Success</Button>
-                <Button onClick={handleClickError}>Error</Button>
-                <Button onClick={handleClickInfo}>Info</Button>
-                <Button onClick={handleClickWarning}>Warning</Button>
-            </div>
-            <h2>Control time</h2>
-            <p>You can control the time the toast last. It can last forever!</p>
-            <div className="code-view">
-                <Button onClick={handleClickSuccess1000}>1 seconde</Button>
-                <Button onClick={handleClickError5000}>5 secondes</Button>
-                <Button onClick={handleClickInfo0}>Forever</Button>
-            </div>
-            <h2>Allow JSX props</h2>
-            <p>You can put whatever you want in the toast</p>
-            <div className="code-view">
-                <Button onClick={handleClickButton}>A button in a toast</Button>
-            </div>
-            <h2>Other global props</h2>
+            <CodeView
+                code={`toast.success("Saved briefly", { duration: 1000 });
+toast.info("This toast stays visible", { duration: 0 });
+toast.error("Custom exit animation", {
+    exitDuration: 1000,
+});`}
+                style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "1rem",
+                }}
+            >
+                <Button
+                    onClick={() =>
+                        toast.success("Saved briefly", { duration: 1000 })
+                    }
+                >
+                    One second
+                </Button>
+                <Button
+                    onClick={() =>
+                        toast.info("This toast stays visible", { duration: 0 })
+                    }
+                >
+                    Persistent
+                </Button>
+                <Button
+                    onClick={() =>
+                        toast.error("Custom exit animation", {
+                            exitDuration: 1000,
+                        })
+                    }
+                >
+                    Custom exit
+                </Button>
+            </CodeView>
+
+            <Title level={2}>React content and dismissal</Title>
             <p>
-                You can control the position of the toast, the exit duration and
-                the number of toasts that can be displayed at the same time.
-                <br />
-                These elements can but put on the provider but not in the toast
-                itself, so it will be the same for all the toasts.
+                The message accepts any React node. Each creation method
+                returns an identifier that can be passed to{" "}
+                <code>dismiss</code>.
             </p>
-        </main>
+            <CodeView
+                code={`const id = toast.info(
+    <>
+        <span>More information</span>
+        <Button onClick={() => toast.dismiss(id)}>
+            Dismiss
+        </Button>
+    </>,
+    { duration: 0 },
+);`}
+            >
+                <Button
+                    onClick={() => {
+                        const id = toast.info(
+                            <>
+                                <span>More information</span>
+                                <Button onClick={() => toast.dismiss(id)}>
+                                    Dismiss
+                                </Button>
+                            </>,
+                            { duration: 0 },
+                        );
+                        setDismissibleId(id);
+                    }}
+                >
+                    Show dismissible toast
+                </Button>
+                {dismissibleId !== null && (
+                    <Button
+                        variant="transparent"
+                        onClick={() => {
+                            toast.dismiss(dismissibleId);
+                            setDismissibleId(null);
+                        }}
+                    >
+                        Dismiss from outside
+                    </Button>
+                )}
+            </CodeView>
+
+            <Title level={2}>Provider configuration</Title>
+            <p>
+                Wrap the application with <code>ToastProvider</code> once.
+                Provider options apply globally and cannot be set when creating
+                an individual toast.
+            </p>
+            <CodeView
+                code={`<ToastProvider
+    duration={3000}
+    exitDuration={300}
+    position="tr"
+    toastNumberLimit={5}
+    tooltip
+>
+    {children}
+</ToastProvider>`}
+            />
+
+            <ComponentApi
+                title="Provider API"
+                elements={toastApi.provider}
+            />
+            <ComponentApi
+                title="Toast creation API"
+                elements={toastApi.toast}
+            />
+            <ComponentAccessibility elements={toastApi.accessibility} />
+        </PageScroll>
     );
 }

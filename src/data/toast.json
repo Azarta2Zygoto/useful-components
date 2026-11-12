@@ -1,0 +1,89 @@
+{
+    "provider": {
+        "description": "<code>ToastProvider</code> supplies the toast context and renders the toast viewport. Place it once around the part of the application that needs to create toasts.",
+        "elements": [
+            {
+                "name": "duration",
+                "description": "Default display duration in milliseconds. Defaults to <code>3000</code>. A value of <code>0</code> keeps toasts visible."
+            },
+            {
+                "name": "exitDuration",
+                "description": "Default exit animation duration in milliseconds. Defaults to <code>300</code>."
+            },
+            {
+                "name": "position",
+                "description": "Toast viewport position: <code>tl</code>, <code>tr</code> (default), <code>bl</code>, or <code>br</code>."
+            },
+            {
+                "name": "toastNumberLimit",
+                "description": "Maximum number of active toasts. Defaults to <code>5</code>; older active toasts are dismissed when the limit is exceeded."
+            },
+            {
+                "name": "tooltip",
+                "description": "Enables the close-button tooltip by default. Defaults to <code>true</code>."
+            },
+            {
+                "name": "size",
+                "description": "Default toast size using the shared <code>sm</code>, <code>md</code>, or <code>lg</code> values."
+            },
+            {
+                "name": "toastText",
+                "description": "Overrides the default accessible text for the close button and toast type icons."
+            },
+            {
+                "name": "children",
+                "description": "The application content rendered inside the provider."
+            }
+        ]
+    },
+    "toast": {
+        "description": "<code>useToast</code> returns methods for creating and dismissing toasts. It must be called within a <code>ToastProvider</code>.",
+        "elements": [
+            {
+                "name": "success / error / info / warning",
+                "description": "Creates a toast of the corresponding type from a React <code>message</code> and optional <code>ToastOptions</code>. Each method returns the toast identifier."
+            },
+            {
+                "name": "message",
+                "description": "The toast content. It accepts any React node, including text, markup, and interactive elements."
+            },
+            {
+                "name": "duration",
+                "description": "Per-toast display duration in milliseconds. A value of <code>0</code> keeps the toast visible until dismissed."
+            },
+            {
+                "name": "exitDuration",
+                "description": "Per-toast exit animation duration in milliseconds."
+            },
+            {
+                "name": "tooltip",
+                "description": "Enables or disables the close-button tooltip for this toast."
+            },
+            {
+                "name": "size",
+                "description": "Overrides the provider size for this toast."
+            },
+            {
+                "name": "toastText",
+                "description": "Overrides accessible labels for this toast's type icon and close button."
+            },
+            {
+                "name": "onClose",
+                "description": "Called when the toast begins dismissal, whether it is dismissed automatically or through <code>dismiss</code>."
+            },
+            {
+                "name": "dismiss",
+                "description": "Dismisses a toast using the identifier returned by a creation method."
+            }
+        ]
+    },
+    "accessibility": {
+        "general": "The provider renders a live toast viewport with <code>aria-live=\"polite\"</code> and <code>aria-relevant=\"additions\"</code>. Toasts pause while hovered or focused and can be dismissed with the Escape key or close button.",
+        "elements": [
+            "Keep toast messages concise and do not rely on color or the status icon alone to communicate meaning.",
+            "Provide accessible text for interactive content included in a toast, such as buttons or links.",
+            "Customize <code>toastText</code> when the default status or close labels do not fit the application language or context.",
+            "Use a persistent toast only when it contains a clear dismissal action or another way for users to close it."
+        ]
+    }
+}

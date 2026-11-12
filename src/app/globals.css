@@ -97,6 +97,12 @@
         border-radius: 0.25rem;
     }
 
+    [data-uc-size] {
+        svg {
+            width: var(--icon-size);
+            height: var(--icon-size);
+        }
+    }
     [data-uc-size="sm"] {
         --height: var(--height-sm);
         --font-size: var(--font-size-sm);

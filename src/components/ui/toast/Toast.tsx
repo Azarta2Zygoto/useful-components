@@ -7,33 +7,38 @@ import {
 } from "react";
 
 import ErrorIcon from "../assets/icons/error.svg";
+import InfoIcon from "../assets/icons/info.svg";
+import SuccessIcon from "../assets/icons/success.svg";
+import WarningIcon from "../assets/icons/warning.svg";
 import Button from "../button/Button";
 import Icon from "../icon/Icon";
-import type { ToastItem } from "./Toast.context";
-
-interface ToastProps {
-    toast: ToastItem;
-    exitDuration: number;
-    closeLabel: string;
-    tooltip: boolean;
-    onDismiss: (id: number) => void;
-    onPause: (id: number) => void;
-    onResume: (id: number) => void;
-}
+import type { ToastProps } from "./toast.type";
 
 const Toast = memo(function ToastView({
     toast,
+    size,
     exitDuration,
-    closeLabel,
+    toastText,
     tooltip,
     onDismiss,
     onPause,
     onResume,
-}: Readonly<ToastProps>): ReactNode {
+}: ToastProps): ReactNode {
     const interaction = useRef({ hovered: false, focused: false });
 
-    const label = toast.options?.toastText?.close ?? closeLabel;
+    const innerToastText = {
+        ...toast.options?.toastText,
+        ...toastText,
+    };
     const hasTooltip = toast.options?.tooltip ?? tooltip;
+    const correctedSize = toast.options?.size ?? size;
+
+    const toastElement = {
+        success: { icon: SuccessIcon, aria: innerToastText.success },
+        error: { icon: ErrorIcon, aria: innerToastText.error },
+        info: { icon: InfoIcon, aria: innerToastText.info },
+        warning: { icon: WarningIcon, aria: innerToastText.warning },
+    };
 
     const sync = () => {
         const { hovered, focused } = interaction.current;
@@ -53,8 +58,8 @@ const Toast = memo(function ToastView({
 
     return (
         <div
-            data-toast={toast.type}
-            data-toast-state={toast.state}
+            data-uc-toast={`${toast.type}-${toast.state}`}
+            data-uc-size={correctedSize}
             style={
                 {
                     "--toast-exit-duration": `${toast.options?.exitDuration ?? exitDuration}ms`,
@@ -81,11 +86,15 @@ const Toast = memo(function ToastView({
             }}
             onKeyDown={onKeyDown}
         >
+            <Icon
+                icon={toastElement[toast.type].icon}
+                aria-label={toastElement[toast.type].aria}
+            />
             {toast.message}
             <Button
-                data-uc-tooltip={hasTooltip ? label : undefined}
+                data-uc-tooltip={hasTooltip ? innerToastText.close : undefined}
                 variant="transparent"
-                aria-label={label}
+                aria-label={innerToastText.close}
                 onClick={() => onDismiss(toast.id)}
             >
                 <Icon icon={ErrorIcon} />

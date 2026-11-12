@@ -18,163 +18,144 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-width: 50px;
+        min-width: 3rem;
         height: 100%;
         padding: 1rem 0;
         background-color: var(--toolbar-bg-color);
-
         opacity: 1;
         visibility: visible;
         overflow-x: hidden;
-        overflow-y: auto; /* Allow scrolling */
+        overflow-y: auto;
         transition: all 0.3s ease;
         overscroll-behavior: contain;
-    }
-    .toolbar a {
-        text-decoration: none;
-    }
 
-    .toolbar .active-button {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-width: 35px;
-        max-width: 35px;
-        height: 35px;
-        padding: 0;
-        background-color: var(--toolbar-button-color);
-        color: white;
-        border: none;
-        border-radius: 8px;
+        & > .active-button {
+            flex-shrink: 0;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            background-color: var(--toolbar-button-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        & > .active-button:hover {
+            background-color: var(--toolbar-button-hover-color);
+        }
+        & > .active-button:active {
+            background-color: var(--toolbar-button-active-color);
+            outline: 2px solid var(--toolbar-button-active-color);
+        }
+        & > .active-button:focus-visible {
+            outline: 2px solid var(--toolbar-button-active-color);
+        }
 
-        cursor: pointer;
-        overflow: hidden;
-        transition:
-            background-color 0.3s ease,
-            min-width 0.3s ease;
-    }
-    .toolbar .active-button:hover {
-        background-color: var(--toolbar-button-hover-color);
-    }
-    .toolbar .active-button:active {
-        background-color: var(--toolbar-button-active-color);
-        outline: 2px solid var(--toolbar-button-active-color);
-    }
-    .toolbar .active-button:focus-visible {
-        outline: 2px solid var(--toolbar-button-active-color);
-    }
-    .toolbar .active-button i {
-        width: 20px;
-        height: 20px;
-        font-size: 20px;
-    }
+        & > nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.5rem;
+            width: 100%;
+        }
 
-    .toolbar .link {
-        position: relative;
-        display: inline-flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        min-width: 30px;
-        max-width: 30px;
-        height: 30px;
-        margin: 5px;
-        padding: 0;
-        background-color: var(--toolbar-button-color);
-        color: white;
-        border: none;
-        border-radius: 5px;
+        [data-uc-path] {
+            position: relative;
+            display: flex;
+            gap: 0.5rem;
+            min-width: 1.5rem;
+            max-width: 1.5rem;
+            padding: 0.25rem;
+            background-color: var(--toolbar-button-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition:
+                background-color 0.3s ease-in-out,
+                min-width 0.3s ease-in-out;
+        }
+        [data-uc-path]:hover {
+            background-color: var(--toolbar-button-hover-color);
+        }
+        [data-uc-path]:active {
+            background-color: var(--toolbar-button-active-color);
+            outline: 2px solid var(--toolbar-button-active-color);
+        }
+        [data-uc-path="true"],
+        [data-uc-path]:focus-visible {
+            outline: 2px solid var(--toolbar-button-active-color);
+        }
+        [data-uc-path] > [data-uc-expandable] {
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 0;
+            font-size: var(--font-size-sm);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: max-width 0.3s;
+        }
 
-        cursor: pointer;
-        transition:
-            background-color 0.3s ease,
-            min-width 0.3s ease;
-    }
-    .toolbar .link:hover {
-        background-color: var(--toolbar-button-hover-color);
-    }
-    .toolbar .link:active {
-        background-color: var(--toolbar-button-active-color);
-        outline: 2px solid var(--toolbar-button-active-color);
-    }
-    .toolbar .link.selected {
-        outline: 2px solid var(--toolbar-button-active-color);
-    }
-    .toolbar .link:focus-visible {
-        outline: 2px solid var(--toolbar-button-active-color);
-    }
+        [data-uc-path] > [data-uc-expandable="true"] {
+            justify-content: space-between;
+            & > button {
+                flex-shrink: 0;
+            }
+        }
+        [data-uc-path] i {
+            height: 16px;
+            font-size: 16px;
+        }
+        [data-uc-path].mini [data-uc-expandable] {
+            max-width: 0;
+        }
 
-    .toolbar .link span {
-        width: calc(100% - 25px);
-        max-width: 0;
-        margin-left: 25px;
-        font-size: 16px;
-        text-overflow: ellipsis;
+        .subpath {
+            width: 0px;
+            height: 0px;
+            margin: 0 0 0 10px;
+            padding: 0;
+            background-color: transparent;
+            list-style: none;
+            border-left: 2px solid var(--toolbar-button-active-color);
+            opacity: 0;
+            visibility: hidden;
+            overflow: visible;
 
-        white-space: nowrap;
-        overflow: hidden;
-        transition: max-width 0.3s;
-    }
-    .toolbar .link i {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        height: 16px;
-        font-size: 16px;
-
-        transition: left 0.3s ease;
-    }
-
-    .toolbar .link.mini {
-        min-width: 25px;
-        max-width: 25px;
-        height: 25px;
-    }
-    .toolbar .link.mini span {
-        max-width: 0;
-        font-size: 16px;
+            transition:
+                height 0.3s ease,
+                opacity 0.3s ease,
+                width 0.3s ease;
+        }
+        .subpath.active {
+            width: 80%;
+            opacity: 1;
+            visibility: visible;
+        }
     }
 
     .toolbar.active {
         min-width: 150px;
-    }
-    .toolbar.active .link {
-        min-width: 130px;
-    }
-    .toolbar.active .link .i {
-        left: 10%;
-    }
-    .toolbar.active .link span {
-        max-width: 120px;
-        transition: max-width 0.3s;
-    }
 
-    .toolbar .subpath {
-        width: 0px;
-        height: 0px;
-        margin: 0 0 0 10px;
-        padding: 0;
-        background-color: transparent;
-        list-style: none;
-        border-left: 2px solid var(--toolbar-button-active-color);
-        opacity: 0;
-        visibility: hidden;
-        overflow: visible;
+        [data-uc-path] {
+            min-width: 130px;
+            padding: 0.25rem 0.5rem;
+        }
+        [data-uc-path] span {
+            max-width: 120px;
+        }
 
-        transition:
-            height 0.3s ease,
-            opacity 0.3s ease,
-            width 0.3s ease;
-    }
-    .toolbar .subpath.active {
-        width: 80%;
-        opacity: 1;
-        visibility: visible;
-    }
-    .toolbar.active .subpath .link {
-        min-width: 118px;
+        .subpath [data-uc-path] {
+            min-width: 118px;
+        }
     }
     @media (max-width: 600px) {
         .toolbar {

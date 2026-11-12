@@ -1,8 +1,7 @@
-import type { PropsWithChildren, ReactNode } from "react";
+import type { ReactNode } from "react";
 
-import ToastContextProvider, {
-    type ToastProviderProps,
-} from "../toast/Toast.context";
+import ToastProvider from "../toast/Toast.context";
+import type { ToastProviderProps } from "../toast/toast.type";
 import TooltipLayer from "../tooltip/TooltipLayer";
 
 type ComponentProviderProps = ToastProviderProps;
@@ -14,19 +13,21 @@ export default function ComponentProvider({
     position,
     toastNumberLimit,
     toastText,
+    size,
     children,
-}: Readonly<PropsWithChildren<ComponentProviderProps>>): ReactNode {
+}: ComponentProviderProps): ReactNode {
     return (
-        <ToastContextProvider
+        <ToastProvider
             duration={duration}
             exitDuration={exitDuration}
             tooltip={tooltip}
             position={position}
             toastNumberLimit={toastNumberLimit}
             toastText={toastText}
+            size={size}
         >
             {children}
             <TooltipLayer />
-        </ToastContextProvider>
+        </ToastProvider>
     );
 }

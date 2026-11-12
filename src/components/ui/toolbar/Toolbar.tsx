@@ -1,41 +1,13 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-    Fragment,
-    type MouseEvent,
-    type ReactNode,
-    useEffect,
-    useState,
-} from "react";
+import { type MouseEvent, type ReactNode, useEffect, useState } from "react";
 
+import JustifyIcon from "../assets/icons/justify.svg";
+import Icon from "../icon/Icon";
+import ToolbarLink from "./ToolbarLink";
 import "./toolbar.css";
-
-interface ToolbarPaths {
-    name: string;
-    icon: string;
-    subpath?: ToolbarPaths[];
-    [key: string]: string | ToolbarPaths[] | undefined;
-}
-
-interface ToolbarProps {
-    toolbarData: ToolbarPaths[];
-    isActive?: boolean;
-    isActiveDefault?: boolean;
-    innerChange?: boolean;
-    tooltip?: boolean;
-    type?: "expand" | "menu";
-    text?: {
-        fermer?: string;
-        ouvrir?: string;
-    };
-    children?: React.ReactNode;
-    underChildren?: React.ReactNode;
-    displayDifferentName?: (name: string) => string;
-    getPath?: (path: string, subPath: string) => void;
-    getActive?: (active: boolean) => void;
-}
+import type { ToolbarProps } from "./toolbar.type";
 
 export default function Toolbar({
     toolbarData,
@@ -59,14 +31,8 @@ export default function Toolbar({
     );
     const [subPathOpen, setSubPathOpen] = useState<(boolean | null)[]>([]);
 
-    useEffect(() => {
-        if (isActiveDefault !== undefined) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
-            setInternaIsActive(isActiveDefault);
-            return;
-        }
-        setInternaIsActive(isActive);
-    }, [isActive, isActiveDefault]);
+    const isControlled = isActiveDefault !== undefined;
+    const internaIsActive = isControlled ? isActiveDefault : internIsActive;
 
     useEffect(() => {
         const newToolbarOpen: (boolean | null)[] = [];
@@ -107,209 +73,43 @@ export default function Toolbar({
     }
 
     function handleToolbarActivation() {
-        const newState = !internIsActive;
-        if (getActive) getActive(newState);
+        const newState = !internaIsActive;
+        getActive?.(newState);
         setInternaIsActive(newState);
     }
 
+    const textOpenClose = internaIsActive
+        ? text?.fermer || "close"
+        : text?.ouvrir || "open";
+
     return (
-        <div className={internIsActive ? "toolbar active" : "toolbar"}>
+        <div className={internaIsActive ? "toolbar active" : "toolbar"}>
             {innerChange && (
                 <button
                     className="active-button"
                     type="button"
                     onClick={handleToolbarActivation}
-                    data-uc-tooltip={
-                        internIsActive
-                            ? text?.fermer || "close"
-                            : text?.ouvrir || "open"
-                    }
-                    aria-label={
-                        internIsActive
-                            ? text?.fermer || "close"
-                            : text?.ouvrir || "open"
-                    }
+                    data-uc-tooltip={textOpenClose}
+                    aria-label={textOpenClose}
                 >
-                    <i className="bi bi-justify" />
+                    <Icon icon={JustifyIcon} />
                 </button>
             )}
             {children}
             <nav>
-                {toolbarData.map((item, index) => {
-                    const name = item.name;
-                    const key = name.toLowerCase().replace(/\s+/g, "-");
-                    return (
-                        <Fragment key={index}>
-                            <Link
-                                data-uc-tooltip={
-                                    displayDifferentName
-                                        ? displayDifferentName(name)
-                                        : name
-                                }
-                                key={index}
-                                id={`${key}-link-${index}`}
-                                className={
-                                    "link " +
-                                    (path === key ||
-                                    (path === "" && key === "accueil")
-                                        ? "selected"
-                                        : "")
-                                }
-                                href={key === "accueil" ? "//" : `/${key}`}
-                            >
-                                <i className={item.icon + " i"} />
-                                <span
-                                    style={{
-                                        width:
-                                            type === "expand" &&
-                                            item.subpath &&
-                                            item.subpath.length !== 0 &&
-                                            path !== key
-                                                ? "calc(100% - 50px)"
-                                                : undefined,
-                                        marginRight:
-                                            type === "expand" &&
-                                            item.subpath &&
-                                            item.subpath.length !== 0 &&
-                                            path !== key
-                                                ? "25px"
-                                                : undefined,
-                                    }}
-                                >
-                                    {displayDifferentName
-                                        ? displayDifferentName(name)
-                                        : name}
-                                    {type === "expand" &&
-                                        item.subpath &&
-                                        item.subpath.length !== 0 &&
-                                        path !== key && (
-                                            <button
-                                                type="button"
-                                                className="expand background-click"
-                                                onClick={(e) =>
-                                                    handleClickOpen(e, index)
-                                                }
-                                                aria-label={
-                                                    internIsActive
-                                                        ? text?.fermer ||
-                                                          "close"
-                                                        : text?.ouvrir || "open"
-                                                }
-                                                style={{
-                                                    display: internIsActive
-                                                        ? "block"
-                                                        : "none",
-                                                    width: "16px",
-                                                    height: "16px",
-                                                    position: "absolute",
-                                                    right: "0px",
-                                                    top: "0px",
-                                                    margin: "7px",
-                                                }}
-                                            >
-                                                <i
-                                                    className={
-                                                        subPathOpen[index]
-                                                            ? "bi bi-chevron-contract"
-                                                            : "bi bi-chevron-expand"
-                                                    }
-                                                />
-                                            </button>
-                                        )}
-                                </span>
-                            </Link>
-                            {type === "expand" &&
-                                item.subpath &&
-                                item.subpath.length !== 0 && (
-                                    <ul
-                                        id={"ul-" + key}
-                                        className={
-                                            path === key || subPathOpen[index]
-                                                ? "subpath active"
-                                                : "subpath"
-                                        }
-                                        style={{
-                                            height:
-                                                path === key ||
-                                                subPathOpen[index]
-                                                    ? `${35 * item.subpath.length}px`
-                                                    : "0px",
-                                        }}
-                                    >
-                                        {item.subpath &&
-                                            item.subpath.map(
-                                                (subItem, subIndex) => {
-                                                    const subKey = subItem.name
-                                                        .toLowerCase()
-                                                        .replace(/\s+/g, "-");
-                                                    return (
-                                                        <li
-                                                            key={subIndex}
-                                                            style={{
-                                                                height:
-                                                                    path ===
-                                                                        key ||
-                                                                    subPathOpen[
-                                                                        index
-                                                                    ]
-                                                                        ? `35px`
-                                                                        : "0px",
-                                                            }}
-                                                        >
-                                                            <Link
-                                                                data-uc-tooltip={
-                                                                    displayDifferentName
-                                                                        ? displayDifferentName(
-                                                                              subItem.name,
-                                                                          )
-                                                                        : subItem.name
-                                                                }
-                                                                key={
-                                                                    key +
-                                                                    "-" +
-                                                                    subKey
-                                                                }
-                                                                id={
-                                                                    key +
-                                                                    "-" +
-                                                                    subKey +
-                                                                    "-link-" +
-                                                                    subIndex
-                                                                }
-                                                                className={
-                                                                    "link mini" +
-                                                                    (key ===
-                                                                        path &&
-                                                                    subPath ===
-                                                                        subKey
-                                                                        ? " selected"
-                                                                        : "")
-                                                                }
-                                                                href={`/${key}/${subKey}`}
-                                                            >
-                                                                <i
-                                                                    className={
-                                                                        subItem.icon +
-                                                                        " i"
-                                                                    }
-                                                                />
-                                                                <span>
-                                                                    {displayDifferentName
-                                                                        ? displayDifferentName(
-                                                                              subItem.name,
-                                                                          )
-                                                                        : subItem.name}
-                                                                </span>
-                                                            </Link>
-                                                        </li>
-                                                    );
-                                                },
-                                            )}
-                                    </ul>
-                                )}
-                        </Fragment>
-                    );
-                })}
+                {toolbarData.map((item, index) => (
+                    <ToolbarLink
+                        key={item.name}
+                        item={item}
+                        index={index}
+                        currentPath={path}
+                        currentSubPath={subPath}
+                        displayDifferentName={displayDifferentName}
+                        type={type}
+                        handleClickOpen={handleClickOpen}
+                        subPathOpen={subPathOpen}
+                    />
+                ))}
             </nav>
             {underChildren}
         </div>

@@ -14,12 +14,16 @@ export interface ComponentApiType {
 
 interface Props {
     elements: ComponentApiType;
+    title?: string;
 }
 
-export default function ComponentApi({ elements }: Props): ReactNode {
+export default function ComponentApi({
+    elements,
+    title = "API",
+}: Props): ReactNode {
     return (
         <>
-            <Title level={2}>API</Title>
+            <Title level={2}>{title}</Title>
             <section>
                 <p dangerouslySetInnerHTML={{ __html: elements.description }} />
                 <ul className="component-api">

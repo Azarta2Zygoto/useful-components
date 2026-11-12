@@ -1,7 +1,6 @@
 "use client";
 
 import {
-    type PropsWithChildren,
     type ReactNode,
     createContext,
     useCallback,
@@ -14,72 +13,36 @@ import {
 
 import Toast from "./Toast";
 import "./toast.css";
-
-export type ToastType = "success" | "error" | "info" | "warning";
-
-interface ToastTextProps {
-    close?: string;
-}
+import type {
+    ToastContextValue,
+    ToastItem,
+    ToastOptions,
+    ToastProviderProps,
+    ToastRuntime,
+    ToastTextProps,
+    ToastType,
+} from "./toast.type";
 
 const defaultText: Required<ToastTextProps> = {
     close: "Close",
+    info: "Information",
+    success: "Success",
+    warning: "Warning",
+    error: "Error",
 };
-
-export interface ToastOptions {
-    duration?: number;
-    exitDuration?: number;
-    tooltip?: boolean;
-    toastText?: ToastTextProps;
-    onClose?: () => void;
-}
-
-type ToastState = "visible" | "exiting";
-
-export interface ToastItem {
-    id: number;
-    type: ToastType;
-    message: ReactNode;
-    options: ToastOptions | undefined;
-    state: ToastState;
-}
-
-interface ToastRuntime {
-    exitDuration: number;
-    remaining: number;
-    startedAt: number;
-    timer?: number;
-    exitTimer?: number;
-    onClose?: () => void;
-}
-
-interface ToastContextValue {
-    success: (message: ReactNode, options?: ToastOptions) => number;
-    error: (message: ReactNode, options?: ToastOptions) => number;
-    info: (message: ReactNode, options?: ToastOptions) => number;
-    warning: (message: ReactNode, options?: ToastOptions) => number;
-    dismiss: (id: number) => void;
-}
 
 const ToastContext = createContext<ToastContextValue | null>(null);
 
-export interface ToastProviderProps {
-    duration?: number;
-    exitDuration?: number;
-    tooltip?: boolean;
-    position?: "tl" | "tr" | "bl" | "br";
-    toastNumberLimit?: number;
-    toastText?: ToastTextProps;
-}
-
-export default function ToastContextProvider({
+export default function ToastProvider({
     children,
     duration = 3000,
     exitDuration = 300,
     tooltip = true,
     position = "tr",
     toastNumberLimit = 5,
+    size,
     toastText,
-}: Readonly<PropsWithChildren<ToastProviderProps>>): ReactNode {
+}: ToastProviderProps): ReactNode {
     const [toasts, setToasts] = useState<ToastItem[]>([]);
     const nextId = useRef(0);
     const runtimes = useRef(new Map<number, ToastRuntime>());
@@ -99,14 +62,10 @@ export default function ToastContextProvider({
     const dismiss = useCallback(
         (id: number) => {
             const runtime = runtimes.current.get(id);
-
-            // On retire éventuellement le toast
             if (!runtime) {
                 finishDismiss(id);
                 return;
             }
-
-            // toast en cours de suppression : on ne fait rien
             if (runtime.exitTimer !== undefined) {
                 return;
             }
@@ -244,13 +203,15 @@ export default function ToastContextProvider({
         [show, dismiss],
     );
 
-    const closeLabel = toastText?.close ?? defaultText.close;
+    const text = {
+        ...defaultText,
+        ...toastText,
+    };
     return (
         <ToastContext.Provider value={value}>
             {children}
             <div
-                className="toast-viewport"
-                data-position={position}
+                data-uc-toast-viewport={position}
                 aria-live="polite"
                 aria-relevant="additions"
             >
@@ -258,8 +219,9 @@ export default function ToastContextProvider({
                     <Toast
                         key={toast.id}
                         toast={toast}
+                        size={size}
                         exitDuration={exitDuration}
-                        closeLabel={closeLabel}
+                        toastText={text}
                         tooltip={tooltip}
                         onDismiss={dismiss}
                         onPause={pause}

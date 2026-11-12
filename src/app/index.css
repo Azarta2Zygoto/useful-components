@@ -80,7 +80,7 @@ p {
         box-shadow 0.3s ease-in-out;
 }
 .code-view > .code-view-button {
-    position: absolute;
+    position: absolute !important;
     top: 0.5rem;
     right: 0.5rem;
 }
