@@ -1,0 +1,53 @@
+{
+    "css": {
+        "description": "The CSS tooltip is enabled by adding a <code>data-uc-tooltip</code> attribute to an element. It is suitable for short, static supplementary content.",
+        "elements": [
+            {
+                "name": "data-uc-tooltip",
+                "description": "The text displayed by the tooltip on hover, focus-visible, or focus-within."
+            },
+            {
+                "name": "Trigger content",
+                "description": "The tooltip is rendered with a CSS pseudo-element, so the attribute value is text content rather than React content."
+            }
+        ]
+    },
+    "hook": {
+        "description": "<code>useTooltip</code> returns event handlers and <code>aria-describedby</code> props for an interactive trigger. The shared <code>TooltipLayer</code> renders and positions the active tooltip.",
+        "elements": [
+            {
+                "name": "content",
+                "description": "The tooltip content. It accepts any React node. The tooltip is disabled when the content is <code>null</code>, <code>undefined</code>, <code>false</code>, or an empty string."
+            },
+            {
+                "name": "placement",
+                "description": "The position relative to the anchor: <code>top</code>, <code>bottom</code> (default), <code>left</code>, <code>right</code>, <code>top-left</code>, <code>top-right</code>, <code>bottom-left</code>, <code>bottom-right</code>, <code>left-top</code>, <code>left-bottom</code>, <code>right-top</code>, or <code>right-bottom</code>."
+            },
+            {
+                "name": "delay",
+                "description": "The opening delay in milliseconds. Defaults to <code>0</code>. Keyboard focus opens immediately."
+            },
+            {
+                "name": "positionRef",
+                "description": "An optional ref to the HTMLElement used as the positioning anchor instead of the event target."
+            },
+            {
+                "name": "Returned props",
+                "description": "Spread the returned props onto the trigger. They include pointer/focus handlers and <code>aria-describedby</code>."
+            },
+            {
+                "name": "mergeTooltipProps",
+                "description": "Merges existing element handlers and attributes with the props returned by <code>useTooltip</code> without replacing either set of handlers."
+            }
+        ]
+    },
+    "accessibility": {
+        "general": "The hook associates the trigger with a shared element using <code>aria-describedby</code> and renders that element with <code>role=\"tooltip\"</code>. Tooltips are supplementary and should not be the only way to provide essential information.",
+        "elements": [
+            "Keep tooltip content short and supplemental. Put essential instructions, errors, or action names in the trigger's accessible name or surrounding content.",
+            "Use a visible label or an explicit <code>aria-label</code> for icon-only triggers; the tooltip does not replace the trigger's accessible name.",
+            "The hook ignores touch pointer entry, opens on visible keyboard focus, and closes on blur, pointer leave, or <code>Escape</code>.",
+            "The CSS attribute does not create an ARIA relationship automatically, so provide an accessible name independently when needed."
+        ]
+    }
+}

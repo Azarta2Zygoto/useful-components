@@ -1,12 +1,18 @@
 "use client";
 
-import { type CSSProperties, type ReactNode, useId, useState } from "react";
+import {
+    type CSSProperties,
+    type ReactNode,
+    useId,
+    useRef,
+    useState,
+} from "react";
 
 import CaretUpIcon from "../assets/icons/caret-up.svg";
 import Button from "../button/Button";
 import Icon from "../icon/Icon";
 import { useRipple } from "../ripple/useRipple.hook";
-import { useTooltip } from "../tooltip/useTooltip.hook";
+import useTooltip from "../tooltip/useTooltip.hook";
 import "./accordion.css";
 import type { AccordionProps, AccordionTextProps } from "./accordion.type";
 
@@ -42,6 +48,7 @@ export default function Accordion({
     const isControlled = open !== undefined;
     const hasRipple =
         view !== "card" ? false : (ripple ?? variant === "around");
+    const iconRef = useRef<SVGSVGElement>(null);
     const [internalOpen, setInternalOpen] = useState(defaultOpen ?? false);
     const { rippleProps, onPointerDown: handlePointerDown } =
         useRipple<HTMLButtonElement>({
@@ -61,6 +68,7 @@ export default function Accordion({
                 : texts.expand
             : undefined,
         delay: 300,
+        positionRef: iconRef,
     });
 
     const handleToggle = () => {
@@ -124,7 +132,10 @@ export default function Accordion({
                 >
                     {header}
                     {hasRipple && <span {...rippleProps} />}
-                    <Icon icon={CaretUpIcon} />
+                    <Icon
+                        ref={iconRef}
+                        icon={CaretUpIcon}
+                    />
                 </Button>
             )}
 

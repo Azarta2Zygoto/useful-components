@@ -1,53 +1,49 @@
 @layer components {
-    [data-uc-tooltip-layer] {
+    [data-uc-tooltip-layer],
+    [data-uc-tooltip]::after {
         z-index: 9999;
+        width: max-content;
+        max-width: min(15rem, calc(100vw - 1rem));
+        padding: 0.25rem 0.5rem;
+        background-color: var(--bgE);
+        color: var(--textE);
+        border: 1px solid transparent;
+        font-size: var(--font-size-md);
+        font-weight: normal;
+        border-radius: 0.25rem;
+        box-shadow: var(--shadowE);
+        opacity: 0;
+        pointer-events: none;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        overflow: hidden;
+        visibility: hidden;
+        transition:
+            opacity 300ms ease-in-out,
+            visibility 0s linear 300ms;
+    }
+    [data-uc-tooltip-layer] {
         position: fixed;
         top: 0;
         left: 0;
-        max-width: 15rem;
-        padding: 0.25rem 0.5rem;
-        background-color: var(--bgE);
-        color: var(--fg);
-        font-size: var(--font-size-md);
-        font-weight: normal;
-        white-space: nowrap;
-        border-radius: 0.25rem;
-        box-shadow: 1px 1px 2px 3px rgba(0, 0, 0, 0.1);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 300ms ease-in-out;
     }
-    [data-uc-tooltip-layer][data-visible="true"] {
-        opacity: 1;
-    }
-
     [data-uc-tooltip] {
         position: relative;
     }
     [data-uc-tooltip]::after {
         content: attr(data-uc-tooltip);
-        z-index: 9999;
         position: absolute;
         top: calc(100% + 0.5rem);
         left: 50%;
         transform: translate(-50%, 0);
-        max-width: 15rem;
-        padding: 0.25rem 0.5rem;
-        background-color: var(--bgE);
-        color: var(--fg);
-        font-size: var(--font-size-md);
-        font-weight: normal;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        border-radius: 0.25rem;
-        box-shadow: 1px 1px 2px 3px rgba(0, 0, 0, 0.1);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 150ms ease-in-out;
     }
+    [data-uc-tooltip-layer="true"],
     [data-uc-tooltip]:hover::after,
     [data-uc-tooltip]:focus-visible::after,
     [data-uc-tooltip]:focus-within::after {
         opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition-delay: 0s;
     }
 }

@@ -1,89 +1,110 @@
 @layer components {
-    .switch-container {
+    [data-uc-switch] {
         display: flex;
-        flex-direction: column;
+        flex-direction: row-reverse;
         align-items: center;
         gap: 0.5rem;
-        width: fit-content;
+        min-height: 1.5rem;
+        font-size: var(--font-size);
         cursor: pointer;
     }
-    .switch-container[data-uc-side="left"] {
-        flex-direction: row-reverse;
-    }
-    .switch-container[data-uc-side="right"] {
+    [data-uc-switch="right"] {
         flex-direction: row;
     }
-    .switch-container[data-uc-side="top"] {
-        flex-direction: column-reverse;
-    }
-    .switch-wrapper {
-        box-sizing: border-box;
+
+    [data-uc-switch-wrapper] {
+        --uc-color: var(--theme-main);
+        --bg-disabled: var(--bgE-disabled);
+
         position: relative;
-        width: 30px;
-        height: 12px;
-        margin: 5px 10px;
-        background-color: var(--element-color);
-        border-radius: 12px;
-        user-select: none;
+        width: calc(var(--padding) * 2);
+        height: calc(var(--padding));
+        margin: calc(var(--padding) * 0.5);
+        background-color: color-mix(in srgb, var(--uc-color) 50%, transparent);
+        border-radius: calc(var(--padding) * 0.5);
         transition: background-color 0.3s ease-in-out;
-    }
 
-    .switch-wrapper input[type="checkbox"] {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 0;
-        margin: 0;
-        padding: 0;
-        opacity: 0;
+        & > input[type="checkbox"] {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            opacity: 0;
+            cursor: inherit;
+        }
+        & > span {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translate(-50%, -50%);
+            width: calc(var(--padding) * 1.5);
+            height: calc(var(--padding) * 1.5);
+            background-color: var(--uc-color);
+            border-radius: 50%;
+            outline: 2px solid transparent;
+            outline-offset: 3px;
+            transition:
+                transform 0.3s ease-in-out,
+                outline 0.3s ease-in-out,
+                background-color 0.3s ease-in-out;
+        }
     }
-    .switch-wrapper span {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translate(-50%, -50%);
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        outline: 2px solid transparent;
-        outline-offset: 2px;
-        transition:
-            left 0.3s ease-in-out,
-            outline 0.3s ease-in-out,
-            background-color 0.3s ease-in-out;
+    [data-uc-switch-wrapper]:hover,
+    [data-uc-switch-wrapper]:has(:hover) {
+        background-color: color-mix(in srgb, var(--uc-color) 80%, transparent);
     }
-    .switch-container:not([aria-disabled="true"]):hover .switch-wrapper {
-        background-color: var(--add-light-color);
+    [data-uc-switch-wrapper]:focus-within {
+        background-color: color-mix(in srgb, var(--uc-color) 90%, transparent);
+        & > span {
+            outline-color: var(--fg);
+        }
     }
-
-    .switch-container:not([aria-disabled="true"]):hover .switch-wrapper span {
-        outline-color: var(--add-hard-color);
-    }
-    .switch-container:not([aria-disabled="true"]) .switch-wrapper:focus-within {
-        background-color: var(--add-mid-color);
-    }
-    .switch-container:not([aria-disabled="true"])
-        .switch-wrapper
-        input[type="checkbox"]:active
-        ~ span,
-    .switch-container:not([aria-disabled="true"])
-        .switch-wrapper
-        input[type="checkbox"]:focus-visible
-        ~ span {
-        outline-color: var(--fg);
-    }
-    .switch-wrapper input[type="checkbox"]:checked ~ span {
-        left: 100%;
-    }
-    .switch-container[aria-disabled="true"] {
-        cursor: default;
-    }
-    .switch-container[aria-disabled="true"] .switch-wrapper {
-        background-color: var(--bgE-disabled);
+    [data-uc-switch]:has(input[type="checkbox"]:disabled) {
         cursor: not-allowed;
     }
-    .switch-wrapper input[type="checkbox"]:disabled ~ span {
-        background-color: var(--bgE-disabled);
+    [data-uc-switch-wrapper]:has(> input[type="checkbox"]:disabled) {
+        background-color: var(--bg-disabled);
+        cursor: not-allowed;
+        & > span {
+            background-color: var(--bg-disabled);
+        }
+    }
+
+    [data-uc-switch-wrapper]:has(> input[type="checkbox"]:required) {
+        --uc-color: var(--borderE-danger);
+    }
+    [data-uc-switch-wrapper]:has(> input[type="checkbox"]:checked:required) {
+        --uc-color: var(--borderE-success);
+    }
+    [data-uc-switch-wrapper] > input[type="checkbox"]:checked ~ span {
+        transform: translate(calc(var(--padding) * 1.5), -50%);
+    }
+
+    @media (forced-colors: active) {
+        [data-uc-switch]:hover {
+            [data-uc-switch-wrapper] > span {
+                background-color: Highlight !important;
+            }
+        }
+        [data-uc-switch-wrapper] {
+            background-color: ButtonText !important;
+            transition: none;
+            & > span {
+                background-color: ButtonText !important;
+                outline: none;
+                transition: none;
+            }
+            & > input[type="checkbox"]:enabled:focus-visible ~ span {
+                background-color: Highlight !important;
+                outline: 2px solid Highlight !important;
+            }
+            &:has(> input[type="checkbox"]:disabled) {
+                background-color: GrayText !important;
+                & > span {
+                    background-color: GrayText !important;
+                }
+            }
+        }
     }
 }

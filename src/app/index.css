@@ -108,7 +108,7 @@ img {
 li code,
 p code {
     padding: 0.125rem 0.25rem;
-    background-color: var(--add-nothing-color);
+    background-color: var(--theme-main-minor);
     font-size: calc(var(--font-size) * 0.9);
     font-family: monospace;
     border-radius: 0.25rem;
@@ -135,7 +135,7 @@ p code {
     color: var(--border-color);
 }
 .frame.info {
-    --bg-color: var(--add-minor-color);
+    --bg-color: var(--theme-main-minor);
     --border-color: var(--outlineE);
 }
 .frame.warning {

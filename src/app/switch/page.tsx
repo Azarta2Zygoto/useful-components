@@ -2,180 +2,167 @@
 
 import { useState } from "react";
 
-import Switch from "@ui/switch/switch";
-
-import InfoFrame from "@/components/frames/InfoFrame";
-
-const radioList = [
-    true,
-    false,
-    true,
-    false,
-    true,
-    false,
-    true,
-    false,
-    true,
-    false,
-    true,
-];
+import CodeView from "@/components/CodeView";
+import ComponentAccessibility from "@/components/ComponentAccessibility";
+import ComponentApi from "@/components/ComponentApi";
+import PageScroll from "@/components/PageScroll";
+import Title from "@/components/Title";
+import Switch from "@/components/ui/switch/Switch";
+import switchApi from "@/data/switch.json";
 
 export default function SwitchPage() {
-    const [selectedValue, setSelectedValue] = useState<boolean[]>(radioList);
-
-    const handleChange = (value: boolean, index: number) => {
-        setSelectedValue((prev) => {
-            const newValue = [...prev];
-            newValue[index] = value;
-            return newValue;
-        });
-    };
+    const [enabled, setEnabled] = useState(false);
+    const [notifications, setNotifications] = useState(true);
 
     return (
-        <main>
-            <h1>Switch</h1>
+        <PageScroll>
+            <Title level={1}>Switch</Title>
             <p>
-                A switch allows the user to select an option between two choice,
-                this is an alternative way to do a checkbox.
+                A switch represents an on/off setting. It uses a native checkbox
+                with <code>role=&quot;switch&quot;</code> and supports labels,
+                state text, tooltips, and custom colors.
             </p>
 
-            <h2>Basic switch</h2>
-            <div
-                className="code-view"
+            <Title level={2}>Basic switch</Title>
+            <p>
+                Use <code>checked</code> with <code>onChange</code> for a
+                controlled switch. The switch can be positioned on the left or
+                right of its label.
+            </p>
+            <CodeView
+                code={`const [enabled, setEnabled] = useState(false);
+
+<Switch
+    label="Enable feature"
+    checked={enabled}
+    onChange={(event) => setEnabled(event.target.checked)}
+/>
+<Switch
+    label="Enable notifications"
+    position="right"
+    defaultChecked
+/>`}
                 style={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: "10px",
+                    gap: "1rem",
                 }}
             >
                 <Switch
-                    label="Enable feature left"
-                    checked={selectedValue[0]}
-                    onChange={(e) => handleChange(e.currentTarget.checked, 0)}
+                    label="Enable feature"
+                    checked={enabled}
+                    onChange={(event) => setEnabled(event.target.checked)}
                 />
                 <Switch
-                    label="Enable feature right"
-                    side="right"
-                    checked={selectedValue[1]}
-                    onChange={(e) => handleChange(e.currentTarget.checked, 1)}
+                    label="Enable notifications"
+                    position="right"
+                    checked={notifications}
+                    onChange={(event) => setNotifications(event.target.checked)}
                 />
-                <Switch
-                    label="Enable feature top"
-                    side="top"
-                    checked={selectedValue[2]}
-                    onChange={(e) => handleChange(e.currentTarget.checked, 2)}
-                />
-                <Switch
-                    label="Enable feature bottom"
-                    side="bottom"
-                    checked={selectedValue[3]}
-                    onChange={(e) => handleChange(e.currentTarget.checked, 3)}
-                />
-            </div>
+            </CodeView>
 
-            <h2>Switch with labels</h2>
-            <p>This type of switch informs which value is currently put.</p>
-            <div className="code-view">
+            <Title level={2}>State labels</Title>
+            <p>
+                Use <code>values</code> to display text for the current state.
+                Both <code>on</code> and <code>off</code> values are required.
+            </p>
+            <CodeView
+                code={`<Switch
+    label="Automatic updates"
+    defaultChecked
+    values={{ on: "On", off: "Off" }}
+/>`}
+            >
                 <Switch
-                    label="Enable feature left"
-                    checked={selectedValue[4]}
+                    label="Automatic updates"
+                    defaultChecked
                     values={{ on: "On", off: "Off" }}
-                    onChange={(e) => handleChange(e.currentTarget.checked, 4)}
                 />
-            </div>
+            </CodeView>
 
-            <h2>Disabled option</h2>
-            <p>As input or checkbox, a switch can be disabled.</p>
-            <div className="code-view">
+            <Title level={2}>Required and disabled states</Title>
+            <p>
+                Native <code>required</code> and <code>disabled</code> states
+                are forwarded to the checkbox. A required switch uses the
+                required state styling.
+            </p>
+            <CodeView
+                code={`<Switch
+    label="Accept the terms"
+    required
+/>
+<Switch
+    label="Feature unavailable"
+    checked
+    disabled
+/>`}
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1rem",
+                }}
+            >
                 <Switch
-                    label="Disabled switch on"
+                    label="Accept the terms"
+                    required
+                />
+                <Switch
+                    label="Feature unavailable"
                     checked
                     disabled
                 />
-                <Switch
-                    label="Disabled switch off"
-                    checked={false}
-                    disabled
-                />
-            </div>
+            </CodeView>
 
-            <h2>Required</h2>
+            <Title level={2}>Tooltips and colors</Title>
             <p>
-                The require allows the user to know when he needs to accept.
-                This is mainly usefull to indicate that the user need to accept
-                terms and conditions of use of your website.
+                A tooltip can be a single string or an object with separate{" "}
+                <code>on</code> and <code>off</code> messages. Use{" "}
+                <code>colors</code> to set the thumb color for the on and off
+                states.
             </p>
-
-            <div className="code-view">
+            <CodeView
+                code={`<Switch
+    label="Custom setting"
+    tooltip={{
+        on: "The setting is enabled",
+        off: "The setting is disabled",
+    }}
+    colors={["#18864b", "#9b2c2c"]}
+/>`}
+            >
                 <Switch
-                    id="switch-required"
-                    label="Required switch"
-                    checked={selectedValue[5]}
-                    onChange={(e) => handleChange(e.currentTarget.checked, 5)}
-                    required
-                />
-            </div>
-            <InfoFrame>
-                <p>
-                    The main difference with just a red/green switch is the
-                    label width the red &nbsp;<b style={{ color: "red" }}>*</b>
-                </p>
-            </InfoFrame>
-            <h2>Colors</h2>
-            <p>
-                You can change the color of the switch when it is on or off. You
-                can also use the &quot;opposite&quot; color to have a green/red
-                switch depending on the state.
-            </p>
-
-            <div className="code-view">
-                <Switch
-                    id="switch-colors"
-                    checked={selectedValue[6]}
-                    label="Custom colors"
-                    colors={["#4caf50", "#f44336"]}
-                    onChange={(e) => handleChange(e.currentTarget.checked, 6)}
-                />
-            </div>
-            <h2>Tooltip</h2>
-            <p>
-                You can add a tooltip to the switch, it will display the state
-                of the switch or a custom text when hovering the switch.
-            </p>
-            <div className="code-view">
-                <Switch
-                    label="Switch with tooltip"
-                    checked={selectedValue[7]}
-                    tooltip="informations about the switch"
-                    onChange={(e) => handleChange(e.currentTarget.checked, 7)}
-                />
-                <Switch
-                    label="Switch with tooltip"
-                    required
-                    checked={selectedValue[8]}
+                    label="Custom setting"
                     tooltip={{
-                        on: "This switch is on",
-                        off: "This switch is off",
+                        on: "The setting is enabled",
+                        off: "The setting is disabled",
                     }}
-                    onChange={(e) => handleChange(e.currentTarget.checked, 8)}
+                    colors={["#18864b", "#9b2c2c"]}
                 />
-            </div>
-            <h2>Without label</h2>
+            </CodeView>
+
+            <Title level={2}>Hidden label</Title>
             <p>
-                You can hide the label of the switch with the hideLabel
-                property. An aria-label is automatically added to the switch for
-                accessibility. It is recommended to use the tooltip property to
-                help the user understand what the switch is for.
+                Set <code>hideLabel</code> when the visible label should not be
+                rendered. The label is still exposed as the switch&apos;s{" "}
+                <code>aria-label</code>; provide a tooltip when visual context
+                is useful.
             </p>
-            <div className="code-view">
+            <CodeView
+                code={`<Switch
+    label="Sync data"
+    hideLabel
+    tooltip="Toggle data synchronization"
+/>`}
+            >
                 <Switch
-                    label="Switch without label"
+                    label="Sync data"
                     hideLabel
-                    checked={selectedValue[9]}
-                    tooltip="Switch without label"
-                    onChange={(e) => handleChange(e.currentTarget.checked, 9)}
+                    tooltip="Toggle data synchronization"
                 />
-            </div>
-        </main>
+            </CodeView>
+
+            <ComponentApi elements={switchApi} />
+            <ComponentAccessibility elements={switchApi.accessibility} />
+        </PageScroll>
     );
 }

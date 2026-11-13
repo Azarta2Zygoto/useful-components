@@ -1,4 +1,4 @@
-import type { Placement } from "./tooltip.store";
+import type { Placement } from "./tooltip.type";
 
 export function tooltipPlacement(
     element: DOMRect,
@@ -52,5 +52,7 @@ export function tooltipPlacement(
                 top: element.bottom + gap,
                 left: element.right + gap,
             };
+        default:
+            throw new Error(`Unknown tooltip placement: ${placement}`);
     }
 }

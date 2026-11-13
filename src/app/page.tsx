@@ -51,6 +51,27 @@ export default function HomePage() {
                     <p>You can put any JSX element here.</p>
                 </Accordion>
             </div>
+            <span style={{ backgroundColor: "var(--theme-main)" }}>
+                main-theme
+            </span>
+            <span style={{ backgroundColor: "var(--theme-main-hard)" }}>
+                main-theme-hard
+            </span>
+            <span style={{ backgroundColor: "var(--theme-main-mid)" }}>
+                main-theme-mid
+            </span>
+            <span style={{ backgroundColor: "var(--theme-main-light)" }}>
+                main-theme-light
+            </span>
+            <span style={{ backgroundColor: "var(--theme-main-minor)" }}>
+                main-theme-minor
+            </span>
+            <span style={{ backgroundColor: "var(--theme-main-few)" }}>
+                main-theme-few
+            </span>
+            <span style={{ backgroundColor: "var(--add-few-color)" }}>
+                add-hard-color
+            </span>
         </main>
     );
 }

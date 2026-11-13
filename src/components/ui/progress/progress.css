@@ -26,8 +26,8 @@
             height: var(--track-height);
             background: linear-gradient(
                 to right,
-                var(--add-total-color) calc(var(--percent) * 100%),
-                var(--fg2) 0
+                var(--theme-main) calc(var(--percent) * 100%),
+                light-dark(#b0b8c1, var(--fg2)) 0
             );
             border: 1px solid var(--bgE);
             border-radius: 999px;
@@ -57,7 +57,7 @@
             transform: translateX(-50%) translateY(50%);
             width: var(--size);
             height: var(--size);
-            background-color: var(--add-total-color);
+            background-color: var(--theme-main);
             font-size: var(--font-size);
             border: 1px solid var(--bgE);
             border-radius: 100%;

@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { MouseEvent, ReactNode } from "react";
 
 import Button from "../button/Button";
-import { useTooltip } from "../tooltip/useTooltip.hook";
+import useTooltip from "../tooltip/useTooltip.hook";
 import type { ToolbarPaths } from "./toolbar.type";
 
 interface ToolbarLinkProps {

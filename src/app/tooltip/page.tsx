@@ -1,110 +1,155 @@
 "use client";
 
 import Button from "@ui/button/Button";
-import { useTooltip } from "@ui/tooltip/useTooltip.hook";
+import useTooltip from "@ui/tooltip/useTooltip.hook";
+
+import CodeView from "@/components/CodeView";
+import ComponentAccessibility from "@/components/ComponentAccessibility";
+import ComponentApi from "@/components/ComponentApi";
+import PageScroll from "@/components/PageScroll";
+import Title from "@/components/Title";
+import tooltipApi from "@/data/tooltip.json";
 
 export default function TooltipPage() {
-    const bottomTooltip = useTooltip({
-        content: "Bottom tooltip",
-        placement: "bottom",
-    });
     const topTooltip = useTooltip({
-        content: "Top tooltip",
+        content: "Tooltip above the button",
         placement: "top",
     });
-    const leftTooltip = useTooltip({
-        content: "Left tooltip",
-        placement: "left",
-    });
     const rightTooltip = useTooltip({
-        content: "Right tooltip",
+        content: "Tooltip to the right",
         placement: "right",
     });
-    const tooltip300 = useTooltip({
-        content: "300ms delay tooltip",
+    const delayedTooltip = useTooltip({
+        content: "This tooltip appears after 300 milliseconds",
         delay: 300,
+    });
+    const bottomTooltip = useTooltip({
+        content: "Tooltip below the button",
+        placement: "bottom",
+    });
+    const leftTooltip = useTooltip({
+        content: "Tooltip on the left",
+        placement: "left",
     });
 
     return (
-        <main>
-            <h1>Tooltip</h1>
+        <PageScroll>
+            <Title level={1}>Tooltip</Title>
             <p>
-                A tooltip is a small pop-up box that appears when a user hovers
-                over an element, providing additional information or context
-                about that element. Tooltips are commonly used in user
-                interfaces to enhance usability and provide guidance to users.
+                A tooltip provides short, supplementary information when an
+                element is hovered or focused. This library offers a simple
+                CSS attribute and an advanced <code>useTooltip</code> hook.
             </p>
-            <h2>Basic tooltip</h2>
+
+            <Title level={2}>Basic tooltip</Title>
             <p>
-                You just need to put some texts into &quot;tooltip&quot; and,
-                most of the time, a tooltip entirely made with CSS appears
+                Add <code>data-uc-tooltip</code> to an element to display a CSS
+                tooltip on hover and keyboard focus. Add an accessible name
+                separately when the tooltip trigger has no visible name.
             </p>
-            <div className="code-view">
+            <CodeView
+                code={`<Button
+    data-uc-tooltip="Save your changes"
+    aria-label="Save your changes"
+>
+    Save
+</Button>
+<p data-uc-tooltip="Additional information">
+    Information
+</p>`}
+                style={{
+                    display: "flex",
+                    gap: "1rem",
+                    alignItems: "center",
+                }}
+            >
                 <Button
-                    variant="primary"
-                    data-uc-tooltip="This is a tooltip"
-                    aria-label="This is a tooltip"
+                    data-uc-tooltip="Save your changes"
+                    aria-label="Save your changes"
                 >
-                    Primary
+                    Save
                 </Button>
-                <Button
-                    variant="primary"
-                    data-uc-tooltip="This is a tooltip"
-                    aria-label="This is a tooltip"
-                    ripple={false}
-                >
-                    Primary
-                </Button>
-                <p data-uc-tooltip="This is a tooltip">Element</p>
-            </div>
-            <h2>More develop tooltip</h2>
+                <p data-uc-tooltip="Additional information">Information</p>
+            </CodeView>
+
+            <Title level={2}>Advanced tooltip</Title>
             <p>
-                Sometimes, the precedent solution is not working due to CSS
-                (skill) issues or want more control over the tooltip. Then, you
-                have a more advanced solution with a little bit of custom code.
-                You can use the &quot;useTooltip&quot; hook to create a tooltip
-                with more control over its behavior and appearance.
+                Use <code>useTooltip</code> when you need dynamic positioning,
+                a delay, or automatic ARIA association. Spread its returned
+                props onto the trigger element.
             </p>
-            <div className="code-view">
-                <Button
-                    variant="primary"
-                    {...bottomTooltip}
-                >
-                    Bottom
-                </Button>
-                <Button
-                    variant="primary"
-                    {...topTooltip}
-                >
-                    Top
-                </Button>
-                <Button
-                    variant="primary"
-                    {...leftTooltip}
-                >
-                    Left
-                </Button>
-                <Button
-                    variant="primary"
-                    {...rightTooltip}
-                >
-                    Right
-                </Button>
-            </div>
-            <h3>Delay</h3>
+            <CodeView
+                code={`const tooltip = useTooltip({
+    content: "Tooltip above the button",
+    placement: "top",
+});
+
+<Button {...tooltip}>Top tooltip</Button>`}
+                style={{
+                    display: "flex",
+                    gap: "1rem",
+                }}
+            >
+                <Button {...topTooltip}>Top tooltip</Button>
+                <Button {...rightTooltip}>Right tooltip</Button>
+            </CodeView>
+
+            <Title level={2}>Placements</Title>
             <p>
-                You can also add a delay to the tooltip, so it will appear after
-                a certain amount of time. This can be useful to avoid showing
-                the tooltip too quickly and annoying the user.
+                The hook supports <code>top</code>, <code>bottom</code>,{" "}
+                <code>left</code>, <code>right</code>, and corner placements
+                such as <code>top-left</code> and <code>bottom-right</code>.
+                The layer stays inside the viewport and can flip vertically
+                when needed.
             </p>
-            <div className="code-view">
-                <Button
-                    variant="primary"
-                    {...tooltip300}
-                >
-                    300ms delay
-                </Button>
-            </div>
-        </main>
+            <CodeView
+                code={`const tooltip = useTooltip({
+    content: "Tooltip on the left",
+    placement: "left",
+});
+
+<Button {...tooltip}>Left tooltip</Button>`}
+            >
+                <Button {...bottomTooltip}>Bottom</Button>
+                <Button {...leftTooltip}>Left</Button>
+            </CodeView>
+
+            <Title level={2}>Delay and keyboard behavior</Title>
+            <p>
+                Set <code>delay</code> in milliseconds to defer opening. Hook
+                tooltips open on pointer hover and visible keyboard focus,
+                close on blur or pointer leave, and close globally with{" "}
+                <code>Escape</code>.
+            </p>
+            <CodeView
+                code={`<Button
+    {...useTooltip({
+        content: "Delayed tooltip",
+        delay: 300,
+    })}
+>
+    Delayed tooltip
+</Button>`}
+            >
+                <Button {...delayedTooltip}>Delayed tooltip</Button>
+            </CodeView>
+
+            <Title level={2}>Custom anchor</Title>
+            <p>
+                Use <code>positionRef</code> when the tooltip should be
+                positioned relative to a different element than the trigger.
+                The ref must point to an <code>HTMLElement</code>.
+            </p>
+
+            <ComponentApi
+                title="CSS tooltip API"
+                elements={tooltipApi.css}
+            />
+            <ComponentApi
+                title="useTooltip API"
+                elements={tooltipApi.hook}
+            />
+            <ComponentAccessibility elements={tooltipApi.accessibility} />
+        </PageScroll>
     );
 }

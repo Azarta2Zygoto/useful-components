@@ -10,13 +10,9 @@ import {
 } from "react";
 
 import Required from "../required/Required";
-import { useTooltip } from "../tooltip/useTooltip.hook";
+import useTooltip, { mergeTooltipProps } from "../tooltip/useTooltip.hook";
 import "./checkbox.css";
 import type { CheckboxProps } from "./checkbox.type";
-
-function chain<E>(...f: Array<((e: E) => void) | undefined>) {
-    return (e: E) => f.forEach((fn) => fn?.(e));
-}
 
 export default function Checkbox({
     ref,
@@ -51,10 +47,15 @@ export default function Checkbox({
             ? checkmark(currentChecked, indeterminate)
             : checkmark;
 
-    const { "aria-describedby": tooltipDescribedBy, ...handlers } = useTooltip({
+    const tooltipProps = useTooltip({
         content: tooltip,
         delay: 300,
     });
+
+    const {
+        ["aria-describedby"]: tooltipDescribedBy,
+        ...mergedContainerProps
+    } = mergeTooltipProps(containerProps, tooltipProps);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (!isControlled) {
@@ -67,21 +68,11 @@ export default function Checkbox({
 
     return (
         <label
-            {...containerProps}
+            {...mergedContainerProps}
             data-uc-size={size}
             data-uc-checkbox={`${position}-${hideLabel ? "none" : "label"}`}
-            onMouseEnter={chain(
-                containerProps?.onMouseEnter,
-                handlers.onMouseEnter,
-            )}
-            onMouseLeave={chain(
-                containerProps?.onMouseLeave,
-                handlers.onMouseLeave,
-            )}
-            onFocus={chain(containerProps?.onFocus, handlers.onFocus)}
-            onBlur={chain(containerProps?.onBlur, handlers.onBlur)}
         >
-            {hideLabel ? null : (
+            {!hideLabel && (
                 <>
                     {label}
                     <Required required={required} />

@@ -45,8 +45,8 @@
             height: var(--track-height);
             background: linear-gradient(
                 to right,
-                var(--add-hard-color) calc(var(--percent) * 100%),
-                var(--fg2) 0
+                var(--theme-main-hard) calc(var(--percent) * 100%),
+                light-dark(#b0b8c1, var(--fg2)) 0
             );
             border-radius: 999px;
         }
@@ -81,7 +81,7 @@
             left: calc(var(--percent) * (100% - var(--thumb-size)));
             width: var(--thumb-size);
             height: var(--thumb-size);
-            background: var(--fg);
+            background: light-dark(#eee, var(--fg));
             border-radius: 50%;
             box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
             pointer-events: none;
@@ -92,13 +92,13 @@
         }
 
         & > input[type="range"]:enabled:hover ~ [data-uc-thumb] {
-            background-color: var(--add-mid2-color);
+            background-color: var(--theme-main-mid);
             scale: 1.1;
         }
         & > input[type="range"]:enabled:active ~ [data-uc-thumb],
         & > input[type="range"]:enabled:focus-visible ~ [data-uc-thumb] {
-            background-color: var(--add-total-color);
-            box-shadow: 0 0 3px 8px var(--add-mid-color);
+            background-color: var(--theme-main);
+            box-shadow: 0 0 3px 8px var(--theme-main-mid);
             scale: 1.1;
         }
         & > input[type="range"]:disabled {

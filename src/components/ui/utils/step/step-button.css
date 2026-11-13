@@ -19,11 +19,11 @@
             pointer-events: none;
         }
         .step-button:hover {
-            color: var(--add-mid-color);
+            color: var(--theme-main-mid);
         }
         .step-button:active {
             transform: scale(0.85);
-            color: var(--add-hard-color);
+            color: var(--theme-main-hard);
         }
     }
 

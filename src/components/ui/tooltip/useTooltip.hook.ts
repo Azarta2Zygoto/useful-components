@@ -2,34 +2,42 @@
 
 import {
     type FocusEvent,
+    type HTMLAttributes,
     type MouseEvent,
-    type ReactNode,
+    type PointerEvent,
+    useEffect,
     useId,
     useLayoutEffect,
     useMemo,
     useRef,
 } from "react";
 
-import { type Placement, tooltipStore } from "./tooltip.store";
+import { tooltipStore } from "./tooltip.store";
+import type { UseTooltipOptions } from "./tooltip.type";
 
-interface UseTooltipOptions {
-    content: ReactNode;
-    placement?: Placement;
-    delay?: number;
-}
-
-export function useTooltip({
+export default function useTooltip({
     content,
     placement = "bottom",
     delay = 0,
+    positionRef,
 }: UseTooltipOptions) {
     const id = useId();
     const contentRef = useRef(content);
-    const enabled = Boolean(content);
+    const enabled =
+        content !== null &&
+        content !== undefined &&
+        content !== false &&
+        content !== "";
 
     useLayoutEffect(() => {
         contentRef.current = content;
-    }, [content]);
+        tooltipStore.update(id, content);
+    }, [id, content]);
+
+    useEffect(() => {
+        if (!enabled) return;
+        return () => tooltipStore.release(id);
+    }, [id, enabled]);
 
     return useMemo(() => {
         if (!enabled) return {};
@@ -42,20 +50,54 @@ export function useTooltip({
                     ownerId: id,
                     content: contentRef.current,
                     placement,
-                    anchor: event.currentTarget,
+                    anchor: positionRef?.current ?? event.currentTarget,
                 },
                 openDelay,
             );
         };
 
-        const hide = () => tooltipStore.hide(id);
-
         return {
-            onMouseEnter: (e: MouseEvent<HTMLElement>) => open(e, delay),
-            onMouseLeave: hide,
-            onFocus: (e: FocusEvent<HTMLElement>) => open(e, 0),
-            onBlur: hide,
+            onPointerEnter: (e: PointerEvent<HTMLElement>) => {
+                if (e.pointerType !== "touch") open(e, delay);
+            },
+            onPointerLeave: (e: PointerEvent<HTMLElement>) => {
+                if (!e.currentTarget.matches(":focus-visible"))
+                    tooltipStore.hide(id);
+            },
+            onFocus: (e: FocusEvent<HTMLElement>) => {
+                if (e.currentTarget.matches(":focus-visible")) open(e, 0);
+            },
+            onBlur: (e: FocusEvent<HTMLElement>) => {
+                if (!e.currentTarget.matches(":hover"))
+                    tooltipStore.hide(id, true);
+            },
             "aria-describedby": id,
         };
-    }, [id, placement, delay, enabled]);
+    }, [enabled, id, placement, positionRef, delay]);
+}
+
+type Tip = ReturnType<typeof useTooltip>;
+
+export function mergeTooltipProps<P extends HTMLAttributes<HTMLElement>>(
+    own: P | undefined,
+    tip: Tip,
+) {
+    const chain =
+        <E>(a?: (e: E) => void, b?: (e: E) => void) =>
+        (e: E) => {
+            a?.(e);
+            b?.(e);
+        };
+    return {
+        ...own,
+        ...tip,
+        onPointerEnter: chain(own?.onPointerEnter, tip.onPointerEnter),
+        onPointerLeave: chain(own?.onPointerLeave, tip.onPointerLeave),
+        onFocus: chain(own?.onFocus, tip.onFocus),
+        onBlur: chain(own?.onBlur, tip.onBlur),
+        "aria-describedby":
+            [own?.["aria-describedby"], tip["aria-describedby"]]
+                .filter(Boolean)
+                .join(" ") || undefined,
+    };
 }

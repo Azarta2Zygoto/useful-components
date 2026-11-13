@@ -1,0 +1,62 @@
+{
+    "description": "<code>Switch</code> renders a labeled native checkbox with <code>role=\"switch\"</code> and extends checkbox input properties with switch-specific presentation and state options.",
+    "elements": [
+        {
+            "name": "label",
+            "description": "The accessible label for the switch. This prop is required."
+        },
+        {
+            "name": "checked / defaultChecked",
+            "description": "Controls the current state or sets the initial state. Use <code>checked</code> with <code>onChange</code> for a controlled switch, or <code>defaultChecked</code> for an uncontrolled switch."
+        },
+        {
+            "name": "onValue",
+            "description": "Called with the next boolean state whenever the switch changes."
+        },
+        {
+            "name": "values",
+            "description": "Displays state text outside the switch. Provide both <code>on</code> and <code>off</code> strings."
+        },
+        {
+            "name": "position",
+            "description": "Places the switch on the <code>left</code> (default) or <code>right</code> of the label."
+        },
+        {
+            "name": "size",
+            "description": "Sets the shared component size to <code>sm</code>, <code>md</code>, or <code>lg</code>."
+        },
+        {
+            "name": "tooltip",
+            "description": "Adds tooltip content as a string, or provides separate <code>on</code> and <code>off</code> messages."
+        },
+        {
+            "name": "colors",
+            "description": "Sets the thumb color as a tuple of <code>[onColor, offColor]</code>. Custom colors are not applied while disabled."
+        },
+        {
+            "name": "hideLabel",
+            "description": "Hides the visible label while keeping it available through <code>aria-label</code>."
+        },
+        {
+            "name": "required / disabled",
+            "description": "Forwards native required and disabled behavior to the checkbox input."
+        },
+        {
+            "name": "containerProps",
+            "description": "Passes native label properties to the outer switch container."
+        },
+        {
+            "name": "Native checkbox properties",
+            "description": "Other native checkbox properties such as <code>name</code>, <code>value</code>, <code>id</code>, and <code>aria-describedby</code> are forwarded to the input."
+        }
+    ],
+    "accessibility": {
+        "general": "The component uses a native checkbox with <code>role=\"switch\"</code> inside a label. Native keyboard interaction, focus behavior, form participation, and checked state semantics are preserved.",
+        "elements": [
+            "Always provide a meaningful <code>label</code>. When <code>hideLabel</code> is enabled, the label is exposed through <code>aria-label</code>.",
+            "Use <code>values</code> or a tooltip as supplemental state information; the switch role and checked state remain the primary semantic announcement.",
+            "Do not rely on custom colors, tooltips, or the visual thumb position alone to communicate whether the switch is on or off.",
+            "Use <code>required</code> only when the setting must be enabled for the form to be valid, and provide a clear label explaining the requirement."
+        ]
+    }
+}

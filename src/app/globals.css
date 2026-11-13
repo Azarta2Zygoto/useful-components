@@ -15,13 +15,33 @@
         --fg: light-dark(#1e1f20, #ededed);
         --fg2: light-dark(#2f3236, #b0b8c1);
 
-        --add-nothing-color: #00aaff20;
-        --add-minor-color: #00aaff40;
-        --add-light-color: #00aaff80;
-        --add-mid-color: #00aaffb0;
-        --add-mid2-color: #4ac3ff;
-        --add-hard-color: #00aaffd0;
-        --add-total-color: #00aaff;
+        --mix: light-dark(#fff, #000);
+        --theme-main: light-dark(#0184c5, #00aaff);
+        --theme-main-hard: color-mix(
+            in srgb,
+            var(--theme-main) 85%,
+            var(--mix) 15%
+        );
+        --theme-main-mid: color-mix(
+            in srgb,
+            var(--theme-main) 70%,
+            var(--mix) 30%
+        );
+        --theme-main-light: color-mix(
+            in srgb,
+            var(--theme-main) 50%,
+            var(--mix) 50%
+        );
+        --theme-main-minor: color-mix(
+            in srgb,
+            var(--theme-main) 30%,
+            var(--mix) 70%
+        );
+        --theme-main-few: color-mix(
+            in srgb,
+            var(--theme-main) 15%,
+            var(--mix) 85%
+        );
 
         --bgE: light-dark(#deeaf7, #2f3236);
         --bgE-hover: light-dark(#d3e2f3, #3f4347);
@@ -35,18 +55,18 @@
 
         --textE: light-dark(#1e1f20, #ededed);
         --textE-disabled: light-dark(#444, #aaa);
-        --textE-success: #80ff86;
-        --textE-danger: #ff8080;
+        --textE-success: light-dark(#107010, #80ff86);
+        --textE-danger: light-dark(#a00000, #ff8080);
 
-        --borderE: var(--add-light-color);
+        --borderE: var(--theme-main-light);
         --borderE-disabled: light-dark(#999, #646464);
-        --borderE-danger: #a00000;
-        --borderE-danger-active: #f71f1f;
+        --borderE-danger: light-dark(#f71f1f, #a00000);
+        --borderE-danger-active: light-dark(#a00000, #f71f1f);
         --borderE-warning: #d97706;
-        --borderE-success: #138313;
-        --borderE-success-active: #19c019;
+        --borderE-success: light-dark(#19c019, #107010);
+        --borderE-success-active: light-dark(#107010, #19c019);
 
-        --outlineE: var(--add-total-color);
+        --outlineE: var(--theme-main);
 
         --shadowE-c: #1167b10f;
         --shadowE-hollow-c: #1167b136;
@@ -54,27 +74,10 @@
         --shadowE-hollow: 0 0 0 3px var(--shadowE-hollow-c);
 
         --ui-scale: 1;
-
-        --font-size-sm: calc(0.875rem * var(--ui-scale));
-        --font-size-md: calc(1rem * var(--ui-scale));
-        --font-size-lg: calc(1.125rem * var(--ui-scale));
-
-        --height-sm: calc(2rem * var(--ui-scale));
-        --height-md: calc(2.625rem * var(--ui-scale));
-        --height-lg: calc(3.25rem * var(--ui-scale));
-
-        --padding-sm: calc(0.5rem * var(--ui-scale));
-        --padding-md: calc(0.875rem * var(--ui-scale));
-        --padding-lg: calc(1.25rem * var(--ui-scale));
-
-        --icon-size-sm: calc(var(--font-size-sm) * 1.25);
-        --icon-size-md: calc(var(--font-size-md) * 1.25);
-        --icon-size-lg: calc(var(--font-size-lg) * 1.25);
-
-        --height: var(--height-md);
-        --font-size: var(--font-size-md);
-        --padding: var(--padding-md);
-        --icon-size: var(--icon-size-md);
+        --height: calc(2.625rem * var(--ui-scale));
+        --font-size: calc(1rem * var(--ui-scale));
+        --padding: calc(0.875rem * var(--ui-scale));
+        --icon-size: calc(var(--font-size) * 1.25);
     }
 
     :root[data-theme="light"] {
@@ -93,7 +96,7 @@
         height: 0.4rem;
     }
     ::-webkit-scrollbar-thumb {
-        background: var(--add-total-color);
+        background: var(--theme-main);
         border-radius: 0.25rem;
     }
 
@@ -104,16 +107,14 @@
         }
     }
     [data-uc-size="sm"] {
-        --height: var(--height-sm);
-        --font-size: var(--font-size-sm);
-        --padding: var(--padding-sm);
-        --icon-size: var(--icon-size-sm);
+        --height: calc(2rem * var(--ui-scale));
+        --font-size: calc(0.875rem * var(--ui-scale));
+        --padding: calc(0.5rem * var(--ui-scale));
     }
     [data-uc-size="lg"] {
-        --height: var(--height-lg);
-        --font-size: var(--font-size-lg);
-        --padding: var(--padding-lg);
-        --icon-size: var(--icon-size-lg);
+        --height: calc(3.25rem * var(--ui-scale));
+        --font-size: calc(1.125rem * var(--ui-scale));
+        --padding: calc(1.25rem * var(--ui-scale));
     }
 
     * {

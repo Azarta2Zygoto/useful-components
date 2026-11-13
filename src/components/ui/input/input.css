@@ -147,12 +147,12 @@
     }
 
     [data-uc-input-wrapper="underlined"] {
-        --bg: var(--add-nothing-color);
-        --bg-hover: var(--add-nothing-color);
-        --bg-active: var(--add-nothing-color);
+        --bg: var(--theme-main-few);
+        --bg-hover: var(--theme-main-few);
+        --bg-active: var(--theme-main-few);
         --bg-disabled: transparent;
         --shadow-hover: var(--shadowE);
-        --shadow-active: 3px 3px 10px 5px var(--add-minor-color);
+        --shadow-active: 3px 3px 10px 5px var(--theme-main-minor);
         --outline-active: transparent;
 
         border-radius: 0;

@@ -26,10 +26,11 @@ type CheckboxType = Omit<
     | "src"
 >;
 
-export interface CheckboxProps extends CheckboxType, SizeableComponentProps {
+type CheckboxState =
+    | { checked: boolean; defaultChecked?: never }
+    | { checked?: undefined; defaultChecked?: boolean };
+interface CheckboxCore extends CheckboxType, SizeableComponentProps {
     label: string;
-    checked?: boolean;
-    defaultChecked?: boolean;
     indeterminate?: boolean;
     position?: "left" | "right";
     hideLabel?: boolean;
@@ -39,3 +40,4 @@ export interface CheckboxProps extends CheckboxType, SizeableComponentProps {
     containerProps?: ContainerProps<"label">;
     onValue?: (checked: boolean) => void;
 }
+export type CheckboxProps = CheckboxCore & CheckboxState;

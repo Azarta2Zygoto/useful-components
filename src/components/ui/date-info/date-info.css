@@ -10,7 +10,7 @@
         cursor: help;
         &:focus-visible {
             text-decoration: underline;
-            text-decoration-color: var(--add-total-color);
+            text-decoration-color: var(--theme-main);
         }
     }
 }

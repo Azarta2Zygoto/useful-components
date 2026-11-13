@@ -1,8 +1,8 @@
 @layer components {
     [data-uc-variant] {
-        --bg: var(--add-light-color);
-        --bg-hover: var(--add-mid-color);
-        --bg-active: var(--add-hard-color);
+        --bg: var(--theme-main-light);
+        --bg-hover: var(--theme-main-mid);
+        --bg-active: var(--theme-main-hard);
         --bg-disabled: var(--bgE-disabled);
         --text: var(--textE);
         --text-hover: var(--textE);
@@ -15,7 +15,7 @@
         --outline-active: var(--outlineE);
         --box-shadow: var(--shadowE);
         --icon: var(--textE);
-        --ripple-color: var(--add-total-color);
+        --ripple-color: var(--theme-main);
 
         position: relative;
         display: inline-flex;
@@ -70,9 +70,9 @@
     }
     [data-uc-variant][aria-pressed="true"],
     [data-uc-variant]:has(> input:checked) {
-        --bg: var(--add-hard-color);
-        --bg-hover: var(--add-mid2-color);
-        --bg-active: var(--add-mid2-color);
+        --bg: var(--theme-main-hard);
+        --bg-hover: var(--theme-main-mid);
+        --bg-active: var(--theme-main-mid);
         --outline: var(--outline-active);
         font-weight: bold;
     }
@@ -84,12 +84,12 @@
         --border: var(--borderE);
         --border-hover: var(--borderE);
         --border-active: var(--borderE);
-        --icon: var(--add-total-color);
+        --icon: var(--theme-main);
         &[aria-pressed="true"],
         &:has(> input:checked) {
-            --bg: var(--add-minor-color);
-            --bg-hover: var(--add-light-color);
-            --bg-active: var(--add-light-color);
+            --bg: var(--theme-main-minor);
+            --bg-hover: var(--theme-main-light);
+            --bg-active: var(--theme-main-light);
             --outline: transparent;
         }
     }
@@ -104,7 +104,7 @@
         --text: var(--textE-danger);
         --text-hover: var(--textE-danger);
         --text-active: var(--textE-danger);
-        --icon: var(--add-total-color);
+        --icon: var(--theme-main);
         --ripple-color: var(--borderE-danger);
         &[aria-pressed="true"],
         &:has(> input:checked) {
@@ -126,7 +126,7 @@
         --text: var(--textE-success);
         --text-hover: var(--textE-success);
         --text-active: var(--textE-success);
-        --icon: var(--add-total-color);
+        --icon: var(--theme-main);
         --ripple-color: var(--borderE-success);
         &[aria-pressed="true"],
         &:has(> input:checked) {
@@ -145,7 +145,7 @@
         --text-hover: var(--fg2);
         --text-active: var(--fg2);
         --bg-disabled: transparent;
-        --icon: var(--add-total-color);
+        --icon: var(--theme-main);
         min-height: 0;
         margin: 0;
         padding: calc(var(--padding) / 2);
@@ -172,7 +172,7 @@
         display: inline-block;
         width: 1em;
         height: 1em;
-        border: 2px solid var(--add-total-color);
+        border: 2px solid var(--theme-main);
         border-right-color: transparent;
         border-radius: 50%;
         animation: uc-spin 0.6s linear infinite;

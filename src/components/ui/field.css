@@ -24,6 +24,7 @@
         min-height: var(--font-size);
         max-height: var(--font-size);
         color: var(--textE-danger);
+        padding-top: 0.25rem;
         font-size: calc(var(--font-size) * 0.75);
         line-height: 1.2;
         overflow-wrap: anywhere;
@@ -67,7 +68,7 @@
             line-height: var(--label-size-active);
         }
         input:focus-visible ~ label {
-            color: var(--add-total-color);
+            color: var(--theme-main);
         }
         input:disabled ~ label {
             color: var(--textE-disabled);
