@@ -9,10 +9,11 @@ import toolbarJSON from "@/data/toolbar.json";
 
 export default function ToolbarWrapper(): ReactNode {
     const { openToolbar, setOpenToolbar } = useGlobal();
+
     return (
         <Toolbar
             toolbarData={toolbarJSON.toolbar}
-            isActive={openToolbar}
+            open={openToolbar}
             getActive={(active) => setOpenToolbar(active)}
         />
     );

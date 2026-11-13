@@ -103,7 +103,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
                         <ToolbarWrapper />
                         <div className="sub-body">
                             <Header />
-                            {children}
+                            <div className="content">{children}</div>
                         </div>
                     </ComponentProvider>
                 </GlobalProvider>

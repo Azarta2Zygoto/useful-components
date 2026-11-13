@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export interface ToolbarPaths {
     name: string;
     icon: string;
@@ -7,8 +9,8 @@ export interface ToolbarPaths {
 
 export interface ToolbarProps {
     toolbarData: ToolbarPaths[];
-    isActive?: boolean;
-    isActiveDefault?: boolean;
+    open?: boolean;
+    openDefault?: boolean;
     innerChange?: boolean;
     tooltip?: boolean;
     type?: "expand" | "menu";
@@ -16,8 +18,8 @@ export interface ToolbarProps {
         fermer?: string;
         ouvrir?: string;
     };
-    children?: React.ReactNode;
-    underChildren?: React.ReactNode;
+    children?: ReactNode;
+    underChildren?: ReactNode;
     displayDifferentName?: (name: string) => string;
     getPath?: (path: string, subPath: string) => void;
     getActive?: (active: boolean) => void;

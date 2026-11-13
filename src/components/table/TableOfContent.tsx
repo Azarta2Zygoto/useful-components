@@ -16,7 +16,7 @@ interface Props {
 
 export default function TableOfContents({ sharedRef }: Props) {
     const [items, setItems] = useState<TocItem[]>([]);
-    const [activeId, setActiveId] = useState<string>("");
+    const [activeId, setActiveId] = useState<Set<string>>(new Set());
 
     useEffect(() => {
         const container = sharedRef?.current;
@@ -41,21 +41,26 @@ export default function TableOfContents({ sharedRef }: Props) {
 
         setItems(generatedItems);
 
+        const visibility = new Map<string, boolean>();
         const observer = new IntersectionObserver(
             (entries) => {
-                const visibleEntries = entries
-                    .filter((entry) => entry.isIntersecting)
-                    .sort(
-                        (a, b) =>
-                            a.boundingClientRect.top - b.boundingClientRect.top,
+                entries.forEach((entry) => {
+                    visibility.set(
+                        (entry.target as HTMLElement).id,
+                        entry.isIntersecting,
                     );
+                });
 
-                if (visibleEntries.length > 0) {
-                    setActiveId(visibleEntries[0].target.id);
-                }
+                setActiveId(
+                    new Set(
+                        headings
+                            .filter((heading) => visibility.get(heading.id))
+                            .map((heading) => heading.id),
+                    ),
+                );
             },
             {
-                rootMargin: "-10% 0px -80% 0px",
+                rootMargin: "10px",
                 threshold: 0,
             },
         );
@@ -75,8 +80,6 @@ export default function TableOfContents({ sharedRef }: Props) {
             behavior: "smooth",
             block: "start",
         });
-
-        setActiveId(id);
     };
 
     if (items.length === 0) return null;
@@ -91,7 +94,7 @@ export default function TableOfContents({ sharedRef }: Props) {
                 {items.map((item) => (
                     <li
                         key={item.id}
-                        data-active={activeId === item.id}
+                        data-active={activeId.has(item.id) ? "true" : "false"}
                         className="toc-item"
                     >
                         <a
@@ -99,7 +102,7 @@ export default function TableOfContents({ sharedRef }: Props) {
                             className={`toc-level-${item.level}`}
                             onClick={(event) => handleClick(event, item.id)}
                             aria-current={
-                                activeId === item.id ? "location" : undefined
+                                activeId.has(item.id) ? "location" : undefined
                             }
                         >
                             {item.text}

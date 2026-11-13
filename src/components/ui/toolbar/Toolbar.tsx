@@ -11,8 +11,8 @@ import type { ToolbarProps } from "./toolbar.type";
 
 export default function Toolbar({
     toolbarData,
-    isActive = false,
-    isActiveDefault,
+    open = false,
+    openDefault,
     innerChange = true,
     type = "expand",
     text,
@@ -26,14 +26,18 @@ export default function Toolbar({
 
     const [path, setPath] = useState<string>("");
     const [subPath, setSubPath] = useState<string>("");
-    const [internIsActive, setInternaIsActive] = useState<boolean>(
-        isActiveDefault !== undefined ? isActiveDefault : isActive,
+    const [internIsOpen, setInternIsOpen] = useState<boolean>(
+        openDefault !== undefined ? openDefault : open,
     );
     const [subPathOpen, setSubPathOpen] = useState<(boolean | null)[]>([]);
+    const internalOpen = open ?? internIsOpen;
 
-    const isControlled = isActiveDefault !== undefined;
-    const internaIsActive = isControlled ? isActiveDefault : internIsActive;
-
+    console.log("Toolbar render", {
+        path,
+        subPath,
+        internalOpen,
+        subPathOpen,
+    });
     useEffect(() => {
         const newToolbarOpen: (boolean | null)[] = [];
         toolbarData.forEach((item) => {
@@ -67,23 +71,21 @@ export default function Toolbar({
         event.stopPropagation();
         event.preventDefault();
 
-        setSubPathOpen((prev) =>
-            prev.map((open, i) => (i === index ? !open : open)),
-        );
+        setSubPathOpen((prev) => prev.map((o, i) => (i === index ? !o : o)));
     }
 
     function handleToolbarActivation() {
-        const newState = !internaIsActive;
+        const newState = !internalOpen;
         getActive?.(newState);
-        setInternaIsActive(newState);
+        setInternIsOpen(newState);
     }
 
-    const textOpenClose = internaIsActive
+    const textOpenClose = internalOpen
         ? text?.fermer || "close"
         : text?.ouvrir || "open";
 
     return (
-        <div className={internaIsActive ? "toolbar active" : "toolbar"}>
+        <div className={internalOpen ? "toolbar active" : "toolbar"}>
             {innerChange && (
                 <button
                     className="active-button"
