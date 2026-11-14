@@ -25,10 +25,10 @@
             position: absolute;
             appearance: none;
             width: 100%;
+            inset: 0;
             margin: 0;
             cursor: pointer;
             opacity: 0;
-            inset: 0;
         }
         & > input[type="range"]::-webkit-slider-thumb {
             appearance: none;
@@ -56,7 +56,8 @@
             top: 50%;
             transform: translateY(-50%);
             height: calc(var(--track-height) + 0.125rem);
-
+            inset-inline: 0;
+            margin-inline: calc(var(--track-height) + 0.125rem);
             background:
                 linear-gradient(
                         to right,
@@ -72,8 +73,6 @@
                     var(--tick-color) calc(100% / var(--steps) - 1.5px),
                     var(--tick-color) calc(100% / var(--steps))
                 );
-            inset-inline: 0;
-            margin-inline: calc(var(--track-height) + 0.125rem);
         }
 
         & > [data-uc-thumb] {

@@ -38,5 +38,5 @@
         "vitest.config.mjs",
         "svgr.d.ts"
     ],
-    "exclude": ["node_modules", ".next", "legacy"]
+    "exclude": ["node_modules", ".next"]
 }

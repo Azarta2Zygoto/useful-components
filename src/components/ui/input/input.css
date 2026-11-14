@@ -63,6 +63,8 @@
             min-height: calc(var(--rows-min) * 1lh + var(--extra));
             height: auto;
             max-height: calc(var(--rows-max) * 1lh + var(--extra));
+            field-sizing: content;
+            resize: vertical;
             padding: var(--pad-block) var(--padding);
             background-color: transparent;
             color: inherit;
@@ -72,8 +74,6 @@
             border-radius: 0.5rem;
             outline: none;
             cursor: inherit;
-            field-sizing: content;
-            resize: vertical;
         }
 
         & > input::placeholder,

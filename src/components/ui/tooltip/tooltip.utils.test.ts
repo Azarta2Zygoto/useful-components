@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { tooltipPlacement } from "./tooltip.utils";
 import type { Placement } from "./tooltip.type";
+import { tooltipPlacement } from "./tooltip.utils";
 
 const element = {
     top: 100,
@@ -31,14 +31,20 @@ describe("tooltipPlacement", () => {
         ["bottom-right", { top: 150, left: 270 }],
         ["right-bottom", { top: 150, left: 270 }],
     ] as const)("calcule la position pour %s", (placement, expected) => {
-        expect(tooltipPlacement(element, placement, width, height, gap)).toEqual(
-            expected,
-        );
+        expect(
+            tooltipPlacement(element, placement, width, height, gap),
+        ).toEqual(expected);
     });
 
     it("lève une erreur pour un placement invalide", () => {
         expect(() =>
-            tooltipPlacement(element, "invalid" as Placement, width, height, gap),
+            tooltipPlacement(
+                element,
+                "invalid" as Placement,
+                width,
+                height,
+                gap,
+            ),
         ).toThrow("Unknown tooltip placement: invalid");
     });
 });

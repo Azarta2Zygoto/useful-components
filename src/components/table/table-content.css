@@ -9,12 +9,12 @@
     max-height: calc(100vh - 60px);
     padding: 1rem;
     background-color: var(--bgE);
+    backdrop-filter: blur(1rem);
     font-size: var(--font-size);
     border-left: 2px solid var(--borderE);
     border-radius: 0 0.5rem 0.5rem 0;
     opacity: 0.9;
     overflow-y: auto;
-    backdrop-filter: blur(1rem);
 }
 
 .table-of-contents > strong {

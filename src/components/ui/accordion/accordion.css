@@ -15,8 +15,8 @@
 
     [data-uc-accordion] {
         --accordion-padding: calc(var(--padding) / 4);
-        width: 100%;
 
+        width: 100%;
         min-height: 0;
         padding: var(--accordion-padding);
         border-radius: 0.5rem;
@@ -34,8 +34,8 @@
     }
     [data-uc-accordion="around"] {
         --accordion-padding: var(--padding);
-        border-radius: 0.5rem;
 
+        border-radius: 0.5rem;
         outline: 2px solid var(--theme-main);
         outline-offset: -2px;
     }

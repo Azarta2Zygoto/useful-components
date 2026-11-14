@@ -15,7 +15,6 @@
             height: var(--height);
             margin: 0;
             padding: 0 var(--padding-left) 0 var(--padding-right);
-
             border: none;
         }
         & > button[aria-haspopup="listbox"][aria-disabled="true"] {
@@ -33,10 +32,14 @@
         --x: 0;
         --y: -0.25rem;
         --size: calc(var(--icon-size) * 1.15);
+        position-area: bottom span-right;
+        position-try-fallbacks: flip-block, flip-inline;
 
         transform: translate(var(--x), var(--y)) scale(0.95);
+        transform-origin: top left;
         min-width: calc(anchor-size(width) - 1rem);
         max-height: min(20rem, 50vh);
+        inset: auto;
         margin: 0;
         padding: 0.5rem;
         background-color: var(--bgE);
@@ -44,20 +47,15 @@
         border-radius: 8px;
         outline: none;
         box-shadow: var(--shadowE);
-
         opacity: 0;
         pointer-events: none;
         overflow-y: auto;
+        overscroll-behavior: contain;
         transition:
             opacity 0.3s ease-in-out,
             transform 0.3s ease-in-out,
             display 0.3s allow-discrete,
             overlay 0.3s allow-discrete;
-        position-area: bottom span-right;
-        position-try-fallbacks: flip-block, flip-inline;
-        inset: auto;
-        overscroll-behavior: contain;
-        transform-origin: top left;
     }
 
     .uc-menu:popover-open {

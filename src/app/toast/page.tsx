@@ -52,11 +52,15 @@ toast.warning("Your session will expire soon");`}
                 <Button onClick={() => toast.error("Unable to save changes")}>
                     Error
                 </Button>
-                <Button onClick={() => toast.info("A new version is available")}>
+                <Button
+                    onClick={() => toast.info("A new version is available")}
+                >
                     Info
                 </Button>
                 <Button
-                    onClick={() => toast.warning("Your session will expire soon")}
+                    onClick={() =>
+                        toast.warning("Your session will expire soon")
+                    }
                 >
                     Warning
                 </Button>
@@ -108,9 +112,8 @@ toast.error("Custom exit animation", {
 
             <Title level={2}>React content and dismissal</Title>
             <p>
-                The message accepts any React node. Each creation method
-                returns an identifier that can be passed to{" "}
-                <code>dismiss</code>.
+                The message accepts any React node. Each creation method returns
+                an identifier that can be passed to <code>dismiss</code>.
             </p>
             <CodeView
                 code={`const id = toast.info(
