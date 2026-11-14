@@ -17,7 +17,10 @@ export default function InputPage() {
     const [value, setValue] = useState("");
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={inputApi.name}
+            link={inputApi.source}
+        >
             <Title level={1}>Text Input</Title>
             <p>
                 <code>InputField</code> is a labeled text field built on top of

@@ -17,13 +17,21 @@
     justify-content: flex-start;
     width: 100%;
     height: 100%;
-    padding: 0 clamp(0.25rem, 4vw, 2.5rem);
+    padding: 0 clamp(0.25rem, 6vw, 10rem);
 }
 main {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    max-width: 50rem;
+    max-width: 70vw;
+}
+@media (max-width: 768px) {
+    .content {
+        padding: 0 clamp(0.25rem, 3vw, 3rem);
+    }
+    main {
+        max-width: 100%;
+    }
 }
 header {
     position: relative;
@@ -204,4 +212,23 @@ p code {
     line-height: 1.35;
     border: 1px solid var(--borderE);
     border-radius: 1rem;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1rem 0;
+}
+footer > a {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--textE);
+    text-decoration: none;
 }

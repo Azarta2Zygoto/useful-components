@@ -1,4 +1,7 @@
 {
+    "name": "Checkbox",
+    "source": "src/components/ui/checkbox/Checkbox.tsx",
+    "since": "1.0.1",
     "description": "<code>Checkbox</code> extends the native <code>HTMLInputElement</code> checkbox properties and renders the input inside a label container.",
     "elements": [
         {

@@ -1,13 +1,15 @@
 .table-of-contents {
+    --font-size: 1.25rem;
     z-index: 10;
     position: fixed;
     top: 60px;
     right: 1rem;
-    width: 11rem;
+    width: max-content;
+    max-width: 18vw;
     max-height: calc(100vh - 60px);
     padding: 1rem;
     background-color: var(--bgE);
-    font-size: 0.875rem;
+    font-size: var(--font-size);
     border-left: 2px solid var(--borderE);
     border-radius: 0 0.5rem 0.5rem 0;
     opacity: 0.9;
@@ -51,7 +53,7 @@
 }
 .toc-item .toc-level-3 {
     padding-left: calc(var(--padding) + 1rem);
-    font-size: 0.8rem;
+    font-size: calc(var(--font-size) * 0.9);
 }
 
 @media (max-width: 1100px) {

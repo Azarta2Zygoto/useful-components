@@ -1,4 +1,7 @@
 {
+    "name": "Progress",
+    "source": "src/components/ui/progress/Progress.tsx",
+    "since": "1.0.1",
     "description": "<code>Progress</code> extends the native <code>HTMLProgressElement</code> properties and wraps the progress bar in a labeled container.",
     "elements": [
         {

@@ -1,4 +1,7 @@
 {
+    "name": "Button",
+    "source": "src/components/ui/button/Button.tsx",
+    "since": "1.0.1",
     "description": "<code>Button</code> extends the native<code>ButtonHTMLAttributes&lt;HTMLButtonElement&gt;</code>properties.",
     "elements": [
         {

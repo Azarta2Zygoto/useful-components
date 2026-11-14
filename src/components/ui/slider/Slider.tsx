@@ -18,7 +18,7 @@ export default function Slider({
     min = 0,
     max = 100,
     value,
-    defaultValue = 0,
+    defaultValue,
     label,
     hideLabel = false,
     size,

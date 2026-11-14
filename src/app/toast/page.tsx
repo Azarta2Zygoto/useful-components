@@ -17,7 +17,10 @@ export default function ToastPage() {
     const [dismissibleId, setDismissibleId] = useState<number | null>(null);
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={toastApi.name}
+            link={toastApi.source}
+        >
             <Title level={1}>Toast</Title>
             <p>
                 A toast displays a temporary message without interrupting the

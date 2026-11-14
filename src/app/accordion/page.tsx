@@ -10,7 +10,7 @@ import ComponentAccessibility from "@/components/ComponentAccessibility";
 import ComponentApi from "@/components/ComponentApi";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
-import accordionApi from "@/data/accordion.json";
+import accordionJson from "@/data/accordion.json";
 
 export default function AccordionPage() {
     const [openSimple, setOpenSimple] = useState(false);
@@ -18,7 +18,10 @@ export default function AccordionPage() {
     const [openControlled, setOpenControlled] = useState(false);
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={accordionJson.name}
+            link={accordionJson.source}
+        >
             <Title level={1}>Accordion</Title>
             <p>An accordion allows to hide then show content.</p>
 
@@ -155,8 +158,8 @@ export default function AccordionPage() {
                     <p>It has a different style.</p>
                 </Accordion>
             </CodeView>
-            <ComponentApi elements={accordionApi} />
-            <ComponentAccessibility elements={accordionApi.accessibility} />
+            <ComponentApi elements={accordionJson} />
+            <ComponentAccessibility elements={accordionJson.accessibility} />
         </PageScroll>
     );
 }

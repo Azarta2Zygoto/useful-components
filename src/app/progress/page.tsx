@@ -10,7 +10,10 @@ import progressApi from "@/data/progress.json";
 
 export default function ProgressPage() {
     return (
-        <PageScroll>
+        <PageScroll
+            name={progressApi.name}
+            link={progressApi.source}
+        >
             <Title level={1}>Progress</Title>
             <p>
                 <code>Progress</code> shows the completion state of a task using

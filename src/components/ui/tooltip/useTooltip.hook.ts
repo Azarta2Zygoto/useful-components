@@ -20,6 +20,7 @@ export default function useTooltip({
     placement = "bottom",
     delay = 0,
     positionRef,
+    hideGrace,
 }: UseTooltipOptions) {
     const id = useId();
     const contentRef = useRef(content);
@@ -51,6 +52,7 @@ export default function useTooltip({
                     content: contentRef.current,
                     placement,
                     anchor: positionRef?.current ?? event.currentTarget,
+                    hideGrace,
                 },
                 openDelay,
             );
@@ -73,7 +75,7 @@ export default function useTooltip({
             },
             "aria-describedby": id,
         };
-    }, [enabled, id, placement, positionRef, delay]);
+    }, [enabled, id, placement, positionRef, delay, hideGrace]);
 }
 
 type Tip = ReturnType<typeof useTooltip>;

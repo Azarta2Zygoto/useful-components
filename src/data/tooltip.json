@@ -1,4 +1,7 @@
 {
+    "name": "Tooltip",
+    "source": "src/components/ui/tooltip",
+    "since": "1.0.1",
     "css": {
         "description": "The CSS tooltip is enabled by adding a <code>data-uc-tooltip</code> attribute to an element. It is suitable for short, static supplementary content.",
         "elements": [
@@ -26,6 +29,10 @@
             {
                 "name": "delay",
                 "description": "The opening delay in milliseconds. Defaults to <code>0</code>. Keyboard focus opens immediately."
+            },
+            {
+                "name": "hideGrace",
+                "description": "The closing grace period in milliseconds after leaving the trigger. It allows the pointer to move from the trigger to the tooltip before it closes. Defaults to <code>100</code>."
             },
             {
                 "name": "positionRef",

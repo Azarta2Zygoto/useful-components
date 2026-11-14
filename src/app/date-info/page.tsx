@@ -14,7 +14,10 @@ export default function DateInfoPage() {
     const currentDate = new Date();
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={dateApi.name}
+            link={dateApi.source}
+        >
             <Title level={1}>Date Info</Title>
             <p>
                 This component allows to give more details on the date that it

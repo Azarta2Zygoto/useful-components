@@ -1,4 +1,7 @@
 {
+    "name": "Input",
+    "source": "src/components/ui/input/InputField.tsx",
+    "since": "1.0.1",
     "description": "<code>Input</code> renders a labeled native <code>input</code> and extends its standard input properties with field layout, validation, and adornment options.",
     "elements": [
         {

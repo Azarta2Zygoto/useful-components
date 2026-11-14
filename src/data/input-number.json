@@ -1,4 +1,7 @@
 {
+    "name": "Number Field",
+    "source": "src/components/ui/input/number-input/NumberField.tsx",
+    "since": "1.0.1",
     "description": "<code>NumberField</code> renders a labeled native <code>input type=\"number\"</code> and extends its standard number-input properties with step controls, field layout, validation, and adornments.",
     "elements": [
         {

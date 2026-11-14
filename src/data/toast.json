@@ -1,4 +1,7 @@
 {
+    "name": "Toast",
+    "source": "src/components/ui/toast/Toast.context.tsx",
+    "since": "1.0.1",
     "provider": {
         "description": "<code>ToastProvider</code> supplies the toast context and renders the toast viewport. Place it once around the part of the application that needs to create toasts.",
         "elements": [

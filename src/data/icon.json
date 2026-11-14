@@ -1,4 +1,7 @@
 {
+    "name": "Icon",
+    "source": "src/components/ui/icon/Icon.tsx",
+    "since": "1.0.1",
     "description": "<code>Icon</code> renders a supplied SVG component and extends native SVG properties, except for <code>width</code>, <code>height</code>, and <code>fill</code>, which are controlled by dedicated props.",
     "elements": [
         {

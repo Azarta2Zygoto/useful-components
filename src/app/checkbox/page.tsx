@@ -45,7 +45,10 @@ export default function CheckboxPage() {
     };
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={checkboxApi.name}
+            link={checkboxApi.source}
+        >
             <Title level={1}>Checkbox</Title>
             <p>
                 A checkbox lets users select or clear an option. It supports

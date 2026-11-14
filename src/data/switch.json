@@ -1,4 +1,7 @@
 {
+    "name": "Switch",
+    "source": "src/components/ui/switch/Switch.tsx",
+    "since": "1.0.1",
     "description": "<code>Switch</code> renders a labeled native checkbox with <code>role=\"switch\"</code> and extends checkbox input properties with switch-specific presentation and state options.",
     "elements": [
         {

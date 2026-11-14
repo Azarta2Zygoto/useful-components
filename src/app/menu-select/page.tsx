@@ -24,7 +24,10 @@ export default function MenuSelectPage() {
         useState<MenuSelectOption | null>(null);
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={menuSelectApi.name}
+            link={menuSelectApi.source}
+        >
             <Title level={1}>Menu Select</Title>
             <p>
                 <code>MenuSelect</code> is an accessible listbox component for

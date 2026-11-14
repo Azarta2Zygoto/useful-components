@@ -1,4 +1,7 @@
 {
+    "name": "Accordion",
+    "source": "src/components/ui/accordion/Accordion.tsx",
+    "since": "1.0.1",
     "description": "<code>Accordion</code> extends the native <code>HTMLAttributes&lt;HTMLDivElement&gt;</code> properties for its content region.",
     "elements": [
         {

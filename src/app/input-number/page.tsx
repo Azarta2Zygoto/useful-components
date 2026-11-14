@@ -16,7 +16,10 @@ export default function NumberInputPage() {
     const [value, setValue] = useState<number | null>(50);
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={numberInputApi.name}
+            link={numberInputApi.source}
+        >
             <Title level={1}>Number Field</Title>
             <p>
                 <code>NumberField</code> is a labeled numeric field built on the

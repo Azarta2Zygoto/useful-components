@@ -39,7 +39,9 @@ export default function ToolbarLink({
 
     const tooltip = useTooltip({
         content: label,
+        hideGrace: 0,
     });
+
     return (
         <>
             <Link

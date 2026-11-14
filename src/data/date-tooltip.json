@@ -1,4 +1,7 @@
 {
+    "name": "Date Info",
+    "source": "src/components/ui/date-info/DateInfo.tsx",
+    "since": "1.0.1",
     "description": "<code>DateTooltip</code> extends the native<code>TimeHTMLAttributes&lt;HTMLTimeElement&gt;</code>properties.",
     "elements": [
         {

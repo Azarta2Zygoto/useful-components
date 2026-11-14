@@ -20,7 +20,10 @@ import iconApi from "@/data/icon.json";
 
 export default function IconPage() {
     return (
-        <PageScroll>
+        <PageScroll
+            name={iconApi.name}
+            link={iconApi.source}
+        >
             <Title level={1}>Icon</Title>
             <p>
                 The <code>Icon</code> component renders an SVG icon with a

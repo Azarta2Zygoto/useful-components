@@ -32,7 +32,10 @@ export default function ButtonPage() {
     };
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={buttonApi.name}
+            link={buttonApi.source}
+        >
             <Title level={1}>Button</Title>
             <p>
                 A button is a clickable element that allows the user to perform

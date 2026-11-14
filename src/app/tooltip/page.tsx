@@ -23,6 +23,10 @@ export default function TooltipPage() {
         content: "This tooltip appears after 300 milliseconds",
         delay: 300,
     });
+    const graceTooltip = useTooltip({
+        content: "This tooltip remains open briefly while moving to it",
+        hideGrace: 300,
+    });
     const bottomTooltip = useTooltip({
         content: "Tooltip below the button",
         placement: "bottom",
@@ -33,12 +37,15 @@ export default function TooltipPage() {
     });
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={tooltipApi.name}
+            link={tooltipApi.source}
+        >
             <Title level={1}>Tooltip</Title>
             <p>
                 A tooltip provides short, supplementary information when an
-                element is hovered or focused. This library offers a simple
-                CSS attribute and an advanced <code>useTooltip</code> hook.
+                element is hovered or focused. This library offers a simple CSS
+                attribute and an advanced <code>useTooltip</code> hook.
             </p>
 
             <Title level={2}>Basic tooltip</Title>
@@ -74,9 +81,9 @@ export default function TooltipPage() {
 
             <Title level={2}>Advanced tooltip</Title>
             <p>
-                Use <code>useTooltip</code> when you need dynamic positioning,
-                a delay, or automatic ARIA association. Spread its returned
-                props onto the trigger element.
+                Use <code>useTooltip</code> when you need dynamic positioning, a
+                delay, or automatic ARIA association. Spread its returned props
+                onto the trigger element.
             </p>
             <CodeView
                 code={`const tooltip = useTooltip({
@@ -98,9 +105,9 @@ export default function TooltipPage() {
             <p>
                 The hook supports <code>top</code>, <code>bottom</code>,{" "}
                 <code>left</code>, <code>right</code>, and corner placements
-                such as <code>top-left</code> and <code>bottom-right</code>.
-                The layer stays inside the viewport and can flip vertically
-                when needed.
+                such as <code>top-left</code> and <code>bottom-right</code>. The
+                layer stays inside the viewport and can flip vertically when
+                needed.
             </p>
             <CodeView
                 code={`const tooltip = useTooltip({
@@ -117,9 +124,11 @@ export default function TooltipPage() {
             <Title level={2}>Delay and keyboard behavior</Title>
             <p>
                 Set <code>delay</code> in milliseconds to defer opening. Hook
-                tooltips open on pointer hover and visible keyboard focus,
-                close on blur or pointer leave, and close globally with{" "}
-                <code>Escape</code>.
+                tooltips open on pointer hover and visible keyboard focus, close
+                on blur or pointer leave, and close globally with{" "}
+                <code>Escape</code>. Use <code>hideGrace</code> to delay closing
+                after leaving the trigger, which gives the pointer time to reach
+                the tooltip.
             </p>
             <CodeView
                 code={`<Button
@@ -129,16 +138,29 @@ export default function TooltipPage() {
     })}
 >
     Delayed tooltip
+</Button>
+<Button
+    {...useTooltip({
+        content: "Tooltip with a closing grace period",
+        hideGrace: 300,
+    })}
+>
+    Grace period
 </Button>`}
+                style={{
+                    display: "flex",
+                    gap: "1rem",
+                }}
             >
                 <Button {...delayedTooltip}>Delayed tooltip</Button>
+                <Button {...graceTooltip}>Grace period</Button>
             </CodeView>
 
             <Title level={2}>Custom anchor</Title>
             <p>
                 Use <code>positionRef</code> when the tooltip should be
-                positioned relative to a different element than the trigger.
-                The ref must point to an <code>HTMLElement</code>.
+                positioned relative to a different element than the trigger. The
+                ref must point to an <code>HTMLElement</code>.
             </p>
 
             <ComponentApi

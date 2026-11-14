@@ -14,7 +14,10 @@ export default function SliderPage() {
     const [value, setValue] = useState(50);
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={sliderApi.name}
+            link={sliderApi.source}
+        >
             <Title level={1}>Slider</Title>
             <p>
                 <code>Slider</code> lets users select a numeric value from a

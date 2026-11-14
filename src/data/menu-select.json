@@ -1,4 +1,7 @@
 {
+    "name": "Menu Select",
+    "source": "src/components/ui/menu-select/MenuSelect.tsx",
+    "since": "1.0.1",
     "description": "<code>MenuSelect</code> renders a labeled listbox button for selecting one option from a list.",
     "elements": [
         {

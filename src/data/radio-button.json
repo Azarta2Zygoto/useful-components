@@ -1,4 +1,7 @@
 {
+    "name": "Radio Button",
+    "source": "src/components/ui/radio-button/RadioGroup.tsx",
+    "since": "1.0.1",
     "description": "<code>RadioGroup</code> renders a labeled <code>fieldset</code> containing native radio inputs. It supports controlled and uncontrolled selection, group layout, visual options, validation feedback, and native radio input properties.",
     "elements": [
         {

@@ -1,4 +1,7 @@
 {
+    "name": "Slider",
+    "source": "src/components/ui/slider/Slider.tsx",
+    "since": "1.0.1",
     "description": "<code>Slider</code> extends native range input properties and renders a labeled range control with optional value tooltips and tick marks.",
     "elements": [
         {

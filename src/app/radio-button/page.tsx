@@ -21,7 +21,10 @@ export default function RadioButtonPage() {
     const [deselectValue, setDeselectValue] = useState<string | null>(null);
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={radioButtonApi.name}
+            link={radioButtonApi.source}
+        >
             <Title level={1}>Radio button</Title>
             <p>
                 <code>RadioGroup</code> renders a group of native radio inputs

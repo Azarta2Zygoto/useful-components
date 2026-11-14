@@ -21,6 +21,7 @@ export interface TooltipState {
     content: ReactNode;
     placement: Placement;
     anchor: TooltipElement | null;
+    hideGrace?: number;
 }
 
 export interface UseTooltipOptions {
@@ -28,4 +29,5 @@ export interface UseTooltipOptions {
     placement?: Placement;
     delay?: number;
     positionRef?: RefObject<TooltipElement | null>;
+    hideGrace?: number;
 }

@@ -5,6 +5,7 @@ import { type MouseEvent, type ReactNode, useEffect, useState } from "react";
 
 import JustifyIcon from "../assets/icons/justify.svg";
 import Icon from "../icon/Icon";
+import useTooltip from "../tooltip/useTooltip.hook";
 import ToolbarLink from "./ToolbarLink";
 import "./toolbar.css";
 import type { ToolbarProps } from "./toolbar.type";
@@ -75,9 +76,13 @@ export default function Toolbar({
     }
 
     const textOpenClose = internalOpen
-        ? text?.fermer || "close"
-        : text?.ouvrir || "open";
+        ? text?.fermer || "Close"
+        : text?.ouvrir || "Open";
 
+    const tooltip = useTooltip({
+        content: textOpenClose,
+        hideGrace: 0,
+    });
     return (
         <div className={internalOpen ? "toolbar active" : "toolbar"}>
             {innerChange && (
@@ -85,8 +90,8 @@ export default function Toolbar({
                     className="active-button"
                     type="button"
                     onClick={handleToolbarActivation}
-                    data-uc-tooltip={textOpenClose}
                     aria-label={textOpenClose}
+                    {...tooltip}
                 >
                     <Icon icon={JustifyIcon} />
                 </button>

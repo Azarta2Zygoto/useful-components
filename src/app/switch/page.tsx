@@ -15,7 +15,10 @@ export default function SwitchPage() {
     const [notifications, setNotifications] = useState(true);
 
     return (
-        <PageScroll>
+        <PageScroll
+            name={switchApi.name}
+            link={switchApi.source}
+        >
             <Title level={1}>Switch</Title>
             <p>
                 A switch represents an on/off setting. It uses a native checkbox

@@ -76,7 +76,7 @@ export const tooltipStore = {
             setState({ ...state, visible: false });
         };
         if (immediate) apply();
-        else hideTimer = setTimeout(apply, HIDE_GRACE);
+        else hideTimer = setTimeout(apply, state.hideGrace ?? HIDE_GRACE);
     },
     hideCurrent() {
         if (state.ownerId === null) return;
