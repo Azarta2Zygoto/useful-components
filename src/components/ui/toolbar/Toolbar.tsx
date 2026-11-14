@@ -32,12 +32,6 @@ export default function Toolbar({
     const [subPathOpen, setSubPathOpen] = useState<(boolean | null)[]>([]);
     const internalOpen = open ?? internIsOpen;
 
-    console.log("Toolbar render", {
-        path,
-        subPath,
-        internalOpen,
-        subPathOpen,
-    });
     useEffect(() => {
         const newToolbarOpen: (boolean | null)[] = [];
         toolbarData.forEach((item) => {

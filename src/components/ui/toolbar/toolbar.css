@@ -72,10 +72,10 @@
             padding: 0.25rem;
             background-color: var(--toolbar-button-color);
             color: white;
+            text-decoration: none;
             border: none;
             border-radius: 0.5rem;
             cursor: pointer;
-            text-decoration: none;
             transition:
                 background-color 0.3s ease-in-out,
                 min-width 0.3s ease-in-out;

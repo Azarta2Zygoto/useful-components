@@ -4,6 +4,7 @@ import {
     type CSSProperties,
     type FocusEvent,
     type KeyboardEvent,
+    type MouseEvent,
     type ReactNode,
     type SyntheticEvent,
     useEffect,
@@ -12,49 +13,82 @@ import {
     useState,
 } from "react";
 
+import CadenasIcon from "../assets/icons/cadenas.svg";
+import CaretUpIcon from "../assets/icons/caret-up.svg";
 import Button from "../button/Button";
-import type { ButtonProps } from "../button/button.type";
+import "../field.css";
+import Icon from "../icon/Icon";
+import { getIconElement } from "../icon/utils";
+import "../input/input.css";
+import RequiredComponent from "../required/Required";
 import "./menu-select.css";
+import type {
+    MenuSelectOption,
+    MenuSelectProps,
+    MenuSelectTextProps,
+} from "./menu-select.type";
 
-interface MenuSelectTextProps {
-    placeholder?: string;
-}
 const defaultText: Required<MenuSelectTextProps> = {
     placeholder: "Select an option",
+    noOptions: "No element to select",
 };
-
-interface Option {
-    value: string;
-    label: string;
-}
-
-interface MenuSelectProps extends Omit<ButtonProps, "onSelect"> {
-    options: Option[];
-    label?: string;
-    selected?: Option;
-    side?: "top" | "left";
-    text?: MenuSelectTextProps;
-    onSelect?: (option: Option) => void;
-}
 
 const PAGE_SIZE = 10;
 const TYPEAHEAD_TIMEOUT_MS = 500;
 
 export default function MenuSelect({
     id,
+    value,
+    defaultValue,
+    variant = "outlined",
+    floatingLabel = false,
     options,
+    error,
+    errorProps,
     label,
-    selected,
-    side,
+    labelPosition = "top",
+    labelProps,
     text,
-    onSelect,
+    iconRight,
+    iconLeft,
+    required,
+    readOnly,
+    size,
+    width,
+    containerProps,
+    name,
+    form,
+    "aria-describedby": describedByProp,
+    "aria-invalid": invalidProp,
+    onValue,
+    onClick,
     onKeyDown,
     style,
     ...props
-}: Readonly<MenuSelectProps>): ReactNode {
+}: MenuSelectProps): ReactNode {
     const generatedId = useId();
-    const correctId = id || generatedId;
+    const correctId = (id || generatedId).replace(/[^a-zA-Z0-9_-]/g, "");
+    const labelId = labelProps?.id ?? `${correctId}-label`;
+    const buttonId = `${correctId}-button`;
     const correctText = { ...defaultText, ...text };
+    const describedBy =
+        [describedByProp, error ? `${correctId}-error` : undefined]
+            .filter(Boolean)
+            .join(" ") || undefined;
+
+    const iconRightElement = getIconElement(iconRight, "right");
+    const iconLeftElement = getIconElement(iconLeft, "left");
+
+    const fieldPosition = floatingLabel
+        ? undefined
+        : labelPosition === "top"
+          ? undefined
+          : labelPosition;
+    const isFieldSet = variant === "outlined" && floatingLabel;
+
+    const [innerValue, setInnerValue] = useState(defaultValue);
+    const isControlled = value !== undefined;
+    const currentValue = isControlled ? value : innerValue;
 
     const menuRef = useRef<HTMLUListElement>(null);
     const typeaheadBuffer = useRef("");
@@ -62,6 +96,7 @@ export default function MenuSelect({
 
     const [open, setOpen] = useState(false);
     const [activeIndex, setActiveIndex] = useState(-1);
+    const safeIndex = activeIndex < options.length ? activeIndex : -1;
 
     const optionId = (index: number) => `${correctId}-option-${index}`;
     const lastIndex = options.length - 1;
@@ -69,23 +104,30 @@ export default function MenuSelect({
     useEffect(() => () => window.clearTimeout(typeaheadTimer.current), []);
 
     useEffect(() => {
-        if (!open || activeIndex < 0) return;
+        if (!open || safeIndex < 0) return;
         document
-            .getElementById(optionId(activeIndex))
+            .getElementById(optionId(safeIndex))
             ?.scrollIntoView({ block: "nearest" });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open, activeIndex]);
+    }, [open, safeIndex]);
 
     const handleToggle = (event: SyntheticEvent<HTMLUListElement>) => {
         const { newState } = event.nativeEvent as ToggleEvent;
         const isOpen = newState === "open";
+
         setOpen(isOpen);
 
         if (isOpen) {
             const selectedIndex = options.findIndex(
-                (o) => o.value === selected?.value,
+                (o) => o.value === currentValue?.value,
             );
-            setActiveIndex(selectedIndex >= 0 ? selectedIndex : 0);
+            setActiveIndex(
+                selectedIndex >= 0
+                    ? selectedIndex
+                    : options.length > 0
+                      ? 0
+                      : -1,
+            );
             menuRef.current?.focus();
         } else {
             typeaheadBuffer.current = "";
@@ -93,9 +135,19 @@ export default function MenuSelect({
         }
     };
 
-    const selectOption = (option: Option) => {
-        onSelect?.(option);
+    const selectOption = (option: MenuSelectOption) => {
+        if (readOnly) return;
+
+        if (!isControlled) {
+            setInnerValue(option);
+        }
+        onValue?.(option);
         menuRef.current?.hidePopover();
+    };
+
+    const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
+        onClick?.(event);
+        if (readOnly) event.preventDefault();
     };
 
     const typeahead = (char: string) => {
@@ -109,7 +161,7 @@ export default function MenuSelect({
 
         const isRepeat = [...buffer].every((c) => c === buffer[0]);
         const search = isRepeat ? buffer[0] : buffer;
-        const start = isRepeat ? activeIndex + 1 : Math.max(activeIndex, 0);
+        const start = isRepeat ? safeIndex + 1 : Math.max(safeIndex, 0);
 
         for (let i = 0; i < options.length; i++) {
             const index = (start + i) % options.length;
@@ -122,7 +174,7 @@ export default function MenuSelect({
 
     const handleButtonKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
         onKeyDown?.(event);
-        if (event.defaultPrevented) return;
+        if (event.defaultPrevented || readOnly) return;
 
         if (event.key === "ArrowDown" || event.key === "ArrowUp") {
             event.preventDefault();
@@ -137,11 +189,11 @@ export default function MenuSelect({
         switch (event.key) {
             case "ArrowDown":
                 event.preventDefault();
-                setActiveIndex((i) => Math.min(i + 1, lastIndex));
+                setActiveIndex(Math.min(safeIndex + 1, lastIndex));
                 return;
             case "ArrowUp":
                 event.preventDefault();
-                setActiveIndex((i) => Math.max(i - 1, 0));
+                setActiveIndex(Math.max(safeIndex - 1, 0));
                 return;
             case "Home":
                 event.preventDefault();
@@ -153,25 +205,23 @@ export default function MenuSelect({
                 return;
             case "PageDown":
                 event.preventDefault();
-                setActiveIndex((i) => Math.min(i + PAGE_SIZE, lastIndex));
+                setActiveIndex(Math.min(safeIndex + PAGE_SIZE, lastIndex));
                 return;
             case "PageUp":
                 event.preventDefault();
-                setActiveIndex((i) => Math.max(i - PAGE_SIZE, 0));
+                setActiveIndex(Math.max(safeIndex - PAGE_SIZE, 0));
                 return;
             case "Enter":
                 event.preventDefault();
-                if (activeIndex >= 0) selectOption(options[activeIndex]);
+                if (safeIndex >= 0) selectOption(options[safeIndex]);
                 return;
             case " ":
                 event.preventDefault();
                 if (typeaheadBuffer.current !== "") typeahead(" ");
-                else if (activeIndex >= 0) selectOption(options[activeIndex]);
+                else if (safeIndex >= 0) selectOption(options[safeIndex]);
                 return;
             case "Tab":
                 menuRef.current?.hidePopover();
-                return;
-            case "Escape":
                 return;
         }
 
@@ -193,76 +243,139 @@ export default function MenuSelect({
         }
     };
 
+    const labelElement = (
+        <label
+            {...labelProps}
+            htmlFor={`${correctId}-button`}
+            id={labelId}
+        >
+            {label}
+            <RequiredComponent required={required} />
+        </label>
+    );
+
     return (
         <div
-            data-uc-side={side}
-            className="menu-select"
+            {...containerProps}
+            data-uc-size={size}
+            data-uc-field={floatingLabel ? `floating-${variant}` : variant}
+            data-uc-field-position={fieldPosition}
+            className="uc-menu-select"
         >
-            {label && (
-                <label
-                    htmlFor={`${correctId}-button`}
-                    id={`${correctId}-label`}
-                >
-                    {label}
-                </label>
+            {name && (
+                <input
+                    type="hidden"
+                    name={name}
+                    form={form}
+                    value={currentValue?.value ?? ""}
+                    disabled={props.disabled}
+                />
             )}
-            <Button
-                {...props}
-                id={`${correctId}-button`}
-                popoverTarget={correctId}
-                style={
-                    {
-                        ...style,
-                        anchorName: `--a-${correctId}`,
-                    } as CSSProperties
-                }
-                aria-haspopup="listbox"
-                aria-expanded={open}
-                aria-controls={correctId}
-                aria-labelledby={label ? `${correctId}-label` : undefined}
-                onKeyDown={handleButtonKeyDown}
+            {!floatingLabel && labelElement}
+            <div
+                data-uc-input-wrapper={variant}
+                style={{ width }}
             >
-                {selected?.label ?? correctText.placeholder}
-            </Button>
+                <Button
+                    {...props}
+                    id={buttonId}
+                    popoverTarget={correctId}
+                    style={
+                        {
+                            ...style,
+                            anchorName: `--uc-anchor-${correctId}`,
+                        } as CSSProperties
+                    }
+                    variant="transparent"
+                    data-uc-select-value={currentValue?.value}
+                    aria-haspopup="listbox"
+                    aria-expanded={open}
+                    aria-disabled={readOnly || undefined}
+                    aria-invalid={error ? true : invalidProp}
+                    aria-controls={correctId}
+                    aria-describedby={describedBy}
+                    aria-labelledby={
+                        label ? `${labelId} ${buttonId}` : undefined
+                    }
+                    onClick={handleButtonClick}
+                    onKeyDown={handleButtonKeyDown}
+                >
+                    {iconLeftElement}
+                    {currentValue?.label ??
+                        (floatingLabel && !open
+                            ? "\u00A0"
+                            : correctText.placeholder)}
+                    <Icon
+                        icon={readOnly ? CadenasIcon : CaretUpIcon}
+                        data-uc-adornment="right"
+                    />
+                    {iconRightElement}
+                </Button>
+                {floatingLabel && labelElement}
+                {isFieldSet && (
+                    <fieldset aria-hidden="true">
+                        <legend>
+                            <span>
+                                {label}
+                                <RequiredComponent required={required} />
+                            </span>
+                        </legend>
+                    </fieldset>
+                )}
+            </div>
             <ul
                 id={correctId}
                 ref={menuRef}
                 popover="auto"
                 role="listbox"
-                className="menu"
+                className="uc-menu"
                 tabIndex={-1}
                 aria-activedescendant={
-                    open && activeIndex >= 0 ? optionId(activeIndex) : undefined
+                    open && safeIndex >= 0 ? optionId(safeIndex) : undefined
                 }
+                aria-labelledby={label ? labelId : undefined}
                 style={
                     {
-                        positionAnchor: `--a-${correctId}`,
+                        positionAnchor: `--uc-anchor-${correctId}`,
                     } as CSSProperties
                 }
                 onToggle={handleToggle}
                 onKeyDown={handleListKeyDown}
                 onBlur={handleListBlur}
             >
-                {options.map((option, index) => (
+                {options.length === 0 ? (
                     <li
-                        key={option.value}
-                        id={`${correctId}-${option.value}`}
-                        role="option"
-                        tabIndex={-1}
-                        aria-selected={selected?.value === option.value}
-                        data-active={index === activeIndex || undefined}
-                        onPointerMove={() => {
-                            if (index !== activeIndex) setActiveIndex(index);
-                        }}
-                        onClick={() => {
-                            onSelect?.(option);
-                            menuRef.current?.hidePopover();
-                        }}
+                        role="presentation"
+                        data-uc-empty=""
                     >
-                        {option.label}
+                        {correctText.noOptions}
                     </li>
-                ))}
+                ) : (
+                    options.map((option, index) => (
+                        <li
+                            key={option.value}
+                            id={optionId(index)}
+                            role="option"
+                            aria-selected={currentValue?.value === option.value}
+                            data-active={index === safeIndex || undefined}
+                            onPointerMove={() => {
+                                if (index !== safeIndex) setActiveIndex(index);
+                            }}
+                            onClick={() => selectOption(option)}
+                        >
+                            {option.label}
+                        </li>
+                    ))
+                )}
             </ul>
+            <p
+                aria-live="polite"
+                {...errorProps}
+                id={`${correctId}-error`}
+                data-uc-field-error
+            >
+                {error}
+            </p>
         </div>
     );
 }

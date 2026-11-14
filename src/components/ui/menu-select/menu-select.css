@@ -1,17 +1,39 @@
 @layer components {
-    .menu-select {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    .menu-select[data-uc-side="left"] {
-        flex-direction: row;
-        align-items: center;
+    .uc-menu-select[data-uc-field] {
+        width: fit-content;
     }
 
-    .menu {
+    .uc-menu-select[data-uc-field] > [data-uc-input-wrapper] {
+        min-width: 0;
+
+        & > button[aria-haspopup="listbox"] {
+            --outline-active: transparent;
+            --text-hover: var(--textE);
+            --text-active: var(--textE);
+            justify-content: space-between;
+            width: 100%;
+            height: var(--height);
+            margin: 0;
+            padding: 0 var(--padding-left) 0 var(--padding-right);
+
+            border: none;
+        }
+        & > button[aria-haspopup="listbox"][aria-disabled="true"] {
+            cursor: default;
+        }
+        & > button[aria-expanded] > svg {
+            transition: transform 0.2s ease-in-out;
+        }
+        & > button[aria-expanded="true"] > svg {
+            transform: rotate(180deg);
+        }
+    }
+
+    .uc-menu {
         --x: 0;
         --y: -0.25rem;
+        --size: calc(var(--icon-size) * 1.15);
+
         transform: translate(var(--x), var(--y)) scale(0.95);
         min-width: calc(anchor-size(width) - 1rem);
         max-height: min(20rem, 50vh);
@@ -21,7 +43,7 @@
         border: 1px solid var(--borderE);
         border-radius: 8px;
         outline: none;
-        box-shadow: 0 2px 10px var(--shadow-color);
+        box-shadow: var(--shadowE);
 
         opacity: 0;
         pointer-events: none;
@@ -38,52 +60,69 @@
         transform-origin: top left;
     }
 
-    .menu:popover-open {
+    .uc-menu:popover-open {
         transform: none;
         opacity: 1;
         pointer-events: auto;
     }
 
-    .menu li {
+    .uc-menu li {
         position: relative;
         padding: 0.5rem;
         padding-left: 2rem;
         list-style: none;
         border-radius: 6px;
         cursor: pointer;
-        transition: border-color 0.2s;
     }
-
-    .menu li:hover {
+    .uc-menu li:hover {
         background-color: var(--bgE-hover);
     }
-    .menu li[data-active="true"] {
+    .uc-menu li[data-active="true"] {
         background-color: var(--bgE-active);
     }
-    .menu li[aria-selected="true"]::after {
+    .uc-menu li[aria-selected="true"]::after {
         content: "";
         position: absolute;
         top: 50%;
         left: 0;
         transform: rotate(45deg) translateY(-100%);
-        width: 6px;
-        height: 12px;
-        border: solid white;
-        border-width: 0 3px 3px 0;
+        width: calc(var(--size) / 3);
+        height: calc(var(--size) / 2);
+        border: solid var(--fg);
+        border-width: 0 calc(var(--size) / 8) calc(var(--size) / 8) 0;
+    }
+    .uc-menu li[data-uc-empty],
+    .uc-menu li[data-uc-empty]:hover {
+        padding: 0.5rem;
+        background: none;
+        font-style: italic;
+        cursor: default;
     }
 
     @starting-style {
-        .menu-select .menu:popover-open {
+        .uc-menu:popover-open {
             transform: translate(var(--x), var(--y)) scale(0.97);
             opacity: 0;
         }
     }
 
     @supports not (anchor-name: --x) {
-        .menu-select .menu {
+        .uc-menu {
             position: fixed;
             top: 30%;
             left: 1rem;
+        }
+    }
+
+    @media (forced-colors: active) {
+        [data-uc-input-wrapper] {
+            & > button[aria-haspopup="listbox"] {
+                border: none !important;
+                outline: none !important;
+            }
+        }
+        .uc-menu li[data-active="true"] {
+            outline: 1px solid Highlight;
         }
     }
 }

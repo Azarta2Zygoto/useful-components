@@ -93,10 +93,10 @@
             -webkit-text-fill-color: var(--text);
         }
     }
-    [data-uc-input-wrapper]:has(> [data-uc-adornment="left"]) {
+    [data-uc-input-wrapper]:has([data-uc-adornment="left"]) {
         --padding-right: 0;
     }
-    [data-uc-input-wrapper]:has(> [data-uc-adornment="right"]) {
+    [data-uc-input-wrapper]:has([data-uc-adornment="right"]) {
         --padding-left: 0;
     }
     [data-uc-input-wrapper]:is(:hover, :has(> :hover)) {
@@ -104,7 +104,7 @@
         border-color: var(--border-hover);
         box-shadow: var(--shadow-hover);
     }
-    [data-uc-input-wrapper]:has(> [readonly]) {
+    [data-uc-input-wrapper]:has(> [readonly], > [aria-disabled="true"]) {
         background-color: var(--bg);
         border-color: var(--border);
         border-style: dashed;

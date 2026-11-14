@@ -72,10 +72,10 @@ p {
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    margin: 1rem 0;
-    padding: 2rem;
     width: 100%;
     max-width: 87vw;
+    margin: 1rem 0;
+    padding: 2rem;
     background-color: var(--bg-1);
     border: 1px solid var(--fg);
     border-radius: 1rem;
@@ -100,10 +100,10 @@ button.button-header {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    color: white !important;
     top: 50%;
     left: 5px;
     transform: translateY(-50%);
+    color: white !important;
 }
 
 img {
@@ -184,10 +184,24 @@ p code {
     width: 100%;
     margin: 1rem 0;
     padding: 1rem 2rem;
+    line-height: 1.35;
     border: 1px solid var(--borderE);
     border-radius: 1rem;
 }
 .component-api > li > strong,
 .component-api > li > p {
     display: inline;
+}
+.accessibility-api {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem 2rem;
+    line-height: 1.35;
+    border: 1px solid var(--borderE);
+    border-radius: 1rem;
 }

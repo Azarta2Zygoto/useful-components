@@ -23,8 +23,8 @@
     [data-uc-field-error] {
         min-height: var(--font-size);
         max-height: var(--font-size);
-        color: var(--textE-danger);
         padding-top: 0.25rem;
+        color: var(--textE-danger);
         font-size: calc(var(--font-size) * 0.75);
         line-height: 1.2;
         overflow-wrap: anywhere;
@@ -60,19 +60,21 @@
             color: transparent;
         }
 
+        button[aria-expanded]:not([aria-disabled]):focus-visible ~ label,
+        [aria-expanded="true"]:not([aria-disabled]) ~ label,
+        [data-uc-select-value] ~ label,
         input:focus-visible:where(:not([readonly])) ~ label,
         input:not(:placeholder-shown) ~ label,
         input:autofill ~ label {
-            color: var(--fg);
+            color: var(--theme-main);
             font-size: var(--label-size-active);
             line-height: var(--label-size-active);
         }
-        input:focus-visible ~ label {
-            color: var(--theme-main);
-        }
+        button:disabled ~ label,
         input:disabled ~ label {
             color: var(--textE-disabled);
         }
+        button:enabled[aria-invalid="true"] ~ label,
         input:enabled[aria-invalid="true"] ~ label,
         input:enabled:user-invalid ~ label {
             color: var(--borderE-danger);
@@ -93,7 +95,6 @@
             overflow: hidden;
             transition: border-color 0.3s ease-in-out;
         }
-
         fieldset > legend {
             float: none;
             display: block;
@@ -113,6 +114,7 @@
             display: inline-block;
             padding: 0 calc(var(--padding) / 3);
         }
+        button[aria-expanded][aria-disabled="true"] ~ fieldset,
         input[readonly] ~ fieldset {
             border-style: dashed;
         }
@@ -120,27 +122,40 @@
 
     [data-uc-field="floating-outlined"] {
         > [data-uc-input-wrapper] {
-            border: none;
-            outline: none;
+            border: none !important;
+            outline: none !important;
         }
+        button[aria-expanded]:not([aria-disabled]):focus-visible ~ label,
+        [aria-expanded="true"]:not([aria-disabled]) ~ label,
+        [data-uc-select-value] ~ label,
         input:focus-visible:not([readonly]) ~ label,
         input:not(:placeholder-shown) ~ label {
             top: 1px;
             left: var(--padding);
         }
 
+        button[aria-expanded]:not([aria-disabled]):focus-visible
+            ~ fieldset
+            > legend,
+        [aria-expanded="true"]:not([aria-disabled]) ~ fieldset > legend,
+        [data-uc-select-value] ~ fieldset > legend,
         input:focus-visible:not([readonly]) ~ fieldset > legend,
         input:not(:placeholder-shown) ~ fieldset > legend {
             max-width: 100%;
             transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
         }
 
-        input:enabled:hover ~ fieldset {
+        button:enabled:not([aria-disabled]):hover ~ fieldset,
+        input:enabled:not([readonly]):hover ~ fieldset {
             border-color: var(--border-hover);
         }
-        input:enabled:focus-visible ~ fieldset {
+        button[aria-expanded]:not([aria-disabled]):focus-visible ~ fieldset,
+        [aria-expanded="true"]:not([aria-disabled]) ~ fieldset,
+        [data-uc-select-value]:not([aria-disabled]) ~ fieldset,
+        input:focus-visible ~ fieldset {
             border-color: var(--border-active);
         }
+        button:disabled ~ fieldset,
         input:disabled ~ fieldset {
             border-color: var(--border-disabled);
         }
@@ -149,6 +164,9 @@
     [data-uc-field="floating-underlined"] {
         padding-top: calc(var(--font-size) * 0.9);
 
+        button[aria-expanded]:not([aria-disabled]):focus-visible ~ label,
+        [aria-expanded="true"]:not([aria-disabled]) ~ label,
+        [data-uc-select-value] ~ label,
         input:focus-visible:not([readonly]) ~ label,
         input:not(:placeholder-shown) ~ label,
         input:autofill ~ label {

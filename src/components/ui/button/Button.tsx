@@ -15,10 +15,11 @@ export default function Button({
     disabled = false,
     ripple,
     onPointerDown,
+    "aria-disabled": ariaDisabled,
     children,
     ...props
 }: ButtonProps): ReactNode {
-    const isDisabled = disabled || loading;
+    const isDisabled = disabled || loading || ariaDisabled;
     const hasRipple = !isDisabled && (ripple ?? variant !== "transparent");
 
     const { rippleProps, onPointerDown: handlePointerDown } =
@@ -34,7 +35,7 @@ export default function Button({
             data-uc-size={size}
             data-uc-variant={variant}
             disabled={disabled}
-            aria-disabled={loading || undefined}
+            aria-disabled={ariaDisabled ?? (loading || undefined)}
             aria-busy={loading || undefined}
             aria-pressed={pressed}
             onClick={

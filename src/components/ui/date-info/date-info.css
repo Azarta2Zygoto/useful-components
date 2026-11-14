@@ -4,9 +4,9 @@
         display: inline-block;
         vertical-align: middle;
         line-height: 1;
-        outline: none;
         text-decoration: underline dotted;
         text-underline-offset: 2px;
+        outline: none;
         cursor: help;
         &:focus-visible {
             text-decoration: underline;

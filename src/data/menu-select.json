@@ -1,0 +1,79 @@
+{
+    "description": "<code>MenuSelect</code> renders a labeled listbox button for selecting one option from a list.",
+    "elements": [
+        {
+            "name": "label",
+            "description": "The accessible label associated with the menu select."
+        },
+        {
+            "name": "options",
+            "description": "The available options. Each option requires a unique <code>value</code> and a displayed <code>label</code>."
+        },
+        {
+            "name": "value / defaultValue",
+            "description": "Controls the selected option or sets the initial option. Use <code>value</code> with <code>onValue</code> for a controlled component, or <code>defaultValue</code> for an uncontrolled component."
+        },
+        {
+            "name": "onValue",
+            "description": "Receives the selected <code>MenuSelectOption</code> when the user chooses an option."
+        },
+        {
+            "name": "variant",
+            "description": "Sets the visual style to <code>outlined</code> (default) or <code>underlined</code>."
+        },
+        {
+            "name": "size",
+            "description": "Sets the field size to <code>sm</code>, <code>md</code> (default), or <code>lg</code>."
+        },
+        {
+            "name": "floatingLabel",
+            "description": "Places the label inside the field until it is opened or contains a selected value."
+        },
+        {
+            "name": "labelPosition",
+            "description": "Places a non-floating label at the <code>top</code> (default) or <code>left</code> of the field."
+        },
+        {
+            "name": "required",
+            "description": "Marks the field as required and displays the required indicator."
+        },
+        {
+            "name": "error",
+            "description": "Displays validation feedback and associates the message with the select through <code>aria-describedby</code>."
+        },
+        {
+            "name": "text",
+            "description": "Customizes the <code>placeholder</code> and <code>noOptions</code> text."
+        },
+        {
+            "name": "readOnly",
+            "description": "Prevents the user from opening the menu or changing the selected option."
+        },
+        {
+            "name": "iconLeft / iconRight",
+            "description": "Adds an SVG component or icon configuration as a left or right adornment."
+        },
+        {
+            "name": "width",
+            "description": "Sets the width of the field wrapper using a CSS length value."
+        },
+        {
+            "name": "containerProps",
+            "description": "Passes native <code>div</code> properties to the field container."
+        },
+        {
+            "name": "Native button properties",
+            "description": "Button properties such as <code>disabled</code>, <code>name</code>, <code>form</code>, and event handlers are forwarded to the trigger button."
+        }
+    ],
+    "accessibility": {
+        "general": "The component uses a button with <code>aria-haspopup=\"listbox\"</code> and an associated <code>ul</code> listbox with option roles. It exposes the expanded state, active option, selected option, validation state, and accessible label to assistive technologies.",
+        "elements": [
+            "Always provide a meaningful <code>label</code>; it is associated with the trigger button and listbox.",
+            "The trigger supports opening with <code>Enter</code>, <code>Space</code>, or the arrow keys. The listbox supports arrow navigation, <code>Home</code>, <code>End</code>, <code>PageUp</code>, <code>PageDown</code>, typeahead, and selection with <code>Enter</code> or <code>Space</code>.",
+            "The selected option is exposed with <code>aria-selected</code>, and the current keyboard target is exposed with <code>aria-activedescendant</code>.",
+            "Error messages are announced politely with <code>aria-live=\"polite\"</code> and linked to the trigger with <code>aria-describedby</code>.",
+            "Use <code>readOnly</code> when the value should remain visible but the user must not change it; use <code>disabled</code> when the control should be unavailable."
+        ]
+    }
+}

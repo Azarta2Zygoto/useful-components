@@ -29,7 +29,7 @@
 
     [data-uc-max] .step-button.up,
     [data-uc-min] .step-button.down {
-        color: var(--textE-disabled);
         transform: none;
+        color: var(--textE-disabled);
     }
 }

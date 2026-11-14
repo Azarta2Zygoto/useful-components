@@ -60,8 +60,8 @@
             --uc-gap: 0.5rem;
             --uc-col-min: 8rem;
             display: grid;
-            gap: 0.5rem;
             grid-template-columns: repeat(var(--uc-columns, 1), minmax(0, 1fr));
+            gap: 0.5rem;
 
             & > [data-uc-variant] {
                 overflow-wrap: anywhere;
