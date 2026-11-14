@@ -219,9 +219,14 @@ footer {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 0.5rem;
     width: 100%;
     padding: 1rem 0;
+
+    & > p {
+        text-align: center;
+    }
 }
 footer > a {
     display: inline-flex;
@@ -231,4 +236,8 @@ footer > a {
     gap: 0.5rem;
     color: var(--textE);
     text-decoration: none;
+}
+footer > a > span {
+    min-width: 0;
+    text-align: center;
 }

@@ -18,8 +18,10 @@ export default function Footer({ link, name }: FooterProps): ReactNode {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                Visit the <i>Useful Components</i> GitHub repository
-                {name ? ` for the ${name} component` : ""}
+                <span>
+                    Visit the <i>Useful Components</i> GitHub repository
+                    {name ? <> for the {name} component</> : ""}
+                </span>
                 <Icon icon={GitHubIcon} />
             </a>
         </footer>
