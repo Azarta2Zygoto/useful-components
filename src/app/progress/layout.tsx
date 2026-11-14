@@ -1,14 +1,9 @@
-import type { Metadata } from "next";
 import type { PropsWithChildren } from "react";
 
 import progressJson from "@/data/progress.json";
-import { makeDescription } from "@/utils/description";
+import { makeMetadata } from "@/utils/makeData";
 
-export const metadata: Metadata = {
-    title: progressJson.name,
-    description: makeDescription(progressJson.name),
-    alternates: { canonical: "/progress" },
-};
+export const metadata = makeMetadata(progressJson.name, ["progress", "status"]);
 
 export default function ProgressLayout({ children }: PropsWithChildren) {
     return children;

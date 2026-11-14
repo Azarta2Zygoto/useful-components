@@ -10,7 +10,7 @@ import {
 import Footer from "./Footer";
 import TableOfContents from "./table/TableOfContent";
 
-import { makeDescription } from "@/utils/description";
+import { makeDescription } from "@/utils/makeData";
 
 interface PageScrollProps extends PropsWithChildren {
     name?: string;

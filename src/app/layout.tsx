@@ -12,26 +12,13 @@ import ComponentProvider from "@/components/ui/provider/Component.provider";
 import { APP_CONFIG, ASSETS } from "@/types/common.constant";
 import { buildAssetPath } from "@/utils/path.utils";
 
-const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
-
-const title = "Component Library";
-const description =
-    "A collection of reusable components for building user interfaces in react.";
-const ogImage = {
-    url: buildAssetPath(ASSETS.LOGO.DARK, "/"),
-    width: 64,
-    height: 64,
-    type: "image/png",
-    alt: `${title} logo`,
-};
-
 export const metadata: Metadata = {
-    metadataBase: new URL(BASE),
+    metadataBase: new URL(APP_CONFIG.baseUrl),
     title: {
-        default: title,
-        template: `%s - ${title}`,
+        default: APP_CONFIG.title,
+        template: `%s - ${APP_CONFIG.title}`,
     },
-    description: description,
+    description: APP_CONFIG.description,
     icons: {
         icon: buildAssetPath(ASSETS.LOGO.DARK),
         shortcut: buildAssetPath(ASSETS.LOGO.DARK),
@@ -47,20 +34,21 @@ export const metadata: Metadata = {
     publisher: "Quentin Potiron",
     category: "IT & Software",
     generator: "Next.js",
+    alternates: { canonical: "/" },
     openGraph: {
-        title: title,
-        description: description,
+        title: APP_CONFIG.title,
+        description: APP_CONFIG.description,
         url: "/",
         type: "website",
-        siteName: title,
-        images: ogImage,
+        siteName: APP_CONFIG.title,
+        images: APP_CONFIG.ogImage,
         locale: "en_US",
     },
     twitter: {
         card: "summary_large_image",
-        title: title,
-        description: description,
-        images: ogImage,
+        title: APP_CONFIG.title,
+        description: APP_CONFIG.description,
+        images: APP_CONFIG.ogImage,
     },
     keywords: ["react", "components", "library", "ui", "user interface", "dev"],
     robots: {

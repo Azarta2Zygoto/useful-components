@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
 import type { PropsWithChildren } from "react";
 
 import inputTextJson from "@/data/input-text.json";
-import { makeDescription } from "@/utils/description";
+import { makeMetadata } from "@/utils/makeData";
 
-export const metadata: Metadata = {
-    title: inputTextJson.name,
-    description: makeDescription(inputTextJson.name),
-    alternates: { canonical: "/input-text" },
-};
+export const metadata = makeMetadata(inputTextJson.name, [
+    "input",
+    "text",
+    "form",
+    "field",
+]);
 
 export default function InputTextLayout({ children }: PropsWithChildren) {
     return children;
