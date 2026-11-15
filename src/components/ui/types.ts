@@ -1,30 +1,20 @@
 import type {
     ComponentProps,
-    ComponentType,
     JSX,
     JSXElementConstructor,
     ReactNode,
-    SVGProps,
 } from "react";
+
+import type { IconProps, IconType } from "./icon/icon.type";
 
 type IntrinsicElements =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     keyof JSX.IntrinsicElements | JSXElementConstructor<any>;
 
-export type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 export type ContainerProps<T extends IntrinsicElements = "div"> = Omit<
     ComponentProps<T>,
     "children"
 >;
-
-export interface IconProps extends Omit<
-    SVGProps<SVGSVGElement>,
-    "width" | "height" | "fill"
-> {
-    icon: IconType;
-    size?: number;
-    fill?: string;
-}
 
 export interface LabelLayoutProps {
     label: ReactNode;

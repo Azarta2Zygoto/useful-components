@@ -1,10 +1,10 @@
 import type { CSSProperties, ReactNode } from "react";
 
+import Icon from "../icon/Icon";
 import type { AdornmentType } from "../types";
-import { isIconType } from "../utils/utils";
-import Icon from "./Icon";
+import { isIconType } from "./utils";
 
-export function getIconElement(
+export function getAdornment(
     icon: AdornmentType | undefined,
     position: "left" | "right",
 ): ReactNode {

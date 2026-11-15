@@ -3,8 +3,8 @@ import { type ReactNode, useId } from "react";
 import CadenasIcon from "../assets/icons/cadenas.svg";
 import "../field.css";
 import Icon from "../icon/Icon";
-import { getIconElement } from "../icon/utils";
 import Required from "../required/Required";
+import { getAdornment } from "../utils/Adornment";
 import "./input.css";
 import type { TextFieldProps } from "./input.type";
 
@@ -35,8 +35,8 @@ export default function InputField({
             .filter(Boolean)
             .join(" ") || undefined;
 
-    const iconRightElement = getIconElement(iconRight, "right");
-    const iconLeftElement = getIconElement(iconLeft, "left");
+    const iconRightElement = getAdornment(iconRight, "right");
+    const iconLeftElement = getAdornment(iconLeft, "left");
 
     const fieldPosition = floatingLabel
         ? undefined

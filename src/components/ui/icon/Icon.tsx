@@ -1,19 +1,21 @@
 import type { ReactNode } from "react";
 
-import type { IconProps } from "../types";
+import type { IconProps } from "./icon.type";
 
 export default function Icon({
     icon: SvgIcon,
     fill = "currentColor",
     size = 18,
+    width,
+    height,
     "aria-label": ariaLabel,
     ...props
-}: Readonly<IconProps>): ReactNode {
+}: IconProps): ReactNode {
     return (
         <SvgIcon
             {...props}
-            width={size}
-            height={size}
+            width={width ?? size}
+            height={height ?? size}
             fill={fill}
             role={ariaLabel ? "img" : undefined}
             aria-label={ariaLabel}
