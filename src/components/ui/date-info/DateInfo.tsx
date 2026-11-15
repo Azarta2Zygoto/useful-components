@@ -10,36 +10,36 @@ import {
 } from "./date-info.utils";
 
 export default function DateTooltip({
-    date,
+    dateTime,
     locale = "fr-FR",
-    fallback = null,
     timeZone,
+    fallback = null,
     displayFormat = DEFAULT_DISPLAY_FORMAT,
     tooltipFormat = DEFAULT_TOOLTIP_FORMAT,
     ...props
 }: DateTooltipProps): ReactNode {
-    const value = toValidDate(date);
-    if (!value) return fallback;
+    const date = toValidDate(dateTime);
+    if (!date) return fallback;
 
-    const shortDate = getFormatter(locale, {
-        ...displayFormat,
-        timeZone,
-    }).format(value);
-    const fullDate = getFormatter(locale, {
+    const tooltip = getFormatter(locale, {
         ...tooltipFormat,
         timeZone,
-    }).format(value);
+    }).format(date);
+    const label = getFormatter(locale, {
+        ...displayFormat,
+        timeZone,
+    }).format(date);
 
     return (
         <time
             tabIndex={0}
             {...props}
             lang={locale}
-            dateTime={value.toISOString()}
+            dateTime={date.toISOString()}
             data-uc-date=""
-            data-uc-tooltip={fullDate}
+            data-uc-tooltip={tooltip}
         >
-            {shortDate}
+            {label}
         </time>
     );
 }

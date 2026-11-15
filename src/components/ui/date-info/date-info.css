@@ -1,9 +1,6 @@
 @layer components {
     time[data-uc-date] {
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 1;
+        display: inline;
         text-decoration: underline dotted;
         text-underline-offset: 2px;
         outline: none;

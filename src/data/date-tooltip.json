@@ -5,7 +5,7 @@
     "description": "<code>DateTooltip</code> extends the native<code>TimeHTMLAttributes&lt;HTMLTimeElement&gt;</code>properties.",
     "elements": [
         {
-            "name": "date",
+            "name": "dateTime",
             "description": "The date to display."
         },
         {

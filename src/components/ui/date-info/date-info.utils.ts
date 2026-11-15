@@ -1,14 +1,14 @@
-const cache = new Map<string, Intl.DateTimeFormat>();
+const formatCache = new Map<string, Intl.DateTimeFormat>();
 
 export function getFormatter(
     locale: string,
     options: Intl.DateTimeFormatOptions,
 ): Intl.DateTimeFormat {
-    const key = `${locale}|${JSON.stringify(options)}`;
-    let formatter = cache.get(key);
+    const key = `${locale}-${JSON.stringify(options)}`;
+    let formatter = formatCache.get(key);
     if (!formatter) {
         formatter = new Intl.DateTimeFormat(locale, options);
-        cache.set(key, formatter);
+        formatCache.set(key, formatter);
     }
     return formatter;
 }

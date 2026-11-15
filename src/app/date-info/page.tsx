@@ -7,7 +7,7 @@ import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import ErrorFrame from "@/components/frames/ErrorFrame";
 import WarningFrame from "@/components/frames/WarningFrame";
-import DateTooltip from "@/components/ui/date-info/DateInfo";
+import DateInfo from "@/components/ui/date-info/DateInfo";
 import dateApi from "@/data/date-tooltip.json";
 
 export default function DateInfoPage() {
@@ -20,79 +20,82 @@ export default function DateInfoPage() {
         >
             <Title level={1}>Date Info</Title>
             <p>
-                This component allows to give more details on the date that it
-                is shown. The tooltip can be disabled if needed.
+                This component allows to give more details on the dateTime that
+                it is shown. The tooltip can be disabled if needed.
             </p>
             <ErrorFrame>
-                If you put the current date as shown in the example, the date
-                will not be updated automatically. You will need to refresh the
-                page to see the new date.
+                If you put the current dateTime as shown in the example, the
+                dateTime will not be updated automatically. You will need to
+                refresh the page to see the new dateTime.
             </ErrorFrame>
             <CodeView
-                code={`<DateTooltip
-    date={currentDate}
+                code={`<DateInfo
+    dateTime={currentDate}
     locale="en-US"
 />`}
             >
                 Current Date:
-                <DateTooltip
-                    date={currentDate}
+                <DateInfo
+                    dateTime={currentDate}
                     locale="en-US"
                 />
             </CodeView>
             <Title level={2}>Custom Locales</Title>
             <p>
-                It possible to change the locale of the date to display it in
-                different languages.
+                It possible to change the locale of the dateTime to display it
+                in different languages.
             </p>
             <CodeView
-                code={`<DateTooltip
-    date={currentDate}
+                code={`<DateInfo
+    dateTime={currentDate}
     locale="fr-FR"
 />`}
             >
                 <div>
                     Date du jour:&nbsp;
-                    <DateTooltip
-                        date={currentDate}
+                    <DateInfo
+                        dateTime={currentDate}
                         locale="fr-FR"
                     />
                 </div>
                 <div>
                     Dato actual:&nbsp;
-                    <DateTooltip
-                        date={currentDate}
+                    <DateInfo
+                        dateTime={currentDate}
                         locale="es-ES"
                     />
                 </div>
             </CodeView>
             <Title level={2}>Timezone</Title>
             <p>
-                You can also change the timezone of the date to display it in.
+                You can also change the timezone of the dateTime to display it
+                in.
             </p>
             <WarningFrame>
-                It seems useless if it only displays the date, but it avoids
+                It seems useless if it only displays the dateTime, but it avoids
                 errors near midnight.
             </WarningFrame>
             <CodeView
-                code={`<DateTooltip
-    date={currentDate}
+                code={`<DateInfo
+    dateTime={currentDate}
     timeZone="America/New_York"
 />`}
             >
-                <p>Current hour in New-York</p>
-                <DateTooltip
-                    date={currentDate}
-                    timeZone="America/New_York"
-                    locale="en-US"
-                    displayFormat={{
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        day: "2-digit",
-                        month: "long",
-                        year: "numeric",
-                    }}
-                />
+                <p>
+                    Current hour in New-York&nbsp;
+                    <DateInfo
+                        dateTime={currentDate}
+                        timeZone="America/New_York"
+                        locale="en-US"
+                        displayFormat={{
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            day: "2-digit",
+                            month: "long",
+                            year: "numeric",
+                        }}
+                    />
+                </p>
             </CodeView>
             <Title level={2}>Custom Formats</Title>
             <p>
@@ -101,8 +104,8 @@ export default function DateInfoPage() {
             </p>
 
             <CodeView
-                code={`<DateTooltip
-    date={currentDate}
+                code={`<DateInfo
+    dateTime={currentDate}
     locale="en-US"
     displayFormat={{
         day: "2-digit",
@@ -118,8 +121,8 @@ export default function DateInfoPage() {
 />`}
             >
                 Current Date:
-                <DateTooltip
-                    date={currentDate}
+                <DateInfo
+                    dateTime={currentDate}
                     locale="en-US"
                     displayFormat={{
                         day: "2-digit",

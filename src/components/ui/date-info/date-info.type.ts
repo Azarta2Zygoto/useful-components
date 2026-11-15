@@ -2,13 +2,14 @@ import type { ComponentProps, ReactNode } from "react";
 
 type DateTooltip = Omit<
     ComponentProps<"time">,
-    "dateTime" | "children" | "aria-label"
+    "dateTime" | "children" | "lang"
 >;
 export interface DateTooltipProps extends DateTooltip {
-    date: Date | string | number;
+    dateTime: Date | string | number;
+    locale?: string;
     timeZone?: string;
     fallback?: ReactNode;
-    locale?: string;
     displayFormat?: Intl.DateTimeFormatOptions;
     tooltipFormat?: Intl.DateTimeFormatOptions;
+    "aria-label"?: never;
 }
