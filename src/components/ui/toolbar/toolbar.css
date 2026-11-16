@@ -14,7 +14,7 @@
     }
 
     .toolbar {
-        position: relative;
+        position: sticky;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -27,7 +27,11 @@
         overflow-x: hidden;
         overflow-y: auto;
         overscroll-behavior: contain;
-        transition: all 0.3s ease;
+        transition:
+            transform 0.3s ease-in-out,
+            opacity 0.3s ease-in-out,
+            visibility 0.3s ease-in-out,
+            min-width 0.3s ease-in-out;
 
         & > .active-button {
             flex-shrink: 0;
@@ -53,7 +57,6 @@
         & > .active-button:focus-visible {
             outline: 2px solid var(--toolbar-button-active-color);
         }
-
         & > nav {
             display: flex;
             flex-direction: column;
@@ -102,7 +105,7 @@
             white-space: nowrap;
             overflow: hidden;
             overflow-wrap: anywhere;
-            transition: max-width 0.3s;
+            transition: max-width 0.3s ease-in-out;
         }
 
         [data-uc-path] > [data-uc-expandable="true"] {
@@ -131,9 +134,9 @@
             visibility: hidden;
             overflow: visible;
             transition:
-                height 0.3s ease,
-                opacity 0.3s ease,
-                width 0.3s ease;
+                height 0.3s ease-in-out,
+                opacity 0.3s ease-in-out,
+                width 0.3s ease-in-out;
         }
         .subpath.active {
             width: 80%;

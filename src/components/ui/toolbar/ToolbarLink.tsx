@@ -11,8 +11,8 @@ interface ToolbarLinkProps {
     item: ToolbarPaths;
     index: number;
     handleClickOpen: (e: MouseEvent<HTMLButtonElement>, index: number) => void;
-    currentPath?: string;
-    currentSubPath?: string;
+    currentPath?: string | null;
+    currentSubPath?: string | null;
     type?: "expand" | "menu";
     displayDifferentName?: (name: string) => string;
     subPathOpen: (boolean | null)[];

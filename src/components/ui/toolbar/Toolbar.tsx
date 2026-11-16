@@ -31,8 +31,8 @@ export default function Toolbar({
 }: ToolbarProps): ReactNode {
     const pathname = usePathname();
 
-    const [path, setPath] = useState<string>("");
-    const [subPath, setSubPath] = useState<string>("");
+    const [path, setPath] = useState<string | null>(null);
+    const [subPath, setSubPath] = useState<string | null>(null);
     const [internIsOpen, setInternIsOpen] = useState<boolean>(
         openDefault !== undefined ? openDefault : open,
     );
