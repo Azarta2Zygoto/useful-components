@@ -1,13 +1,13 @@
 @layer components {
     [data-uc-ripple] {
         position: absolute;
-        inset: 0;
+        inset: calc(-1 * var(--ripple-border, 0));
         border-radius: inherit;
         pointer-events: none;
         overflow: hidden;
         & > span {
             position: absolute;
-            background-color: var(--ripple-color);
+            background-color: var(--ripple-color, --theme-main);
             border-radius: 50%;
             opacity: 0;
             pointer-events: none;

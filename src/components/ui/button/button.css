@@ -15,7 +15,9 @@
         --outline-active: var(--outlineE);
         --box-shadow: var(--shadowE);
         --icon: var(--textE);
+
         --ripple-color: var(--theme-main);
+        --ripple-border: 2px;
 
         position: relative;
         display: inline-flex;
@@ -30,7 +32,7 @@
         color: var(--text);
         font-size: var(--font-size);
         text-align: left;
-        border: 2px solid var(--border);
+        border: var(--ripple-border) solid var(--border);
         border-radius: 0.5rem;
         outline: 2px solid var(--outline);
         outline-offset: 3px;
@@ -42,6 +44,7 @@
             border-color 0.3s ease-in-out,
             box-shadow 0.3s ease-in-out,
             outline-color 0.3s ease-in-out;
+        -webkit-tap-highlight-color: transparent;
     }
     [data-uc-variant]:hover {
         background-color: var(--bg-hover);
