@@ -8,6 +8,8 @@ import ComponentAccessibility from "@/components/ComponentAccessibility";
 import ComponentApi from "@/components/ComponentApi";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
+import ErrorFrame from "@/components/frames/ErrorFrame";
+import InfoFrame from "@/components/frames/InfoFrame";
 import tooltipApi from "@/data/tooltip.json";
 
 export default function TooltipPage() {
@@ -54,6 +56,10 @@ export default function TooltipPage() {
                 tooltip on hover and keyboard focus. Add an accessible name
                 separately when the tooltip trigger has no visible name.
             </p>
+            <InfoFrame>
+                For the moment, theses tooltips also appears on phone after a
+                click on the element.
+            </InfoFrame>
             <CodeView
                 code={`<Button
     data-uc-tooltip="Save your changes"
@@ -85,6 +91,11 @@ export default function TooltipPage() {
                 delay, or automatic ARIA association. Spread its returned props
                 onto the trigger element.
             </p>
+            <ErrorFrame>
+                Theses tooltips are not working for phones! You should always
+                have understandable components, tooltips are a bonus to the
+                comprehension
+            </ErrorFrame>
             <CodeView
                 code={`const tooltip = useTooltip({
     content: "Tooltip above the button",

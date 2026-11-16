@@ -1,6 +1,6 @@
 @layer vendor, components, application;
 
-@import url("./index.css") layer(application);
+@import url("./index.css");
 @import url("./prism.css") layer(vendor);
 @import "bootstrap-icons/font/bootstrap-icons.css" layer(vendor);
 
@@ -122,7 +122,7 @@
         font-family: Arial, Helvetica, sans-serif;
     }
     html {
-        height: 100svh;
+        height: 100%;
     }
     body {
         display: flex;
@@ -130,7 +130,6 @@
         width: 100%;
         height: 100svh;
         margin: 0;
-        padding: 0;
         background-color: var(--bg);
         color: var(--fg);
         overflow: hidden;

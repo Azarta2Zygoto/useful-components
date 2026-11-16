@@ -2,8 +2,9 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import type { PropsWithChildren } from "react";
 
+import { ThemeProvider } from "next-themes";
+
 import "./globals.css";
-import "./layers.css";
 
 import { GlobalProvider } from "@/components/GlobalProvider";
 import Header from "@/components/Header";
@@ -74,7 +75,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
     return (
-        <html lang="fr">
+        <html
+            lang="en-US"
+            suppressHydrationWarning
+        >
             <body>
                 {process.env.NODE_ENV === "development" && (
                     <Script
@@ -86,15 +90,17 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
                     strategy="afterInteractive"
                     src={`${APP_CONFIG.basePath}/js/prism.min.js`}
                 />
-                <GlobalProvider>
-                    <ComponentProvider>
-                        <ToolbarWrapper />
-                        <div className="sub-body">
-                            <Header />
-                            <div className="content">{children}</div>
-                        </div>
-                    </ComponentProvider>
-                </GlobalProvider>
+                <ThemeProvider>
+                    <GlobalProvider>
+                        <ComponentProvider>
+                            <ToolbarWrapper />
+                            <div className="sub-body">
+                                <Header />
+                                <div className="content">{children}</div>
+                            </div>
+                        </ComponentProvider>
+                    </GlobalProvider>
+                </ThemeProvider>
             </body>
         </html>
     );

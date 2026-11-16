@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { MouseEvent, ReactNode } from "react";
+import type { KeyboardEvent, MouseEvent, ReactNode } from "react";
 
 import Button from "../button/Button";
 import useTooltip from "../tooltip/useTooltip.hook";
@@ -16,6 +16,7 @@ interface ToolbarLinkProps {
     type?: "expand" | "menu";
     displayDifferentName?: (name: string) => string;
     subPathOpen: (boolean | null)[];
+    onClick: (open: boolean) => void;
 }
 
 export default function ToolbarLink({
@@ -27,6 +28,7 @@ export default function ToolbarLink({
     type,
     handleClickOpen,
     subPathOpen,
+    onClick,
 }: ToolbarLinkProps): ReactNode {
     const name = item.name;
     const key = name.toLowerCase().replace(/\s+/g, "-");
@@ -42,11 +44,18 @@ export default function ToolbarLink({
         hideGrace: 0,
     });
 
+    const handlePointerDown = () => {
+        if (window.matchMedia("(max-width: 767px)").matches) {
+            onClick(false);
+        }
+    };
+
     return (
         <>
             <Link
                 data-uc-path={isSelected ? "true" : "false"}
                 href={key === "accueil" ? "//" : `/${key}`}
+                onPointerDown={handlePointerDown}
                 {...tooltip}
             >
                 <i className={item.icon + " i"} />

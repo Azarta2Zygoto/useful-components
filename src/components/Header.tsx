@@ -11,21 +11,19 @@ import { ASSETS } from "@/types/common.constant";
 import { buildAssetPath } from "@/utils/path.utils";
 
 export default function Header(): ReactNode {
-    const { openToolbar, setOpenToolbar, width } = useGlobal();
+    const { openToolbar, setOpenToolbar } = useGlobal();
 
     return (
         <header>
-            {width < 600 && (
-                <Button
-                    className="button-header"
-                    variant="transparent"
-                    data-uc-tooltip={openToolbar ? "Close" : "Open"}
-                    onClick={() => setOpenToolbar(!openToolbar)}
-                    aria-label={openToolbar ? "Close" : "Open"}
-                >
-                    <i className="bi bi-justify" />
-                </Button>
-            )}
+            <Button
+                className="toolbar-external"
+                variant="transparent"
+                data-uc-tooltip={openToolbar ? "Close" : "Open"}
+                onClick={() => setOpenToolbar(!openToolbar)}
+                aria-label={openToolbar ? "Close" : "Open"}
+            >
+                <i className="bi bi-justify" />
+            </Button>
             <Image
                 src={buildAssetPath(ASSETS.LOGO.DARK)}
                 alt="Useful Components Logo"

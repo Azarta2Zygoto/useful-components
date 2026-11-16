@@ -1,7 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { type MouseEvent, type ReactNode, useEffect, useState } from "react";
+import {
+    type MouseEvent,
+    type ReactNode,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 
 import JustifyIcon from "../assets/icons/justify.svg";
 import Icon from "../icon/Icon";
@@ -31,6 +37,7 @@ export default function Toolbar({
         openDefault !== undefined ? openDefault : open,
     );
     const [subPathOpen, setSubPathOpen] = useState<(boolean | null)[]>([]);
+    const toolbarRef = useRef<HTMLDivElement>(null);
     const internalOpen = open ?? internIsOpen;
 
     useEffect(() => {
@@ -59,6 +66,46 @@ export default function Toolbar({
         else setSubPath("");
     }, [pathname, getPath]);
 
+    const handleToolbarActivation = (isOpen: boolean) => {
+        getActive?.(isOpen);
+        setInternIsOpen(isOpen);
+    };
+
+    useEffect(() => {
+        if (!internalOpen) return;
+
+        function handleDocumentClick(event: globalThis.MouseEvent) {
+            if (
+                !window.matchMedia("(max-width: 767px)").matches ||
+                !(event.target instanceof Node) ||
+                toolbarRef.current?.contains(event.target)
+            ) {
+                return;
+            }
+
+            handleToolbarActivation(false);
+        }
+
+        function handleDocumentKeyDown(event: globalThis.KeyboardEvent) {
+            if (
+                !window.matchMedia("(max-width: 767px)").matches ||
+                event.key !== "Escape"
+            ) {
+                return;
+            }
+
+            handleToolbarActivation(false);
+        }
+
+        document.addEventListener("click", handleDocumentClick);
+        document.addEventListener("keydown", handleDocumentKeyDown);
+        return () => {
+            document.removeEventListener("click", handleDocumentClick);
+            document.removeEventListener("keydown", handleDocumentKeyDown);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [internalOpen, getActive]);
+
     function handleClickOpen(
         event: MouseEvent<HTMLButtonElement>,
         index: number,
@@ -67,12 +114,6 @@ export default function Toolbar({
         event.preventDefault();
 
         setSubPathOpen((prev) => prev.map((o, i) => (i === index ? !o : o)));
-    }
-
-    function handleToolbarActivation() {
-        const newState = !internalOpen;
-        getActive?.(newState);
-        setInternIsOpen(newState);
     }
 
     const textOpenClose = internalOpen
@@ -84,12 +125,15 @@ export default function Toolbar({
         hideGrace: 0,
     });
     return (
-        <div className={internalOpen ? "toolbar active" : "toolbar"}>
+        <div
+            ref={toolbarRef}
+            className={internalOpen ? "toolbar active" : "toolbar"}
+        >
             {innerChange && (
                 <button
                     className="active-button"
                     type="button"
-                    onClick={handleToolbarActivation}
+                    onClick={() => handleToolbarActivation(!internalOpen)}
                     aria-label={textOpenClose}
                     {...tooltip}
                 >
@@ -109,6 +153,7 @@ export default function Toolbar({
                         type={type}
                         handleClickOpen={handleClickOpen}
                         subPathOpen={subPathOpen}
+                        onClick={handleToolbarActivation}
                     />
                 ))}
             </nav>

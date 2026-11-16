@@ -141,7 +141,6 @@
             visibility: visible;
         }
     }
-
     .toolbar.active {
         --width: 180px;
         min-width: var(--width);
@@ -158,6 +157,19 @@
             min-width: 118px;
         }
     }
+
+    button.toolbar-external {
+        --text: white;
+        --text-hover: white;
+        --text-active: white;
+
+        position: absolute;
+        display: none;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+    }
+
     @media (max-width: 768px) {
         .toolbar {
             z-index: 100;
@@ -175,6 +187,9 @@
             transform: translateX(0);
             opacity: 0.9;
             visibility: visible;
+        }
+        button.toolbar-external {
+            display: inline-flex;
         }
     }
 }
