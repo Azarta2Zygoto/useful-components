@@ -132,7 +132,8 @@
         margin: 0;
         background-color: var(--bg);
         color: var(--fg);
-        overflow: hidden;
+        overflow: auto;
+        overscroll-behavior: contain;
     }
 
     @media (prefers-reduced-motion: reduce) {

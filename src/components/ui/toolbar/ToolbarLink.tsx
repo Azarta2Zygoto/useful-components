@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { KeyboardEvent, MouseEvent, ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 
 import Button from "../button/Button";
 import useTooltip from "../tooltip/useTooltip.hook";
