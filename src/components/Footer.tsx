@@ -12,16 +12,14 @@ interface FooterProps {
 export default function Footer({ link, name }: FooterProps): ReactNode {
     return (
         <footer>
-            <p>&copy; 2026 useful Components. All rights reserved.</p>
+            <p>&copy; 2026 useful Comp onents. All rights reserved.</p>
             <a
                 href={`https://github.com/Azarta2Zygoto/useful-components${link ? `/tree/main/${link}` : ""}`}
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <span>
-                    Visit the <i>Useful Components</i> GitHub repository
-                    {name ? <> for the {name} component</> : ""}
-                </span>
+                Visit the <i>Useful Components</i> GitHub repository
+                {name ? <> for the {name} component</> : ""}
                 <Icon icon={GitHubIcon} />
             </a>
         </footer>

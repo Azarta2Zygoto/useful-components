@@ -126,6 +126,8 @@ p code {
     font-size: calc(var(--font-size) * 0.9);
     font-family: monospace;
     border-radius: 0.25rem;
+    overflow: hidden;
+    overflow-wrap: anywhere;
 }
 
 .frame {
@@ -162,21 +164,19 @@ p code {
 }
 
 .anchor > button {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    display: inline;
     padding: 0 0.25rem;
     background-color: transparent;
     font-size: inherit;
     font-weight: inherit;
+    text-align: left;
     border: none;
     cursor: pointer;
-}
-.anchor > button > span {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    & > span {
+        margin-left: 0.5rem;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
 }
 .anchor:hover > button > span,
 .anchor:focus-within > button > span {
@@ -227,17 +227,19 @@ footer {
     & > p {
         text-align: center;
     }
-}
-footer > a {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: var(--textE);
-    text-decoration: none;
-}
-footer > a > span {
-    min-width: 0;
-    text-align: center;
+    & > a {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        color: var(--textE);
+        text-decoration: none;
+        & > i {
+            display: inline;
+            margin: 0 0.25rem;
+        }
+        & > svg {
+            flex-shrink: 0;
+            margin: 0 0.25rem;
+        }
+    }
 }
