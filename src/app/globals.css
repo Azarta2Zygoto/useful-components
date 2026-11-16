@@ -88,16 +88,16 @@
     }
 
     ::-webkit-scrollbar {
-        width: 0.4rem;
-        background: #0d1011;
-        border-radius: 0.25rem;
+        width: 0.35rem;
+        background: light-dark(#b8b8b8, #0d1011);
+        border-radius: 1rem;
     }
     ::-webkit-scrollbar:horizontal {
-        height: 0.4rem;
+        height: 0.35rem;
     }
     ::-webkit-scrollbar-thumb {
         background: var(--theme-main);
-        border-radius: 0.25rem;
+        border-radius: 1rem;
     }
 
     [data-uc-size] {
@@ -132,7 +132,7 @@
         margin: 0;
         background-color: var(--bg);
         color: var(--fg);
-        overflow: hidden;
+        overflow-y: auto;
     }
 
     @media (prefers-reduced-motion: reduce) {
