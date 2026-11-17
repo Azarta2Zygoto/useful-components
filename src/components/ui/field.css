@@ -16,7 +16,7 @@
         }
         & label {
             padding: calc(var(--padding) / 2);
-            font-size: calc(var(--font-size) * 1.1);
+            font-size: var(--label-size);
         }
     }
 

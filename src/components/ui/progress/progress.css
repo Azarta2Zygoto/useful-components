@@ -1,21 +1,18 @@
 @layer components {
     [data-uc-progress] {
         --gap: 0.5rem;
+        --track-height: calc(var(--font-size) * 0.4);
+        --thumb-size: calc(var(--track-height) * 3);
 
-        display: flex;
-        flex-direction: column;
+        position: relative;
         gap: var(--gap);
         width: 100%;
-        pointer-events: none;
 
         & > progress {
-            --percent: 0;
-
             position: relative;
             width: 100%;
             height: var(--track-height);
         }
-
         & > progress::after {
             content: "";
             position: absolute;
@@ -27,40 +24,77 @@
             background: linear-gradient(
                 to right,
                 var(--theme-main) calc(var(--percent) * 100%),
-                light-dark(#b0b8c1, var(--fg2)) 0
+                var(--track-color) 0
             );
-            border: 1px solid var(--bgE);
             border-radius: 999px;
         }
-
-        & > div {
-            --value: 0%;
-
-            position: relative;
-            height: calc(var(--font-size) * 1.25);
+        & > progress:indeterminate::after {
+            background:
+                linear-gradient(
+                        to right,
+                        transparent,
+                        var(--theme-main) 35%,
+                        var(--theme-main) 65%,
+                        transparent
+                    )
+                    no-repeat,
+                var(--track-color);
+            background-size:
+                40% 100%,
+                100% 100%;
+            background-position:
+                -66.67% 0,
+                0 0;
+            animation: uc-progress-indeterminate 1.4s ease-in-out infinite;
         }
-        & > div > span {
-            z-index: 2;
-            position: absolute;
-            bottom: 0;
-            left: var(--value);
-            transform: translateX(-50%);
-        }
-        & > div > span::before {
-            --size: calc(var(--track-height) * 2);
 
-            content: "";
-            z-index: 2;
-            position: absolute;
-            bottom: calc(var(--track-height) * -0.5 - var(--gap));
-            left: 50%;
-            transform: translateX(-50%) translateY(50%);
-            width: var(--size);
-            height: var(--size);
-            background-color: var(--theme-main);
+        & > [data-uc-progress-dots] {
             font-size: var(--font-size);
-            border: 1px solid var(--bgE);
-            border-radius: 100%;
+
+            & > span {
+                z-index: 1;
+                position: absolute;
+                bottom: calc(
+                    0.5 * var(--track-height) + var(--gap) + var(--font-size)
+                );
+                left: var(--value);
+                transform: translateX(-50%);
+            }
+            & > span::before {
+                content: "";
+                z-index: 1;
+                position: absolute;
+                bottom: calc(-1 * var(--font-size));
+                left: calc(50%);
+                transform: translateX(-50%) translateY(50%);
+                width: var(--thumb-size);
+                height: var(--thumb-size);
+                background-color: var(--theme-main);
+                border-radius: 100%;
+                box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+            }
+        }
+    }
+    [data-uc-progress]:has(> [data-uc-progress-dots]) {
+        --gap: calc(0.5rem + var(--font-size));
+    }
+
+    @keyframes uc-progress-indeterminate {
+        to {
+            background-position:
+                166.67% 0,
+                0 0;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        [data-uc-progress] > progress:indeterminate::after {
+            animation: none;
+            background: color-mix(
+                in srgb,
+                var(--theme-main) 50%,
+                var(--track-color)
+            );
         }
     }
 
@@ -68,6 +102,9 @@
         [data-uc-progress] {
             & > progress::after {
                 display: none;
+            }
+            & > [data-uc-progress-dots] > span::before {
+                background-color: Highlight;
             }
         }
     }

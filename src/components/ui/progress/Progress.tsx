@@ -1,58 +1,126 @@
-"use client";
+import { type CSSProperties, type ReactNode, useId } from "react";
 
-import type { CSSProperties, ReactNode } from "react";
-
+import "../field/field-position.css";
 import "./progress.css";
-import type { ProgressProps } from "./progress.type";
+import type { PreciseDotsProps, ProgressProps } from "./progress.type";
+import {
+    correctProgressValue,
+    correctprogressMax,
+    preciseDotPosition,
+    regularDotPosition,
+} from "./progress.utils";
 
-export default function Progress({
-    label,
+function ProgressPreciseDots({
     value,
-    max = 100,
-    height = "7px",
-    hideLabel = false,
-    labelProps,
-    dots,
-    labels,
-    dotsProps,
-    ...props
-}: ProgressProps): ReactNode {
+    label,
+    max,
+    index,
+    props,
+}: PreciseDotsProps): ReactNode {
+    const preciseValue = preciseDotPosition(value, max);
+    if (preciseValue === null) {
+        return null;
+    }
+
     return (
-        <label
-            {...labelProps}
-            data-uc-progress
-            aria-label={hideLabel ? label : undefined}
+        <span
+            {...props}
+            key={index}
             style={
                 {
-                    ...labelProps?.style,
-                    "--track-height": height,
+                    ...props?.style,
+                    "--value": `${(preciseValue / max) * 100}%`,
                 } as CSSProperties
             }
         >
-            {!hideLabel && label}
-            {(dots || labels) && (
-                <div {...dotsProps}>
-                    {dots &&
-                        dots.map((element) => (
-                            <span
-                                {...element.props}
-                                key={element.value}
-                                style={
-                                    {
-                                        "--value": `${(element.value / max) * 100}%`,
-                                    } as CSSProperties
-                                }
-                            >
-                                {element.label}
-                            </span>
+            {label}
+        </span>
+    );
+}
+
+export default function Progress({
+    id,
+    label,
+    value,
+    max = 100,
+    trackHeight,
+    size,
+    preciseDots,
+    regularDots,
+    labelPosition = "top",
+    labelProps,
+    containerProps,
+    dotsProps,
+    ...props
+}: ProgressProps): ReactNode {
+    const generatedId = useId();
+    const correctId = id ?? generatedId;
+
+    const correctMax = correctprogressMax(max);
+    const correctValue = correctProgressValue(value, correctMax);
+
+    const isDots =
+        correctValue !== undefined &&
+        ((preciseDots?.length ?? 0) > 0 || (regularDots?.length ?? 0) > 0);
+
+    return (
+        <div
+            {...containerProps}
+            data-uc-progress=""
+            data-uc-size={size}
+            data-uc-field-position={labelPosition}
+            style={
+                {
+                    ...containerProps?.style,
+                    "--track-height": trackHeight,
+                } as CSSProperties
+            }
+        >
+            {label && (
+                <label
+                    {...labelProps}
+                    htmlFor={correctId}
+                >
+                    {label}
+                </label>
+            )}
+            <progress
+                {...props}
+                id={correctId}
+                value={correctValue}
+                max={correctMax}
+                style={
+                    {
+                        ...props.style,
+                        "--percent": correctValue
+                            ? `${correctValue / correctMax}`
+                            : 0,
+                    } as CSSProperties
+                }
+            />
+            {isDots && (
+                <div
+                    {...dotsProps}
+                    data-uc-progress-dots=""
+                >
+                    {preciseDots &&
+                        preciseDots.map((element, index) => (
+                            <ProgressPreciseDots
+                                key={index}
+                                index={index}
+                                value={element.value}
+                                label={element.label}
+                                max={correctMax}
+                                props={element.props}
+                            />
                         ))}
-                    {labels &&
-                        labels.map((element, index) => (
+                    {regularDots &&
+                        regularDots.map((element, index) => (
                             <span
                                 key={index}
                                 style={
                                     {
-                                        "--value": `${(index / (labels.length - 1)) * 100}%`,
+                                        "--value": `${regularDotPosition(index, regularDots.length)}%`,
                                     } as CSSProperties
                                 }
                             >
@@ -61,16 +129,6 @@ export default function Progress({
                         ))}
                 </div>
             )}
-            <progress
-                {...props}
-                value={value}
-                max={max}
-                style={
-                    {
-                        "--percent": `${value / max}`,
-                    } as CSSProperties
-                }
-            />
-        </label>
+        </div>
     );
 }

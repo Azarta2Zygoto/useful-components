@@ -1,31 +1,39 @@
 import type { ComponentProps, ReactNode } from "react";
 
-import type { ContainerProps } from "../types";
+import type {
+    ContainerProps,
+    LabelLayoutProps,
+    SizeableComponentProps,
+} from "../types";
 
-export interface ProgressDot {
+interface PreciseDots {
     value: number;
     label?: ReactNode;
     props?: ContainerProps<"span">;
 }
 
-type Progress = Omit<ComponentProps<"progress">, "children">;
-interface ProgressCore extends Progress {
-    label: string;
-    value: number;
+export interface PreciseDotsProps extends PreciseDots {
+    max: number;
+    index: number;
+}
+
+type ProgressType = Omit<ComponentProps<"progress">, "children">;
+interface ProgressCore
+    extends ProgressType, SizeableComponentProps, LabelLayoutProps {
+    value?: number;
     max?: number;
-    height?: string;
-    hideLabel?: boolean;
-    labelProps?: ContainerProps<"label">;
+    trackHeight?: string;
+    containerProps?: ContainerProps;
     dotsProps?: ContainerProps;
 }
-export interface ProgressDots extends ProgressCore {
-    dots?: ProgressDot[];
-    labels?: never;
+export interface ProgressPreciseDots extends ProgressCore {
+    preciseDots?: PreciseDots[];
+    regularDots?: never;
 }
 
-export interface ProgressLabels extends ProgressCore {
-    dots?: never;
-    labels?: ReactNode[];
+export interface ProgressRegularDots extends ProgressCore {
+    preciseDots?: never;
+    regularDots?: ReactNode[];
 }
 
-export type ProgressProps = ProgressDots | ProgressLabels;
+export type ProgressProps = ProgressPreciseDots | ProgressRegularDots;

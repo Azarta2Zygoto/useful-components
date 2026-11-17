@@ -17,7 +17,7 @@ export type ContainerProps<T extends IntrinsicElements = "div"> = Omit<
 >;
 
 export interface LabelLayoutProps {
-    label: ReactNode;
+    label?: ReactNode;
     labelPosition?: "left" | "top";
     labelProps?: ContainerProps<"label">;
 }

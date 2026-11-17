@@ -4,7 +4,7 @@
         flex-direction: column;
         gap: calc(var(--padding) / 2);
         width: 100%;
-        font-size: calc(var(--font-size) * 1.1);
+        font-size: var(--label-size);
     }
     [data-uc-slider="left"] {
         flex-direction: row;
@@ -47,7 +47,7 @@
             background: linear-gradient(
                 to right,
                 var(--theme-main-hard) calc(var(--percent) * 100%),
-                light-dark(#b0b8c1, var(--fg2)) 0
+                var(--track-color) 0
             );
             border-radius: 999px;
         }
@@ -81,8 +81,8 @@
             left: calc(var(--percent) * (100% - var(--thumb-size)));
             width: var(--thumb-size);
             height: var(--thumb-size);
-            background: light-dark(#eee, var(--fg));
-            border-radius: 50%;
+            background-color: light-dark(#eee, var(--fg));
+            border-radius: 100%;
             box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
             pointer-events: none;
             transition:

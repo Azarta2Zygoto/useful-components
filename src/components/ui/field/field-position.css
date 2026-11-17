@@ -1,0 +1,24 @@
+@layer components {
+    [data-uc-field-position] {
+        display: grid;
+        align-items: center;
+        min-width: 0;
+        max-width: 100%;
+        & label {
+            padding: calc(var(--padding) / 2);
+            font-size: var(--label-size);
+        }
+    }
+
+    @media (min-width: 640px) {
+        [data-uc-field-position="left"] {
+            grid-template-columns: auto 1fr;
+            & label {
+                padding-right: calc(var(--padding) * 2);
+            }
+            & > [data-uc-field-error] {
+                grid-column: 2;
+            }
+        }
+    }
+}

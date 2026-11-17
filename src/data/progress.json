@@ -2,55 +2,65 @@
     "name": "Progress",
     "source": "src/components/ui/progress/Progress.tsx",
     "since": "1.0.1",
-    "description": "<code>Progress</code> extends the native <code>HTMLProgressElement</code> properties and wraps the progress bar in a labeled container.",
+    "description": "<code>Progress</code> wraps the native <code>HTMLProgressElement</code> in a labeled container and supports determinate, indeterminate, and milestone-marked states.",
     "elements": [
         {
             "name": "label",
-            "description": "The accessible label for the progress indicator. This prop is required."
+            "description": "The accessible label displayed above or beside the progress bar."
         },
         {
             "name": "value",
-            "description": "The current progress value."
+            "description": "The current numeric progress value. Omit it to render an indeterminate progress state."
         },
         {
             "name": "max",
-            "description": "The maximum progress value. Defaults to <code>100</code>."
+            "description": "The maximum progress value. Defaults to <code>100</code>; invalid or non-positive values are normalized to <code>1</code>."
         },
         {
-            "name": "height",
-            "description": "Sets the progress bar height using a CSS length. Defaults to <code>7px</code>."
+            "name": "trackHeight",
+            "description": "Sets the progress track height using a CSS length. The default is based on the component font size."
         },
         {
-            "name": "hideLabel",
-            "description": "Hides the visible label while keeping it available through <code>aria-label</code>."
+            "name": "size",
+            "description": "Sets the component scale to <code>sm</code>, <code>md</code>, or <code>lg</code>."
         },
         {
-            "name": "dots",
-            "description": "Adds marked points at numeric positions. Each item accepts a required <code>value</code>, an optional React <code>label</code>, and optional span properties through <code>props</code>."
+            "name": "labelPosition",
+            "description": "Places the label at the <code>top</code> (default) or <code>left</code> of the progress bar."
         },
         {
-            "name": "labels",
-            "description": "Adds evenly distributed React labels from the start to the end of the progress bar. Use either <code>labels</code> or <code>dots</code>, not both."
+            "name": "preciseDots",
+            "description": "Adds markers at numeric positions. Each item requires a <code>value</code>, accepts an optional React <code>label</code>, and supports optional span properties through <code>props</code>. Values outside the range are ignored."
+        },
+        {
+            "name": "regularDots",
+            "description": "Adds evenly distributed React markers from the start to the end of the progress bar. Use either <code>regularDots</code> or <code>preciseDots</code>, not both."
         },
         {
             "name": "labelProps",
-            "description": "Passes native label properties to the outer container."
+            "description": "Passes native label properties to the visible label element."
+        },
+        {
+            "name": "containerProps",
+            "description": "Passes native div properties to the outer field container."
         },
         {
             "name": "dotsProps",
-            "description": "Passes native div properties to the container holding dots or labels."
+            "description": "Passes native div properties to the container holding milestone markers."
         },
         {
             "name": "Native progress properties",
-            "description": "Other native progress properties such as <code>id</code>, <code>className</code>, and <code>aria-*</code> attributes are forwarded to the progress element."
+            "description": "Native progress properties such as <code>id</code>, <code>className</code>, <code>value</code>, <code>max</code>, and <code>aria-*</code> attributes are forwarded to the progress element."
         }
     ],
     "accessibility": {
-        "general": "The component uses a native <code>progress</code> element and requires a label. Native progress semantics expose the current value and maximum to assistive technologies.",
+        "general": "The component uses a native <code>progress</code> element, preserving native progress semantics for determinate and indeterminate states. The visible label is associated with the progress element through <code>for</code>/<code>id</code>.",
         "elements": [
-            "Provide a meaningful <code>label</code>. When <code>hideLabel</code> is enabled, the label is exposed on the outer container through <code>aria-label</code>.",
-            "Use <code>dots</code> or <code>labels</code> to provide contextual milestones, but do not rely on their visual position as the only way to communicate progress.",
-            "Keep the numeric <code>value</code> within the intended range defined by <code>max</code> so the native progress state remains accurate."
+            "Provide a meaningful <code>label</code> so the progress indicator has an accessible name. If no visible label is rendered, provide an accessible name through the native progress attributes.",
+            "Omit <code>value</code> only when completion is genuinely unknown; the native element then exposes an indeterminate state.",
+            "Use <code>preciseDots</code> or <code>regularDots</code> as supplemental visual milestones. Their labels do not replace the numeric progress value for assistive technologies.",
+            "Keep <code>value</code> within the intended range defined by <code>max</code>; the component clamps out-of-range values before rendering.",
+            "The indeterminate animation is disabled when the user prefers reduced motion, and forced-colors mode preserves a visible native progress fallback."
         ]
     }
 }
