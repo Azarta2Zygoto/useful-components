@@ -10,7 +10,7 @@ import ComponentAccessibility from "@/components/ComponentAccessibility";
 import ComponentApi from "@/components/ComponentApi";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
-import menuSelectApi from "@/data/menu-select.json";
+import menuSelectApi from "@/documentation/menu-select.json";
 
 const options: MenuSelectOption[] = [
     { value: "banana", label: "Banana" },

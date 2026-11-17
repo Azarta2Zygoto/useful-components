@@ -3,9 +3,11 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 
+import JustifyIcon from "@ui/assets/icons/justify.svg";
 import Button from "@ui/button/Button";
 
 import { useGlobal } from "./GlobalProvider";
+import Icon from "./ui/icon/Icon";
 
 import { ASSETS } from "@/types/common.constant";
 import { buildAssetPath } from "@/utils/path.utils";
@@ -21,8 +23,9 @@ export default function Header(): ReactNode {
                 data-uc-tooltip={openToolbar ? "Close" : "Open"}
                 onClick={() => setOpenToolbar(!openToolbar)}
                 aria-label={openToolbar ? "Close" : "Open"}
+                size="md"
             >
-                <i className="bi bi-justify" />
+                <Icon icon={JustifyIcon} />
             </Button>
             <Image
                 src={buildAssetPath(ASSETS.LOGO.DARK)}

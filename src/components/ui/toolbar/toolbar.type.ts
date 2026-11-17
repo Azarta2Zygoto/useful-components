@@ -1,10 +1,12 @@
 import type { ReactNode } from "react";
 
+import type { IconType } from "../icon/icon.type";
+
 export interface ToolbarPaths {
     name: string;
-    icon: string;
+    icon: IconType;
     subpath?: ToolbarPaths[];
-    [key: string]: string | ToolbarPaths[] | undefined;
+    [key: string]: IconType | string | ToolbarPaths[] | undefined;
 }
 
 export interface ToolbarProps {

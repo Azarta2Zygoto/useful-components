@@ -1,0 +1,36 @@
+import {
+    AlphabetIcon,
+    AppIcon,
+    ArrowsCollapseIcon,
+    BarChartIcon,
+    CalendarIcon,
+    CheckMarkIcon,
+    ExclamationIcon,
+    HandClickIcon,
+    HouseIcon,
+    MarkerTipIcon,
+    MenuButtonIcon,
+    NumberIcon,
+    RadioButtonIcon,
+    SliderIcon,
+    ToggleOnIcon,
+} from "@ui/assets";
+import type { ToolbarPaths } from "@ui/toolbar/toolbar.type";
+
+export const toolbarData = [
+    { name: "Accueil", icon: HouseIcon },
+    { name: "Accordion", icon: ArrowsCollapseIcon },
+    { name: "Button", icon: HandClickIcon },
+    { name: "Checkbox", icon: CheckMarkIcon },
+    { name: "Date info", icon: CalendarIcon },
+    { name: "Icon", icon: AppIcon },
+    { name: "Input text", icon: AlphabetIcon },
+    { name: "Input Number", icon: NumberIcon },
+    { name: "Menu Select", icon: MenuButtonIcon },
+    { name: "Progress", icon: BarChartIcon },
+    { name: "Radio Button", icon: RadioButtonIcon },
+    { name: "Slider", icon: SliderIcon },
+    { name: "Switch", icon: ToggleOnIcon },
+    { name: "Toast", icon: ExclamationIcon },
+    { name: "Tooltip", icon: MarkerTipIcon },
+] satisfies ToolbarPaths[];

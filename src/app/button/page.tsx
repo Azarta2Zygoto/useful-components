@@ -12,7 +12,7 @@ import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import WarningFrame from "@/components/frames/WarningFrame";
 import Icon from "@/components/ui/icon/Icon";
-import buttonApi from "@/data/button.json";
+import buttonApi from "@/documentation/button.json";
 
 export default function ButtonPage() {
     const [isActives, setIsActives] = useState<boolean[]>([

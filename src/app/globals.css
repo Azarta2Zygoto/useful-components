@@ -1,9 +1,5 @@
 @layer vendor, components, application;
 
-@import url("./index.css");
-@import url("./prism.css") layer(vendor);
-@import "bootstrap-icons/font/bootstrap-icons.css" layer(vendor);
-
 @layer components {
     :root {
         color-scheme: light dark;

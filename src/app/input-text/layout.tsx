@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import inputTextJson from "@/data/input-text.json";
+import inputTextJson from "@/documentation/input-text.json";
 import { makeMetadata } from "@/utils/makeData";
 
 export const metadata = makeMetadata(inputTextJson.name, [

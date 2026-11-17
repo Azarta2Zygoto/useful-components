@@ -10,7 +10,7 @@ import ComponentApi from "@/components/ComponentApi";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import Input from "@/components/ui/input/number-input/NumberField";
-import numberInputApi from "@/data/input-number.json";
+import numberInputApi from "@/documentation/input-number.json";
 
 export default function NumberInputPage() {
     const [value, setValue] = useState<number | null>(50);

@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import sliderJson from "@/data/slider.json";
+import sliderJson from "@/documentation/slider.json";
 import { makeMetadata } from "@/utils/makeData";
 
 export const metadata = makeMetadata(sliderJson.name, [

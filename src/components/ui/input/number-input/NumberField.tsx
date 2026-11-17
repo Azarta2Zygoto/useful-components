@@ -9,7 +9,7 @@ import {
     useRef,
 } from "react";
 
-import CadenasIcon from "../../assets/icons/cadenas.svg";
+import { CadenasIcon } from "@ui/assets/icons";
 import "../../field.css";
 import Icon from "../../icon/Icon";
 import Required from "../../required/Required";

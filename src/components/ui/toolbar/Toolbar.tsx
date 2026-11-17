@@ -9,7 +9,7 @@ import {
     useState,
 } from "react";
 
-import JustifyIcon from "../assets/icons/justify.svg";
+import { JustifyIcon } from "@ui/assets/icons";
 import Icon from "../icon/Icon";
 import useTooltip from "../tooltip/useTooltip.hook";
 import ToolbarLink from "./ToolbarLink";

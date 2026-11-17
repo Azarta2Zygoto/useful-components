@@ -8,7 +8,7 @@ import ComponentApi from "@/components/ComponentApi";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import Slider from "@/components/ui/slider/Slider";
-import sliderApi from "@/data/slider.json";
+import sliderApi from "@/documentation/slider.json";
 
 export default function SliderPage() {
     const [value, setValue] = useState(50);

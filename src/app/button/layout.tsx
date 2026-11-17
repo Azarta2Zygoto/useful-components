@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import buttonJson from "@/data/button.json";
+import buttonJson from "@/documentation/button.json";
 import { makeMetadata } from "@/utils/makeData";
 
 export const metadata = makeMetadata(buttonJson.name, ["button", "link"]);

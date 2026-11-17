@@ -11,7 +11,7 @@ import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import InfoFrame from "@/components/frames/InfoFrame";
 import InputField from "@/components/ui/input/InputField";
-import inputApi from "@/data/input-text.json";
+import inputApi from "@/documentation/input-text.json";
 
 export default function InputPage() {
     const [value, setValue] = useState("");

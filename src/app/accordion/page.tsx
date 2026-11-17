@@ -10,7 +10,7 @@ import ComponentAccessibility from "@/components/ComponentAccessibility";
 import ComponentApi from "@/components/ComponentApi";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
-import accordionJson from "@/data/accordion.json";
+import accordionJson from "@/documentation/accordion.json";
 
 export default function AccordionPage() {
     const [openSimple, setOpenSimple] = useState(false);

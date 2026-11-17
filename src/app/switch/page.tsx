@@ -8,7 +8,7 @@ import ComponentApi from "@/components/ComponentApi";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import Switch from "@/components/ui/switch/Switch";
-import switchApi from "@/data/switch.json";
+import switchApi from "@/documentation/switch.json";
 
 export default function SwitchPage() {
     const [enabled, setEnabled] = useState(false);

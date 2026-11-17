@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import radioButtonJson from "@/data/radio-button.json";
+import radioButtonJson from "@/documentation/radio-button.json";
 import { makeMetadata } from "@/utils/makeData";
 
 export const metadata = makeMetadata(radioButtonJson.name, [

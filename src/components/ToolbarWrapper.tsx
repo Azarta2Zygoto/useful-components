@@ -1,15 +1,18 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import type { ReactNode } from "react";
 
+import MoonIcon from "@ui/assets/moon.svg";
+import SunIcon from "@ui/assets/sun.svg";
 import Button from "@ui/button/Button";
 import Toolbar from "@ui/toolbar/Toolbar";
+import { useTheme } from "next-themes";
 
+import Icon from "./ui/icon/Icon";
 import useTooltip from "./ui/tooltip/useTooltip.hook";
 
 import { useGlobal } from "@/components/GlobalProvider";
-import toolbarJSON from "@/data/toolbar.json";
+import { toolbarData } from "@/data/toolbar";
 
 export default function ToolbarWrapper(): ReactNode {
     const { openToolbar, setOpenToolbar } = useGlobal();
@@ -24,7 +27,7 @@ export default function ToolbarWrapper(): ReactNode {
     });
     return (
         <Toolbar
-            toolbarData={toolbarJSON.toolbar}
+            toolbarData={toolbarData}
             open={openToolbar}
             getActive={(active) => setOpenToolbar(active)}
         >
@@ -34,13 +37,13 @@ export default function ToolbarWrapper(): ReactNode {
                 className="theme"
                 {...tooltip}
             >
-                <i
-                    className="bi bi-moon-fill theme-icon-dark"
-                    aria-hidden="true"
+                <Icon
+                    icon={SunIcon}
+                    className="theme-icon-light"
                 />
-                <i
-                    className="bi bi-sun-fill theme-icon-light"
-                    aria-hidden="true"
+                <Icon
+                    icon={MoonIcon}
+                    className="theme-icon-dark"
                 />
             </Button>
         </Toolbar>

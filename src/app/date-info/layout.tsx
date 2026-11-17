@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import dateJson from "@/data/date-tooltip.json";
+import dateJson from "@/documentation/date-tooltip.json";
 import { makeMetadata } from "@/utils/makeData";
 
 export const metadata = makeMetadata(dateJson.name, ["date"]);

@@ -37,7 +37,7 @@ src/
 ├── components/
 │   ├── ui/              # Actual component library
 │   └── ...              # Documentation components and utilities
-├── data/                # Internal documentation data
+├── documentation/       # Internal documentation data
 ├── types/               # Shared TypeScript types and constants
 └── utils/               # Documentation utility functions
 ```
@@ -184,7 +184,7 @@ Documentation work may involve:
 
 - Documentation pages in `src/app/`.
 - Documentation components outside `src/components/ui/`.
-- Documentation data in `src/data/`.
+- Documentation data in `src/documentation/`.
 - Documentation-specific types and utilities.
 - Documentation examples and presentation.
 

@@ -16,7 +16,7 @@ import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import Button from "@/components/ui/button/Button";
 import Icon from "@/components/ui/icon/Icon";
-import iconApi from "@/data/icon.json";
+import iconApi from "@/documentation/icon.json";
 
 export default function IconPage() {
     return (

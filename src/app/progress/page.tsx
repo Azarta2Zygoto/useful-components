@@ -6,7 +6,7 @@ import ComponentApi from "@/components/ComponentApi";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import Progress from "@/components/ui/progress/Progress";
-import progressApi from "@/data/progress.json";
+import progressApi from "@/documentation/progress.json";
 
 export default function ProgressPage() {
     return (
@@ -15,8 +15,8 @@ export default function ProgressPage() {
             <p>
                 <code>Progress</code> wraps the native{" "}
                 <code>&lt;progress&gt;</code> element to show determinate or
-                indeterminate task completion. It supports labels, sizes,
-                custom track heights, label positioning, and milestone markers.
+                indeterminate task completion. It supports labels, sizes, custom
+                track heights, label positioning, and milestone markers.
             </p>
 
             <Title level={2}>Determinate progress</Title>
@@ -60,20 +60,18 @@ export default function ProgressPage() {
             <p>
                 Omit <code>value</code> when the task is active but its
                 completion percentage is not known yet. The native progress
-                semantics remain indeterminate and the visual animation
-                respects reduced-motion preferences.
+                semantics remain indeterminate and the visual animation respects
+                reduced-motion preferences.
             </p>
-            <CodeView
-                code={`<Progress label="Installing updates" />`}
-            >
+            <CodeView code={`<Progress label="Installing updates" />`}>
                 <Progress label="Installing updates" />
             </CodeView>
 
             <Title level={2}>Milestone markers</Title>
             <p>
-                Use <code>preciseDots</code> to place labeled markers at
-                numeric positions. Each marker accepts a <code>value</code>, an
-                optional React <code>label</code>, and optional span properties.
+                Use <code>preciseDots</code> to place labeled markers at numeric
+                positions. Each marker accepts a <code>value</code>, an optional
+                React <code>label</code>, and optional span properties.
             </p>
             <CodeView
                 code={`<Progress
@@ -97,8 +95,8 @@ export default function ProgressPage() {
 
             <p>
                 Use <code>regularDots</code> for evenly distributed markers.
-                Items are placed from the start to the end of the track in
-                array order. Choose either <code>regularDots</code> or{" "}
+                Items are placed from the start to the end of the track in array
+                order. Choose either <code>regularDots</code> or{" "}
                 <code>preciseDots</code>.
             </p>
             <CodeView

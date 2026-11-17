@@ -8,7 +8,7 @@ import Title from "@/components/Title";
 import ErrorFrame from "@/components/frames/ErrorFrame";
 import WarningFrame from "@/components/frames/WarningFrame";
 import DateInfo from "@/components/ui/date-info/DateInfo";
-import dateApi from "@/data/date-tooltip.json";
+import dateApi from "@/documentation/date-tooltip.json";
 
 export default function DateInfoPage() {
     const currentDate = new Date();

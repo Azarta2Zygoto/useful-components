@@ -8,7 +8,7 @@ import ComponentApi from "@/components/ComponentApi";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import RadioGroup from "@/components/ui/radio-button/RadioGroup";
-import radioButtonApi from "@/data/radio-button.json";
+import radioButtonApi from "@/documentation/radio-button.json";
 
 const options = [
     { value: "banana", label: "Banana", tooltip: "A yellow fruit" },

@@ -10,7 +10,7 @@ import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
 import ErrorFrame from "@/components/frames/ErrorFrame";
 import InfoFrame from "@/components/frames/InfoFrame";
-import tooltipApi from "@/data/tooltip.json";
+import tooltipApi from "@/documentation/tooltip.json";
 
 export default function TooltipPage() {
     const topTooltip = useTooltip({

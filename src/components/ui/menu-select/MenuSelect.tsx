@@ -13,8 +13,7 @@ import {
     useState,
 } from "react";
 
-import CadenasIcon from "../assets/icons/cadenas.svg";
-import CaretUpIcon from "../assets/icons/caret-up.svg";
+import { CadenasIcon, CaretUpIcon } from "@ui/assets/icons";
 import Button from "../button/Button";
 import "../field.css";
 import Icon from "../icon/Icon";

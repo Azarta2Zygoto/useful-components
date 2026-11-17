@@ -114,7 +114,8 @@
                 flex-shrink: 0;
             }
         }
-        [data-uc-path] i {
+        [data-uc-path] svg {
+            flex-shrink: 0;
             height: 1em;
             font-size: 1em;
         }

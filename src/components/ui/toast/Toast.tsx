@@ -6,10 +6,12 @@ import {
     useRef,
 } from "react";
 
-import ErrorIcon from "../assets/icons/error.svg";
-import InfoIcon from "../assets/icons/info.svg";
-import SuccessIcon from "../assets/icons/success.svg";
-import WarningIcon from "../assets/icons/warning.svg";
+import {
+    ErrorIcon,
+    InfoIcon,
+    SuccessIcon,
+    WarningIcon,
+} from "@ui/assets/icons";
 import Button from "../button/Button";
 import Icon from "../icon/Icon";
 import type { ToastProps } from "./toast.type";

@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import checkboxJson from "@/data/checkbox.json";
+import checkboxJson from "@/documentation/checkbox.json";
 import { makeMetadata } from "@/utils/makeData";
 
 export const metadata = makeMetadata(checkboxJson.name, [

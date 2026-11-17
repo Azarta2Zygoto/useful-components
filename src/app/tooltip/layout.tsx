@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import tooltipJson from "@/data/tooltip.json";
+import tooltipJson from "@/documentation/tooltip.json";
 import { makeMetadata } from "@/utils/makeData";
 
 export const metadata = makeMetadata(tooltipJson.name, [

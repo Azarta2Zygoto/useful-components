@@ -10,7 +10,7 @@ import ComponentAccessibility from "@/components/ComponentAccessibility";
 import ComponentApi from "@/components/ComponentApi";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
-import toastApi from "@/data/toast.json";
+import toastApi from "@/documentation/toast.json";
 
 export default function ToastPage() {
     const toast = useToast();

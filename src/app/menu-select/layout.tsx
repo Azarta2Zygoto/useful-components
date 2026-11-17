@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import menuSelectJson from "@/data/menu-select.json";
+import menuSelectJson from "@/documentation/menu-select.json";
 import { makeMetadata } from "@/utils/makeData";
 
 export const metadata = makeMetadata(menuSelectJson.name, [

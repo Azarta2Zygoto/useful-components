@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import AccordionJson from "@/data/accordion.json";
+import AccordionJson from "@/documentation/accordion.json";
 import { makeMetadata } from "@/utils/makeData";
 
 export const metadata = makeMetadata(AccordionJson.name, ["disclosure"]);

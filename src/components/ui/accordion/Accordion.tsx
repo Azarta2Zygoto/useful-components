@@ -8,7 +8,7 @@ import {
     useState,
 } from "react";
 
-import CaretUpIcon from "../assets/icons/caret-up.svg";
+import { CaretUpIcon } from "@ui/assets/icons";
 import Button from "../button/Button";
 import Icon from "../icon/Icon";
 import { useRipple } from "../ripple/useRipple.hook";

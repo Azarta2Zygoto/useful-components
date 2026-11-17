@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import switchJson from "@/data/switch.json";
+import switchJson from "@/documentation/switch.json";
 import { makeMetadata } from "@/utils/makeData";
 
 export const metadata = makeMetadata(switchJson.name, [

@@ -1,3 +1,7 @@
+@layer vendor, components, application;
+
+@import url("./prism.css") layer(vendor);
+
 .sub-body {
     flex: 1 1 auto;
     display: flex;

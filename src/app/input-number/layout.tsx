@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import inputNumberJson from "@/data/input-number.json";
+import inputNumberJson from "@/documentation/input-number.json";
 import { makeMetadata } from "@/utils/makeData";
 
 export const metadata = makeMetadata(inputNumberJson.name, [

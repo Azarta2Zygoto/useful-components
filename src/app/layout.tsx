@@ -5,6 +5,7 @@ import type { PropsWithChildren } from "react";
 import { ThemeProvider } from "next-themes";
 
 import "./globals.css";
+import "./index.css";
 
 import { GlobalProvider } from "@/components/GlobalProvider";
 import Header from "@/components/Header";

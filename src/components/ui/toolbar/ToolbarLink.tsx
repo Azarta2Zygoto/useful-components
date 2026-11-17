@@ -3,7 +3,10 @@
 import Link from "next/link";
 import type { MouseEvent, ReactNode } from "react";
 
+import { ChevronContractIcon, ChevronExpandIcon } from "@ui/assets/icons";
+
 import Button from "../button/Button";
+import Icon from "../icon/Icon";
 import useTooltip from "../tooltip/useTooltip.hook";
 import type { ToolbarPaths } from "./toolbar.type";
 
@@ -58,7 +61,7 @@ export default function ToolbarLink({
                 onPointerDown={handlePointerDown}
                 {...tooltip}
             >
-                <i className={item.icon + " i"} />
+                <Icon icon={item.icon} />
                 <span data-uc-expandable={isExpandable ? "true" : "false"}>
                     {label}
                     {isExpandable && (
@@ -67,11 +70,11 @@ export default function ToolbarLink({
                             onClick={(e) => handleClickOpen(e, index)}
                             aria-label={`Expand ${label} subpath`}
                         >
-                            <i
-                                className={
+                            <Icon
+                                icon={
                                     subPathOpen[index]
-                                        ? "bi bi-chevron-contract"
-                                        : "bi bi-chevron-expand"
+                                        ? ChevronContractIcon
+                                        : ChevronExpandIcon
                                 }
                             />
                         </Button>

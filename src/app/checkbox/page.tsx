@@ -9,7 +9,7 @@ import ComponentAccessibility from "@/components/ComponentAccessibility";
 import ComponentApi from "@/components/ComponentApi";
 import PageScroll from "@/components/PageScroll";
 import Title from "@/components/Title";
-import checkboxApi from "@/data/checkbox.json";
+import checkboxApi from "@/documentation/checkbox.json";
 
 export default function CheckboxPage() {
     const [checked, setChecked] = useState(false);
